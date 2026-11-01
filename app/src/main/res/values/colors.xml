@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    
+    <!-- Tết Royal Festival Palette -->
+    <color name="tet_red_dark">#580206</color>
+    <color name="tet_red_primary">#8A000A</color>
+    <color name="tet_red_accent">#C41E24</color>
+    <color name="tet_gold">#E5B867</color>
+    <color name="tet_gold_bright">#FFD700</color>
+    <color name="tet_gold_light">#FFE7A0</color>
+    <color name="tet_text_gold">#F5DEB3</color>
+    <color name="tet_text_dark_red">#74080D</color>
+    <color name="tet_nav_selected">#C41E24</color>
+    <color name="tet_nav_unselected">#757575</color>
+</resources>

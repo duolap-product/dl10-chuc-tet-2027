@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layoutStickerItem"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    android:background="@drawable/bg_feature_card"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?attr/selectableItemBackground"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="8dp">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivStickerPreview"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginBottom="6dp"
+        android:scaleType="fitCenter" />
+
+    <TextView
+        android:id="@+id/tvStickerName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:fontFamily="@font/liberationsans_bold"
+        android:maxLines="1"
+        android:textColor="#5D4037"
+        android:textSize="11.5sp" />
+
+</LinearLayout>
+

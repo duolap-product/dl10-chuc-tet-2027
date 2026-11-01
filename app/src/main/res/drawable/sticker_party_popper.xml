@@ -1,0 +1,35 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="64dp"
+    android:height="64dp"
+    android:viewportWidth="64"
+    android:viewportHeight="64">
+    <!-- Party Popper Cone -->
+    <path
+        android:fillColor="#FFA000"
+        android:pathData="M14,48 L36,44 L20,28 Z" />
+    <path
+        android:fillColor="#FFD54F"
+        android:pathData="M18,47 L30,45 L20,35 Z" />
+    <path
+        android:fillColor="#D81B60"
+        android:pathData="M14,48 L12,52 L16,50 Z" />
+    <!-- Streamers & Confetti -->
+    <path
+        android:fillColor="#E91E63"
+        android:pathData="M24,24 C28,18 34,20 38,14 L36,12 C32,18 26,16 22,22 Z" />
+    <path
+        android:fillColor="#2196F3"
+        android:pathData="M32,28 C38,24 44,28 48,22 L46,20 C42,26 36,22 30,26 Z" />
+    <path
+        android:fillColor="#4CAF50"
+        android:pathData="M28,34 L32,38 L30,40 L26,36 Z" />
+    <path
+        android:fillColor="#FFEB3B"
+        android:pathData="M44,12 L48,16 L46,18 L42,14 Z" />
+    <path
+        android:fillColor="#9C27B0"
+        android:pathData="M48,32 A3,3 0 1,0 54,32 A3,3 0 1,0 48,32" />
+    <path
+        android:fillColor="#FF5722"
+        android:pathData="M38,6 A2.5,2.5 0 1,0 43,6 A2.5,2.5 0 1,0 38,6" />
+</vector>

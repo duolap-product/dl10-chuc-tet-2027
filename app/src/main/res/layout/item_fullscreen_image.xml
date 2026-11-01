@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipChildren="false"
+    android:clipToPadding="false">
+
+    <!-- Card chứa ảnh chiếm ~90% kích thước màn hình -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardPhotoContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="64dp"
+        android:layout_marginEnd="18dp"
+        android:layout_marginBottom="100dp"
+        app:cardBackgroundColor="#1F1714"
+        app:cardCornerRadius="24dp"
+        app:cardElevation="12dp"
+        app:strokeColor="#38FFFFFF"
+        app:strokeWidth="1.5dp">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <!-- Ảnh chính hiển thị sắc nét -->
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivPhoto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitCenter"
+                tools:src="@drawable/bg_card_free_01" />
+
+            <!-- Loading indicator vàng kim khi ảnh đang tải -->
+            <ProgressBar
+                android:id="@+id/progressBarLoading"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:layout_gravity="center"
+                android:indeterminate="true"
+                android:indeterminateTint="#FFD700"
+                android:visibility="visible" />
+
+        </FrameLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</FrameLayout>

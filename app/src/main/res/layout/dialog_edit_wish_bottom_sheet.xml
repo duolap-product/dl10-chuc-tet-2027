@@ -1,0 +1,490 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_bottom_sheet_dialog"
+    android:orientation="vertical"
+    android:paddingStart="20dp"
+    android:paddingTop="12dp"
+    android:paddingEnd="20dp"
+    android:paddingBottom="28dp">
+
+    <View
+        android:layout_width="44dp"
+        android:layout_height="4dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="14dp"
+        android:background="#D6C8B5" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/liberationsans_bold"
+            android:includeFontPadding="false"
+            android:text="@string/card_maker_edit_wish_title"
+            android:textColor="#7A090D"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <ImageButton
+            android:id="@+id/btnCloseSheet"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/action_close"
+            android:src="@drawable/ic_clear"
+            app:tint="#7A090D" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="14dp"
+        android:background="#EFE2D2" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:overScrollMode="never">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- 1. Đoạn văn bản thay thế -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/liberationsans_regular"
+                android:includeFontPadding="false"
+                android:text="@string/card_maker_edit_wish_subtitle"
+                android:textColor="#5E5246"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/bg_search_box">
+
+                <EditText
+                    android:id="@+id/etWishContent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:fontFamily="@font/liberationsans_regular"
+                    android:gravity="top|start"
+                    android:hint="@string/card_maker_wish_hint"
+                    android:importantForAutofill="no"
+                    android:includeFontPadding="false"
+                    android:inputType="textMultiLine"
+                    android:lines="3"
+                    android:maxLines="5"
+                    android:paddingStart="12dp"
+                    android:paddingTop="12dp"
+                    android:paddingEnd="42dp"
+                    android:paddingBottom="12dp"
+                    android:textColor="#221C18"
+                    android:textColorHint="#9E968F"
+                    android:textSize="14.5sp" />
+
+                <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@+id/btnClearWishContent"
+                    android:layout_width="38dp"
+                    android:layout_height="38dp"
+                    android:layout_gravity="top|end"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginEnd="6dp"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    android:contentDescription="@string/action_cancel"
+                    android:padding="8dp"
+                    android:src="@drawable/ic_clear_circle"
+                    android:visibility="gone"
+                    app:tint="#A89E92" />
+
+            </FrameLayout>
+
+            <!-- Gợi ý câu chúc nhanh -->
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:overScrollMode="never"
+                android:scrollbars="none">
+
+                <LinearLayout
+                    android:id="@+id/layoutSuggestions"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <!-- Suggestion Chips dynamically or defined here -->
+                    <TextView
+                        android:id="@+id/chipWish1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:background="@drawable/bg_chip_unselected"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:fontFamily="@font/liberationsans_regular"
+                        android:includeFontPadding="false"
+                        android:paddingStart="12dp"
+                        android:paddingTop="6dp"
+                        android:paddingEnd="12dp"
+                        android:paddingBottom="6dp"
+                        android:text="@string/card_maker_suggestion_1"
+                        android:textColor="#7A090D"
+                        android:textSize="12.5sp" />
+
+                    <TextView
+                        android:id="@+id/chipWish2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:background="@drawable/bg_chip_unselected"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:fontFamily="@font/liberationsans_regular"
+                        android:includeFontPadding="false"
+                        android:paddingStart="12dp"
+                        android:paddingTop="6dp"
+                        android:paddingEnd="12dp"
+                        android:paddingBottom="6dp"
+                        android:text="@string/card_maker_suggestion_2"
+                        android:textColor="#7A090D"
+                        android:textSize="12.5sp" />
+
+                    <TextView
+                        android:id="@+id/chipWish3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:background="@drawable/bg_chip_unselected"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:fontFamily="@font/liberationsans_regular"
+                        android:includeFontPadding="false"
+                        android:paddingStart="12dp"
+                        android:paddingTop="6dp"
+                        android:paddingEnd="12dp"
+                        android:paddingBottom="6dp"
+                        android:text="@string/card_maker_suggestion_3"
+                        android:textColor="#7A090D"
+                        android:textSize="12.5sp" />
+
+                    <TextView
+                        android:id="@+id/chipWish4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:background="@drawable/bg_chip_unselected"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:fontFamily="@font/liberationsans_regular"
+                        android:includeFontPadding="false"
+                        android:paddingStart="12dp"
+                        android:paddingTop="6dp"
+                        android:paddingEnd="12dp"
+                        android:paddingBottom="6dp"
+                        android:text="@string/card_maker_suggestion_4"
+                        android:textColor="#7A090D"
+                        android:textSize="12.5sp" />
+
+                    <TextView
+                        android:id="@+id/chipWish5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_chip_unselected"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:fontFamily="@font/liberationsans_regular"
+                        android:includeFontPadding="false"
+                        android:paddingStart="12dp"
+                        android:paddingTop="6dp"
+                        android:paddingEnd="12dp"
+                        android:paddingBottom="6dp"
+                        android:text="@string/card_maker_suggestion_5"
+                        android:textColor="#7A090D"
+                        android:textSize="12.5sp" />
+
+                </LinearLayout>
+
+            </HorizontalScrollView>
+
+            <!-- 2. Màu sắc chữ -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="18dp"
+                android:fontFamily="@font/liberationsans_bold"
+                android:includeFontPadding="false"
+                android:text="@string/card_maker_color_label"
+                android:textColor="#5E5246"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:overScrollMode="never"
+                android:scrollbars="none">
+
+                <LinearLayout
+                    android:id="@+id/layoutColorPalette"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal" />
+
+            </HorizontalScrollView>
+
+            <!-- 3. Căn lề văn bản (Gravity) -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="18dp"
+                android:fontFamily="@font/liberationsans_bold"
+                android:includeFontPadding="false"
+                android:text="@string/card_maker_align_label"
+                android:textColor="#5E5246"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:id="@+id/btnAlignLeft"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="8dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_chip_unselected"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/ivAlignLeft"
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:src="@drawable/ic_format_align_left"
+                        app:tint="#5E5246" />
+
+                    <TextView
+                        android:id="@+id/tvAlignLeft"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="6dp"
+                        android:fontFamily="@font/liberationsans_regular"
+                        android:includeFontPadding="false"
+                        android:text="@string/card_maker_align_left"
+                        android:textColor="#5E5246"
+                        android:textSize="13sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/btnAlignCenter"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="8dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_chip_selected"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/ivAlignCenter"
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:src="@drawable/ic_format_align_center"
+                        app:tint="#2C1A00" />
+
+                    <TextView
+                        android:id="@+id/tvAlignCenter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="6dp"
+                        android:fontFamily="@font/liberationsans_regular"
+                        android:includeFontPadding="false"
+                        android:text="@string/card_maker_align_center"
+                        android:textColor="#2C1A00"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/btnAlignRight"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_chip_unselected"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/ivAlignRight"
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:src="@drawable/ic_format_align_right"
+                        app:tint="#5E5246" />
+
+                    <TextView
+                        android:id="@+id/tvAlignRight"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="6dp"
+                        android:fontFamily="@font/liberationsans_regular"
+                        android:includeFontPadding="false"
+                        android:text="@string/card_maker_align_right"
+                        android:textColor="#5E5246"
+                        android:textSize="13sp" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!-- 4. Phông chữ (Typeface) -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="18dp"
+                android:fontFamily="@font/liberationsans_bold"
+                android:includeFontPadding="false"
+                android:text="@string/card_maker_font_label"
+                android:textColor="#5E5246"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:overScrollMode="never"
+                android:scrollbars="none">
+
+                <LinearLayout
+                    android:id="@+id/layoutFontOptions"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <!-- Font 1: Liberation Bold -->
+                    <TextView
+                        android:id="@+id/btnFontLiberationBold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:background="@drawable/bg_chip_selected"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:fontFamily="@font/liberationsans_bold"
+                        android:paddingStart="14dp"
+                        android:paddingTop="9dp"
+                        android:paddingEnd="14dp"
+                        android:paddingBottom="9dp"
+                        android:text="@string/card_maker_font_bold"
+                        android:textColor="#2C1A00"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+
+                    <!-- Font 2: Lobster Two (Thư pháp Tết) -->
+                    <TextView
+                        android:id="@+id/btnFontLobsterTwo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:background="@drawable/bg_chip_unselected"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:fontFamily="@font/lobstertwo_bold"
+                        android:paddingStart="14dp"
+                        android:paddingTop="9dp"
+                        android:paddingEnd="14dp"
+                        android:paddingBottom="9dp"
+                        android:text="@string/card_maker_font_art"
+                        android:textColor="#5E5246"
+                        android:textSize="14sp" />
+
+                    <!-- Font 3: Lobster Two Italic -->
+                    <TextView
+                        android:id="@+id/btnFontLobsterItalic"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:background="@drawable/bg_chip_unselected"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:fontFamily="@font/lobstertwo_bolditalic"
+                        android:paddingStart="14dp"
+                        android:paddingTop="9dp"
+                        android:paddingEnd="14dp"
+                        android:paddingBottom="9dp"
+                        android:text="@string/card_maker_font_italic"
+                        android:textColor="#5E5246"
+                        android:textSize="14sp" />
+
+                    <!-- Font 4: Liberation Regular -->
+                    <TextView
+                        android:id="@+id/btnFontLiberationRegular"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:background="@drawable/bg_chip_unselected"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:fontFamily="@font/liberationsans_regular"
+                        android:paddingStart="14dp"
+                        android:paddingTop="9dp"
+                        android:paddingEnd="14dp"
+                        android:paddingBottom="9dp"
+                        android:text="@string/card_maker_font_regular"
+                        android:textColor="#5E5246"
+                        android:textSize="13sp" />
+
+                    <!-- Font 5: Serif Cổ Điển -->
+                    <TextView
+                        android:id="@+id/btnFontSerif"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_chip_unselected"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:fontFamily="serif"
+                        android:paddingStart="14dp"
+                        android:paddingTop="9dp"
+                        android:paddingEnd="14dp"
+                        android:paddingBottom="9dp"
+                        android:text="@string/card_maker_font_serif"
+                        android:textColor="#5E5246"
+                        android:textSize="13sp" />
+
+                </LinearLayout>
+
+            </HorizontalScrollView>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</LinearLayout>

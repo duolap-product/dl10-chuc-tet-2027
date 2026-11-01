@@ -1,0 +1,28 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="64dp"
+    android:height="64dp"
+    android:viewportWidth="64"
+    android:viewportHeight="64">
+    <!-- Top Hanger & Cap -->
+    <path
+        android:fillColor="#FFD54F"
+        android:pathData="M31,4 L33,4 L33,14 L31,14 Z" />
+    <path
+        android:fillColor="#FFA000"
+        android:pathData="M24,14 L40,14 L38,18 L26,18 Z" />
+    <!-- Lantern Oval Body -->
+    <path
+        android:fillColor="#D32F2F"
+        android:pathData="M16,33 C16,22 23,18 32,18 C41,18 48,22 48,33 C48,44 41,48 32,48 C23,48 16,44 16,33 Z" />
+    <!-- Center Bright Stripe -->
+    <path
+        android:fillColor="#FF5252"
+        android:pathData="M26,33 C26,23 28,18 32,18 C36,18 38,23 38,33 C38,43 36,48 32,48 C28,48 26,43 26,33 Z" />
+    <!-- Bottom Cap & Tassels -->
+    <path
+        android:fillColor="#FFA000"
+        android:pathData="M26,48 L38,48 L36,52 L28,52 Z" />
+    <path
+        android:fillColor="#FFD54F"
+        android:pathData="M31,52 L33,52 L33,62 L31,62 Z" />
+</vector>

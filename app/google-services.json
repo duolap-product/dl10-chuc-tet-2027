@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "55668929664",
+    "project_id": "tet-viet-ai-2027-e48d6",
+    "storage_bucket": "tet-viet-ai-2027-e48d6.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:55668929664:android:ab2d78f8aafda5640f2265",
+        "android_client_info": {
+          "package_name": "online.duolap.tetviet"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAzb2pl7ftVN12ppo79f3TKOQtnPqTgnSY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

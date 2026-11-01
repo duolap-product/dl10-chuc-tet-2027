@@ -1,0 +1,22 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="64dp"
+    android:height="64dp"
+    android:viewportWidth="64"
+    android:viewportHeight="64">
+    <!-- Gold Ingot / Kim Nguyên Bảo -->
+    <!-- Base Shape -->
+    <path
+        android:fillColor="#FFB300"
+        android:pathData="M10,26 C12,18 20,18 32,18 C44,18 52,18 54,26 C56,38 48,50 32,50 C16,50 8,38 10,26 Z" />
+    <!-- Top inner surface -->
+    <path
+        android:fillColor="#FFE082"
+        android:pathData="M14,24 C18,20 25,18 32,18 C39,18 46,20 50,24 C46,28 39,30 32,30 C25,30 18,28 14,24 Z" />
+    <!-- Center round nugget -->
+    <path
+        android:fillColor="#FFF8E1"
+        android:pathData="M24,20 C24,15 27,12 32,12 C37,12 40,15 40,20 C40,23 37,25 32,25 C27,25 24,23 24,20 Z" />
+    <path
+        android:fillColor="#FF8F00"
+        android:pathData="M20,38 C26,44 38,44 44,38 C40,42 24,42 20,38 Z" />
+</vector>

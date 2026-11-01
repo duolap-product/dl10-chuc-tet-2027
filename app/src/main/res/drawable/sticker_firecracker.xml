@@ -1,0 +1,36 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="64dp"
+    android:height="64dp"
+    android:viewportWidth="64"
+    android:viewportHeight="64">
+    <!-- Firecracker String -->
+    <!-- Hanging line -->
+    <path
+        android:fillColor="#FFD54F"
+        android:pathData="M31,4 L33,4 L33,20 L31,20 Z" />
+    <!-- Cracker 1 (Left) -->
+    <path
+        android:fillColor="#C62828"
+        android:pathData="M18,18 L30,24 L27,30 L15,24 Z" />
+    <path
+        android:fillColor="#FFD54F"
+        android:pathData="M18,18 L20,19 L17,25 L15,24 Z" />
+    <!-- Cracker 2 (Right) -->
+    <path
+        android:fillColor="#D32F2F"
+        android:pathData="M34,26 L46,32 L43,38 L31,32 Z" />
+    <path
+        android:fillColor="#FFD54F"
+        android:pathData="M44,31 L46,32 L43,38 L41,37 Z" />
+    <!-- Cracker 3 (Center Bottom) -->
+    <path
+        android:fillColor="#E53935"
+        android:pathData="M22,36 L34,42 L31,48 L19,42 Z" />
+    <path
+        android:fillColor="#FFD54F"
+        android:pathData="M22,36 L24,37 L21,43 L19,42 Z" />
+    <!-- Sparkles -->
+    <path
+        android:fillColor="#FFEB3B"
+        android:pathData="M38,46 L44,48 L38,50 L40,56 L36,51 L32,54 L34,48 L28,47 L34,45 L33,39 Z" />
+</vector>

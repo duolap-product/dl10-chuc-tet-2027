@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_bottom_sheet_dialog"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <View
+        android:layout_width="40dp"
+        android:layout_height="4dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="16dp"
+        android:background="#D1C7B7" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="📜"
+            android:textSize="22sp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_weight="1"
+            android:fontFamily="@font/liberationsans_bold"
+            android:includeFontPadding="false"
+            android:text="@string/wheel_history_title"
+            android:textColor="#7A090D"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/btnCloseHistory"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/action_close"
+            android:src="@android:drawable/ic_menu_close_clear_cancel"
+            app:tint="#7A090D" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="14dp"
+        android:background="#E8DAC5" />
+
+    <TextView
+        android:id="@+id/tvEmptyHistory"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:fontFamily="@font/liberationsans_regular"
+        android:gravity="center"
+        android:includeFontPadding="false"
+        android:text="@string/wheel_history_empty"
+        android:textColor="#8D5524"
+        android:textSize="14sp"
+        android:visibility="gone" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvSpinHistory"
+        android:layout_width="match_parent"
+        android:layout_height="280dp"
+        android:overScrollMode="never"
+        tools:itemCount="3"
+        tools:listitem="@layout/item_spin_history" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnClearHistory"
+        style="@style/Widget.Material3.Button.OutlinedButton"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="14dp"
+        android:fontFamily="@font/liberationsans_bold"
+        android:includeFontPadding="false"
+        android:text="@string/wheel_history_clear"
+        android:textColor="#C41E24"
+        app:cornerRadius="10dp"
+        app:strokeColor="#C41E24" />
+
+</LinearLayout>

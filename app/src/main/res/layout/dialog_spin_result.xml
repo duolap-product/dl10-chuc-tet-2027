@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_bottom_sheet_dialog"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:padding="24dp">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/ic_feature_lucky_wheel" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:fontFamily="@font/liberationsans_bold"
+        android:includeFontPadding="false"
+        android:letterSpacing="0.04"
+        android:text="@string/wheel_result_congrats"
+        android:textColor="#C41E24"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:fontFamily="@font/liberationsans_bold"
+        android:includeFontPadding="false"
+        android:text="@string/wheel_result_won_prefix"
+        android:textColor="#8D5524"
+        android:textSize="13.5sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/bg_countdown_rec"
+        android:elevation="6dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingTop="18dp"
+        android:paddingBottom="18dp">
+
+        <TextView
+            android:id="@+id/tvResultPrize"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-black"
+            android:textColor="#7A090D"
+            android:textSize="26sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:fontFamily="@font/liberationsans_bold"
+            android:includeFontPadding="false"
+            android:text="🧧 Lộc Xuân Như Ý 🧧"
+            android:textColor="#8D5524"
+            android:textSize="12sp" />
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/liberationsans_regular"
+        android:gravity="center"
+        android:includeFontPadding="false"
+        android:text="@string/wheel_result_wishing"
+        android:textColor="#3D3025"
+        android:textSize="13sp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnSpinAgain"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="#7A090D"
+        android:fontFamily="@font/liberationsans_bold"
+        android:includeFontPadding="false"
+        android:text="@string/wheel_result_spin_again"
+        android:textColor="#FEE5AA"
+        android:textSize="15sp"
+        app:cornerRadius="12dp" />
+
+</LinearLayout>

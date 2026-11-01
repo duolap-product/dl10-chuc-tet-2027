@@ -1,0 +1,550 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#650106">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivBackground"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/bg_tet_screen" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivHeaderArt"
+        android:layout_width="0dp"
+        android:layout_height="142dp"
+        android:layout_marginTop="40dp"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/img_tet_header_art"
+        app:layout_constraintDimensionRatio="1045:599"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Top Action Buttons: Music & Settings -->
+    <LinearLayout
+        android:id="@+id/layoutTopActions"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:elevation="8dp"
+        android:gravity="end|center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="16dp"
+        android:paddingTop="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <!-- Nút VIP Tết Việt -->
+        <LinearLayout
+            android:id="@+id/btnVip"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/bg_vip_card_gold"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackground"
+            android:gravity="center_vertical"
+            android:paddingHorizontal="10dp">
+
+            <ImageView
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:src="@drawable/ic_vip_crown" />
+
+            <TextView
+                android:id="@+id/tv_vip_badge_main"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:fontFamily="sans-serif-black"
+                android:text="VIP"
+                android:textColor="#FFD700"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <!-- Nút Bật/Tắt Nhạc Tết -->
+        <ImageButton
+            android:id="@+id/btnMusicToggle"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="10dp"
+            android:background="@drawable/bg_glass_circle"
+            android:contentDescription="Bật/Tắt nhạc nền Tết"
+            android:padding="9dp"
+            android:src="@drawable/ic_music_note"
+            app:tint="#FFE8A3" />
+
+        <!-- Nút Cài Đặt -->
+        <ImageButton
+            android:id="@+id/btnSettings"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/bg_glass_circle"
+            android:contentDescription="Cài đặt"
+            android:padding="9dp"
+            android:src="@drawable/ic_settings"
+            app:tint="#FFE8A3" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/cardCountdown"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/bg_countdown_card"
+        android:elevation="6dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:paddingStart="12dp"
+        android:paddingTop="14dp"
+        android:paddingEnd="12dp"
+        android:paddingBottom="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ivHeaderArt">
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/vpCountdown"
+            android:layout_width="match_parent"
+            android:layout_height="164dp"
+            android:overScrollMode="never" />
+
+        <!-- Indicators: 2 dots for 2 pages -->
+        <LinearLayout
+            android:id="@+id/layoutIndicators"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <View
+                android:id="@+id/dotPage0"
+                android:layout_width="16dp"
+                android:layout_height="5dp"
+                android:layout_marginEnd="6dp"
+                android:background="@drawable/bg_indicator_active" />
+
+            <View
+                android:id="@+id/dotPage1"
+                android:layout_width="6dp"
+                android:layout_height="5dp"
+                android:background="@drawable/bg_indicator_inactive" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        android:overScrollMode="never"
+        android:scrollbars="none"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cardCountdown">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/gridFeatures"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:orientation="vertical"
+            android:paddingBottom="92dp">
+
+            <!-- Row 1: Tử Vi & Tử Khởi | Lời Chúc Ý Nghĩa -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:baselineAligned="false"
+                android:orientation="horizontal">
+
+                <!-- Card 1: Tử Vi & Tử Khởi -->
+                <LinearLayout
+                    android:id="@+id/cardHoroscope"
+                    android:layout_width="0dp"
+                    android:layout_height="150dp"
+                    android:layout_marginEnd="7dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_feature_card"
+                    android:clickable="true"
+                    android:elevation="5dp"
+                    android:focusable="true"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="8dp">
+
+                    <ImageView
+                        android:id="@+id/ivHoroscope"
+                        android:layout_width="88dp"
+                        android:layout_height="88dp"
+                        android:contentDescription="@string/feature_tu_vi"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/ic_feature_horoscope" />
+
+                    <TextView
+                        android:id="@+id/tvHoroscope"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:fontFamily="@font/liberationsans_bold"
+                        android:gravity="center"
+                        android:includeFontPadding="false"
+                        android:text="@string/feature_tu_vi"
+                        android:textColor="#7A090D"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <!-- Card 2: Lời Chúc Ý Nghĩa -->
+                <LinearLayout
+                    android:id="@+id/cardWishes"
+                    android:layout_width="0dp"
+                    android:layout_height="150dp"
+                    android:layout_marginStart="7dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_feature_card"
+                    android:clickable="true"
+                    android:elevation="5dp"
+                    android:focusable="true"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="8dp">
+
+                    <ImageView
+                        android:id="@+id/ivWishes"
+                        android:layout_width="88dp"
+                        android:layout_height="88dp"
+                        android:contentDescription="@string/feature_loi_chuc"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/ic_feature_wishes" />
+
+                    <TextView
+                        android:id="@+id/tvWishes"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:fontFamily="@font/liberationsans_bold"
+                        android:gravity="center"
+                        android:includeFontPadding="false"
+                        android:text="@string/feature_loi_chuc"
+                        android:textColor="#7A090D"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!-- Row 2: Phong Tục Tết | Tạo Thiệp Tết -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:baselineAligned="false"
+                android:orientation="horizontal">
+
+                <!-- Card 3: Phong Tục Tết -->
+                <LinearLayout
+                    android:id="@+id/cardCustoms"
+                    android:layout_width="0dp"
+                    android:layout_height="150dp"
+                    android:layout_marginEnd="7dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_feature_card"
+                    android:clickable="true"
+                    android:elevation="5dp"
+                    android:focusable="true"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="8dp">
+
+                    <ImageView
+                        android:id="@+id/ivCustoms"
+                        android:layout_width="88dp"
+                        android:layout_height="88dp"
+                        android:contentDescription="@string/feature_phong_tuc"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/ic_feature_customs" />
+
+                    <TextView
+                        android:id="@+id/tvCustoms"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:fontFamily="@font/liberationsans_bold"
+                        android:gravity="center"
+                        android:includeFontPadding="false"
+                        android:text="@string/feature_phong_tuc"
+                        android:textColor="#7A090D"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <!-- Card 4: Tạo Thiệp Tết -->
+                <LinearLayout
+                    android:id="@+id/cardCardMaker"
+                    android:layout_width="0dp"
+                    android:layout_height="150dp"
+                    android:layout_marginStart="7dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_feature_card"
+                    android:clickable="true"
+                    android:elevation="5dp"
+                    android:focusable="true"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="8dp">
+
+                    <ImageView
+                        android:id="@+id/ivCardMaker"
+                        android:layout_width="88dp"
+                        android:layout_height="88dp"
+                        android:contentDescription="@string/feature_tao_thiep"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/ic_feature_card_maker" />
+
+                    <TextView
+                        android:id="@+id/tvCardMaker"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:fontFamily="@font/liberationsans_bold"
+                        android:gravity="center"
+                        android:includeFontPadding="false"
+                        android:text="@string/feature_tao_thiep"
+                        android:textColor="#7A090D"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!-- Row 3: Banner Lì Xì May Mắn (Vòng Quay May Mắn) -->
+            <LinearLayout
+                android:id="@+id/cardLuckyWheel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:background="@drawable/bg_feature_card"
+                android:clickable="true"
+                android:elevation="5dp"
+                android:focusable="true"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingStart="16dp"
+                android:paddingTop="12dp"
+                android:paddingEnd="12dp"
+                android:paddingBottom="12dp">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_badge_gold"
+                        android:fontFamily="@font/liberationsans_regular"
+                        android:includeFontPadding="false"
+                        android:paddingHorizontal="8dp"
+                        android:paddingVertical="4dp"
+                        android:text="@string/feature_spring_fortune"
+                        android:textColor="#7A090D"
+                        android:textSize="10.5sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tvLuckyWheelTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:fontFamily="@font/liberationsans_bold"
+                        android:includeFontPadding="false"
+                        android:text="@string/feature_lucky_wheel"
+                        android:textColor="#7A090D"
+                        android:textSize="17sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:fontFamily="@font/liberationsans_regular"
+                        android:includeFontPadding="false"
+                        android:text="@string/feature_lucky_wheel_desc"
+                        android:textColor="#8D5524"
+                        android:textSize="12.5sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:fontFamily="@font/liberationsans_regular"
+                        android:includeFontPadding="false"
+                        android:textColor="#C41E24"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/ivLuckyWheel"
+                    android:layout_width="92dp"
+                    android:layout_height="92dp"
+                    android:layout_marginStart="8dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_feature_lucky_wheel" />
+
+            </LinearLayout>
+
+            <!-- Row 4: Hàng 3 Item (Hình Ảnh Tết & 2 Tính Năng Dự Phòng) -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:baselineAligned="false"
+                android:orientation="horizontal">
+
+                <FrameLayout
+                    android:id="@+id/cardTetPhotos"
+                    android:layout_width="0dp"
+                    android:layout_height="120dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_feature_card">
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="1dp"
+                        app:cardBackgroundColor="@color/white"
+                        app:cardCornerRadius="14dp"
+                        app:cardElevation="0dp">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="centerCrop"
+                            app:srcCompat="@drawable/banner_tet_photos" />
+
+                    </androidx.cardview.widget.CardView>
+
+                    <TextView
+                        android:id="@+id/tvTetPhotos"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal|bottom"
+                        android:layout_marginTop="6dp"
+                        android:layout_marginBottom="4dp"
+                        android:background="@drawable/bg_feature_card"
+                        android:fontFamily="@font/liberationsans_regular"
+                        android:gravity="center"
+                        android:includeFontPadding="false"
+                        android:paddingHorizontal="10dp"
+                        android:paddingVertical="4dp"
+                        android:text="@string/feature_tet_photos"
+                        android:textColor="#7A090D"
+                        android:textSize="11sp" />
+                </FrameLayout>
+
+                <!-- Item 2: Option Bổ Sung 1 -->
+                <LinearLayout
+                    android:id="@+id/cardOption2"
+                    android:layout_width="0dp"
+                    android:layout_height="120dp"
+                    android:layout_marginHorizontal="3dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_feature_card"
+                    android:clickable="true"
+                    android:elevation="5dp"
+                    android:focusable="true"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="8dp">
+
+                    <ImageView
+                        android:id="@+id/ivOption2"
+                        android:layout_width="56dp"
+                        android:layout_height="56dp"
+                        android:contentDescription="Tính năng bổ sung 1"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/sticker_gold_ingot" />
+
+                    <TextView
+                        android:id="@+id/tvOption2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:fontFamily="@font/liberationsans_bold"
+                        android:gravity="center"
+                        android:includeFontPadding="false"
+                        android:text="@string/coming_soon"
+                        android:textColor="#7A090D"
+                        android:textSize="13.5sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <!-- Item 3: Option Bổ Sung 2 -->
+                <LinearLayout
+                    android:id="@+id/cardOption3"
+                    android:layout_width="0dp"
+                    android:layout_height="120dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_feature_card"
+                    android:clickable="true"
+                    android:elevation="5dp"
+                    android:focusable="true"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="8dp">
+
+                    <ImageView
+                        android:id="@+id/ivOption3"
+                        android:layout_width="56dp"
+                        android:layout_height="56dp"
+                        android:contentDescription="Tính năng bổ sung 2"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/sticker_lantern" />
+
+                    <TextView
+                        android:id="@+id/tvOption3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:fontFamily="@font/liberationsans_bold"
+                        android:gravity="center"
+                        android:includeFontPadding="false"
+                        android:text="@string/coming_soon"
+                        android:textColor="#7A090D"
+                        android:textSize="13.5sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </androidx.core.widget.NestedScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

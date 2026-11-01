@@ -1,0 +1,21 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <!-- Packet envelope -->
+    <path
+        android:fillColor="#C0392B"
+        android:pathData="M6,3h12c0.8,0 1.5,0.7 1.5,1.5v15c0,0.8 -0.7,1.5 -1.5,1.5H6c-0.8,0 -1.5,-0.7 -1.5,-1.5v-15C4.5,3.7 5.2,3 6,3z" />
+    <!-- Flap fold curved -->
+    <path
+        android:fillColor="#962D22"
+        android:pathData="M4.5,4.5C4.5,4.5 12,9 12,9S19.5,4.5 19.5,4.5V3H4.5V4.5z" />
+    <!-- Golden seal coin in center -->
+    <path
+        android:fillColor="#F1C40F"
+        android:pathData="M12,12m-3,0a3,3 0,1 1,6 0a3,3 0,1 1,-6 0" />
+    <path
+        android:fillColor="#C0392B"
+        android:pathData="M11,11h2v2h-2z" />
+</vector>

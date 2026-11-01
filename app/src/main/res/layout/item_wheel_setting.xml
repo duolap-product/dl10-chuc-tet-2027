@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="8dp"
+    android:background="@drawable/bg_feature_card"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingStart="12dp"
+    android:paddingTop="10dp"
+    android:paddingEnd="8dp"
+    android:paddingBottom="10dp">
+
+    <!-- Color indicator -->
+    <View
+        android:id="@+id/viewColorDot"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:background="@drawable/bg_indicator_active" />
+
+    <!-- Sticker mini preview -->
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivItemSticker"
+        android:layout_width="22dp"
+        android:layout_height="22dp"
+        android:layout_marginStart="8dp"
+        android:scaleType="fitCenter"
+        android:visibility="gone"
+        tools:src="@drawable/sticker_gold_ingot"
+        tools:visibility="visible" />
+
+    <!-- Name and Frequency -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvPrizeName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/liberationsans_bold"
+            android:includeFontPadding="false"
+            android:textColor="#3D3025"
+            android:textSize="14.5sp"
+            android:textStyle="bold"
+            tools:text="10.000đ" />
+
+        <TextView
+            android:id="@+id/tvPrizeFrequency"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:fontFamily="@font/liberationsans_regular"
+            android:includeFontPadding="false"
+            android:textColor="#8D5524"
+            android:textSize="12sp"
+            tools:text="Tần suất: 80 • Rất dễ trúng" />
+
+    </LinearLayout>
+
+    <!-- Edit Button -->
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/btnEditPrize"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:padding="8dp"
+        app:srcCompat="@android:drawable/ic_menu_edit"
+        app:tint="#8D5524" />
+
+    <!-- Delete Button -->
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/btnDeletePrize"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:padding="8dp"
+        app:srcCompat="@android:drawable/ic_menu_delete"
+        app:tint="#C41E24" />
+
+</LinearLayout>

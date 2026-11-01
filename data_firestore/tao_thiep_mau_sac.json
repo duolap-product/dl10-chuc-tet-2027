@@ -1,0 +1,38 @@
+[
+    {
+        "name": "Đỏ Tết",
+        "color_hex": "#7A090D"
+    },
+    {
+        "name": "Vàng Kim",
+        "color_hex": "#F5A623"
+    },
+    {
+        "name": "Vàng Đồng",
+        "color_hex": "#C59B27"
+    },
+    {
+        "name": "Nâu Gỗ",
+        "color_hex": "#5D4037"
+    },
+    {
+        "name": "Xanh Ngọc",
+        "color_hex": "#00796B"
+    },
+    {
+        "name": "Đen Mun",
+        "color_hex": "#212121"
+    },
+    {
+        "name": "Trắng Bạc",
+        "color_hex": "#FFFFFF"
+    },
+    {
+        "name": "Cam Tết",
+        "color_hex": "#E65100"
+    },
+    {
+        "name": "Vàng Chanh",
+        "color_hex": "#E65100"
+    }
+]

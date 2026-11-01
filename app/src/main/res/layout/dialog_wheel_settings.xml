@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_bottom_sheet_dialog"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <View
+        android:layout_width="40dp"
+        android:layout_height="4dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="16dp"
+        android:background="#D1C7B7" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:src="@drawable/ic_settings"
+            app:tint="#7A090D" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_weight="1"
+            android:fontFamily="@font/liberationsans_bold"
+            android:includeFontPadding="false"
+            android:text="@string/wheel_settings_title"
+            android:textColor="#7A090D"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/btnCloseWheelSettings"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/action_close"
+            android:src="@android:drawable/ic_menu_close_clear_cancel"
+            app:tint="#7A090D" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="14dp"
+        android:background="#E8DAC5" />
+
+    <!-- Button Add New Prize Modal -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnAddPrize"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:backgroundTint="#7A090D"
+        android:fontFamily="@font/liberationsans_regular"
+        android:includeFontPadding="false"
+        android:text="@string/wheel_settings_add_prize"
+        android:textColor="#FEE5AA"
+        android:textSize="14.5sp"
+        app:cornerRadius="10dp"
+        app:icon="@android:drawable/ic_input_add"
+        app:iconGravity="textStart"
+        app:iconTint="#FEE5AA" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="@font/liberationsans_regular"
+        android:includeFontPadding="false"
+        android:text="@string/wheel_settings_current_list"
+        android:textColor="#8D5524"
+        android:textSize="13sp" />
+
+    <!-- RecyclerView for Items -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvWheelItems"
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
+        android:overScrollMode="never"
+        tools:itemCount="6"
+        tools:listitem="@layout/item_wheel_setting" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:orientation="horizontal">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnResetDefault"
+            style="@style/Widget.Material3.Button.OutlinedButton"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginEnd="6dp"
+            android:layout_weight="1"
+            android:fontFamily="@font/liberationsans_bold"
+            android:includeFontPadding="false"
+            android:text="@string/wheel_settings_reset_default"
+            android:textColor="#7A090D"
+            app:cornerRadius="10dp"
+            app:strokeColor="#7A090D" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSaveWheelSettings"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="6dp"
+            android:layout_weight="1"
+            android:backgroundTint="#7A090D"
+            android:fontFamily="@font/liberationsans_bold"
+            android:includeFontPadding="false"
+            android:text="@string/wheel_settings_save_apply"
+            android:textColor="#FEE5AA"
+            app:cornerRadius="10dp" />
+
+    </LinearLayout>
+
+</LinearLayout>

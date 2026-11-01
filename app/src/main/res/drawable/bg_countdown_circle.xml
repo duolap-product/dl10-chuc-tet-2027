@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Glowing Halo Outer Circle -->
+    <item>
+        <shape android:shape="oval">
+            <solid android:color="#4DFFA726" />
+        </shape>
+    </item>
+
+    <!-- Outer Gold Rim -->
+    <item
+        android:bottom="2dp"
+        android:left="2dp"
+        android:right="2dp"
+        android:top="2dp">
+        <shape android:shape="oval">
+            <gradient
+                android:angle="135"
+                android:endColor="#FFE29F"
+                android:startColor="#FFA800" />
+        </shape>
+    </item>
+
+    <!-- Inner Cream Face -->
+    <item
+        android:bottom="5dp"
+        android:left="5dp"
+        android:right="5dp"
+        android:top="5dp">
+        <shape android:shape="oval">
+            <gradient
+                android:angle="270"
+                android:endColor="#FFF0D0"
+                android:startColor="#FFFFFB" />
+            <stroke
+                android:width="1dp"
+                android:color="#E8C37B" />
+        </shape>
+    </item>
+</layer-list>

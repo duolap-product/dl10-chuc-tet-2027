@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tvMondayTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/liberationsans_bold"
+        android:includeFontPadding="false"
+        android:letterSpacing="0.02"
+        android:text="@string/countdown_monday_title"
+        android:textColor="#FEE5AA"
+        android:textSize="16.5sp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:id="@+id/layoutMondayDials"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="10dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <!-- Dial 1: Thứ Hai kế tiếp -->
+        <LinearLayout
+            android:id="@+id/dialNextMonday"
+            android:layout_width="88dp"
+            android:layout_height="88dp"
+            android:background="@drawable/bg_countdown_circle"
+            android:elevation="5dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="2dp">
+
+            <TextView
+                android:id="@+id/tvNextMondayHeader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/liberationsans_regular"
+                android:includeFontPadding="false"
+                android:text="@string/monday_next_label"
+                android:textColor="#8D5524"
+                android:textSize="11.5sp" />
+
+            <TextView
+                android:id="@+id/tvNextMondayDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="-2dp"
+                android:layout_marginBottom="-3dp"
+                android:fontFamily="@font/liberationsans_bold"
+                android:includeFontPadding="false"
+                android:textColor="#7A090D"
+                android:textSize="23sp"
+                tools:text="26/10" />
+
+            <TextView
+                android:id="@+id/tvNextMondayFooter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/liberationsans_regular"
+                android:includeFontPadding="false"
+                android:text="@string/monday_early_week"
+                android:textColor="#8D5524"
+                android:textSize="11.5sp" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="14dp"
+            android:layout_height="1dp" />
+
+        <!-- Dial 2: Số Thứ Hai Còn Lại -->
+        <LinearLayout
+            android:id="@+id/dialMondaysCount"
+            android:layout_width="88dp"
+            android:layout_height="88dp"
+            android:background="@drawable/bg_countdown_circle"
+            android:elevation="5dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="2dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/liberationsans_regular"
+                android:includeFontPadding="false"
+                android:text="@string/countdown_con"
+                android:textColor="#8D5524"
+                android:textSize="11.5sp" />
+
+            <TextView
+                android:id="@+id/tvMondaysCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="-2dp"
+                android:layout_marginBottom="-3dp"
+                android:fontFamily="@font/liberationsans_bold"
+                android:includeFontPadding="false"
+                android:textColor="#7A090D"
+                android:textSize="29sp"
+                tools:text="15" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/liberationsans_regular"
+                android:includeFontPadding="false"
+                android:text="@string/monday_count_label"
+                android:textColor="#8D5524"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="14dp"
+            android:layout_height="1dp" />
+
+        <!-- Dial 3: Thứ Hai cuối cùng trước Tết -->
+        <LinearLayout
+            android:id="@+id/dialLastMonday"
+            android:layout_width="88dp"
+            android:layout_height="88dp"
+            android:background="@drawable/bg_countdown_circle"
+            android:elevation="5dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="2dp">
+
+            <TextView
+                android:id="@+id/tvLastMondayHeader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/liberationsans_regular"
+                android:includeFontPadding="false"
+                android:text="@string/monday_last_label"
+                android:textColor="#8D5524"
+                android:textSize="11.5sp" />
+
+            <TextView
+                android:id="@+id/tvLastMondayDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="-2dp"
+                android:layout_marginBottom="-3dp"
+                android:fontFamily="@font/liberationsans_bold"
+                android:includeFontPadding="false"
+                android:textColor="#7A090D"
+                android:textSize="23sp"
+                tools:text="01/02" />
+
+            <TextView
+                android:id="@+id/tvLastMondayFooter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/liberationsans_regular"
+                android:includeFontPadding="false"
+                android:text="@string/monday_tet_25"
+                android:textColor="#8D5524"
+                android:textSize="11.5sp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvMondaySubtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:fontFamily="@font/liberationsans_regular"
+        android:gravity="center"
+        android:includeFontPadding="false"
+        android:textColor="#FEE5A2"
+        android:textSize="13.5sp"
+        tools:text="Chỉ còn 15 lần đầu tuần nữa là đón Tết sum vầy! 🌸" />
+
+</LinearLayout>

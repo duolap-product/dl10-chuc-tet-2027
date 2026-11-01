@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!-- Viền khung nét đứt khi được chọn -->
+    <View
+        android:id="@+id/viewStickerBorder"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="13dp"
+        android:background="@drawable/bg_sticker_frame"
+        android:visibility="gone" />
+
+    <!-- Hình ảnh sticker Tết -->
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivStickerImage"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="14dp"
+        android:scaleType="fitCenter" />
+
+    <!-- Nút xoá sticker (Góc trên - phải) -->
+    <FrameLayout
+        android:id="@+id/btnDeleteSticker"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_gravity="top|end"
+        android:background="@drawable/bg_sticker_delete_circle"
+        android:contentDescription="Xoá sticker"
+        android:elevation="6dp"
+        android:visibility="gone">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="14dp"
+            android:layout_height="14dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_clear"
+            app:tint="#FFFFFF" />
+    </FrameLayout>
+
+    <!-- Nút xoay sticker (Góc dưới - trái) -->
+    <FrameLayout
+        android:id="@+id/btnRotateSticker"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_gravity="bottom|start"
+        android:background="@drawable/bg_sticker_rotate_circle"
+        android:contentDescription="Xoay sticker"
+        android:elevation="6dp"
+        android:visibility="gone">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="14dp"
+            android:layout_height="14dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_rotate"
+            app:tint="#FFFFFF" />
+    </FrameLayout>
+
+    <!-- Nút kéo đổi kích thước sticker (Góc dưới - phải) -->
+    <FrameLayout
+        android:id="@+id/btnResizeSticker"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_gravity="bottom|end"
+        android:background="@drawable/bg_sticker_resize_circle"
+        android:contentDescription="Đổi kích thước sticker"
+        android:elevation="6dp"
+        android:visibility="gone">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="14dp"
+            android:layout_height="14dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_resize_handle"
+            app:tint="#FFFFFF" />
+    </FrameLayout>
+
+</merge>
+

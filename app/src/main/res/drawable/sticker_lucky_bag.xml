@@ -1,0 +1,21 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="64dp"
+    android:height="64dp"
+    android:viewportWidth="64"
+    android:viewportHeight="64">
+    <!-- Red Envelope / Lucky Money Bag -->
+    <path
+        android:fillColor="#E53935"
+        android:pathData="M16,10 L48,10 C50.2,10 52,11.8 52,14 L52,52 C52,54.2 50.2,56 48,56 L16,56 C13.8,56 12,54.2 12,52 L12,14 C12,11.8 13.8,10 16,10 Z" />
+    <!-- Flap triangular curve -->
+    <path
+        android:fillColor="#C62828"
+        android:pathData="M12,14 L32,32 L52,14 Z" />
+    <!-- Gold Coin Seal -->
+    <path
+        android:fillColor="#FFD54F"
+        android:pathData="M32,26 C36.4,26 40,29.6 40,34 C40,38.4 36.4,42 32,42 C27.6,42 24,38.4 24,34 C24,29.6 27.6,26 32,26 Z" />
+    <path
+        android:fillColor="#D32F2F"
+        android:pathData="M29,31 L35,31 L35,37 L29,37 Z" />
+</vector>
