@@ -4,34 +4,40 @@ import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.view.animation.DecelerateInterpolator
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.net.toUri
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import online.duolap.tetviet.R
 import online.duolap.tetviet.analytics.AppAnalytics
+import online.duolap.tetviet.analytics.AppCrashlytics
 import online.duolap.tetviet.databinding.ActivityUpdateAppBinding
+import online.duolap.tetviet.update.PlayUpdateManager
 import online.duolap.tetviet.views.setSafeOnClickListener
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
-/**
- * Màn hình thông báo cập nhật phiên bản mới cho ứng dụng Tết Việt.
- * Gồm 2 lựa chọn chính:
- * 1. "Bỏ qua": Đóng màn hình để tiếp tục trải nghiệm app (hoặc thoát app nếu bắt buộc cập nhật).
- * 2. "Cập nhật ngay": Mở Google Play Store để tải phiên bản mới nhất.
- */
+@AndroidEntryPoint
 class UpdateAppActivity : AppCompatActivity() {
+
+    @Inject
+    lateinit var playUpdateManager: PlayUpdateManager
 
     private lateinit var binding: ActivityUpdateAppBinding
 
     private var isForceUpdate: Boolean = false
-    private var newVersion: String = "2027.2.0"
+    private var newVersion: String = ""
     private var storeUrl: String? = null
+
+    private var countdownTimer: CountDownTimer? = null
+    private var hasRedirected: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,6 +64,7 @@ class UpdateAppActivity : AppCompatActivity() {
         setupListeners()
         setupBackPressHandling()
         animateEntrance()
+        startCountdownTimer()
     }
 
     private fun extractIntentData() {
@@ -78,19 +85,19 @@ class UpdateAppActivity : AppCompatActivity() {
             "1.0.0"
         }
 
-        binding.tvCurrentVersion.text = "Hiện tại: v$currentVersionName"
-        binding.tvNewVersion.text = "Mới: v$newVersion"
-
-        if (isForceUpdate) {
-            binding.tvSubtitle.text = "Đây là bản cập nhật quan trọng để đảm bảo ứng dụng Tết Việt hoạt động ổn định và chính xác. Vui lòng cập nhật để tiếp tục sử dụng."
-            binding.btnSkip.text = "Thoát"
+        binding.tvCurrentVersion.text = getString(R.string.update_current_ver).let {
+            if (it.contains("%")) String.format(it, currentVersionName) else "Hiện tại: v$currentVersionName"
+        }
+        binding.tvNewVersion.text = getString(R.string.update_new_ver).let {
+            if (it.contains("%")) String.format(it, newVersion) else "Mới: v$newVersion"
         }
     }
 
     private fun setupListeners() {
-        // Option 1: Bỏ qua (hoặc Thoát nếu là bản cập nhật bắt buộc)
-        binding.btnSkip.setSafeOnClickListener(hasAnim = true) {
-            AppAnalytics.logFeatureClick("update_skip_click")
+        // Nút Đóng (X)
+        binding.btnClose.setSafeOnClickListener(hasAnim = true) {
+            countdownTimer?.cancel()
+            AppAnalytics.logFeatureClick("update_close_click")
             if (isForceUpdate) {
                 finishAffinity()
             } else {
@@ -99,35 +106,87 @@ class UpdateAppActivity : AppCompatActivity() {
             }
         }
 
-        // Option 2: Cập nhật ngay
+        // Nút Cập nhật ngay
         binding.btnUpdateNow.setSafeOnClickListener(hasAnim = true) {
+            countdownTimer?.cancel()
+            hasRedirected = true
             AppAnalytics.logFeatureClick("update_now_click")
             openStoreForUpdate()
         }
     }
 
-    private fun openStoreForUpdate() {
-        val customUrl = storeUrl
-        if (!customUrl.isNullOrBlank()) {
-            try {
-                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(customUrl))
-                startActivity(intent)
-                return
-            } catch (_: Exception) {
-                // Fallback xuống Play Store mặc định
+    private fun startCountdownTimer() {
+        countdownTimer?.cancel()
+
+        val totalDurationMs = 5000L
+        val intervalMs = 1000L
+
+        // Hiển thị ngay trạng thái ban đầu 5s
+        updateCountdownUI(5)
+
+        countdownTimer = object : CountDownTimer(totalDurationMs, intervalMs) {
+            override fun onTick(millisUntilFinished: Long) {
+                val secondsLeft = ((millisUntilFinished + 999) / 1000).toInt().coerceAtLeast(1)
+                updateCountdownUI(secondsLeft)
             }
+
+            override fun onFinish() {
+                updateCountdownUI(0)
+                if (!isFinishing && !isDestroyed && !hasRedirected) {
+                    hasRedirected = true
+                    AppAnalytics.logFeatureClick("update_auto_redirect")
+                    openStoreForUpdate()
+                }
+            }
+        }.start()
+    }
+
+    private fun updateCountdownUI(secondsLeft: Int) {
+        if (secondsLeft > 0) {
+            binding.btnUpdateNow.text = getString(R.string.update_btn_update_countdown, secondsLeft)
+            binding.tvAutoRedirectNotice.text = getString(R.string.update_auto_redirect_notice, secondsLeft)
+        } else {
+            binding.btnUpdateNow.text = getString(R.string.update_btn_update)
+            binding.tvAutoRedirectNotice.text = getString(R.string.update_auto_redirect_notice, 0)
+        }
+    }
+
+    private fun openStoreForUpdate() {
+        // Ưu tiên 1: Khởi chạy trực tiếp In-App Update của Google Play nếu khả dụng
+        val appUpdateInfo = playUpdateManager.latestAppUpdateInfo
+        if (appUpdateInfo != null && playUpdateManager.startUpdateFlow(this, appUpdateInfo)) {
+            return
         }
 
+        // Ưu tiên 2: Custom store URL nếu có
+        val customUrl = storeUrl
+        if (!customUrl.isNullOrBlank()) {
+            val opened = runCatching {
+                val intent = Intent(Intent.ACTION_VIEW, customUrl.toUri())
+                startActivity(intent)
+                true
+            }.getOrDefault(false)
+            if (opened) return
+        }
+
+        // Ưu tiên 3: Mở trực tiếp trang Google Play Store
         val appPackage = packageName
         try {
-            val marketIntent = Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=$appPackage"))
-            marketIntent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY or Intent.FLAG_ACTIVITY_NEW_DOCUMENT or Intent.FLAG_ACTIVITY_MULTIPLE_TASK)
+            val marketIntent = Intent(Intent.ACTION_VIEW, "market://details?id=$appPackage".toUri())
+            marketIntent.addFlags(
+                Intent.FLAG_ACTIVITY_NO_HISTORY or
+                Intent.FLAG_ACTIVITY_NEW_DOCUMENT or
+                Intent.FLAG_ACTIVITY_MULTIPLE_TASK
+            )
             startActivity(marketIntent)
         } catch (_: ActivityNotFoundException) {
             try {
-                val webIntent = Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=$appPackage"))
+                val webIntent = Intent(
+                    Intent.ACTION_VIEW,
+                    "https://play.google.com/store/apps/details?id=$appPackage".toUri()
+                )
                 startActivity(webIntent)
-            } catch (e: Exception) {
+            } catch (_: Exception) {
                 Toast.makeText(this, getString(R.string.update_msg_store_error), Toast.LENGTH_SHORT).show()
             }
         }
@@ -136,6 +195,7 @@ class UpdateAppActivity : AppCompatActivity() {
     private fun setupBackPressHandling() {
         onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
+                countdownTimer?.cancel()
                 if (isForceUpdate) {
                     finishAffinity()
                 } else {
@@ -158,14 +218,17 @@ class UpdateAppActivity : AppCompatActivity() {
             .start()
     }
 
+    override fun onDestroy() {
+        countdownTimer?.cancel()
+        countdownTimer = null
+        super.onDestroy()
+    }
+
     companion object {
         const val EXTRA_NEW_VERSION = "extra_new_version"
         const val EXTRA_IS_FORCE_UPDATE = "extra_is_force_update"
         const val EXTRA_STORE_URL = "extra_store_url"
 
-        /**
-         * Tiện ích mở màn hình cập nhật từ bất kỳ đâu (MainActivity, Splash, RemoteConfig, Notification,...)
-         */
         @JvmStatic
         fun start(
             context: Context,

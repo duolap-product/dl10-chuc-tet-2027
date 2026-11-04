@@ -18,6 +18,7 @@ crashlytics = "3.0.3"
 hilt = "2.60.1"
 playServicesAds = "23.6.0"
 billing = "8.0.0"
+appUpdate = "2.1.0"
 
 [libraries]
 androidx-activity = { module = "androidx.activity:activity", version.ref = "activity" }
@@ -46,6 +47,8 @@ hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hilt"
 hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hilt" }
 play-services-ads = { module = "com.google.android.gms:play-services-ads", version.ref = "playServicesAds" }
 billing-ktx = { module = "com.android.billingclient:billing-ktx", version.ref = "billing" }
+play-app-update = { module = "com.google.android.play:app-update", version.ref = "appUpdate" }
+play-app-update-ktx = { module = "com.google.android.play:app-update-ktx", version.ref = "appUpdate" }
 
 [plugins]
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }

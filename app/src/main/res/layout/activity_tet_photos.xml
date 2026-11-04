@@ -1,88 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/rootGallery"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFBF4"
-    android:orientation="vertical">
+    android:background="#650106">
 
-    <!-- Top Action Bar -->
-    <FrameLayout
-        android:id="@+id/topBarGallery"
-        android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:paddingStart="8dp"
-        android:paddingEnd="16dp">
-
-        <ImageButton
-            android:id="@+id/btnBack"
-            android:layout_width="44dp"
-            android:layout_height="44dp"
-            android:layout_gravity="center_vertical|start"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:contentDescription="Quay lại"
-            android:padding="10dp"
-            android:src="@drawable/ic_arrow_back"
-            app:tint="#221C18" />
-
-        <TextView
-            android:id="@+id/tvHeaderTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:fontFamily="@font/liberationsans_bold"
-            android:includeFontPadding="false"
-            android:text="@string/photos_gallery_title"
-            android:textColor="#221C18"
-            android:textSize="19sp"
-            android:textStyle="bold" />
-
-        <!-- Counter Badge -->
-        <TextView
-            android:id="@+id/tvPhotoCountBadge"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical|end"
-            android:background="@drawable/bg_version_badge"
-            android:fontFamily="@font/liberationsans_bold"
-            android:includeFontPadding="false"
-            android:paddingHorizontal="10dp"
-            android:paddingVertical="4dp"
-            android:textColor="#8A5A00"
-            android:textSize="11.5sp"
-            tools:text="12 ảnh" />
-
-    </FrameLayout>
-
-    <!-- Category filter chips -->
-    <HorizontalScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:layout_marginBottom="8dp"
-        android:overScrollMode="never"
-        android:scrollbars="none">
-
-        <LinearLayout
-            android:id="@+id/layoutCategoryChips"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingHorizontal="16dp" />
-
-    </HorizontalScrollView>
-
-    <!-- Grid danh sách ảnh Tết -->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvPhotos"
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivBackground"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:clipToPadding="false"
-        android:overScrollMode="never"
-        android:paddingHorizontal="10dp"
-        android:paddingBottom="24dp"
-        tools:listitem="@layout/item_tet_photo" />
+        android:scaleType="centerCrop"
+        android:src="@drawable/bg_tet_screen" />
 
-</LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingTop="20dp">
+
+        <FrameLayout
+            android:id="@+id/topBarGallery"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:paddingStart="8dp"
+            android:paddingEnd="16dp">
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/btnBack"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center_vertical|start"
+                android:background="@drawable/bg_circle_icon_button"
+                android:contentDescription="@string/action_close"
+                android:padding="10dp"
+                android:src="@drawable/ic_arrow_back"
+                app:tint="#8A000A" />
+
+            <TextView
+                android:id="@+id/tvHeaderTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/liberationsans_bold"
+                android:includeFontPadding="false"
+                android:text="@string/photos_gallery_title"
+                android:textColor="#FFFFFF"
+                android:textSize="19sp"
+                android:textStyle="bold" />
+
+        </FrameLayout>
+
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="8dp"
+            android:overScrollMode="never"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:id="@+id/layoutCategoryChips"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingHorizontal="16dp" />
+
+        </HorizontalScrollView>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvPhotos"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:overScrollMode="never"
+            android:paddingHorizontal="10dp"
+            android:paddingBottom="24dp"
+            tools:listitem="@layout/item_tet_photo" />
+    </LinearLayout>
+
+</FrameLayout>

@@ -4,65 +4,135 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFBF2"
-    android:orientation="vertical">
+    android:clipChildren="false"
+    android:clipToPadding="false"
+    android:background="@drawable/bg_card_maker_screen">
+
+    <!-- Festive Background Watermarks & Traditional Motifs -->
+    <FrameLayout
+        android:id="@+id/layoutBackgroundDecorations"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="200dp"
+            android:layout_height="400dp"
+            android:layout_gravity="top|start"
+            android:alpha="0.32"
+            android:scaleType="centerCrop"
+            android:translationX="-20dp"
+            app:srcCompat="@drawable/bg_card_maker_left" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="200dp"
+            android:layout_height="400dp"
+            android:layout_gravity="top|end"
+            android:alpha="0.30"
+            android:scaleType="centerCrop"
+            app:srcCompat="@drawable/bg_card_maker_right" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:alpha="0.45"
+            android:scaleType="centerCrop"
+            app:srcCompat="@drawable/ic_bg_floating_petals" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_gravity="bottom"
+            android:alpha="0.50"
+            android:scaleType="centerCrop"
+            app:srcCompat="@drawable/ic_bg_oriental_wave_pattern" />
+
+    </FrameLayout>
 
     <FrameLayout
         android:id="@+id/topBar"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="56dp"
-        android:paddingStart="10dp"
-        android:paddingEnd="16dp"
+        android:paddingHorizontal="14dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/btnBack"
-            android:layout_width="44dp"
-            android:layout_height="44dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_gravity="center_vertical|start"
-            android:background="?attr/selectableItemBackgroundBorderless"
+            android:background="@drawable/bg_circle_icon_button"
+            android:contentDescription="@string/action_close"
             android:padding="10dp"
             android:src="@drawable/ic_arrow_back"
-            app:tint="#221C18" />
+            app:tint="#8A000A" />
 
-        <TextView
-            android:id="@+id/tvHeaderTitle"
+        <LinearLayout
+            android:id="@+id/layoutTitleGroup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center|start"
             android:layout_marginStart="50dp"
-            android:fontFamily="sans-serif-medium"
-            android:text="@string/card_maker_title"
-            android:textAllCaps="true"
-            android:textColor="#221C18"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivTitleFlower"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:layout_marginEnd="8dp"
+                android:contentDescription="Flower"
+                app:srcCompat="@drawable/ic_custom_blossom" />
+
+            <TextView
+                android:id="@+id/tvHeaderTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/liberationsans_bold"
+                android:includeFontPadding="false"
+                android:text="@string/card_maker_title"
+                android:textAllCaps="false"
+                android:textColor="#7A090D"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/layoutBottomActions"
+            android:id="@+id/layoutTopActions"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center|end"
+            android:layout_gravity="center_vertical|end"
+            android:gravity="center_vertical"
             android:orientation="horizontal">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/btnDownload"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:layout_marginEnd="6dp"
-                android:padding="8dp"
+                android:layout_marginEnd="10dp"
+                android:background="@drawable/bg_circle_icon_button"
+                android:contentDescription="@string/card_maker_btn_download"
+                android:padding="9dp"
                 app:srcCompat="@drawable/ic_download"
-                app:tint="#A81C22" />
+                app:tint="#8A000A" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/btnShare"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:padding="8dp"
+                android:background="@drawable/bg_circle_icon_button"
+                android:contentDescription="@string/card_maker_btn_share"
+                android:padding="9dp"
                 app:srcCompat="@drawable/ic_share"
-                app:tint="#A81C22" />
+                app:tint="#8A000A" />
 
         </LinearLayout>
 
@@ -72,7 +142,7 @@
         android:id="@+id/divider"
         android:layout_width="0dp"
         android:layout_height="1dp"
-        android:background="#1A8D5524"
+        android:background="#128D5524"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/topBar" />
@@ -81,105 +151,129 @@
         android:id="@+id/layoutCardToolbar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="10dp"
-        android:layout_marginTop="6dp"
+        android:layout_marginHorizontal="14dp"
+        android:layout_marginTop="8dp"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/topBar">
+        app:layout_constraintTop_toBottomOf="@id/divider">
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnChangeBg"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_marginEnd="4dp"
+            android:layout_height="42dp"
+            android:layout_marginEnd="6dp"
             android:layout_weight="1"
+            android:background="@drawable/bg_card_pill_unselected"
             android:fontFamily="@font/liberationsans_bold"
             android:includeFontPadding="false"
             android:insetTop="0dp"
             android:insetBottom="0dp"
-            android:paddingHorizontal="4dp"
+            android:paddingHorizontal="8dp"
             android:paddingVertical="0dp"
             android:text="@string/card_maker_btn_change_bg"
             android:textAllCaps="false"
-            android:textColor="#7A090D"
-            android:textSize="12sp"
-            app:cornerRadius="11dp"
-            app:icon="@drawable/ic_nav_card"
+            android:textColor="#8A000A"
+            android:textSize="12.5sp"
+            app:backgroundTint="@null"
+            app:cornerRadius="21dp"
+            app:elevation="1dp"
+            app:icon="@drawable/ic_image_outline"
             app:iconGravity="textStart"
             app:iconPadding="4dp"
-            app:iconSize="16dp"
-            app:iconTint="#7A090D"
-            app:strokeColor="#7A090D"
-            app:strokeWidth="1dp" />
+            app:iconSize="22dp"
+            app:iconTint="#8A000A" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnEditWish"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:layout_width="0dp"
-            android:layout_height="40dp"
-            android:layout_marginEnd="4dp"
+            android:layout_height="42dp"
+            android:layout_marginEnd="6dp"
             android:layout_weight="1.15"
+            android:background="@drawable/bg_card_pill_unselected"
             android:fontFamily="@font/liberationsans_bold"
             android:includeFontPadding="false"
             android:insetTop="0dp"
             android:insetBottom="0dp"
-            android:paddingHorizontal="4dp"
+            android:paddingHorizontal="8dp"
             android:paddingVertical="0dp"
             android:text="@string/card_maker_btn_edit_wish"
             android:textAllCaps="false"
-            android:textColor="#7A090D"
-            android:textSize="12sp"
-            app:cornerRadius="11dp"
+            android:textColor="#8A000A"
+            android:textSize="12.5sp"
+            app:backgroundTint="@null"
+            app:cornerRadius="21dp"
+            app:elevation="1dp"
             app:icon="@drawable/ic_sparkle"
             app:iconGravity="textStart"
             app:iconPadding="4dp"
-            app:iconSize="16dp"
-            app:iconTint="#7A090D"
-            app:strokeColor="#7A090D"
-            app:strokeWidth="1dp" />
+            app:iconSize="22dp"
+            app:iconTint="#8A000A" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnAddSticker"
+        <FrameLayout
+            android:id="@+id/layoutStickerPillContainer"
             android:layout_width="0dp"
-            android:layout_height="40dp"
+            android:layout_height="42dp"
             android:layout_weight="1.25"
-            android:backgroundTint="#7A090D"
-            android:fontFamily="@font/liberationsans_bold"
-            android:includeFontPadding="false"
-            android:insetTop="0dp"
-            android:insetBottom="0dp"
-            android:paddingHorizontal="4dp"
-            android:paddingVertical="0dp"
-            android:text="Sticker (0/3)"
-            android:textAllCaps="false"
-            android:textColor="#FEE5AA"
-            android:textSize="12sp"
-            app:cornerRadius="11dp"
-            app:icon="@drawable/sticker_apricot_flower"
-            app:iconGravity="textStart"
-            app:iconPadding="4dp"
-            app:iconSize="18dp"
-            app:iconTint="@null" />
+            android:clipChildren="false"
+            android:clipToPadding="false">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnAddSticker"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_card_pill_selected"
+                android:fontFamily="@font/liberationsans_bold"
+                android:includeFontPadding="false"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:paddingHorizontal="8dp"
+                android:paddingVertical="0dp"
+                android:text="Sticker (0/3)"
+                android:textAllCaps="false"
+                android:textColor="#FFF7E6"
+                android:textSize="12.5sp"
+                app:backgroundTint="@null"
+                app:cornerRadius="21dp"
+                app:elevation="3dp"
+                app:icon="@drawable/ic_custom_blossom"
+                app:iconGravity="textStart"
+                app:iconPadding="4dp"
+                app:iconSize="22dp"
+                app:iconTint="#FFD700" />
+
+        </FrameLayout>
 
     </LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivStickerCloudAccent"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_gravity="bottom|end"
+        android:translationX="10dp"
+        app:layout_constraintBottom_toBottomOf="@id/layoutCardToolbar"
+        app:layout_constraintEnd_toEndOf="@id/layoutCardToolbar"
+        app:srcCompat="@drawable/bg_item_sticker" />
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardBgWish"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginHorizontal="10dp"
-        android:layout_marginTop="6dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         app:cardBackgroundColor="@color/white"
-        app:cardCornerRadius="20dp"
-        app:cardElevation="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:cardCornerRadius="26dp"
+        app:cardElevation="6dp"
+        app:layout_constraintBottom_toTopOf="@id/layoutBottomBar"
         app:layout_constraintDimensionRatio="1024:1434"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/layoutCardToolbar">
+        app:layout_constraintTop_toBottomOf="@id/layoutCardToolbar"
+        app:strokeColor="#F0E5D8"
+        app:strokeWidth="1dp">
 
         <FrameLayout
             android:id="@+id/layoutCardContent"
@@ -197,21 +291,46 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvWish"
-                android:layout_width="220dp"
-                android:layout_height="100dp"
+                android:layout_width="230dp"
+                android:layout_height="110dp"
                 android:layout_gravity="center"
-                android:fontFamily="@font/liberationsans_bold"
+                android:fontFamily="@font/lobstertwo_bolditalic"
                 android:gravity="center"
                 android:includeFontPadding="false"
+                android:lineSpacingMultiplier="1.2"
                 android:text="@string/card_maker_placeholder_wish"
-                android:textColor="#7A090D"
-                android:textSize="18sp"
-                app:autoSizeMaxTextSize="34sp"
-                app:autoSizeMinTextSize="12sp"
+                android:textColor="#6B0509"
+                android:textSize="22sp"
+                app:autoSizeMaxTextSize="36sp"
+                app:autoSizeMinTextSize="14sp"
                 app:autoSizeStepGranularity="1sp"
                 app:autoSizeTextType="uniform" />
+
         </FrameLayout>
+
     </com.google.android.material.card.MaterialCardView>
+
+    <FrameLayout
+        android:id="@+id/layoutBottomBar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:paddingTop="4dp"
+        android:paddingBottom="14dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/btnSendWish"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_gravity="center"
+            android:scaleType="centerCrop"
+            app:srcCompat="@drawable/button_send_card_maker" />
+
+    </FrameLayout>
 
     <FrameLayout
         android:id="@+id/layoutLoading"
@@ -261,7 +380,11 @@
                     android:textColor="#7A090D"
                     android:textSize="15sp"
                     android:textStyle="bold" />
+
             </LinearLayout>
+
         </com.google.android.material.card.MaterialCardView>
+
     </FrameLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

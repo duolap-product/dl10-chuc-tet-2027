@@ -40,7 +40,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <!-- Nút VIP Tết Việt -->
         <LinearLayout
             android:id="@+id/btnVip"
             android:layout_width="wrap_content"
@@ -296,8 +295,7 @@
 
                 </LinearLayout>
 
-                <!-- Card 4: Tạo Thiệp Tết -->
-                <LinearLayout
+                <FrameLayout
                     android:id="@+id/cardCardMaker"
                     android:layout_width="0dp"
                     android:layout_height="150dp"
@@ -306,33 +304,55 @@
                     android:background="@drawable/bg_feature_card"
                     android:clickable="true"
                     android:elevation="5dp"
-                    android:focusable="true"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:padding="8dp">
+                    android:focusable="true">
 
-                    <ImageView
-                        android:id="@+id/ivCardMaker"
-                        android:layout_width="88dp"
-                        android:layout_height="88dp"
-                        android:contentDescription="@string/feature_tao_thiep"
-                        android:scaleType="fitCenter"
-                        android:src="@drawable/ic_feature_card_maker" />
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="100dp"
+                        android:layout_height="50dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:alpha="0.5"
+                        app:srcCompat="@drawable/bg_cloud_01" />
 
-                    <TextView
-                        android:id="@+id/tvCardMaker"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:fontFamily="@font/liberationsans_bold"
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="100dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="bottom|end"
+                        android:layout_marginBottom="20dp"
+                        android:alpha="0.3"
+                        app:srcCompat="@drawable/bg_cloud_01" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:elevation="5dp"
                         android:gravity="center"
-                        android:includeFontPadding="false"
-                        android:text="@string/feature_tao_thiep"
-                        android:textColor="#7A090D"
-                        android:textSize="15sp"
-                        android:textStyle="bold" />
+                        android:orientation="vertical"
+                        android:padding="8dp">
 
-                </LinearLayout>
+                        <ImageView
+                            android:id="@+id/ivCardMaker"
+                            android:layout_width="88dp"
+                            android:layout_height="88dp"
+                            android:contentDescription="@string/feature_tao_thiep"
+                            android:scaleType="fitCenter"
+                            android:src="@drawable/ic_feature_card_maker" />
+
+                        <TextView
+                            android:id="@+id/tvCardMaker"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:fontFamily="@font/liberationsans_bold"
+                            android:gravity="center"
+                            android:includeFontPadding="false"
+                            android:text="@string/feature_tao_thiep"
+                            android:textColor="#7A090D"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
+
+                    </LinearLayout>
+                </FrameLayout>
 
             </LinearLayout>
 
@@ -417,134 +437,149 @@
             </LinearLayout>
 
             <!-- Row 4: Hàng 3 Item (Hình Ảnh Tết & 2 Tính Năng Dự Phòng) -->
-            <LinearLayout
+            <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="14dp"
+                android:background="@drawable/bg_feature_card"
                 android:baselineAligned="false"
-                android:orientation="horizontal">
+                android:orientation="vertical"
+                android:padding="10dp">
 
-                <FrameLayout
-                    android:id="@+id/cardTetPhotos"
-                    android:layout_width="0dp"
-                    android:layout_height="120dp"
-                    android:layout_marginEnd="5dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/bg_feature_card">
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/liberationsans_bold"
+                    android:includeFontPadding="false"
+                    android:padding="5dp"
+                    android:text="Khám phá Tết Việt"
+                    android:textColor="#7A090D" />
 
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_margin="1dp"
-                        app:cardBackgroundColor="@color/white"
-                        app:cardCornerRadius="14dp"
-                        app:cardElevation="0dp">
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
 
-                        <androidx.appcompat.widget.AppCompatImageView
+                    <FrameLayout
+                        android:id="@+id/cardTetPhotos"
+                        android:layout_width="0dp"
+                        android:layout_height="154dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_feature_card">
+
+                        <androidx.cardview.widget.CardView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:scaleType="centerCrop"
-                            app:srcCompat="@drawable/banner_tet_photos" />
+                            android:layout_margin="1dp"
+                            app:cardBackgroundColor="@color/white"
+                            app:cardCornerRadius="14dp"
+                            app:cardElevation="0dp">
 
-                    </androidx.cardview.widget.CardView>
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:scaleType="centerCrop"
+                                app:srcCompat="@drawable/bg_hinh_anh_tet" />
 
-                    <TextView
-                        android:id="@+id/tvTetPhotos"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_horizontal|bottom"
-                        android:layout_marginTop="6dp"
-                        android:layout_marginBottom="4dp"
+                        </androidx.cardview.widget.CardView>
+
+                        <TextView
+                            android:id="@+id/tvTetPhotos"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal|bottom"
+                            android:layout_marginTop="6dp"
+                            android:layout_marginBottom="4dp"
+                            android:fontFamily="@font/liberationsans_bold"
+                            android:gravity="center"
+                            android:includeFontPadding="false"
+                            android:paddingHorizontal="10dp"
+                            android:paddingVertical="4dp"
+                            android:text="@string/feature_tet_photos"
+                            android:textColor="#FFF"
+                            android:textSize="15sp" />
+                    </FrameLayout>
+
+                    <LinearLayout
+                        android:id="@+id/cardOption2"
+                        android:layout_width="0dp"
+                        android:layout_height="120dp"
+                        android:layout_marginHorizontal="3dp"
+                        android:layout_weight="1"
                         android:background="@drawable/bg_feature_card"
-                        android:fontFamily="@font/liberationsans_regular"
+                        android:clickable="true"
+                        android:elevation="5dp"
+                        android:focusable="true"
                         android:gravity="center"
-                        android:includeFontPadding="false"
-                        android:paddingHorizontal="10dp"
-                        android:paddingVertical="4dp"
-                        android:text="@string/feature_tet_photos"
-                        android:textColor="#7A090D"
-                        android:textSize="11sp" />
-                </FrameLayout>
+                        android:orientation="vertical"
+                        android:padding="8dp"
+                        android:visibility="invisible">
 
-                <!-- Item 2: Option Bổ Sung 1 -->
-                <LinearLayout
-                    android:id="@+id/cardOption2"
-                    android:layout_width="0dp"
-                    android:layout_height="120dp"
-                    android:layout_marginHorizontal="3dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/bg_feature_card"
-                    android:clickable="true"
-                    android:elevation="5dp"
-                    android:focusable="true"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:padding="8dp">
+                        <ImageView
+                            android:id="@+id/ivOption2"
+                            android:layout_width="56dp"
+                            android:layout_height="56dp"
+                            android:contentDescription="Tính năng bổ sung 1"
+                            android:scaleType="fitCenter"
+                            android:src="@drawable/sticker_gold_ingot" />
 
-                    <ImageView
-                        android:id="@+id/ivOption2"
-                        android:layout_width="56dp"
-                        android:layout_height="56dp"
-                        android:contentDescription="Tính năng bổ sung 1"
-                        android:scaleType="fitCenter"
-                        android:src="@drawable/sticker_gold_ingot" />
+                        <TextView
+                            android:id="@+id/tvOption2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6dp"
+                            android:fontFamily="@font/liberationsans_bold"
+                            android:gravity="center"
+                            android:includeFontPadding="false"
+                            android:text="@string/coming_soon"
+                            android:textColor="#7A090D"
+                            android:textSize="13.5sp"
+                            android:textStyle="bold" />
 
-                    <TextView
-                        android:id="@+id/tvOption2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="6dp"
-                        android:fontFamily="@font/liberationsans_bold"
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/cardOption3"
+                        android:layout_width="0dp"
+                        android:layout_height="120dp"
+                        android:layout_marginStart="5dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_feature_card"
+                        android:clickable="true"
+                        android:elevation="5dp"
+                        android:focusable="true"
                         android:gravity="center"
-                        android:includeFontPadding="false"
-                        android:text="@string/coming_soon"
-                        android:textColor="#7A090D"
-                        android:textSize="13.5sp"
-                        android:textStyle="bold" />
+                        android:orientation="vertical"
+                        android:padding="8dp"
+                        android:visibility="invisible">
 
-                </LinearLayout>
+                        <ImageView
+                            android:id="@+id/ivOption3"
+                            android:layout_width="56dp"
+                            android:layout_height="56dp"
+                            android:contentDescription="Tính năng bổ sung 2"
+                            android:scaleType="fitCenter"
+                            android:src="@drawable/sticker_lantern" />
 
-                <!-- Item 3: Option Bổ Sung 2 -->
-                <LinearLayout
-                    android:id="@+id/cardOption3"
-                    android:layout_width="0dp"
-                    android:layout_height="120dp"
-                    android:layout_marginStart="5dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/bg_feature_card"
-                    android:clickable="true"
-                    android:elevation="5dp"
-                    android:focusable="true"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:padding="8dp">
+                        <TextView
+                            android:id="@+id/tvOption3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6dp"
+                            android:fontFamily="@font/liberationsans_bold"
+                            android:gravity="center"
+                            android:includeFontPadding="false"
+                            android:text="@string/coming_soon"
+                            android:textColor="#7A090D"
+                            android:textSize="13.5sp"
+                            android:textStyle="bold" />
 
-                    <ImageView
-                        android:id="@+id/ivOption3"
-                        android:layout_width="56dp"
-                        android:layout_height="56dp"
-                        android:contentDescription="Tính năng bổ sung 2"
-                        android:scaleType="fitCenter"
-                        android:src="@drawable/sticker_lantern" />
+                    </LinearLayout>
 
-                    <TextView
-                        android:id="@+id/tvOption3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="6dp"
-                        android:fontFamily="@font/liberationsans_bold"
-                        android:gravity="center"
-                        android:includeFontPadding="false"
-                        android:text="@string/coming_soon"
-                        android:textColor="#7A090D"
-                        android:textSize="13.5sp"
-                        android:textStyle="bold" />
-
-                </LinearLayout>
-
-            </LinearLayout>
-
+                </androidx.appcompat.widget.LinearLayoutCompat>
+            </androidx.appcompat.widget.LinearLayoutCompat>
         </androidx.appcompat.widget.LinearLayoutCompat>
-
     </androidx.core.widget.NestedScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

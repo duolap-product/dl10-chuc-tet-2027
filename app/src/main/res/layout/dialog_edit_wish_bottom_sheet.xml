@@ -479,6 +479,22 @@
                         android:textColor="#5E5246"
                         android:textSize="13sp" />
 
+                    <TextView
+                        android:id="@+id/btnFontBangers"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_chip_unselected"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:fontFamily="@font/bangers_regular"
+                        android:paddingStart="14dp"
+                        android:paddingTop="9dp"
+                        android:paddingEnd="14dp"
+                        android:paddingBottom="9dp"
+                        android:text="Bangers Regular"
+                        android:textColor="#5E5246"
+                        android:textSize="13sp" />
+
                 </LinearLayout>
 
             </HorizontalScrollView>

@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App & General Branding -->
+    <string name="app_name">Chúc Tết 2027</string>
+    <string name="tet_viet">Viet</string>
+    <string name="tet_year">2027</string>
+    <string name="tet_blessing">May All Wishes Come True</string>
+    <string name="brand_duolap">DuoLap</string>
+    <string name="app_footer_brand">Tet Viet 2027 • DuoLap</string>
+    <string name="app_version_info">Version 1.0 • Happy Lunar New Year 2027</string>
+    <string name="action_close">Close</string>
+    <string name="action_cancel">Cancel</string>
+    <string name="action_confirm">Confirm</string>
+    <string name="action_save">Save</string>
+    <string name="action_share">Share</string>
+    <string name="action_copy">Copy</string>
+    <string name="action_download">Download</string>
+    <string name="action_understood">Got It</string>
+    <string name="action_got_it">Got it</string>
+    <string name="coming_soon">Coming Soon</string>
+    <string name="msg_feature_coming_soon">Feature coming soon! 🧧</string>
+
+    <!-- Main Screen & Countdown -->
+    <string name="countdown_title">Lunar New Year 2027 Countdown</string>
+    <string name="countdown_con">Left</string>
+    <string name="countdown_ngay">Days</string>
+    <string name="countdown_gio">Hours</string>
+    <string name="countdown_phut">Mins</string>
+    <string name="countdown_giay">Secs</string>
+    <string name="countdown_welcome">Happy Year of the Goat 2027!</string>
+    <string name="countdown_monday_title">Monday Countdown</string>
+    <string name="monday_next_label">Next Mon</string>
+    <string name="monday_early_week">Early Week</string>
+    <string name="monday_count_label">Mondays</string>
+    <string name="monday_last_label">Last Mon</string>
+    <string name="monday_tet_25">25th Tet</string>
+    <string name="monday_today_label">Today</string>
+    <string name="monday_count_format">Monday • %1$d days left</string>
+
+    <!-- Feature Cards & Navigation -->
+    <string name="feature_spring_fortune">🧧 SPRING BLESSINGS</string>
+    <string name="feature_lucky_wheel">Lucky Red Envelope</string>
+    <string name="feature_lucky_wheel_desc">Festive spin wheel • Receive spring luck</string>
+    <string name="feature_tet_photos">Tet Photos</string>
+    <string name="feature_tu_vi">Horoscope &amp; Auspicious Guide</string>
+    <string name="feature_loi_chuc">Meaningful Wishes</string>
+    <string name="feature_phong_tuc">Tet Customs</string>
+    <string name="feature_tao_thiep">Tet Card Maker</string>
+    <string name="nav_home">Home</string>
+    <string name="nav_explore">Explore</string>
+    <string name="nav_card">Create Card</string>
+    <string name="nav_profile">Profile</string>
+
+    <!-- Settings & Audio -->
+    <string name="settings_title">App Settings</string>
+    <string name="settings_sound_title">Festive Tet Music</string>
+    <string name="settings_sound_desc">Firecracker sounds &amp; spring melodies</string>
+    <string name="settings_notification_title">Daily Countdown Reminder</string>
+    <string name="settings_notification_desc">Remind remaining days until Tet</string>
+    <string name="msg_music_on">Festive Tet music enabled 🌸</string>
+    <string name="msg_music_off">Background music muted 🔕</string>
+    <string name="content_desc_music_turn_off">Mute Tet music</string>
+    <string name="content_desc_music_turn_on">Play Tet music</string>
+    <string name="msg_monday_notification_enabled">Monday 8:30 AM notification enabled! 🧧</string>
+
+    <!-- Card Maker Activity & Bottom Sheets -->
+    <string name="card_maker_title">Tet Card Maker</string>
+    <string name="card_maker_btn_change_bg">Background</string>
+    <string name="card_maker_btn_edit_wish">Edit Wish</string>
+    <string name="card_maker_btn_sticker">Stickers (%1$d/%2$d)</string>
+    <string name="card_maker_placeholder_wish">Tap here\nto add your wish</string>
+    <string name="card_maker_btn_download">Download</string>
+    <string name="card_maker_btn_share">Share</string>
+    <string name="card_maker_btn_send_wish">Send wishes</string>
+    <string name="card_maker_exporting">Exporting card...</string>
+    <string name="card_maker_saving">Saving card to Gallery...</string>
+    <string name="card_maker_preparing_share">Preparing to share...</string>
+    <string name="card_maker_saved_success_title">Card Saved Successfully!</string>
+    <string name="card_maker_saved_success_desc">Image saved to Gallery\nPictures/TetViet</string>
+    <string name="card_maker_choose_bg_title">Choose Card Background</string>
+    <string name="card_maker_choose_bg_subtitle">Aspect ratio adjusts automatically to template</string>
+    <string name="card_maker_choose_sticker_title">Add Tet Sticker</string>
+    <string name="card_maker_choose_sticker_subtitle">Decorate card with up to %1$d lucky stickers (drag, rotate, resize)</string>
+    <string name="card_maker_sticker_sheet_subtitle">Select Tet sticker (%1$d/%2$d stickers)</string>
+    <string name="card_maker_edit_wish_title">Customize Wishes</string>
+    <string name="card_maker_edit_wish_subtitle">Edit wording, color, alignment and typography</string>
+    <string name="card_maker_wish_hint">Enter meaningful Tet 2027 wishes...</string>
+    <string name="card_maker_wish_suggestions_label">Suggested wishes:</string>
+    <string name="card_maker_suggestion_1">🧧 May all your wishes come true and dreams flourish</string>
+    <string name="card_maker_suggestion_2">🌸 Abundant blessings, prosperity and good health</string>
+    <string name="card_maker_suggestion_3">✨ Peace in the new year, smooth journeys everywhere</string>
+    <string name="card_maker_suggestion_4">💰 Wealth flows in like rivers, expenses drop like dew</string>
+    <string name="card_maker_suggestion_5">🕊️ Family harmony, pious and loving descendants</string>
+    <string name="card_maker_color_label">Text Color</string>
+    <string name="card_maker_align_label">Alignment</string>
+    <string name="card_maker_align_left">Left</string>
+    <string name="card_maker_align_center">Center</string>
+    <string name="card_maker_align_right">Right</string>
+    <string name="card_maker_font_label">Font Typography</string>
+    <string name="card_maker_font_bold">Bold</string>
+    <string name="card_maker_font_art">Artistic</string>
+    <string name="card_maker_font_italic">Elegant</string>
+    <string name="card_maker_font_regular">Regular</string>
+    <string name="card_maker_font_serif">Classic Serif</string>
+    <string name="card_bg_free">FREE</string>
+    <string name="card_bg_unlock_ad">Watch 0/3 ads to unlock</string>
+    <string name="msg_storage_permission_needed">Storage permission is required to save cards publicly</string>
+    <string name="msg_max_stickers_reached">Maximum of %d stickers reached on card</string>
+    <string name="msg_added_sticker">Added sticker %s (touch to drag, rotate, resize)</string>
+    <string name="msg_removed_sticker">Sticker removed</string>
+    <string name="msg_save_card_failed">Failed to save card, please try again</string>
+    <string name="msg_save_card_error">Failed to save card: %s</string>
+    <string name="msg_share_card_error">Failed to share card: %s</string>
+    <string name="share_card_subject">Lunar New Year 2027 Greeting Card • Tet Viet</string>
+    <string name="share_card_message">Happy Lunar New Year 2027! Here is a greeting card I created with the Tet Viet app.\nDownload app: https://duolap.online/</string>
+    <string name="share_chooser_title">Share Tet card via</string>
+
+    <!-- Lucky Wheel -->
+    <string name="wheel_title">Lucky Wheel</string>
+    <string name="wheel_subtitle">Spring Fortune • 2027</string>
+    <string name="wheel_banner_title">SPRING FORTUNE WHEEL</string>
+    <string name="wheel_instruction_default">Tap \'Spin Now\' to test your spring fortune!</string>
+    <string name="wheel_instruction_spinning">The wheel is spinning... Let\'s see your luck! 🌸</string>
+    <string name="wheel_btn_spin">SPIN NOW</string>
+    <string name="wheel_btn_spinning">SPINNING...</string>
+    <string name="wheel_btn_customize">Customize</string>
+    <string name="wheel_btn_history">History</string>
+    <string name="wheel_settings_title">Lucky Wheel Settings</string>
+    <string name="wheel_settings_add_prize">Add New Prize</string>
+    <string name="wheel_settings_current_list">Current prizes:</string>
+    <string name="wheel_settings_reset_default">Reset Default</string>
+    <string name="wheel_settings_save_apply">Save &amp; Apply</string>
+    <string name="wheel_prize_edit_title">Edit Prize</string>
+    <string name="wheel_prize_add_title">Add New Prize</string>
+    <string name="wheel_prize_name_label">Prize Name / Wish:</string>
+    <string name="wheel_prize_name_hint">E.g.: $88, Spring Fortune...</string>
+    <string name="wheel_prize_freq_label">Frequency (1 - 100):</string>
+    <string name="wheel_prize_freq_note">* Higher value = higher chance to win, lower = rarer</string>
+    <string name="wheel_prize_color_label">Sector Color:</string>
+    <string name="wheel_prize_sticker_label">Sector Sticker / Icon:</string>
+    <string name="wheel_result_congrats">CONGRATULATIONS!</string>
+    <string name="wheel_result_won_prefix">You won the lucky envelope:</string>
+    <string name="wheel_result_wishing">Wishing you a joyful and prosperous Year of the Goat 2027!</string>
+    <string name="wheel_result_spin_again">Spin Again</string>
+    <string name="wheel_history_title">Spin History</string>
+    <string name="wheel_history_empty">No spins yet.\nTry your spring luck now! 🧧</string>
+    <string name="wheel_history_clear">Clear History</string>
+    <string name="msg_wheel_need_at_least_2">The wheel needs at least 2 prizes!</string>
+    <string name="msg_wheel_need_min_2">The wheel needs at least 2 items!</string>
+    <string name="msg_wheel_max_16">Maximum of 16 items on the wheel!</string>
+    <string name="msg_wheel_reset_success">Restored default items!</string>
+    <string name="msg_wheel_updated">Lucky wheel updated! 🧧</string>
+    <string name="msg_wheel_enter_prize_name">Please enter a prize name!</string>
+    <string name="msg_wheel_history_cleared">Spin history cleared!</string>
+    <string name="wheel_freq_format">Frequency: %1$d/100 • Rate ~%2$d%%</string>
+
+    <!-- Horoscope Dialog -->
+    <string name="horoscope_title">Horoscope &amp; Auspicious Guide 2027</string>
+    <string name="horoscope_subtitle">Heavenly River Water • Astrological Predictions</string>
+    <string name="horoscope_section_overview_title">🔮 Overview of the Year 2027</string>
+    <string name="horoscope_section_overview_content">2027 is the Year of the Goat (Dinh Mui), characterized by Heavenly River Water (Thien Ha Thuy). This year brings harmonious, compassionate energy, ideal for establishing long-term relationships and sustainable wealth.</string>
+    <string name="horoscope_section_departure_title">🧭 First Departure Directions (Day 1)</string>
+    <string name="horoscope_section_departure_content">• Joy God: Northwest (welcome joy, luck, family peace)\n• Wealth God: Southeast (attract wealth, career prosperity)\n• Auspicious Hours: Rat (23:00-01:00), Tiger (03:00-05:00), Dragon (07:00-09:00), Snake (09:00-11:00)</string>
+    <string name="horoscope_section_color_title">🎨 Lucky Colors for 2027</string>
+    <string name="horoscope_section_color_content">• Generating colors (Metal generates Water): White, Gold, Silver\n• Element colors (Water): Blue, Black\n• Auspicious festival colors: Royal Red, Prosperity Gold</string>
+
+    <!-- Wishes Dialog -->
+    <string name="wishes_dialog_title">Meaningful Tet Wishes 2027</string>
+    <string name="wishes_dialog_subtitle">Send love &amp; prosperity this spring</string>
+    <string name="wishes_section_parents">🧧 For Grandparents &amp; Parents</string>
+    <string name="wishes_section_parents_content">Wishing Parents a healthy, peaceful and long life in 2027, always being a warm and steadfast shelter for children and grandchildren!</string>
+    <string name="wishes_section_friends">🌸 For Friends &amp; Colleagues</string>
+    <string name="wishes_section_friends_content">Happy New Year 2027: Wealth pours in like a rushing river, money leaves drop by drop like drip coffee. Skyrocketing career, glowing success, and peaceful home!</string>
+    <string name="msg_wish_copied">Wish copied to clipboard! 🧧</string>
+    <string name="wishes_share_subject">Tet 2027 Best Wishes</string>
+    <string name="wishes_share_chooser">Share via</string>
+
+    <!-- Tet Customs Screen & Detail -->
+    <string name="customs_title">Tet Customs</string>
+    <string name="customs_subtitle">Traditional cultural heritage through generations</string>
+    <string name="customs_search_hint">Search customs, dishes, rituals...</string>
+    <string name="customs_category_all">✓ All</string>
+    <string name="customs_category_all_raw">All</string>
+    <string name="customs_category_before_tet">Before Tet</string>
+    <string name="customs_category_eve">New Year\'s Eve</string>
+    <string name="customs_category_during_tet">During Tet</string>
+    <string name="customs_category_after_tet">After Tet</string>
+    <string name="customs_handbook_title">Vietnamese Tet Handbook</string>
+    <string name="customs_empty_title">No customs found</string>
+    <string name="customs_empty_desc">Try searching with a different keyword</string>
+    <string name="customs_item_banh_chung_title">🍃 Square Sticky Rice Cake (Banh Chung)</string>
+    <string name="customs_item_banh_chung_desc">Square Banh Chung symbolizes the Earth, cylindrical Banh Tet symbolizes bonding and care. Family gathering by the simmering fire on New Year\'s Eve is the most sacred bonding moment.</string>
+    <string name="customs_item_tao_quan_title">🐟 Kitchen Gods Farewell (23rd Lunar Month)</string>
+    <string name="customs_item_tao_quan_desc">Releasing red carp to send Kitchen Gods to heaven to report household events to the Jade Emperor, and initiating thorough house cleaning for Tet.</string>
+    <string name="customs_item_xong_dat_title">🚪 First Footing Ritual (Xong Dat)</string>
+    <string name="customs_item_xong_dat_desc">The first person to enter the house after midnight brings fortune and vitality for the entire year. Hosts usually invite a kind, warm-hearted person with a compatible zodiac.</string>
+    <string name="customs_detail_meaning_title">🌸 Meaning &amp; Origins</string>
+    <string name="customs_detail_ritual_title">📜 Rituals &amp; Practices</string>
+    <string name="customs_detail_taboo_title">✨ Lucky Notes &amp; Taboos</string>
+    <string name="customs_detail_btn_close">Got It</string>
+    <string name="customs_count_format">%1$d/%2$d items</string>
+
+    <!-- Tet Photos & Viewer -->
+    <string name="photos_gallery_title">Tet 2027 Photo Gallery</string>
+    <string name="photos_msg_downloading">Downloading photo...</string>
+    <string name="photos_msg_download_success">Photo saved to Gallery successfully! 🌸</string>
+    <string name="photos_msg_download_failed">Failed to save photo!</string>
+    <string name="photos_msg_share_failed">Cannot prepare photo for sharing</string>
+
+    <!-- App Update Screen -->
+    <string name="update_header_title">TET 2027 UPDATE</string>
+    <string name="update_header_better_badge">BETTER UPDATE READY ✨</string>
+    <string name="update_better_title">New Version Available! 🧧</string>
+    <string name="update_better_subtitle">A new and better version is ready with superior performance, smoother animations, and the best Lunar New Year 2027 experience. Please update now to enjoy!</string>
+    <string name="update_btn_update_countdown">Update Now (%1$ds)</string>
+    <string name="update_auto_redirect_notice">Automatically redirecting to Store in %1$d seconds...</string>
+    <string name="update_title">New Update Available! 🧧</string>
+    <string name="update_current_ver">Current: v1.0.0</string>
+    <string name="update_new_ver">Latest: v2.0.0</string>
+    <string name="update_description">Please update to the latest version to enjoy all Tet 2027 features and the smoothest experience!</string>
+    <string name="update_whats_new_title">✨ What\'s new in this update:</string>
+    <string name="update_item_card_title">Artistic Greeting Cards</string>
+    <string name="update_item_card_desc">Quick delete wish button, custom calligraphy typography and diverse spring backgrounds.</string>
+    <string name="update_item_countdown_title">Countdown &amp; Customs</string>
+    <string name="update_item_countdown_desc">Precise second-by-second countdown to Tet 2027, explore rich traditional customs.</string>
+    <string name="update_item_perf_title">Superior Speed &amp; Performance</string>
+    <string name="update_item_perf_desc">Instant startup, super smooth navigation and battery optimization.</string>
+    <string name="update_item_security_title">Security &amp; Bug Fixes</string>
+    <string name="update_item_security_desc">Improved system stability, fast sync and resolved issues.</string>
+    <string name="update_btn_skip">Later</string>
+    <string name="update_btn_update">Update Now</string>
+    <string name="update_msg_store_error">Cannot open app store!</string>
+    <string name="update_msg_already_latest">You are already using the latest version! ✨</string>
+    <string name="update_checking_toast">Checking for updates...</string>
+
+    <!-- Milestones Dialog -->
+    <string name="notif_dialog_title">Tet 2027 Milestones</string>
+    <string name="notif_item_tao_title">23rd of Last Month • Kitchen Gods</string>
+    <string name="notif_item_tao_desc">Saturday, Jan 30, 2027: Release red carps, bid farewell to Kitchen Gods.</string>
+    <string name="notif_item_eve_title">29th-30th of Tet • New Year\'s Eve</string>
+    <string name="notif_item_eve_desc">Friday, Feb 05, 2027: Year-end feast, family gathering for sacred New Year\'s Eve.</string>
+    <string name="notif_item_mung1_title">1st Day of Tet • Auspicious Beginning</string>
+    <string name="notif_item_mung1_desc">Saturday, Feb 06, 2027: 1st day visits to father\'s side, auspicious spring start.</string>
+
+    <!-- Legacy Card Maker Dialog -->
+    <string name="dialog_card_maker_title">Create Tet Greeting Card 2027</string>
+    <string name="dialog_card_maker_subtitle">Design exclusive cards to send loved ones</string>
+    <string name="dialog_card_maker_card_heading">✨ HAPPY NEW YEAR 2027 ✨</string>
+    <string name="dialog_card_maker_to_label">To: %1$s</string>
+    <string name="dialog_card_maker_default_recipient">Beloved Family</string>
+    <string name="dialog_card_maker_default_wish">Wishing you a joyful, prosperous and healthy Year of the Goat 2027, may all your wishes come true!</string>
+    <string name="dialog_card_maker_from_label">— From: %1$s —</string>
+    <string name="dialog_card_maker_default_sender">Your Loving One</string>
+    <string name="dialog_card_maker_input_recipient_hint">Recipient (e.g., Parents, Best Friend)</string>
+    <string name="dialog_card_maker_input_wish_hint">Meaningful wish</string>
+    <string name="dialog_card_maker_input_sender_hint">Sender name</string>
+    <string name="dialog_card_maker_share_btn">Share Tet Card Now 🧧</string>
+
+    <!-- VIP & Monetization & Billing Strings -->
+    <string name="vip_header_title">Tet Viet VIP</string>
+    <string name="vip_header_subtitle">Unlock all premium Tet features, unlimited &amp; ad-free</string>
+    <string name="vip_btn_restore">Restore</string>
+    <string name="vip_perk_no_ads_title">100% Ad-Free Experience</string>
+    <string name="vip_perk_no_ads_desc">Enjoy smooth app experience without any interruptions</string>
+    <string name="vip_perk_card_maker_title">Unlock All VIP Cards &amp; Stickers</string>
+    <string name="vip_perk_card_maker_desc">Unlimited access to all exclusive festive cards and golden stickers</string>
+    <string name="vip_perk_wheel_title">Unlimited Lucky Spins</string>
+    <string name="vip_perk_wheel_desc">Spin freely to welcome prosperity and good fortune</string>
+    <string name="vip_perk_horoscope_title">Deep 2027 Horoscope &amp; Feng Shui</string>
+    <string name="vip_perk_horoscope_desc">Detailed insights on career, love, and lifetime fortune</string>
+    <string name="vip_plans_title">Choose your membership plan:</string>
+    <string name="vip_badge_best_value">SAVE 50%</string>
+    <string name="vip_plan_yearly_name">VIP 1 Year</string>
+    <string name="vip_plan_yearly_sub">Recommended • Only ~$0.35 / mo</string>
+    <string name="vip_price_yearly_default">$3.99</string>
+    <string name="vip_plan_lifetime_name">Lifetime VIP</string>
+    <string name="vip_plan_lifetime_sub">Pay once • Own forever</string>
+    <string name="vip_price_lifetime_default">$7.99</string>
+    <string name="vip_plan_monthly_name">VIP 1 Month</string>
+    <string name="vip_plan_monthly_sub">Full experience for Tet season</string>
+    <string name="vip_price_monthly_default">$1.29</string>
+    <string name="vip_terms_notice">Secure payment via Google Play. You can cancel your subscription anytime in Google Play Settings.</string>
+    <string name="vip_btn_upgrade_now">Upgrade to VIP Now</string>
+    <string name="vip_active_badge">You are a VIP Member 👑</string>
+    <string name="vip_already_active_desc">You already have full access to all premium Tet Viet features!</string>
+    <string name="dialog_unlock_vip_title">Unlock VIP Feature</string>
+    <string name="dialog_unlock_vip_subtitle">This feature belongs to Tet Viet VIP exclusive package</string>
+    <string name="btn_watch_ad_unlock_title">Watch a short video to unlock</string>
+    <string name="btn_watch_ad_unlock_desc">Watch once to use free for 24 hours</string>
+    <string name="btn_upgrade_vip_title">Upgrade to Lifetime VIP</string>
+    <string name="btn_upgrade_vip_desc">No ads • Unlock everything forever</string>
+    <string name="msg_ad_loading_short">Loading video ad...</string>
+    <string name="msg_feature_unlocked_success">Congratulations! Feature unlocked successfully!</string>
+    <string name="settings_vip_title">Tet Viet VIP Account</string>
+    <string name="settings_vip_desc">Ad-free, unlock all premium perks</string>
+    <string name="badge_free">Free</string>
+</resources>

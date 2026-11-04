@@ -206,6 +206,10 @@ class CardMakerActivity : AppCompatActivity() {
             shareCard()
         }
 
+        binding.btnSendWish.setSafeOnClickListener(hasAnim = true) {
+            shareCard()
+        }
+
         binding.btnChangeBg.setSafeOnClickListener(hasAnim = true) {
             showChooseBackgroundBottomSheet()
         }
@@ -670,6 +674,7 @@ class CardMakerActivity : AppCompatActivity() {
             Triple(sheetBinding.btnFontLobsterTwo, R.font.lobstertwo_bold, null),
             Triple(sheetBinding.btnFontLobsterItalic, R.font.lobstertwo_bolditalic, null),
             Triple(sheetBinding.btnFontLiberationRegular, R.font.liberationsans_regular, Typeface.DEFAULT),
+            Triple(sheetBinding.btnFontBangers, R.font.bangers_regular, null),
             Triple(sheetBinding.btnFontSerif, 0, Typeface.SERIF)
         )
 

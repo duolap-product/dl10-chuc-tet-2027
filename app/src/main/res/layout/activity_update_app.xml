@@ -1,13 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/rootUpdateApp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFBF4">
 
-    <!-- Top decorative festive header / banner -->
+    <!-- Top Action Bar with Dismiss/Close Button -->
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/btnClose"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/bg_circle_close_btn"
+        android:contentDescription="Đóng"
+        android:padding="10dp"
+        android:src="@drawable/ic_clear"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="#594E43" />
+
+    <!-- Centered Scrollable Content -->
     <androidx.core.widget.NestedScrollView
         android:id="@+id/scrollViewContent"
         android:layout_width="0dp"
@@ -17,23 +31,24 @@
         app:layout_constraintBottom_toTopOf="@id/layoutBottomActions"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/btnClose">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
             android:orientation="vertical"
+            android:paddingHorizontal="24dp"
+            android:paddingTop="12dp"
             android:paddingBottom="24dp">
 
-            <!-- Festive Illustration Banner -->
+            <!-- Hero Festive Illustration Banner -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cardBanner"
                 android:layout_width="match_parent"
-                android:layout_height="210dp"
-                android:layout_marginHorizontal="16dp"
-                android:layout_marginTop="16dp"
-                app:cardCornerRadius="20dp"
-                app:cardElevation="3dp"
+                android:layout_height="220dp"
+                app:cardCornerRadius="24dp"
+                app:cardElevation="4dp"
                 app:strokeColor="#F0E3D3"
                 app:strokeWidth="1dp">
 
@@ -48,10 +63,10 @@
                         android:scaleType="centerCrop"
                         android:src="@drawable/img_update_tet_header" />
 
-                    <!-- Soft gradient overlay at bottom of image for text readability -->
+                    <!-- Gradient overlay at bottom of image for badge legibility -->
                     <View
                         android:layout_width="match_parent"
-                        android:layout_height="70dp"
+                        android:layout_height="80dp"
                         android:layout_gravity="bottom"
                         android:background="@drawable/bg_bottom_navigation" />
 
@@ -60,13 +75,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="bottom|start"
-                        android:layout_marginStart="14dp"
-                        android:layout_marginBottom="12dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginBottom="14dp"
                         android:background="@drawable/bg_version_badge"
                         android:gravity="center_vertical"
                         android:orientation="horizontal"
-                        android:paddingHorizontal="12dp"
-                        android:paddingVertical="5dp">
+                        android:paddingHorizontal="14dp"
+                        android:paddingVertical="6dp">
 
                         <ImageView
                             android:layout_width="16dp"
@@ -82,9 +97,9 @@
                             android:layout_marginStart="6dp"
                             android:fontFamily="@font/liberationsans_bold"
                             android:includeFontPadding="false"
-                            android:text="@string/update_header_title"
+                            android:text="@string/update_header_better_badge"
                             android:textColor="#8A5A00"
-                            android:textSize="11.5sp"
+                            android:textSize="12sp"
                             android:textStyle="bold" />
 
                     </LinearLayout>
@@ -93,384 +108,102 @@
 
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Title & Version Info -->
-            <LinearLayout
-                android:layout_width="match_parent"
+            <!-- Title -->
+            <TextView
+                android:id="@+id/tvTitle"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="20dp"
-                android:layout_marginTop="18dp"
+                android:layout_marginTop="24dp"
+                android:fontFamily="@font/liberationsans_bold"
                 android:gravity="center"
-                android:orientation="vertical">
+                android:includeFontPadding="false"
+                android:text="@string/update_better_title"
+                android:textColor="#7A090D"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/tvTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/liberationsans_bold"
-                    android:gravity="center"
-                    android:includeFontPadding="false"
-                    android:text="@string/update_title"
-                    android:textColor="#7A090D"
-                    android:textSize="22sp"
-                    android:textStyle="bold" />
-
-                <!-- Version Comparison Row -->
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:background="@drawable/bg_chip_unselected"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:paddingHorizontal="14dp"
-                    android:paddingVertical="6dp">
-
-                    <TextView
-                        android:id="@+id/tvCurrentVersion"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/liberationsans_regular"
-                        android:includeFontPadding="false"
-                        android:text="@string/update_current_ver"
-                        android:textColor="#786B5E"
-                        android:textSize="12.5sp" />
-
-                    <ImageView
-                        android:layout_width="16dp"
-                        android:layout_height="16dp"
-                        android:layout_marginHorizontal="8dp"
-                        android:contentDescription="Next"
-                        android:src="@drawable/ic_chevron_right"
-                        app:tint="#8A000A" />
-
-                    <TextView
-                        android:id="@+id/tvNewVersion"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/liberationsans_bold"
-                        android:includeFontPadding="false"
-                        android:text="@string/update_new_ver"
-                        android:textColor="#8A000A"
-                        android:textSize="13sp"
-                        android:textStyle="bold" />
-
-                </LinearLayout>
-
-                <TextView
-                    android:id="@+id/tvSubtitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:fontFamily="@font/liberationsans_regular"
-                    android:gravity="center"
-                    android:includeFontPadding="false"
-                    android:lineSpacingExtra="3dp"
-                    android:text="@string/update_description"
-                    android:textColor="#594E43"
-                    android:textSize="14sp" />
-
-            </LinearLayout>
-
-            <!-- Release Highlights Container -->
+            <!-- Version Comparison Row -->
             <LinearLayout
-                android:layout_width="match_parent"
+                android:id="@+id/layoutVersionRow"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp"
-                android:layout_marginTop="20dp"
-                android:orientation="vertical">
+                android:layout_marginTop="12dp"
+                android:background="@drawable/bg_chip_unselected"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="7dp">
 
                 <TextView
+                    android:id="@+id/tvCurrentVersion"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    android:layout_marginBottom="10dp"
+                    android:fontFamily="@font/liberationsans_regular"
+                    android:includeFontPadding="false"
+                    android:text="@string/update_current_ver"
+                    android:textColor="#786B5E"
+                    android:textSize="13sp" />
+
+                <ImageView
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_marginHorizontal="8dp"
+                    android:contentDescription="Next"
+                    android:src="@drawable/ic_chevron_right"
+                    app:tint="#8A000A" />
+
+                <TextView
+                    android:id="@+id/tvNewVersion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:fontFamily="@font/liberationsans_bold"
                     android:includeFontPadding="false"
-                    android:text="@string/update_whats_new_title"
-                    android:textColor="#3D3228"
-                    android:textSize="15sp"
+                    android:text="@string/update_new_ver"
+                    android:textColor="#8A000A"
+                    android:textSize="13.5sp"
                     android:textStyle="bold" />
 
-                <!-- Feature 1: Thiệp Chúc Tết -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:background="@drawable/bg_feature_item_card"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:padding="14dp">
-
-                    <FrameLayout
-                        android:layout_width="44dp"
-                        android:layout_height="44dp"
-                        android:background="@drawable/bg_color_circle"
-                        android:backgroundTint="#FDF2E2">
-
-                        <ImageView
-                            android:layout_width="26dp"
-                            android:layout_height="26dp"
-                            android:layout_gravity="center"
-                            android:contentDescription="Thiệp Tết"
-                            android:src="@drawable/sticker_lucky_bag" />
-                    </FrameLayout>
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="12dp"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/tvFeatureTitle1"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/liberationsans_bold"
-                            android:includeFontPadding="false"
-                            android:text="@string/update_item_card_title"
-                            android:textColor="#2D231A"
-                            android:textSize="14.5sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/tvFeatureDesc1"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="3dp"
-                            android:fontFamily="@font/liberationsans_regular"
-                            android:includeFontPadding="false"
-                            android:lineSpacingExtra="2dp"
-                            android:text="@string/update_item_card_desc"
-                            android:textColor="#665B50"
-                            android:textSize="13sp" />
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-                <!-- Feature 2: Đếm Ngược & Phong Tục -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:background="@drawable/bg_feature_item_card"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:padding="14dp">
-
-                    <FrameLayout
-                        android:layout_width="44dp"
-                        android:layout_height="44dp"
-                        android:background="@drawable/bg_color_circle"
-                        android:backgroundTint="#FDF2E2">
-
-                        <ImageView
-                            android:layout_width="26dp"
-                            android:layout_height="26dp"
-                            android:layout_gravity="center"
-                            android:contentDescription="Pháo hoa"
-                            android:src="@drawable/sticker_party_popper" />
-                    </FrameLayout>
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="12dp"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/tvFeatureTitle2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/liberationsans_bold"
-                            android:includeFontPadding="false"
-                            android:text="@string/update_item_countdown_title"
-                            android:textColor="#2D231A"
-                            android:textSize="14.5sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/tvFeatureDesc2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="3dp"
-                            android:fontFamily="@font/liberationsans_regular"
-                            android:includeFontPadding="false"
-                            android:lineSpacingExtra="2dp"
-                            android:text="@string/update_item_countdown_desc"
-                            android:textColor="#665B50"
-                            android:textSize="13sp" />
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-                <!-- Feature 3: Tối ưu hiệu năng -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:background="@drawable/bg_feature_item_card"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:padding="14dp">
-
-                    <FrameLayout
-                        android:layout_width="44dp"
-                        android:layout_height="44dp"
-                        android:background="@drawable/bg_color_circle"
-                        android:backgroundTint="#FDF2E2">
-
-                        <ImageView
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:layout_gravity="center"
-                            android:contentDescription="Tối ưu"
-                            android:src="@drawable/ic_rocket_launch" />
-                    </FrameLayout>
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="12dp"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/tvFeatureTitle3"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/liberationsans_bold"
-                            android:includeFontPadding="false"
-                            android:text="@string/update_item_perf_title"
-                            android:textColor="#2D231A"
-                            android:textSize="14.5sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/tvFeatureDesc3"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="3dp"
-                            android:fontFamily="@font/liberationsans_regular"
-                            android:includeFontPadding="false"
-                            android:lineSpacingExtra="2dp"
-                            android:text="@string/update_item_perf_desc"
-                            android:textColor="#665B50"
-                            android:textSize="13sp" />
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-                <!-- Feature 4: Bảo Mật & Ổn Định -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/bg_feature_item_card"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:padding="14dp">
-
-                    <FrameLayout
-                        android:layout_width="44dp"
-                        android:layout_height="44dp"
-                        android:background="@drawable/bg_color_circle"
-                        android:backgroundTint="#FDF2E2">
-
-                        <ImageView
-                            android:layout_width="22dp"
-                            android:layout_height="22dp"
-                            android:layout_gravity="center"
-                            android:contentDescription="Bảo mật"
-                            android:src="@drawable/ic_check"
-                            app:tint="#2E7D32" />
-                    </FrameLayout>
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="12dp"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/tvFeatureTitle4"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/liberationsans_bold"
-                            android:includeFontPadding="false"
-                            android:text="@string/update_item_security_title"
-                            android:textColor="#2D231A"
-                            android:textSize="14.5sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/tvFeatureDesc4"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="3dp"
-                            android:fontFamily="@font/liberationsans_regular"
-                            android:includeFontPadding="false"
-                            android:lineSpacingExtra="2dp"
-                            android:text="@string/update_item_security_desc"
-                            android:textColor="#665B50"
-                            android:textSize="13sp" />
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
             </LinearLayout>
+
+            <!-- Subtitle highlighting superior update -->
+            <TextView
+                android:id="@+id/tvSubtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/liberationsans_regular"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:lineSpacingExtra="4dp"
+                android:text="@string/update_better_subtitle"
+                android:textColor="#594E43"
+                android:textSize="14.5sp" />
 
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
 
-    <!-- Bottom Action Bar containing 2 options: "Bỏ qua" and "Cập nhật ngay" -->
+    <!-- Bottom Actions Container -->
     <LinearLayout
         android:id="@+id/layoutBottomActions"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="#FFFBF4"
         android:elevation="8dp"
-        android:orientation="horizontal"
-        android:paddingHorizontal="16dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:paddingHorizontal="20dp"
         android:paddingTop="12dp"
         android:paddingBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
-        <!-- Option 1: Bỏ qua -->
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnSkip"
-            android:layout_width="0dp"
-            android:layout_height="52dp"
-            android:layout_marginEnd="10dp"
-            android:layout_weight="1"
-            android:backgroundTint="#F3ECE2"
-            android:fontFamily="@font/liberationsans_bold"
-            android:includeFontPadding="false"
-            android:insetTop="0dp"
-            android:insetBottom="0dp"
-            android:text="@string/update_btn_skip"
-            android:textColor="#615549"
-            android:textSize="15sp"
-            android:textStyle="bold"
-            app:cornerRadius="16dp"
-            app:elevation="0dp"
-            app:strokeColor="#DECFC0"
-            app:strokeWidth="1dp" />
-
-        <!-- Option 2: Cập nhật ngay -->
+        <!-- Primary Action Button with Countdown -->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnUpdateNow"
-            android:layout_width="0dp"
-            android:layout_height="52dp"
-            android:layout_weight="1.6"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
             android:backgroundTint="#7A090D"
             android:fontFamily="@font/liberationsans_bold"
             android:includeFontPadding="false"
@@ -478,15 +211,28 @@
             android:insetBottom="0dp"
             android:text="@string/update_btn_update"
             android:textColor="#FFF7E6"
-            android:textSize="15.5sp"
+            android:textSize="16sp"
             android:textStyle="bold"
-            app:cornerRadius="16dp"
+            app:cornerRadius="28dp"
             app:elevation="3dp"
             app:icon="@drawable/ic_rocket_launch"
             app:iconGravity="textStart"
-            app:iconPadding="8dp"
-            app:iconSize="20dp"
+            app:iconPadding="10dp"
+            app:iconSize="22dp"
             app:iconTint="#FFD700" />
+
+        <!-- Automatic Redirect Notice -->
+        <TextView
+            android:id="@+id/tvAutoRedirectNotice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/liberationsans_regular"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:text="@string/update_auto_redirect_notice"
+            android:textColor="#8E8275"
+            android:textSize="12.5sp" />
 
     </LinearLayout>
 

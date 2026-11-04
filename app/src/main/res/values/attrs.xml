@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ShadowPillView">
+        <!-- Surface / Pill shape -->
+        <attr name="pillBgColor" format="color" />
+        <attr name="pillStrokeColor" format="color" />
+        <attr name="pillStrokeWidth" format="dimension" />
+        <attr name="pillCornerRadius" format="dimension" />
+
+        <!-- Warm Diffused Shadow -->
+        <attr name="pillShadowColor" format="color" />
+        <attr name="pillShadowRadius" format="dimension" />
+        <attr name="pillShadowDx" format="dimension" />
+        <attr name="pillShadowDy" format="dimension" />
+
+        <!-- Content -->
+        <attr name="pillText" format="string" />
+        <attr name="pillTextColor" format="color" />
+        <attr name="pillTextSize" format="dimension" />
+        <attr name="pillFont" format="reference" />
+        <attr name="pillIcon" format="reference" />
+        <attr name="pillIconTint" format="color" />
+        <attr name="pillIconSize" format="dimension" />
+        <attr name="pillIconPadding" format="dimension" />
+
+        <!-- Selected State (e.g., active crimson gradient) -->
+        <attr name="pillIsSelected" format="boolean" />
+        <attr name="pillSelectedStartColor" format="color" />
+        <attr name="pillSelectedEndColor" format="color" />
+        <attr name="pillSelectedTextColor" format="color" />
+        <attr name="pillSelectedShadowColor" format="color" />
+    </declare-styleable>
+</resources>
+

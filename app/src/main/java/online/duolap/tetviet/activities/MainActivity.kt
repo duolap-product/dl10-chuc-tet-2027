@@ -39,7 +39,9 @@ import online.duolap.tetviet.audio.TetMusicManager
 import online.duolap.tetviet.data.local.VipPreferences
 import online.duolap.tetviet.data.model.MondayCountdownInfo
 import online.duolap.tetviet.databinding.ActivityMainBinding
+import online.duolap.tetviet.update.PlayUpdateManager
 import online.duolap.tetviet.views.setSafeOnClickListener
+import com.google.android.play.core.install.model.UpdateAvailability
 import java.util.Calendar
 import java.util.Locale
 import java.util.TimeZone
@@ -50,6 +52,9 @@ class MainActivity : AppCompatActivity() {
 
     @Inject
     lateinit var vipPreferences: VipPreferences
+
+    @Inject
+    lateinit var playUpdateManager: PlayUpdateManager
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var countdownAdapter: CountdownPagerAdapter
@@ -112,6 +117,7 @@ class MainActivity : AppCompatActivity() {
 
         handleNotificationIntent(intent)
         checkAndRequestNotificationPermission()
+        checkGooglePlayUpdate()
     }
 
     override fun onNewIntent(intent: Intent) {
@@ -479,6 +485,29 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        // Kiểm tra phiên bản mới thủ công khi bấm vào thông tin phiên bản
+        view.findViewById<android.view.View>(R.id.layoutAppVersion)?.setOnClickListener {
+            Toast.makeText(this, getString(R.string.update_checking_toast), Toast.LENGTH_SHORT).show()
+            playUpdateManager.checkForUpdate(
+                forceCheck = true,
+                onUpdateAvailable = { appUpdateInfo ->
+                    dialog.dismiss()
+                    val newVersionCode = appUpdateInfo.availableVersionCode()
+                    UpdateAppActivity.start(
+                        context = this,
+                        newVersion = "v$newVersionCode",
+                        isForceUpdate = appUpdateInfo.updatePriority() >= 4
+                    )
+                },
+                onNoUpdate = {
+                    Toast.makeText(this, getString(R.string.update_msg_already_latest), Toast.LENGTH_SHORT).show()
+                },
+                onError = {
+                    Toast.makeText(this, getString(R.string.update_msg_already_latest), Toast.LENGTH_SHORT).show()
+                }
+            )
+        }
+
         dialog.show()
     }
 
@@ -509,6 +538,29 @@ class MainActivity : AppCompatActivity() {
         TetMusicManager.resume(this)
         updateMusicButtonUI(TetMusicManager.isMusicEnabled(this))
         updateVipBadgeUI()
+        checkPendingGooglePlayUpdate()
+    }
+
+    private fun checkGooglePlayUpdate() {
+        playUpdateManager.checkForUpdate(
+            forceCheck = false,
+            onUpdateAvailable = { appUpdateInfo ->
+                val newVersionCode = appUpdateInfo.availableVersionCode()
+                UpdateAppActivity.start(
+                    context = this,
+                    newVersion = "v$newVersionCode",
+                    isForceUpdate = appUpdateInfo.updatePriority() >= 4
+                )
+            }
+        )
+    }
+
+    private fun checkPendingGooglePlayUpdate() {
+        playUpdateManager.appUpdateManager.appUpdateInfo.addOnSuccessListener { appUpdateInfo ->
+            if (appUpdateInfo.updateAvailability() == UpdateAvailability.DEVELOPER_TRIGGERED_UPDATE_IN_PROGRESS) {
+                playUpdateManager.startUpdateFlow(this, appUpdateInfo)
+            }
+        }
     }
 
     override fun onPause() {

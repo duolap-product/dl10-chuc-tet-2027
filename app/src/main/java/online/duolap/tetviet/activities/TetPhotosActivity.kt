@@ -19,11 +19,6 @@ import online.duolap.tetviet.data.model.TetPhotoRepository
 import online.duolap.tetviet.databinding.ActivityTetPhotosBinding
 import online.duolap.tetviet.views.setSafeOnClickListener
 
-/**
- * Màn hình danh mục "Hình ảnh Tết":
- * Hiển thị lưới ảnh Tết nghệ thuật 2 cột, hỗ trợ lọc theo danh mục
- * và mở trình xem ảnh toàn màn hình với hiệu ứng làm mờ nền khi click vào bất kỳ ảnh nào.
- */
 class TetPhotosActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityTetPhotosBinding
@@ -40,7 +35,7 @@ class TetPhotosActivity : AppCompatActivity() {
 
         ViewCompat.setOnApplyWindowInsetsListener(binding.rootGallery) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, 0)
+            v.setPadding(systemBars.left, 0, systemBars.right, 0)
             binding.rvPhotos.setPadding(
                 binding.rvPhotos.paddingLeft,
                 binding.rvPhotos.paddingTop,
@@ -130,7 +125,7 @@ class TetPhotosActivity : AppCompatActivity() {
     private fun loadPhotos() {
         displayedPhotos = TetPhotoRepository.getImagesByCategory(currentCategory)
         adapter.updateData(displayedPhotos)
-        binding.tvPhotoCountBadge.text = "${displayedPhotos.size} ảnh"
+//        binding.tvPhotoCountBadge.text = "${displayedPhotos.size} ảnh"
     }
 
     private fun setupListeners() {

@@ -1,0 +1,43 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="360dp"
+    android:height="600dp"
+    android:viewportWidth="360"
+    android:viewportHeight="600">
+    <!-- Soft falling petals across the sides -->
+    <!-- Upper Left -->
+    <path
+        android:fillColor="#80E06D53"
+        android:pathData="M26,110 C30,104 40,108 38,116 C34,122 24,118 26,110 Z" />
+    <path
+        android:fillColor="#60C84B31"
+        android:pathData="M16,190 C22,182 32,186 28,196 C24,204 12,198 16,190 Z" />
+
+    <!-- Mid Left -->
+    <path
+        android:fillColor="#70D9534F"
+        android:pathData="M14,320 C20,312 30,318 26,328 C22,336 10,330 14,320 Z" />
+
+    <!-- Lower Left -->
+    <path
+        android:fillColor="#80C84B31"
+        android:pathData="M28,490 C34,482 44,488 40,498 C36,506 24,500 28,490 Z" />
+
+    <!-- Upper Right -->
+    <path
+        android:fillColor="#70D9534F"
+        android:pathData="M336,130 C342,122 352,128 348,138 C344,146 332,140 336,130 Z" />
+    <path
+        android:fillColor="#60E06D53"
+        android:pathData="M344,220 C350,214 358,218 356,226 C352,232 342,228 344,220 Z" />
+
+    <!-- Mid Right -->
+    <path
+        android:fillColor="#70E06D53"
+        android:pathData="M338,350 C344,344 352,348 350,356 C346,362 336,358 338,350 Z" />
+
+    <!-- Lower Right -->
+    <path
+        android:fillColor="#80C84B31"
+        android:pathData="M330,500 C336,494 344,498 342,506 C338,512 328,508 330,500 Z" />
+</vector>
+
