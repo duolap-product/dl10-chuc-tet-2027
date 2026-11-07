@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layoutSongRoot"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="14dp"
+    android:layout_marginVertical="5dp"
+    android:background="@drawable/bg_song_item_normal"
+    android:clickable="true"
+    android:elevation="2dp"
+    android:focusable="true"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:padding="12dp">
+
+    <!-- Vinyl Disc / Music Icon -->
+    <FrameLayout
+        android:id="@+id/layoutDiscContainer"
+        android:layout_width="44dp"
+        android:layout_height="44dp">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivDisc"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            app:srcCompat="@drawable/ic_disc_music" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivWaveIndicator"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            app:srcCompat="@drawable/ic_sound_wave"
+            app:tint="#FFFFFF" />
+
+    </FrameLayout>
+
+    <!-- Song Details (Title, Artist, Source) -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="8dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvSongTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:fontFamily="@font/liberationsans_bold"
+            android:includeFontPadding="false"
+            android:maxLines="1"
+            android:textColor="#7A090D"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            tools:text="Ngày Tết Quê Em" />
+
+        <TextView
+            android:id="@+id/tvSongArtist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:ellipsize="end"
+            android:fontFamily="@font/liberationsans_regular"
+            android:includeFontPadding="false"
+            android:maxLines="1"
+            android:textColor="#594235"
+            android:textSize="12.5sp"
+            tools:text="Từ Huy" />
+
+        <TextView
+            android:id="@+id/tvSongSource"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:ellipsize="end"
+            android:fontFamily="@font/liberationsans_regular"
+            android:includeFontPadding="false"
+            android:maxLines="1"
+            android:textColor="#9E8575"
+            android:textSize="11sp"
+            tools:text="Nguồn: Nhạc Tết Truyền Thống" />
+
+    </LinearLayout>
+
+    <!-- Selection / Play Status Badge -->
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <!-- Selected / Playing Badge -->
+        <LinearLayout
+            android:id="@+id/layoutSelectedBadge"
+            android:layout_width="wrap_content"
+            android:layout_height="32dp"
+            android:background="@drawable/bg_version_badge_v2"
+            android:gravity="center"
+            android:paddingHorizontal="10dp"
+            android:visibility="gone"
+            tools:visibility="visible">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="14dp"
+                android:layout_height="14dp"
+                android:layout_marginEnd="4dp"
+                app:srcCompat="@drawable/ic_sound_wave"
+                app:tint="#FFFFFF" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/liberationsans_bold"
+                android:includeFontPadding="false"
+                android:text="@string/music_selected_badge"
+                android:textColor="#FFFFFF"
+                android:textSize="11.5sp" />
+
+        </LinearLayout>
+
+        <!-- Unselected: Choose button -->
+        <TextView
+            android:id="@+id/btnSelectSong"
+            android:layout_width="wrap_content"
+            android:layout_height="32dp"
+            android:background="@drawable/bg_chip_unselected"
+            android:fontFamily="@font/liberationsans_bold"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:paddingHorizontal="12dp"
+            android:text="@string/music_btn_select"
+            android:textColor="#7A090D"
+            android:textSize="12sp"
+            tools:visibility="gone" />
+
+    </FrameLayout>
+
+</LinearLayout>

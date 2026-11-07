@@ -22,8 +22,8 @@ android {
         applicationId = "online.duolap.tetviet"
         minSdk = 24
         targetSdk = 36
-        versionCode = 6
-        versionName = "1.0.6-beta"
+        versionCode = 7
+        versionName = "1.0.7-beta"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -45,7 +45,8 @@ android {
 
     buildTypes {
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
+            isShrinkResources = true
             signingConfig = signingConfigs.getByName("release")
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }

@@ -1,0 +1,47 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="170dp"
+    android:height="170dp"
+    android:viewportWidth="170"
+    android:viewportHeight="170">
+    <!-- Bowl Dome Shadow -->
+    <path
+        android:fillColor="#25000000"
+        android:pathData="M85,5A80,80 0 1,0 165,85A80,80 0 0,0 85,5Z" />
+    <!-- Bowl Outer Ceramic Dome (Màu đỏ mận / sứ hoàng gia) -->
+    <path
+        android:fillColor="#900C3F"
+        android:pathData="M85,8A77,77 0 1,0 162,85A77,77 0 0,0 85,8Z" />
+    <path
+        android:fillColor="#C70039"
+        android:pathData="M85,11A74,74 0 1,0 159,85A74,74 0 0,0 85,11Z" />
+    <!-- Gold Rim -->
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#F1C40F"
+        android:strokeWidth="3"
+        android:pathData="M85,16A69,69 0 1,0 154,85A69,69 0 0,0 85,16Z" />
+    <!-- Golden Dragon / Cloud Ornaments -->
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#F39C12"
+        android:strokeWidth="1.8"
+        android:pathData="M55,60 C65,45 105,45 115,60 C125,75 125,95 115,110 C105,125 65,125 55,110 C45,95 45,75 55,60 Z" />
+    <!-- Center Top Knob / Handle (Núm bát tròn mạ vàng) -->
+    <path
+        android:fillColor="#B7950B"
+        android:pathData="M85,70A15,15 0 1,0 100,85A15,15 0 0,0 85,70Z" />
+    <path
+        android:fillColor="#F1C40F"
+        android:pathData="M85,72A13,13 0 1,0 98,85A13,13 0 0,0 85,72Z" />
+    <!-- Chinese/Vietnamese "Lộc" character or Blossom motif on knob -->
+    <path
+        android:fillColor="#900C3F"
+        android:pathData="M85,79 L85,91 M80,83 L90,83 M80,87 L90,87"
+        android:strokeColor="#900C3F"
+        android:strokeWidth="1.5" />
+    <!-- Specular highlight on dome -->
+    <path
+        android:fillColor="#40FFFFFF"
+        android:pathData="M40,40 C55,25 75,25 65,45 C55,60 30,55 40,40 Z" />
+</vector>
+

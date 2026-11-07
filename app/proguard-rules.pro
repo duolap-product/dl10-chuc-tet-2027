@@ -1,21 +1,96 @@
-# Add project specific ProGuard rules here.
-# You can control the set of applied configuration files using the
-# proguardFiles setting in build.gradle.
-#
-# For more details, see
-#   http://developer.android.com/guide/developing/tools/proguard.html
+# ==============================================================================
+# TetViet ProGuard / R8 Rules for Release Optimization & Obfuscation
+# ==============================================================================
 
-# If your project uses WebView with JS, uncomment the following
-# and specify the fully qualified class name to the JavaScript interface
-# class:
-#-keepclassmembers class fqcn.of.javascript.interface.for.webview {
-#   public *;
-#}
+# ------------------------------------------------------------------------------
+# 1. Line Numbers & Stack Trace Preservations (Crashlytics De-obfuscation)
+# ------------------------------------------------------------------------------
+-keepattributes SourceFile,LineNumberTable
+-renamesourcefileattribute SourceFile
+-keepattributes *Annotation*,Signature,InnerClasses,EnclosingMethod,Exceptions
 
-# Uncomment this to preserve the line number information for
-# debugging stack traces.
-#-keepattributes SourceFile,LineNumberTable
+# ------------------------------------------------------------------------------
+# 2. App Data Models, Entities & Local Database
+# ------------------------------------------------------------------------------
+# Preserve all data classes used in Room, Firestore, and serialization
+-keep class online.duolap.tetviet.data.model.** { *; }
+-keep class online.duolap.tetviet.data.local.** { *; }
+-keep class online.duolap.tetviet.data.sync.** { *; }
+-keep class online.duolap.tetviet.audio.TetSongRepository { *; }
 
-# If you keep the line number information, uncomment this to
-# hide the original source file name.
-#-renamesourcefileattribute SourceFile
+# Room Database
+-keep class * extends androidx.room.RoomDatabase
+-dontwarn androidx.room.paging.**
+
+# ------------------------------------------------------------------------------
+# 3. Custom Views & View Binding
+# ------------------------------------------------------------------------------
+-keep public class online.duolap.tetviet.views.** { *; }
+-keep public class * extends android.view.View {
+    public <init>(android.content.Context);
+    public <init>(android.content.Context, android.util.AttributeSet);
+    public <init>(android.content.Context, android.util.AttributeSet, int);
+    public void set*(...);
+    public *** get*();
+}
+-keepclassmembers class * extends androidx.viewbinding.ViewBinding {
+    public static *** inflate(...);
+    public static *** bind(...);
+}
+
+# ------------------------------------------------------------------------------
+# 4. Dagger Hilt & Dependency Injection
+# ------------------------------------------------------------------------------
+-keep class * extends dagger.hilt.internal.GeneratedComponent { *; }
+-keep class * extends dagger.hilt.android.internal.managers.ViewComponentManager$FragmentContextWrapper { *; }
+-dontwarn dagger.hilt.**
+
+# ------------------------------------------------------------------------------
+# 5. Firebase & Cloud Firestore
+# ------------------------------------------------------------------------------
+-keepclassmembers class * {
+    @com.google.firebase.firestore.PropertyName <fields>;
+    @com.google.firebase.firestore.PropertyName <methods>;
+    @com.google.firebase.firestore.Exclude <fields>;
+    @com.google.firebase.firestore.Exclude <methods>;
+}
+-dontwarn com.google.firebase.**
+
+# ------------------------------------------------------------------------------
+# 6. Google Mobile Ads (AdMob)
+# ------------------------------------------------------------------------------
+-keep public class com.google.android.gms.ads.** { public *; }
+-keep public class com.google.ads.** { public *; }
+-keep class com.google.android.gms.ads.mediation.** { *; }
+-dontwarn com.google.android.gms.ads.**
+
+# ------------------------------------------------------------------------------
+# 7. Google Play In-App Billing & In-App Update
+# ------------------------------------------------------------------------------
+-keep class com.android.billingclient.** { *; }
+-keep class com.google.android.play.core.** { *; }
+-dontwarn com.android.billingclient.**
+-dontwarn com.google.android.play.core.**
+
+# ------------------------------------------------------------------------------
+# 8. Glide (Image Loading & Caching)
+# ------------------------------------------------------------------------------
+-keep public class * implements com.bumptech.glide.module.GlideModule
+-keep class * extends com.bumptech.glide.module.AppGlideModule { <init>(...); }
+-keep public enum com.bumptech.glide.load.ImageHeaderParser$** {
+    **[] $VALUES;
+    public *;
+}
+-dontwarn com.bumptech.glide.**
+
+# ------------------------------------------------------------------------------
+# 9. Lottie Animation
+# ------------------------------------------------------------------------------
+-keep class com.airbnb.lottie.** { *; }
+-dontwarn com.airbnb.lottie.**
+
+# ------------------------------------------------------------------------------
+# 10. General AndroidX & Coroutines Optimizations
+# ------------------------------------------------------------------------------
+-dontwarn kotlinx.coroutines.**
+-dontwarn okio.**

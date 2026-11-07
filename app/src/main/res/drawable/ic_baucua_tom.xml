@@ -1,0 +1,54 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="48dp"
+    android:height="48dp"
+    android:viewportWidth="48"
+    android:viewportHeight="48">
+    <!-- Antennae / Whiskers (Râu tôm cong) -->
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#E67E22"
+        android:strokeWidth="1.2"
+        android:strokeLineCap="round"
+        android:pathData="M16,14 C12,8 7,8 4,11 M18,12 C16,6 12,4 8,7" />
+    <!-- Shrimp Head (Đầu tôm) -->
+    <path
+        android:fillColor="#E67E22"
+        android:pathData="M15,16 C16,12 24,13 25,17 C26,20 22,23 18,22 L14,20 Z" />
+    <!-- Rostrum (Gai đầu nhọn) -->
+    <path
+        android:fillColor="#D35400"
+        android:pathData="M15,15 L10,12 L14,18 Z" />
+    <!-- Curved Body Segments (Các đốt thân tôm cong vòng cung) -->
+    <path
+        android:fillColor="#F39C12"
+        android:pathData="M23,17 C27,18 31,21 31,25 C31,27 28,27 25,24 Z" />
+    <path
+        android:fillColor="#E67E22"
+        android:pathData="M28,23 C33,26 34,31 32,35 C30,36 28,33 26,29 Z" />
+    <path
+        android:fillColor="#F39C12"
+        android:pathData="M31,32 C31,37 26,41 22,41 C21,39 23,36 26,34 Z" />
+    <path
+        android:fillColor="#E67E22"
+        android:pathData="M23,39 C19,41 15,39 14,35 C15,34 19,36 22,37 Z" />
+    <!-- Tail Fan (Đuôi tôm xoè) -->
+    <path
+        android:fillColor="#C0392B"
+        android:pathData="M14,35 C10,36 8,33 9,30 C12,31 13,33 14,35 Z M13,37 C9,40 7,37 9,34 C11,35 12,36 13,37 Z" />
+    <!-- Swimmerets / Legs (Chân bơi) -->
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#F5B041"
+        android:strokeWidth="1.2"
+        android:strokeLineCap="round"
+        android:pathData="M20,24 L18,28 M24,27 L22,31 M27,33 L25,37" />
+    <!-- Eye White -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M19,16m-2,0a2,2 0,1 1,4 0a2,2 0,1 1,-4 0" />
+    <!-- Eye Pupil -->
+    <path
+        android:fillColor="#17202A"
+        android:pathData="M19,16m-1,0a1,1 0,1 1,2 0a1,1 0,1 1,-2 0" />
+</vector>
+

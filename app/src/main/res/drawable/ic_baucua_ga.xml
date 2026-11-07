@@ -1,0 +1,44 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="48dp"
+    android:height="48dp"
+    android:viewportWidth="48"
+    android:viewportHeight="48">
+    <!-- Red Comb on top -->
+    <path
+        android:fillColor="#C0392B"
+        android:pathData="M22,7 C20,4 23,2 25,5 C27,2 30,3 30,6 C33,4 36,6 34,9 C36,11 34,14 31,13 C29,12 25,12 22,7 Z" />
+    <!-- Rooster Head -->
+    <path
+        android:fillColor="#F39C12"
+        android:pathData="M18,17 C18,12 28,11 31,14 C33,16 33,21 31,25 C29,28 22,29 18,25 C16,23 18,19 18,17 Z" />
+    <!-- Neck / Feathers -->
+    <path
+        android:fillColor="#D35400"
+        android:pathData="M18,25 C20,29 16,36 14,41 C21,43 31,43 36,37 C34,31 31,25 31,25 Z" />
+    <path
+        android:fillColor="#F1C40F"
+        android:pathData="M20,30 C22,33 22,38 18,40 C23,41 29,40 32,35 C30,31 28,28 28,28 Z" />
+    <!-- Wattle (yếm gà dưới mỏ) -->
+    <path
+        android:fillColor="#C0392B"
+        android:pathData="M16,23 C14,23 13,27 15,29 C17,30 18,26 17,23 Z" />
+    <!-- Beak (Mỏ gà vàng) -->
+    <path
+        android:fillColor="#F39C12"
+        android:pathData="M18,18 L9,22 L17,24 Z" />
+    <path
+        android:fillColor="#E67E22"
+        android:pathData="M17,21 L11,22 L17,24 Z" />
+    <!-- Eye Area White -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M24,18m-3.5,0a3.5,3.5 0,1 1,7 0a3.5,3.5 0,1 1,-7 0" />
+    <!-- Eye Pupil -->
+    <path
+        android:fillColor="#17202A"
+        android:pathData="M24,18m-2,0a2,2 0,1 1,4 0a2,2 0,1 1,-4 0" />
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M23.5,17.5m-0.7,0a0.7,0.7 0,1 1,1.4 0a0.7,0.7 0,1 1,-1.4 0" />
+</vector>
+

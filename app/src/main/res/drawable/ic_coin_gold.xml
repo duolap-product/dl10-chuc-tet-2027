@@ -1,0 +1,26 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <!-- Outer Gold Ring -->
+    <path
+        android:fillColor="#F39C12"
+        android:pathData="M12,2A10,10 0 1,0 22,12A10,10 0 0,0 12,2Z" />
+    <!-- Inner Gold Surface -->
+    <path
+        android:fillColor="#F1C40F"
+        android:pathData="M12,3.5A8.5,8.5 0 1,0 20.5,12A8.5,8.5 0 0,0 12,3.5Z" />
+    <!-- Traditional Square Hole in Ancient Coin -->
+    <path
+        android:fillColor="#B7950B"
+        android:pathData="M9,9h6v6h-6z" />
+    <path
+        android:fillColor="#D4AC0D"
+        android:pathData="M9.8,9.8h4.4v4.4h-4.4z" />
+    <!-- Highlights -->
+    <path
+        android:fillColor="#FEF9E7"
+        android:pathData="M6,6 C8,4 10,3.8 12,3.8 C10,4.8 7,7 6,6 Z" />
+</vector>
+

@@ -1,0 +1,33 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="36dp"
+    android:height="36dp"
+    android:viewportWidth="36"
+    android:viewportHeight="36">
+    <!-- Vinyl Disc Outer Ring -->
+    <path
+        android:fillColor="#3A2E2B"
+        android:pathData="M18,2A16,16 0 1,0 34,18A16,16 0 0,0 18,2Z" />
+    <!-- Grooves -->
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#564743"
+        android:strokeWidth="1.2"
+        android:pathData="M18,6A12,12 0 1,0 30,18A12,12 0 0,0 18,6Z" />
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#564743"
+        android:strokeWidth="0.8"
+        android:pathData="M18,9A9,9 0 1,0 27,18A9,9 0 0,0 18,9Z" />
+    <!-- Center Label (Gold & Red Festive) -->
+    <path
+        android:fillColor="#D48806"
+        android:pathData="M18,12A6,6 0 1,0 24,18A6,6 0 0,0 18,12Z" />
+    <path
+        android:fillColor="#C41E24"
+        android:pathData="M18,14A4,4 0 1,0 22,18A4,4 0 0,0 18,14Z" />
+    <!-- Spindle Hole -->
+    <path
+        android:fillColor="#FFFDF9"
+        android:pathData="M18,17A1,1 0 1,0 19,18A1,1 0 0,0 18,17Z" />
+</vector>
+

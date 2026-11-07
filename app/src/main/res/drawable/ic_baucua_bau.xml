@@ -1,0 +1,47 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="48dp"
+    android:height="48dp"
+    android:viewportWidth="48"
+    android:viewportHeight="48">
+    <!-- Vine Stem & Leaf -->
+    <path
+        android:fillColor="#27AE60"
+        android:pathData="M24,4 C25,2 29,2 28,6 C26,7 24,7 24,8 Z" />
+    <path
+        android:fillColor="#2ECC71"
+        android:pathData="M24,6 C21,4 17,6 18,9 C20,11 23,8 24,6 Z" />
+    <!-- Upper Gourd Lobe -->
+    <path
+        android:fillColor="#F39C12"
+        android:pathData="M18,14 C18,9 30,9 30,14 C30,18 28,21 24,21 C20,21 18,18 18,14 Z" />
+    <path
+        android:fillColor="#F5B041"
+        android:pathData="M20,13 C20,10 27,10 28,13 C28,16 26,18 24,18 C22,18 20,16 20,13 Z" />
+    <!-- Lower Gourd Lobe -->
+    <path
+        android:fillColor="#E67E22"
+        android:pathData="M14,27 C14,19 34,19 34,27 C34,38 14,38 14,27 Z" />
+    <path
+        android:fillColor="#F39C12"
+        android:pathData="M17,27 C17,21 31,21 31,27 C31,35 17,35 17,27 Z" />
+    <!-- Highlight shine -->
+    <path
+        android:fillColor="#FAD7A0"
+        android:pathData="M18,25 C19,23 23,22 23,24 C23,26 18,28 18,25 Z" />
+    <!-- Red Festive Ribbon & Bow -->
+    <path
+        android:fillColor="#C0392B"
+        android:pathData="M19,20 C22,19 26,19 29,20 C28,22 20,22 19,20 Z" />
+    <!-- Bow Knots -->
+    <path
+        android:fillColor="#E74C3C"
+        android:pathData="M22,21 C20,19 19,22 21,23 Z M26,21 C28,19 29,22 27,23 Z" />
+    <path
+        android:fillColor="#F1C40F"
+        android:pathData="M23.5,21m-1,0a1,1 0,1 1,2 0a1,1 0,1 1,-2 0" />
+    <!-- Ribbon tails -->
+    <path
+        android:fillColor="#C0392B"
+        android:pathData="M23,22 L21,27 L23,26 Z M25,22 L27,27 L25,26 Z" />
+</vector>
+

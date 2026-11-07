@@ -294,4 +294,50 @@
     <string name="settings_vip_title">Tet Viet VIP Account</string>
     <string name="settings_vip_desc">Ad-free, unlock all premium perks</string>
     <string name="badge_free">Free</string>
+
+    <!-- Game Bầu Cua Tôm Cá Dân Gian -->
+    <string name="feature_bau_cua">Bau Cua Folk Game</string>
+    <string name="feature_bau_cua_desc">Shake the dice to welcome Spring fortune</string>
+    <string name="baucua_title">Bau Cua Tom Ca 🧧</string>
+    <string name="baucua_item_nai">Deer</string>
+    <string name="baucua_item_bau">Gourd</string>
+    <string name="baucua_item_ga">Rooster</string>
+    <string name="baucua_item_ca">Fish</string>
+    <string name="baucua_item_cua">Crab</string>
+    <string name="baucua_item_tom">Shrimp</string>
+    <string name="baucua_btn_shake">SHAKE DICE</string>
+    <string name="baucua_btn_open">OPEN BOWL 🧧</string>
+    <string name="baucua_btn_clear_bets">Clear</string>
+    <string name="baucua_btn_rebet">Re-bet</string>
+    <string name="baucua_btn_double_bet">Double (x2)</string>
+    <string name="baucua_coins_unit">%1$d Coins</string>
+    <string name="baucua_total_bet_label">Total Bet: %1$d Coins</string>
+    <string name="baucua_msg_need_bet">Please place bets on at least 1 mascot before shaking!</string>
+    <string name="baucua_msg_not_enough_coins">Not enough coins! Please choose a smaller chip or claim relief coins.</string>
+    <string name="baucua_msg_shaking">Shaking the dice... Good luck!</string>
+    <string name="baucua_win_dialog_title">🎉 CONGRATULATIONS!</string>
+    <string name="baucua_win_dialog_desc">You won +%1$d Coins! Spring blessings have arrived!</string>
+    <string name="baucua_lose_dialog_title">BETTER LUCK NEXT TIME 🌸</string>
+    <string name="baucua_lose_dialog_desc">No match this time, try another round for good fortune!</string>
+    <string name="baucua_draw_dialog_title">DRAW! 🧧</string>
+    <string name="baucua_draw_dialog_desc">You received %1$d Coins back!</string>
+    <string name="baucua_dialog_relief_title">Lucky Tet Gift 🧧</string>
+    <string name="baucua_dialog_relief_desc">Receive 100 free coins daily! Or watch a short video to double your blessing and get 200 coins!</string>
+    <string name="baucua_dialog_relief_claimed_title">Gift Claimed Today 🌸</string>
+    <string name="baucua_dialog_relief_claimed_desc">You have already claimed today\'s lucky gift (see you tomorrow)!\n\nWatch a short video to get +200 Lucky Coins anytime!</string>
+    <string name="baucua_btn_claim_relief">Claim 100 Free Coins</string>
+    <string name="baucua_btn_claim_double_ad">Watch Video to 2x Gift (+200 Coins) 🎁</string>
+    <string name="baucua_btn_watch_ad_coins">Watch Video for +200 Coins 🎥</string>
+    <string name="baucua_disclaimer">This traditional Tet folk game is purely for casual entertainment with no real-money gambling.</string>
+    <string name="baucua_rule_x2_notice">Rules: Win x2 bet coins for each matching face!</string>
+
+    <!-- Background Music Selection -->
+    <string name="music_selection_title">Tet Background Music 🎶</string>
+    <string name="music_master_switch_title">Enable Tet Music</string>
+    <string name="music_master_switch_desc">Auto plays on open, pauses in background</string>
+    <string name="music_now_playing_title">NOW PLAYING 🎵</string>
+    <string name="music_song_list_header">Tet Music Playlist</string>
+    <string name="music_selected_badge">Playing</string>
+    <string name="music_btn_select">Select</string>
+    <string name="music_change_song_setting">Change background song</string>
 </resources>

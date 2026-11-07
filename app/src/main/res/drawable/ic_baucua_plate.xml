@@ -1,0 +1,42 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="200dp"
+    android:height="200dp"
+    android:viewportWidth="200"
+    android:viewportHeight="200">
+    <!-- Plate Rim Shadow -->
+    <path
+        android:fillColor="#15000000"
+        android:pathData="M100,5A95,95 0 1,0 195,100A95,95 0 0,0 100,5Z" />
+    <!-- Outer Bronze / Ceramic Rim -->
+    <path
+        android:fillColor="#E59866"
+        android:pathData="M100,8A92,92 0 1,0 192,100A92,92 0 0,0 100,8Z" />
+    <path
+        android:fillColor="#D35400"
+        android:pathData="M100,12A88,88 0 1,0 188,100A88,88 0 0,0 100,12Z" />
+    <!-- Plate Base Surface (Đáy đĩa sứ men lam hoặc men rạn cổ truyền) -->
+    <path
+        android:fillColor="#FDFEFE"
+        android:pathData="M100,18A82,82 0 1,0 182,100A82,82 0 0,0 100,18Z" />
+    <!-- Traditional Blue Pattern Ring (Họa tiết men lam cổ điển) -->
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#2471A3"
+        android:strokeWidth="2.5"
+        android:pathData="M100,24A76,76 0 1,0 176,100A76,76 0 0,0 100,24Z" />
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#5499C7"
+        android:strokeWidth="1.2"
+        android:pathData="M100,28A72,72 0 1,0 172,100A72,72 0 0,0 100,28Z" />
+    <!-- Center Cloud / Lotus Motif -->
+    <path
+        android:fillColor="#EBF5FB"
+        android:pathData="M100,55A45,45 0 1,0 145,100A45,45 0 0,0 100,55Z" />
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#7FB3D5"
+        android:strokeWidth="1.2"
+        android:pathData="M85,95 C90,85 110,85 115,95 C125,90 130,105 120,110 C125,120 110,125 100,115 C90,125 75,120 80,110 C70,105 75,90 85,95 Z" />
+</vector>
+

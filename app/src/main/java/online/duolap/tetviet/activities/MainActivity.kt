@@ -338,11 +338,17 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.btnMusicToggle.setSafeOnClickListener(hasAnim = true) {
+            AppAnalytics.logFeatureClick("open_music_selection")
+            MusicSelectionActivity.start(this)
+        }
+
+        binding.btnMusicToggle.setOnLongClickListener {
             val newState = TetMusicManager.toggleMusic(this)
             updateMusicButtonUI(newState)
             val msg = if (newState) getString(R.string.msg_music_on) else getString(R.string.msg_music_off)
             Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
             AppAnalytics.logFeatureClick(if (newState) "quick_enable_bgm" else "quick_disable_bgm")
+            true
         }
 
         binding.btnSettings.setSafeOnClickListener(hasAnim = true) {
@@ -384,7 +390,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.cardOption2.setSafeOnClickListener {
-            Toast.makeText(this, getString(R.string.msg_feature_coming_soon), Toast.LENGTH_SHORT).show()
+            AppAnalytics.logFeatureClick("bau_cua")
+            BauCuaActivity.start(this)
         }
 
         binding.cardOption3.setSafeOnClickListener {
@@ -475,6 +482,14 @@ class MainActivity : AppCompatActivity() {
             AppAnalytics.logFeatureClick(if (isChecked) "enable_bgm_settings" else "disable_bgm_settings")
         }
 
+        val tvCurrentSong = view.findViewById<TextView>(R.id.tvCurrentSongSetting)
+        tvCurrentSong?.text = TetMusicManager.getCurrentSong(this).title
+
+        view.findViewById<android.view.View>(R.id.layoutChangeSongSetting)?.setOnClickListener {
+            dialog.dismiss()
+            MusicSelectionActivity.start(this)
+        }
+
         btnClose.setOnClickListener {
             dialog.dismiss()
         }
@@ -535,7 +550,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        TetMusicManager.resume(this)
         updateMusicButtonUI(TetMusicManager.isMusicEnabled(this))
         updateVipBadgeUI()
         checkPendingGooglePlayUpdate()
@@ -563,16 +577,8 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    override fun onPause() {
-        super.onPause()
-        TetMusicManager.pause()
-    }
-
     override fun onDestroy() {
         super.onDestroy()
         countdownRunnable?.let { handler.removeCallbacks(it) }
-        if (isFinishing) {
-            TetMusicManager.release()
-        }
     }
 }

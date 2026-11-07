@@ -293,4 +293,50 @@
     <string name="settings_vip_title">Tài khoản VIP Tết Việt</string>
     <string name="settings_vip_desc">Không quảng cáo, mở khóa toàn bộ đặc quyền</string>
     <string name="badge_free">Miễn phí</string>
+
+    <!-- Game Bầu Cua Tôm Cá Dân Gian -->
+    <string name="feature_bau_cua">Bầu Cua Tôm Cá</string>
+    <string name="feature_bau_cua_desc">Lắc xúc xắc rước lộc may mắn đầu xuân</string>
+    <string name="baucua_title">Bầu Cua Tôm Cá</string>
+    <string name="baucua_item_nai">Nai</string>
+    <string name="baucua_item_bau">Bầu</string>
+    <string name="baucua_item_ga">Gà</string>
+    <string name="baucua_item_ca">Cá</string>
+    <string name="baucua_item_cua">Cua</string>
+    <string name="baucua_item_tom">Tôm</string>
+    <string name="baucua_btn_shake">LẮC BẦU CUA</string>
+    <string name="baucua_btn_open">MỞ BÁT</string>
+    <string name="baucua_btn_clear_bets">Hủy cược</string>
+    <string name="baucua_btn_rebet">Cược lại</string>
+    <string name="baucua_btn_double_bet">Gấp đôi (x2)</string>
+    <string name="baucua_coins_unit">%1$d Xu</string>
+    <string name="baucua_total_bet_label">Tổng cược: %1$d Xu</string>
+    <string name="baucua_msg_need_bet">Vui lòng đặt cược vào ít nhất 1 linh vật trước khi lắc!</string>
+    <string name="baucua_msg_not_enough_coins">Bạn không đủ xu! Vui lòng chọn mệnh giá nhỏ hơn hoặc nhận lì xì.</string>
+    <string name="baucua_msg_shaking">Đang xóc đĩa... Chúc bạn rước lộc đắc tài!</string>
+    <string name="baucua_win_dialog_title">CHÚC MỪNG CHIẾN THẮNG!</string>
+    <string name="baucua_win_dialog_desc">Bạn nhận được +%1$d Xu! Lộc xuân tràn đầy!</string>
+    <string name="baucua_lose_dialog_title">CHÚC MAY MẮN LẦN SAU</string>
+    <string name="baucua_lose_dialog_desc">Chưa trúng rồi, lắc thêm ván nữa để rước lộc nhé!</string>
+    <string name="baucua_draw_dialog_title">HÒA TIỀN!</string>
+    <string name="baucua_draw_dialog_desc">Bạn nhận lại %1$d Xu đã cược!</string>
+    <string name="baucua_dialog_relief_title">Lì Xì May Mắn Đầu Xuân 🧧</string>
+    <string name="baucua_dialog_relief_desc">Mỗi ngày nhận 1 lần lì xì may mắn 100 Xu! Đặc biệt: Xem video ngắn để nhân đôi nhận ngay 200 Xu!</string>
+    <string name="baucua_dialog_relief_claimed_title">Đã Nhận Lì Xì Hôm Nay</string>
+    <string name="baucua_dialog_relief_claimed_desc">Hôm nay bạn đã nhận phần lì xì may mắn rồi (hẹn bạn vào ngày mai nhé)!\n\nHãy xem video ngắn để nhận thêm +200 Xu May Mắn du xuân không giới hạn!</string>
+    <string name="baucua_btn_claim_relief">Nhận 100 Xu Miễn Phí</string>
+    <string name="baucua_btn_claim_double_ad">Xem Video x2 Lì Xì (+200 Xu)</string>
+    <string name="baucua_btn_watch_ad_coins">Xem Video Nhận +150 Xu May Mắn</string>
+    <string name="baucua_disclaimer">Trò chơi Bầu Cua Tôm Cá mô phỏng ngày Tết mang tính chất giải trí dân gian thuần túy, không có giá trị quy đổi tiền mặt.</string>
+    <string name="baucua_rule_x2_notice">Quy tắc: Thắng nhận x2 xu cược mỗi mặt trúng!</string>
+
+    <!-- Chọn Nhạc Nền Tết -->
+    <string name="music_selection_title">Nhạc Nền Tết</string>
+    <string name="music_master_switch_title">Bật nhạc nền Tết</string>
+    <string name="music_master_switch_desc">Tự động phát khi mở app, dừng khi về background</string>
+    <string name="music_now_playing_title">ĐANG PHÁT NỀN</string>
+    <string name="music_song_list_header">Danh Sách Bài Hát Tết</string>
+    <string name="music_selected_badge">Đang phát</string>
+    <string name="music_btn_select">Chọn</string>
+    <string name="music_change_song_setting">Đổi bài hát nền</string>
 </resources>

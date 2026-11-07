@@ -1,0 +1,865 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rootBauCua"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_game_baucua">
+
+    <FrameLayout
+        android:id="@+id/topBar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_lucky_header"
+        android:paddingStart="14dp"
+        android:paddingTop="34dp"
+        android:paddingEnd="10dp"
+        android:paddingBottom="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <FrameLayout
+            android:id="@+id/btnBack"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:background="@drawable/bg_lucky_button"
+            android:clickable="true"
+            android:elevation="6dp"
+            android:focusable="true">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_arrow_back"
+                app:tint="#FFF0C2" />
+
+        </FrameLayout>
+
+        <LinearLayout
+            android:id="@+id/layoutCoinBalance"
+            android:layout_width="wrap_content"
+            android:layout_height="38dp"
+            android:layout_gravity="center_vertical|end"
+            android:background="@drawable/bg_vip_card_gold_v2"
+            android:clickable="true"
+            android:elevation="2dp"
+            android:focusable="true"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingHorizontal="12dp">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginEnd="6dp"
+                app:srcCompat="@drawable/ic_coin_gold" />
+
+            <TextView
+                android:id="@+id/tvUserCoins"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/lobstertwo_bold"
+                android:includeFontPadding="false"
+                android:textColor="#F1C40F"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                tools:text="200" />
+
+            <TextView
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_marginStart="6dp"
+                android:background="@drawable/bg_color_circle"
+                android:backgroundTint="#8A000A"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:text="+"
+                android:textColor="#FFF"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="159dp"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="29dp"
+        android:layout_marginEnd="6dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/header_bau_cua" />
+
+    <!-- Subtle Divider -->
+    <View
+        android:id="@+id/divider"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="#148D5524"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/topBar" />
+
+    <!-- Scrollable Main Game Content -->
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollGame"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        android:overScrollMode="never"
+        app:layout_constraintBottom_toTopOf="@id/layoutBottomControls"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/divider">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:paddingHorizontal="12dp"
+            android:paddingTop="6dp"
+            android:paddingBottom="12dp">
+
+            <!-- History of Last 5 Rounds -->
+            <LinearLayout
+                android:id="@+id/layoutHistoryContainer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingVertical="2dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="6dp"
+                    android:fontFamily="@font/liberationsans_regular"
+                    android:includeFontPadding="false"
+                    android:text="Ván trước:"
+                    android:textColor="#FFF"
+                    android:textSize="12sp" />
+
+                <LinearLayout
+                    android:id="@+id/layoutHistoryDice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal" />
+
+            </LinearLayout>
+
+            <!-- PLATE & BOWL SHAKING ARENA -->
+            <FrameLayout
+                android:id="@+id/layoutArena"
+                android:layout_width="196dp"
+                android:layout_height="196dp"
+                android:layout_marginTop="6dp">
+
+                <!-- The Plate (Đĩa sứ đựng xúc xắc) -->
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/ivPlate"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/ic_baucua_plate" />
+
+                <!-- The 3 Dice on the plate (3 Quân xúc xắc) -->
+                <FrameLayout
+                    android:id="@+id/layoutDiceContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <!-- Dice 1 (Top Center) -->
+                    <FrameLayout
+                        android:id="@+id/dice1"
+                        android:layout_width="44dp"
+                        android:layout_height="44dp"
+                        android:layout_gravity="top|center_horizontal"
+                        android:layout_marginTop="42dp"
+                        android:background="@drawable/bg_baucua_dice">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/ivDice1"
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:layout_gravity="center"
+                            android:paddingBottom="2dp"
+                            app:srcCompat="@drawable/ic_baucua_bau" />
+                    </FrameLayout>
+
+                    <!-- Dice 2 (Bottom Left) -->
+                    <FrameLayout
+                        android:id="@+id/dice2"
+                        android:layout_width="44dp"
+                        android:layout_height="44dp"
+                        android:layout_gravity="bottom|start"
+                        android:layout_marginStart="44dp"
+                        android:layout_marginBottom="46dp"
+                        android:background="@drawable/bg_baucua_dice">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/ivDice2"
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:layout_gravity="center"
+                            android:paddingBottom="2dp"
+                            app:srcCompat="@drawable/ic_baucua_cua" />
+                    </FrameLayout>
+
+                    <!-- Dice 3 (Bottom Right) -->
+                    <FrameLayout
+                        android:id="@+id/dice3"
+                        android:layout_width="44dp"
+                        android:layout_height="44dp"
+                        android:layout_gravity="bottom|end"
+                        android:layout_marginEnd="44dp"
+                        android:layout_marginBottom="46dp"
+                        android:background="@drawable/bg_baucua_dice">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/ivDice3"
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:layout_gravity="center"
+                            android:paddingBottom="2dp"
+                            app:srcCompat="@drawable/ic_baucua_tom" />
+                    </FrameLayout>
+
+                </FrameLayout>
+
+                <!-- The Bowl Cover (Nắp Bát úp lên đĩa) -->
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/ivBowlCover"
+                    android:layout_width="176dp"
+                    android:layout_height="176dp"
+                    android:layout_gravity="center"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/ic_baucua_bowl" />
+
+            </FrameLayout>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="288dp"
+                android:layout_height="40dp"
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/bg_rule_baucua" />
+
+            <androidx.core.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp">
+
+                <LinearLayout
+                    android:id="@+id/layoutBetBoard"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <!-- SLOT: NAI -->
+                        <FrameLayout
+                            android:id="@+id/slotNai"
+                            android:layout_width="0dp"
+                            android:layout_height="88dp"
+                            android:layout_margin="3dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/bg_dreamy_golden"
+                            android:clickable="true"
+                            android:elevation="2dp"
+                            android:focusable="true">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center_horizontal"
+                                android:orientation="vertical">
+
+                                <androidx.appcompat.widget.AppCompatImageView
+                                    android:layout_width="60dp"
+                                    android:layout_height="62dp"
+                                    android:scaleType="centerCrop"
+                                    app:srcCompat="@drawable/icon_nai_baucua" />
+
+                                <TextView
+                                    android:layout_width="60dp"
+                                    android:layout_height="20dp"
+                                    android:layout_marginBottom="6dp"
+                                    android:background="@drawable/bg_slot_name"
+                                    android:fontFamily="@font/lobstertwo_bold"
+                                    android:gravity="center"
+                                    android:includeFontPadding="false"
+                                    android:text="@string/baucua_item_nai"
+                                    android:textColor="#6C2306"
+                                    android:textSize="13sp" />
+                            </LinearLayout>
+
+                            <TextView
+                                android:id="@+id/tvBetNai"
+                                android:layout_width="wrap_content"
+                                android:layout_height="20dp"
+                                android:layout_gravity="top|end"
+                                android:layout_margin="4dp"
+                                android:background="@drawable/bg_version_badge_v2"
+                                android:fontFamily="@font/liberationsans_bold"
+                                android:gravity="center"
+                                android:includeFontPadding="false"
+                                android:paddingHorizontal="6dp"
+                                android:paddingVertical="2dp"
+                                android:textColor="#FFF"
+                                android:textSize="10.5sp"
+                                android:visibility="gone"
+                                tools:text="10"
+                                tools:visibility="visible" />
+
+                        </FrameLayout>
+
+                        <!-- SLOT: BẦU -->
+                        <FrameLayout
+                            android:id="@+id/slotBau"
+                            android:layout_width="0dp"
+                            android:layout_height="88dp"
+                            android:layout_margin="3dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/bg_dreamy_golden"
+                            android:clickable="true"
+                            android:elevation="2dp"
+                            android:focusable="true">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:orientation="vertical"
+                                android:padding="4dp">
+
+                                <androidx.appcompat.widget.AppCompatImageView
+                                    android:layout_width="58dp"
+                                    android:layout_height="62dp"
+                                    app:srcCompat="@drawable/icon_bau_baucua" />
+
+                                <TextView
+                                    android:layout_width="60dp"
+                                    android:layout_height="20dp"
+                                    android:layout_marginBottom="6dp"
+                                    android:background="@drawable/bg_slot_name"
+                                    android:fontFamily="@font/lobstertwo_bold"
+                                    android:gravity="center"
+                                    android:includeFontPadding="false"
+                                    android:text="@string/baucua_item_bau"
+                                    android:textColor="#6C2306"
+                                    android:textSize="13sp" />
+                            </LinearLayout>
+
+                            <TextView
+                                android:id="@+id/tvBetBau"
+                                android:layout_width="wrap_content"
+                                android:layout_height="20dp"
+                                android:layout_gravity="top|end"
+                                android:layout_margin="4dp"
+                                android:background="@drawable/bg_version_badge_v2"
+                                android:fontFamily="@font/liberationsans_bold"
+                                android:gravity="center"
+                                android:includeFontPadding="false"
+                                android:paddingHorizontal="6dp"
+                                android:paddingVertical="2dp"
+                                android:textColor="#FFF"
+                                android:textSize="10.5sp"
+                                android:visibility="gone"
+                                tools:text="10"
+                                tools:visibility="visible" />
+
+                        </FrameLayout>
+
+                        <!-- SLOT: GÀ -->
+                        <FrameLayout
+                            android:id="@+id/slotGa"
+                            android:layout_width="0dp"
+                            android:layout_height="88dp"
+                            android:layout_margin="3dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/bg_dreamy_golden"
+                            android:clickable="true"
+                            android:elevation="2dp"
+                            android:focusable="true">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:orientation="vertical"
+                                android:padding="4dp">
+
+                                <androidx.appcompat.widget.AppCompatImageView
+                                    android:layout_width="70dp"
+                                    android:layout_height="62dp"
+                                    app:srcCompat="@drawable/icon_ga_baucua" />
+
+                                <TextView
+                                    android:layout_width="60dp"
+                                    android:layout_height="20dp"
+                                    android:layout_marginBottom="6dp"
+                                    android:background="@drawable/bg_slot_name"
+                                    android:fontFamily="@font/lobstertwo_bold"
+                                    android:gravity="center"
+                                    android:includeFontPadding="false"
+                                    android:text="@string/baucua_item_ga"
+                                    android:textColor="#6C2306"
+                                    android:textSize="13sp" />
+                            </LinearLayout>
+
+                            <TextView
+                                android:id="@+id/tvBetGa"
+                                android:layout_width="wrap_content"
+                                android:layout_height="20dp"
+                                android:layout_gravity="top|end"
+                                android:layout_margin="4dp"
+                                android:background="@drawable/bg_version_badge_v2"
+                                android:fontFamily="@font/liberationsans_bold"
+                                android:gravity="center"
+                                android:includeFontPadding="false"
+                                android:paddingHorizontal="6dp"
+                                android:paddingVertical="2dp"
+                                android:textColor="#FFF"
+                                android:textSize="10.5sp"
+                                android:visibility="gone"
+                                tools:text="10"
+                                tools:visibility="visible" />
+
+                        </FrameLayout>
+
+                    </LinearLayout>
+
+                    <!-- ROW 2: CÁ - CUA - TÔM -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:orientation="horizontal">
+
+                        <!-- SLOT: CÁ -->
+                        <FrameLayout
+                            android:id="@+id/slotCa"
+                            android:layout_width="0dp"
+                            android:layout_height="88dp"
+                            android:layout_margin="3dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/bg_dreamy_golden"
+                            android:clickable="true"
+                            android:elevation="2dp"
+                            android:focusable="true">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:orientation="vertical"
+                                android:padding="4dp">
+
+                                <androidx.appcompat.widget.AppCompatImageView
+                                    android:layout_width="70dp"
+                                    android:layout_height="62dp"
+                                    app:srcCompat="@drawable/icon_ca_baucua" />
+
+                                <TextView
+                                    android:layout_width="60dp"
+                                    android:layout_height="20dp"
+                                    android:layout_marginBottom="6dp"
+                                    android:background="@drawable/bg_slot_name"
+                                    android:fontFamily="@font/lobstertwo_bold"
+                                    android:gravity="center"
+                                    android:includeFontPadding="false"
+                                    android:text="@string/baucua_item_ca"
+                                    android:textColor="#6C2306"
+                                    android:textSize="13sp" />
+                            </LinearLayout>
+
+                            <TextView
+                                android:id="@+id/tvBetCa"
+                                android:layout_width="wrap_content"
+                                android:layout_height="20dp"
+                                android:layout_gravity="top|end"
+                                android:layout_margin="4dp"
+                                android:background="@drawable/bg_version_badge_v2"
+                                android:fontFamily="@font/liberationsans_bold"
+                                android:gravity="center"
+                                android:includeFontPadding="false"
+                                android:paddingHorizontal="6dp"
+                                android:paddingVertical="2dp"
+                                android:textColor="#FFF"
+                                android:textSize="10.5sp"
+                                android:visibility="gone"
+                                tools:text="10"
+                                tools:visibility="visible" />
+
+                        </FrameLayout>
+
+                        <!-- SLOT: CUA -->
+                        <FrameLayout
+                            android:id="@+id/slotCua"
+                            android:layout_width="0dp"
+                            android:layout_height="88dp"
+                            android:layout_margin="3dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/bg_dreamy_golden"
+                            android:clickable="true"
+                            android:elevation="2dp"
+                            android:focusable="true">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:orientation="vertical"
+                                android:padding="4dp">
+
+                                <androidx.appcompat.widget.AppCompatImageView
+                                    android:layout_width="70dp"
+                                    android:layout_height="62dp"
+                                    app:srcCompat="@drawable/icon_cua_baucua" />
+
+                                <TextView
+                                    android:layout_width="60dp"
+                                    android:layout_height="20dp"
+                                    android:layout_marginBottom="6dp"
+                                    android:background="@drawable/bg_slot_name"
+                                    android:fontFamily="@font/lobstertwo_bold"
+                                    android:gravity="center"
+                                    android:includeFontPadding="false"
+                                    android:text="@string/baucua_item_cua"
+                                    android:textColor="#6C2306"
+                                    android:textSize="13sp" />
+                            </LinearLayout>
+
+                            <TextView
+                                android:id="@+id/tvBetCua"
+                                android:layout_width="wrap_content"
+                                android:layout_height="20dp"
+                                android:layout_gravity="top|end"
+                                android:layout_margin="4dp"
+                                android:background="@drawable/bg_version_badge_v2"
+                                android:fontFamily="@font/liberationsans_bold"
+                                android:gravity="center"
+                                android:includeFontPadding="false"
+                                android:paddingHorizontal="6dp"
+                                android:paddingVertical="2dp"
+                                android:textColor="#FFF"
+                                android:textSize="10.5sp"
+                                android:visibility="gone"
+                                tools:text="10"
+                                tools:visibility="visible" />
+
+                        </FrameLayout>
+
+                        <!-- SLOT: TÔM -->
+                        <FrameLayout
+                            android:id="@+id/slotTom"
+                            android:layout_width="0dp"
+                            android:layout_height="88dp"
+                            android:layout_margin="3dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/bg_dreamy_golden"
+                            android:clickable="true"
+                            android:elevation="2dp"
+                            android:focusable="true">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:gravity="center"
+                                android:orientation="vertical"
+                                android:padding="4dp">
+
+                                <androidx.appcompat.widget.AppCompatImageView
+                                    android:layout_width="70dp"
+                                    android:layout_height="62dp"
+                                    app:srcCompat="@drawable/icon_tom_baucua" />
+
+                                <TextView
+                                    android:layout_width="60dp"
+                                    android:layout_height="20dp"
+                                    android:layout_marginBottom="6dp"
+                                    android:background="@drawable/bg_slot_name"
+                                    android:fontFamily="@font/lobstertwo_bold"
+                                    android:gravity="center"
+                                    android:includeFontPadding="false"
+                                    android:text="@string/baucua_item_tom"
+                                    android:textColor="#6C2306"
+                                    android:textSize="13sp" />
+                            </LinearLayout>
+
+                            <TextView
+                                android:id="@+id/tvBetTom"
+                                android:layout_width="wrap_content"
+                                android:layout_height="20dp"
+                                android:layout_gravity="top|end"
+                                android:layout_margin="4dp"
+                                android:background="@drawable/bg_version_badge_v2"
+                                android:fontFamily="@font/liberationsans_bold"
+                                android:gravity="center"
+                                android:includeFontPadding="false"
+                                android:paddingHorizontal="6dp"
+                                android:paddingVertical="2dp"
+                                android:textColor="#FFF"
+                                android:textSize="10.5sp"
+                                android:visibility="gone"
+                                tools:text="10"
+                                tools:visibility="visible" />
+
+                        </FrameLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </androidx.core.widget.NestedScrollView>
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <!-- BOTTOM CONTROLS & CHIPS AREA -->
+    <LinearLayout
+        android:id="@+id/layoutBottomControls"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_lucky_footer"
+        android:elevation="10dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:paddingHorizontal="14dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="14dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <!-- Total Bet & Quick Actions Row -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingHorizontal="4dp">
+
+            <TextView
+                android:id="@+id/tvTotalBet"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/liberationsans_bold"
+                android:includeFontPadding="false"
+                android:textColor="#FFF"
+                android:textSize="13.5sp"
+                tools:text="Tổng cược: 30 Xu" />
+
+            <TextView
+                android:id="@+id/btnDoubleBet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/bg_chip_unselected"
+                android:fontFamily="@font/liberationsans_bold"
+                android:includeFontPadding="false"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="5dp"
+                android:text="@string/baucua_btn_double_bet"
+                android:textColor="#594E43"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/btnClearBet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_chip_unselected"
+                android:fontFamily="@font/liberationsans_bold"
+                android:includeFontPadding="false"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="5dp"
+                android:text="@string/baucua_btn_clear_bets"
+                android:textColor="#7A090D"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layoutChips"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/chip5"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:layout_marginHorizontal="6dp"
+                android:background="@drawable/bg_chip_default_baucua"
+                android:fontFamily="@font/liberationsans_bold"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:text="5"
+                android:textColor="#593E00"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/chip10"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:layout_marginHorizontal="6dp"
+                android:background="@drawable/bg_chip_selected_baucua"
+                android:fontFamily="@font/liberationsans_bold"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:text="10"
+                android:textColor="#593E00"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/chip20"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:layout_marginHorizontal="6dp"
+                android:background="@drawable/bg_chip_default_baucua"
+                android:fontFamily="@font/liberationsans_bold"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:text="20"
+                android:textColor="#593E00"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/chip50"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:layout_marginHorizontal="6dp"
+                android:background="@drawable/bg_chip_default_baucua"
+                android:fontFamily="@font/liberationsans_bold"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:text="50"
+                android:textColor="#593E00"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/chip100"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:layout_marginHorizontal="6dp"
+                android:background="@drawable/bg_chip_default_baucua"
+                android:fontFamily="@font/liberationsans_bold"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:text="100"
+                android:textColor="#593E00"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+
+        <!-- MAIN ACTION BUTTON (LẮC BẦU CUA / MỞ BÁT) -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnMainAction"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/bg_send_wish_btn"
+            android:fontFamily="@font/liberationsans_bold"
+            android:includeFontPadding="false"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:text="@string/baucua_btn_shake"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:backgroundTint="@null"
+            app:cornerRadius="26dp"
+            app:elevation="4dp" />
+
+        <!-- Disclaimer -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:fontFamily="@font/liberationsans_bold"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:text="@string/baucua_disclaimer"
+            android:textColor="#A69383"
+            android:textSize="10.5sp" />
+
+    </LinearLayout>
+
+    <!-- Celebratory Coin Reward Animation Container -->
+    <FrameLayout
+        android:id="@+id/layoutRewardAnimationOverlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#66000000"
+        android:clickable="true"
+        android:elevation="35dp"
+        android:focusable="true"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:id="@+id/cardRewardPopup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/bg_vip_card_gold_v2"
+            android:elevation="12dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingHorizontal="32dp"
+            android:paddingVertical="20dp">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivRewardCoin"
+                android:layout_width="72dp"
+                android:layout_height="72dp"
+                app:srcCompat="@drawable/ic_coin_gold" />
+
+            <TextView
+                android:id="@+id/tvRewardAmount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/lobstertwo_bold"
+                android:includeFontPadding="false"
+                android:textColor="#7A090D"
+                android:textSize="28sp"
+                android:textStyle="bold"
+                tools:text="+200 Xu" />
+
+            <TextView
+                android:id="@+id/tvRewardDesc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/liberationsans_bold"
+                android:includeFontPadding="false"
+                android:text="Lì Xì May Mắn Rước Lộc 🧧"
+                android:textColor="#593E00"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

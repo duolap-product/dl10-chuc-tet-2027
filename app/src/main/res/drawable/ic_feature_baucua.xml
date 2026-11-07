@@ -1,0 +1,113 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="88dp"
+    android:height="88dp"
+    android:viewportWidth="88"
+    android:viewportHeight="88">
+
+    <!-- Soft Glow / Shadow Behind -->
+    <path
+        android:fillColor="#15E67E22"
+        android:pathData="M44,4A40,40 0 1,0 84,44A40,40 0 0,0 44,4Z" />
+
+    <!-- Ceramic Plate Base (Đĩa sứ Tết) -->
+    <path
+        android:fillColor="#FAD7A0"
+        android:pathData="M44,8A36,36 0 1,0 80,44A36,36 0 0,0 44,8Z" />
+    <path
+        android:fillColor="#D35400"
+        android:pathData="M44,10A34,34 0 1,0 78,44A34,34 0 0,0 44,10Z" />
+    <path
+        android:fillColor="#FFF9E6"
+        android:pathData="M44,12A32,32 0 1,0 76,44A32,32 0 0,0 44,12Z" />
+
+    <!-- Blue Floral Porcelain Ring Rim -->
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#2471A3"
+        android:strokeWidth="1.5"
+        android:pathData="M44,15A29,29 0 1,0 73,44A29,29 0 0,0 44,15Z" />
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#85C1E9"
+        android:strokeWidth="0.8"
+        android:pathData="M44,17A27,27 0 1,0 71,44A27,27 0 0,0 44,17Z" />
+
+    <!-- Dice 1 (Left Dice - White with Red Dot) -->
+    <!-- Dice Body -->
+    <path
+        android:fillColor="#E2E8F0"
+        android:pathData="M19,42 L32,35 L43,40 L30,47 Z" />
+    <path
+        android:fillColor="#CBD5E1"
+        android:pathData="M19,42 L30,47 L30,60 L19,55 Z" />
+    <path
+        android:fillColor="#F8FAFC"
+        android:pathData="M30,47 L43,40 L43,53 L30,60 Z" />
+    <!-- Red Dot on Dice -->
+    <path
+        android:fillColor="#C0392B"
+        android:pathData="M36.5,47m-2.5,0a2.5,2.5 0 1,1 5,0a2.5,2.5 0 1,1 -5,0" />
+
+    <!-- Festive Gourd (Quả Bầu Vàng May Mắn) in Center -->
+    <!-- Stem & Leaves -->
+    <path
+        android:fillColor="#27AE60"
+        android:pathData="M44,20 C45,18 48,18 47,21 C45,22 44,22 44,23 Z" />
+    <path
+        android:fillColor="#2ECC71"
+        android:pathData="M44,21 C42,19 39,20 40,23 C41,24 43,22 44,21 Z" />
+
+    <!-- Top Lobe -->
+    <path
+        android:fillColor="#F39C12"
+        android:pathData="M39,27 C39,23 49,23 49,27 C49,30 47,32 44,32 C41,32 39,30 39,27 Z" />
+    <path
+        android:fillColor="#F5B041"
+        android:pathData="M40.5,26.5 C40.5,24 47.5,24 47.5,26.5 C47.5,29 46,30.5 44,30.5 C42,30.5 40.5,29 40.5,26.5 Z" />
+
+    <!-- Bottom Lobe -->
+    <path
+        android:fillColor="#D35400"
+        android:pathData="M35,37 C35,30 53,30 53,37 C53,46 35,46 35,37 Z" />
+    <path
+        android:fillColor="#E67E22"
+        android:pathData="M37,37 C37,32 51,32 51,37 C51,44 37,44 37,37 Z" />
+    <path
+        android:fillColor="#F39C12"
+        android:pathData="M39,37 C39,33 49,33 49,37 C49,42 39,42 39,37 Z" />
+
+    <!-- Gourd Red Ribbon & Knot -->
+    <path
+        android:fillColor="#C0392B"
+        android:pathData="M40,31.5 C42.5,30.5 45.5,30.5 48,31.5 C47.5,33 40.5,33 40,31.5 Z" />
+    <path
+        android:fillColor="#F1C40F"
+        android:pathData="M44,32m-1,0a1,1 0 1,1 2,0a1,1 0 1,1 -2,0" />
+
+    <!-- Right: Golden Coin (Đồng Tiền Vàng Chiêu Tài) -->
+    <path
+        android:fillColor="#B7950B"
+        android:pathData="M61,54m-12,0a12,12 0 1,1 24,0a12,12 0 1,1 -24,0" />
+    <path
+        android:fillColor="#F1C40F"
+        android:pathData="M61,54m-10.5,0a10.5,10.5 0 1,1 21,0a10.5,10.5 0 1,1 -21,0" />
+    <path
+        android:fillColor="#F9E79F"
+        android:pathData="M61,54m-9,0a9,9 0 1,1 18,0a9,9 0 1,1 -18,0" />
+    <!-- Square Hole in Coin -->
+    <path
+        android:fillColor="#B7950B"
+        android:pathData="M58,51 L64,51 L64,57 L58,57 Z" />
+    <path
+        android:fillColor="#D4AC0D"
+        android:pathData="M59,52 L63,52 L63,56 L59,56 Z" />
+
+    <!-- Sparkle Stars -->
+    <path
+        android:fillColor="#F1C40F"
+        android:pathData="M68,24 L69,27 L72,28 L69,29 L68,32 L67,29 L64,28 L67,27 Z" />
+    <path
+        android:fillColor="#F39C12"
+        android:pathData="M22,26 L23,28 L25,29 L23,30 L22,32 L21,30 L19,29 L21,28 Z" />
+</vector>
+

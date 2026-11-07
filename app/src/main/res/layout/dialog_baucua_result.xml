@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_bottom_sheet_dialog"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <!-- Header Drag Handle -->
+    <View
+        android:layout_width="40dp"
+        android:layout_height="4dp"
+        android:layout_marginBottom="14dp"
+        android:background="#D1C7B7" />
+
+    <!-- Title -->
+    <TextView
+        android:id="@+id/tvResultTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/liberationsans_bold"
+        android:includeFontPadding="false"
+        android:text="@string/baucua_win_dialog_title"
+        android:textColor="#7A090D"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <!-- Subtitle / Message -->
+    <TextView
+        android:id="@+id/tvResultDesc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:fontFamily="@font/liberationsans_regular"
+        android:gravity="center"
+        android:includeFontPadding="false"
+        android:textColor="#594E43"
+        android:textSize="14sp" />
+
+    <!-- 3 Dice Result Container -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <FrameLayout
+            android:layout_width="54dp"
+            android:layout_height="54dp"
+            android:layout_marginHorizontal="6dp"
+            android:background="@drawable/bg_baucua_dice">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivResultDice1"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:paddingBottom="2dp"
+                app:srcCompat="@drawable/ic_baucua_bau" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="54dp"
+            android:layout_height="54dp"
+            android:layout_marginHorizontal="6dp"
+            android:background="@drawable/bg_baucua_dice">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivResultDice2"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:paddingBottom="2dp"
+                app:srcCompat="@drawable/ic_baucua_cua" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="54dp"
+            android:layout_height="54dp"
+            android:layout_marginHorizontal="6dp"
+            android:background="@drawable/bg_baucua_dice">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivResultDice3"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:paddingBottom="2dp"
+                app:srcCompat="@drawable/ic_baucua_tom" />
+        </FrameLayout>
+
+    </LinearLayout>
+
+    <!-- Profit / Win Summary Badge -->
+    <TextView
+        android:id="@+id/tvProfitBadge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/bg_version_badge"
+        android:fontFamily="@font/liberationsans_bold"
+        android:includeFontPadding="false"
+        android:paddingHorizontal="14dp"
+        android:paddingVertical="6dp"
+        android:textColor="#7A090D"
+        android:textSize="15sp"
+        android:textStyle="bold" />
+
+    <!-- Continue / Play Again Button -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnContinue"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/bg_send_wish_btn"
+        android:fontFamily="@font/liberationsans_bold"
+        android:includeFontPadding="false"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:text="Tiếp Tục Chơi"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:backgroundTint="@null"
+        app:cornerRadius="26dp"
+        app:elevation="3dp" />
+
+</LinearLayout>
+

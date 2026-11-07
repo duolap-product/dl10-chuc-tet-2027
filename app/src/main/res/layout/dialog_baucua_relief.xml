@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_bottom_sheet_dialog"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <View
+        android:layout_width="40dp"
+        android:layout_height="4dp"
+        android:layout_marginBottom="14dp"
+        android:background="#D1C7B7" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivReliefIcon"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        app:srcCompat="@drawable/ic_coin_gold" />
+
+    <TextView
+        android:id="@+id/tvReliefTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/liberationsans_bold"
+        android:gravity="center"
+        android:includeFontPadding="false"
+        android:text="@string/baucua_dialog_relief_title"
+        android:textColor="#7A090D"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <!-- Subtitle / Message -->
+    <TextView
+        android:id="@+id/tvReliefDesc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/liberationsans_regular"
+        android:gravity="center"
+        android:includeFontPadding="false"
+        android:lineSpacingExtra="3dp"
+        android:text="@string/baucua_dialog_relief_desc"
+        android:textColor="#594E43"
+        android:textSize="13.5sp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnWatchAdForDouble"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/bg_send_wish_btn"
+        android:fontFamily="@font/liberationsans_bold"
+        android:gravity="center"
+        android:includeFontPadding="false"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:text="@string/baucua_btn_claim_double_ad"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:textSize="15.5sp"
+        android:textStyle="bold"
+        app:backgroundTint="@null"
+        app:cornerRadius="26dp"
+        app:elevation="4dp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnClaimFree"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/liberationsans_bold"
+        android:gravity="center"
+        android:includeFontPadding="false"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:text="@string/baucua_btn_claim_relief"
+        android:textAllCaps="false"
+        android:textColor="#7A090D"
+        android:textSize="14.5sp"
+        app:cornerRadius="24dp"
+        app:strokeColor="#7A090D"
+        app:strokeWidth="1.2dp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnWatchAdForCoins"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/bg_send_wish_btn"
+        android:fontFamily="@font/liberationsans_bold"
+        android:gravity="center"
+        android:includeFontPadding="false"
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        android:text="@string/baucua_btn_watch_ad_coins"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        android:textSize="15.5sp"
+        android:textStyle="bold"
+        android:visibility="gone"
+        app:backgroundTint="@null"
+        app:cornerRadius="26dp"
+        app:elevation="4dp"
+        tools:visibility="visible" />
+
+</LinearLayout>

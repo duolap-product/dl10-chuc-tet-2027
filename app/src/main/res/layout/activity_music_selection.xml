@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rootMusicSelection"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_card_maker_screen">
+
+    <!-- Top Action Bar -->
+    <FrameLayout
+        android:id="@+id/topBar"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        android:paddingHorizontal="14dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <!-- Back Button -->
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/btnBack"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_vertical|start"
+            android:background="@drawable/bg_circle_icon_button"
+            android:contentDescription="@string/action_close"
+            android:padding="10dp"
+            android:src="@drawable/ic_arrow_back"
+            app:tint="#7A090D" />
+
+        <!-- Title -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|start"
+            android:layout_marginStart="48dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:layout_marginEnd="6dp"
+                app:srcCompat="@drawable/ic_custom_blossom" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/liberationsans_bold"
+                android:includeFontPadding="false"
+                android:text="@string/music_selection_title"
+                android:textColor="#7A090D"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+    <!-- Divider line -->
+    <View
+        android:id="@+id/divider"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="#148D5524"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/topBar" />
+
+    <!-- Scrollable Content -->
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollMusic"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        android:overScrollMode="never"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/divider">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="32dp">
+
+            <!-- Card 1: Master Switch (Bật / Tắt Nhạc Nền) -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="14dp"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/bg_feature_card"
+                android:elevation="3dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="14dp">
+
+                <FrameLayout
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    android:background="@drawable/bg_color_circle"
+                    android:backgroundTint="#FFF3D6">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_gravity="center"
+                        app:srcCompat="@drawable/ic_music_note"
+                        app:tint="#D48806" />
+                </FrameLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/liberationsans_bold"
+                        android:includeFontPadding="false"
+                        android:text="@string/music_master_switch_title"
+                        android:textColor="#3D3025"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="3dp"
+                        android:fontFamily="@font/liberationsans_regular"
+                        android:includeFontPadding="false"
+                        android:text="@string/music_master_switch_desc"
+                        android:textColor="#8C6E52"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+
+                <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:id="@+id/switchMasterMusic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="false" />
+
+            </LinearLayout>
+
+            <!-- Card 2: Now Playing Header (Bài Hát Đang Phát) -->
+            <LinearLayout
+                android:id="@+id/cardNowPlaying"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="14dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bg_vip_card_gold"
+                android:elevation="4dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="14dp">
+
+                <!-- Rotating Vinyl Disc -->
+                <FrameLayout
+                    android:layout_width="54dp"
+                    android:layout_height="54dp">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/ivNowPlayingDisc"
+                        android:layout_width="52dp"
+                        android:layout_height="52dp"
+                        android:layout_gravity="center"
+                        app:srcCompat="@drawable/ic_disc_music" />
+
+                </FrameLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="14dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/liberationsans_regular"
+                        android:includeFontPadding="false"
+                        android:text="@string/music_now_playing_title"
+                        android:textColor="#8C6300"
+                        android:textSize="11sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tvNowPlayingTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:ellipsize="end"
+                        android:fontFamily="@font/liberationsans_bold"
+                        android:includeFontPadding="false"
+                        android:maxLines="1"
+                        android:textColor="#7A090D"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        tools:text="Nhạc Hội Tết Quê Hương" />
+
+                    <TextView
+                        android:id="@+id/tvNowPlayingArtist"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:ellipsize="end"
+                        android:fontFamily="@font/liberationsans_regular"
+                        android:includeFontPadding="false"
+                        android:maxLines="1"
+                        android:textColor="#593E00"
+                        android:textSize="12sp"
+                        tools:text="Dân Ca Hoà Tấu Truyền Thống" />
+
+                </LinearLayout>
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/ivPlayPauseQuick"
+                    android:layout_width="38dp"
+                    android:layout_height="38dp"
+                    android:background="@drawable/bg_circle_icon_button"
+                    android:padding="8dp"
+                    app:srcCompat="@drawable/ic_sound_wave"
+                    app:tint="#7A090D" />
+
+            </LinearLayout>
+
+            <!-- Section Label: Danh Sách Bài Hát Tết -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="6dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_marginEnd="6dp"
+                    app:srcCompat="@drawable/ic_custom_blossom" />
+
+                <TextView
+                    android:id="@+id/tvSongListHeader"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/liberationsans_bold"
+                    android:includeFontPadding="false"
+                    android:text="Danh Sách Bài Hát Tết"
+                    android:textColor="#7A090D"
+                    android:textSize="15.5sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <!-- RecyclerView Danh Sách Bài Hát -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvSongs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:nestedScrollingEnabled="false"
+                android:overScrollMode="never" />
+
+            <!-- Footer: Ghi Chú & Tối Ưu Năng Lượng -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="14dp"
+                android:layout_marginTop="14dp"
+                android:background="@drawable/bg_version_badge"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:padding="12dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/liberationsans_regular"
+                    android:gravity="center"
+                    android:includeFontPadding="false"
+                    android:text="🌸 Nhạc Tết tự động tạm dừng khi app chuyển vào chế độ nền (background) để tiết kiệm pin tối đa cho thiết bị của bạn."
+                    android:textColor="#7A090D"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

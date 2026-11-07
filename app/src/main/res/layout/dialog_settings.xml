@@ -92,7 +92,53 @@
             android:id="@+id/switchSound"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:checked="true" />
+            android:checked="false" />
+
+    </LinearLayout>
+
+    <!-- Chọn bài hát nền Tết -->
+    <LinearLayout
+        android:id="@+id/layoutChangeSongSetting"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingVertical="8dp">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-medium"
+                android:text="Đổi bài hát nền"
+                android:textColor="#3D3025"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/tvCurrentSongSetting"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif"
+                android:text="Nhạc Hội Tết Quê Hương"
+                android:textColor="#D48806"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:rotation="180"
+            android:src="@drawable/ic_arrow_back"
+            app:tint="#8C6E52" />
 
     </LinearLayout>
 
