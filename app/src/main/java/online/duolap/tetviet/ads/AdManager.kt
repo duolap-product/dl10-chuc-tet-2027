@@ -504,7 +504,7 @@ class AdManager @Inject constructor(
             val adSize = AdSize.getCurrentOrientationAnchoredAdaptiveBannerAdSize(activity, (widthPx / density).toInt())
 
             val adView = AdView(activity).apply {
-                adUnitId = BuildConfig.ADMOB_BANNER_ID
+                adUnitId = bannerAdUnitId(placement)
                 setAdSize(adSize)
                 adListener = object : AdListener() {
                     override fun onAdImpression() {
@@ -564,6 +564,14 @@ class AdManager @Inject constructor(
         val delay = RETRY_DELAYS_MS[attempt.coerceAtMost(RETRY_DELAYS_MS.lastIndex)]
         mainHandler.removeCallbacks(retry)
         mainHandler.postDelayed(retry, delay)
+    }
+
+    /** Mỗi vị trí banner một ad unit riêng để xem doanh thu theo từng màn hình trên AdMob. */
+    private fun bannerAdUnitId(placement: AdPlacement): String = when (placement) {
+        AdPlacement.BANNER_TET_CUSTOMS -> BuildConfig.ADMOB_BANNER_TET_CUSTOMS_ID
+        AdPlacement.BANNER_TET_PHOTOS -> BuildConfig.ADMOB_BANNER_TET_PHOTOS_ID
+        AdPlacement.BANNER_MUSIC_SELECTION -> BuildConfig.ADMOB_BANNER_MUSIC_SELECTION_ID
+        else -> BuildConfig.ADMOB_BANNER_ID
     }
 
     private fun logLoadFailed(format: String, error: LoadAdError) {

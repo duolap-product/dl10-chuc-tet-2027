@@ -20,7 +20,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 - `app/build.gradle.kts` reads `keystore.properties` at configuration time to build the `release` signing config. If that file is missing, Gradle configuration fails for **every** task, including debug builds.
 - Toolchain: AGP 9, Kotlin 2.2 with KSP (Room and Hilt compilers), Java 21. Dependency versions live in `gradle/libs.versions.toml`.
-- Release builds also need real AdMob IDs as Gradle properties (`ADMOB_APP_ID`, `ADMOB_REWARDED_ID`, `ADMOB_INTERSTITIAL_ID`, `ADMOB_BANNER_ID`, `ADMOB_APP_OPEN_ID`). `preReleaseBuild` fails if they are missing or still Google test IDs. Debug builds always use test IDs (via `BuildConfig` and the `admobAppId` manifest placeholder).
+- Release builds also need real AdMob IDs as Gradle properties (`ADMOB_APP_ID`, `ADMOB_REWARDED_ID`, `ADMOB_INTERSTITIAL_ID`, `ADMOB_BANNER_ID`, `ADMOB_APP_OPEN_ID`). `preReleaseBuild` fails if they are missing or still Google test IDs. Each banner placement can have its own unit (`ADMOB_BANNER_TET_CUSTOMS_ID`, `ADMOB_BANNER_TET_PHOTOS_ID`, `ADMOB_BANNER_MUSIC_SELECTION_ID`, mapped in `AdManager.bannerAdUnitId`). These are optional and fall back to `ADMOB_BANNER_ID`. Rewarded and interstitial share one unit per format because they are preloaded before the placement is known. Debug builds always use test IDs (via `BuildConfig` and the `admobAppId` manifest placeholder).
 - Bump `versionCode`/`versionName` in `app/build.gradle.kts` for releases (commits are titled "Release x.y.z-beta").
 
 ## Architecture
