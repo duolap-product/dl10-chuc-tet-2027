@@ -10,6 +10,23 @@ plugins {
     alias(libs.plugins.hilt)
 }
 
+// Google's public AdMob test IDs: safe for debug builds, never earn revenue.
+val admobTestAppId = "ca-app-pub-3940256099942544~3347511713"
+
+val admobTestRewardedId = "ca-app-pub-3940256099942544/5224354917"
+val admobTestInterstitialId = "ca-app-pub-3940256099942544/1033173712"
+val admobTestBannerId = "ca-app-pub-3940256099942544/9214589741"
+val admobTestAppOpenId = "ca-app-pub-3940256099942544/9257395921"
+val admobTestPublisher = "ca-app-pub-3940256099942544"
+
+// Real IDs come from Gradle properties (gradle.properties, ~/.gradle/gradle.properties or -P).
+val admobReleaseKeys = listOf("ADMOB_APP_ID", "ADMOB_REWARDED_ID", "ADMOB_INTERSTITIAL_ID", "ADMOB_BANNER_ID", "ADMOB_APP_OPEN_ID")
+fun admobProperty(key: String): String = (findProperty(key) as String?)?.trim().orEmpty()
+val invalidAdmobKeys = admobReleaseKeys.filter {
+    val value = admobProperty(it)
+    value.isEmpty() || value.startsWith(admobTestPublisher)
+}
+
 android {
     namespace = "online.duolap.tetviet"
     compileSdk {
@@ -22,10 +39,16 @@ android {
         applicationId = "online.duolap.tetviet"
         minSdk = 24
         targetSdk = 36
-        versionCode = 7
-        versionName = "1.0.7-beta"
+        versionCode = 8
+        versionName = "1.0.8-beta"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        manifestPlaceholders["admobAppId"] = admobTestAppId
+        buildConfigField("String", "ADMOB_REWARDED_ID", "\"$admobTestRewardedId\"")
+        buildConfigField("String", "ADMOB_INTERSTITIAL_ID", "\"$admobTestInterstitialId\"")
+        buildConfigField("String", "ADMOB_BANNER_ID", "\"$admobTestBannerId\"")
+        buildConfigField("String", "ADMOB_APP_OPEN_ID", "\"$admobTestAppOpenId\"")
     }
 
     val keystorePropertiesFile = rootProject.file("keystore.properties")
@@ -48,6 +71,11 @@ android {
             isMinifyEnabled = true
             isShrinkResources = true
             signingConfig = signingConfigs.getByName("release")
+            manifestPlaceholders["admobAppId"] = admobProperty("ADMOB_APP_ID")
+            buildConfigField("String", "ADMOB_REWARDED_ID", "\"${admobProperty("ADMOB_REWARDED_ID")}\"")
+            buildConfigField("String", "ADMOB_INTERSTITIAL_ID", "\"${admobProperty("ADMOB_INTERSTITIAL_ID")}\"")
+            buildConfigField("String", "ADMOB_BANNER_ID", "\"${admobProperty("ADMOB_BANNER_ID")}\"")
+            buildConfigField("String", "ADMOB_APP_OPEN_ID", "\"${admobProperty("ADMOB_APP_OPEN_ID")}\"")
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
@@ -58,6 +86,22 @@ android {
 
     buildFeatures {
         viewBinding = true
+        buildConfig = true
+    }
+}
+
+// Fail release builds (not configuration) when real AdMob IDs are missing or still test IDs.
+tasks.configureEach {
+    if (name == "preReleaseBuild") {
+        val missingKeys = invalidAdmobKeys
+        doFirst {
+            if (missingKeys.isNotEmpty()) {
+                throw GradleException(
+                    "Release build needs real AdMob IDs. Missing or test values: ${missingKeys.joinToString()}. " +
+                        "Set them in gradle.properties or ~/.gradle/gradle.properties."
+                )
+            }
+        }
     }
 }
 
@@ -101,6 +145,7 @@ dependencies {
 
     // Google Mobile Ads (AdMob)
     implementation(libs.play.services.ads)
+    implementation(libs.user.messaging.platform)
 
     // Google Play In-App Billing
     implementation(libs.billing.ktx)

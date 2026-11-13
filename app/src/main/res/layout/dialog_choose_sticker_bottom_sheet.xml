@@ -32,7 +32,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/liberationsans_bold"
+                android:fontFamily="@font/arimo_bold"
                 android:includeFontPadding="false"
                 android:text="@string/card_maker_choose_sticker_title"
                 android:textColor="#7A090D"
@@ -44,7 +44,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
-                android:fontFamily="@font/liberationsans_regular"
+                android:fontFamily="@font/arimo_regular"
                 android:includeFontPadding="false"
                 android:text="@string/card_maker_choose_sticker_subtitle"
                 android:textColor="#8C6E52"

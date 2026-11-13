@@ -12,6 +12,7 @@ import kotlinx.coroutines.launch
 import online.duolap.tetviet.analytics.AppAnalytics
 import online.duolap.tetviet.analytics.AppCrashlytics
 import online.duolap.tetviet.ads.AdManager
+import online.duolap.tetviet.ads.AdPolicy
 import online.duolap.tetviet.audio.TetMusicManager
 import online.duolap.tetviet.billing.BillingManager
 import online.duolap.tetviet.data.local.AppDatabase
@@ -26,8 +27,14 @@ class TetVietApplication : Application(), Application.ActivityLifecycleCallbacks
     private val applicationScope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
     private var startedActivityCount = 0
 
+    // App vừa vào foreground, chờ màn hình resume mới xét App Open (SDK coi show() trước onResume là đang ở nền)
+    private var pendingAppOpenCheck = false
+
     @Inject
     lateinit var syncManager: FirestoreSyncManager
+
+    @Inject
+    lateinit var adPolicy: AdPolicy
 
     @Inject
     lateinit var adManager: AdManager
@@ -44,10 +51,9 @@ class TetVietApplication : Application(), Application.ActivityLifecycleCallbacks
 
         AppDatabase.getInstance(this)
 
-        adManager.initialize()
+        // AdMob được khởi tạo trong MainActivity sau khi có sự đồng ý quảng cáo (UMP)
         billingManager.initializeBillingClient()
 
-        // Khởi tạo và đăng ký giám sát vòng đời phát nhạc toàn ứng dụng
         TetMusicManager.init(this)
         registerActivityLifecycleCallbacks(this)
 
@@ -79,6 +85,8 @@ class TetVietApplication : Application(), Application.ActivityLifecycleCallbacks
     override fun onActivityStarted(activity: Activity) {
         startedActivityCount++
         if (startedActivityCount == 1) {
+            adPolicy.onAppForeground()
+            pendingAppOpenCheck = true
             // App chuyển từ background vào foreground -> tiếp tục phát nhạc nếu người dùng bật
             TetMusicManager.onAppForeground(this)
         }
@@ -88,13 +96,21 @@ class TetVietApplication : Application(), Application.ActivityLifecycleCallbacks
         startedActivityCount--
         if (startedActivityCount <= 0) {
             startedActivityCount = 0
+            pendingAppOpenCheck = false
+            adPolicy.onAppBackground()
             // App chuyển hoàn toàn vào background -> tạm dừng phát nhạc để tiết kiệm pin
             TetMusicManager.onAppBackground()
         }
     }
 
     override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {}
-    override fun onActivityResumed(activity: Activity) {}
+    override fun onActivityResumed(activity: Activity) {
+        if (pendingAppOpenCheck) {
+            pendingAppOpenCheck = false
+            adManager.onAppForeground(activity)
+        }
+    }
+
     override fun onActivityPaused(activity: Activity) {}
     override fun onActivitySaveInstanceState(activity: Activity, outState: Bundle) {}
     override fun onActivityDestroyed(activity: Activity) {}

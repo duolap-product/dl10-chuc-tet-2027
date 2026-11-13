@@ -25,7 +25,7 @@
             android:id="@+id/tvHistoryPrize"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/liberationsans_bold"
+            android:fontFamily="@font/arimo_bold"
             android:includeFontPadding="false"
             android:textColor="#7A090D"
             android:textSize="15sp"
@@ -36,7 +36,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
-            android:fontFamily="@font/liberationsans_regular"
+            android:fontFamily="@font/arimo_regular"
             android:includeFontPadding="false"
             android:textColor="#8D5524"
             android:textSize="11.5sp" />

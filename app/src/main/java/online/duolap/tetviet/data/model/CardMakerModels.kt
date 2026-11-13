@@ -2,6 +2,7 @@ package online.duolap.tetviet.data.model
 
 import android.content.Context
 import androidx.annotation.DrawableRes
+import androidx.annotation.FontRes
 import online.duolap.tetviet.R
 import online.duolap.tetviet.data.local.CardColorEntity
 import online.duolap.tetviet.data.local.CardMakerEntity
@@ -105,6 +106,26 @@ object CardBackgroundManager {
     )
 
     val currentBgId = BACKGROUND.firstOrNull()?.id ?: ""
+}
+
+/** Phông chữ thư pháp cho lời chúc: chỉ dùng được khi đã mua VIP (không mở khoá bằng quảng cáo). */
+data class VipCardFont(
+    val id: String,
+    val displayName: String,
+    @FontRes val fontResId: Int
+)
+
+object VipCardFontManager {
+    // Cả 7 phông đều có đủ dấu tiếng Việt (đã kiểm tra bảng ký tự)
+    val FONTS = listOf(
+        VipCardFont("font_festive", "Festive", R.font.festive_regular),
+        VipCardFont("font_updock", "Updock", R.font.updock_regular),
+        VipCardFont("font_lavishly_yours", "Lavishly Yours", R.font.lavishly_yours_regular),
+        VipCardFont("font_babylonica", "Babylonica", R.font.babylonica_regular),
+        VipCardFont("font_fleur_deleah", "Fleur De Leah", R.font.fleur_deleah_regular),
+        VipCardFont("font_passions_conflict", "Passions Conflict", R.font.passions_conflict_regular),
+        VipCardFont("font_story_script", "Story Script", R.font.story_script_regular)
+    )
 }
 
 data class CardStickerItem(

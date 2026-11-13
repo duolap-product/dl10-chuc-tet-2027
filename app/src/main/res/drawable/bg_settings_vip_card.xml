@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Thẻ VIP trong Cài đặt: nâu trầm, viền vàng -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+    <gradient
+        android:angle="0"
+        android:endColor="#4A2208"
+        android:startColor="#2B1506" />
+    <corners android:radius="18dp" />
+    <stroke android:width="1.5dp" android:color="@color/tet_gold" />
+</shape>

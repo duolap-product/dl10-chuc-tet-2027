@@ -22,6 +22,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import online.duolap.tetviet.ads.AppOpenGate
 import online.duolap.tetviet.data.local.VipPreferences
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -181,6 +182,8 @@ class BillingManager @Inject constructor(
             .setProductDetailsParamsList(listOf(productDetailsParamsBuilder.build()))
             .build()
 
+        // Màn hình thanh toán của Google Play: không hiện App Open khi quay lại app
+        AppOpenGate.skipNextForeground()
         val responseCode = client.launchBillingFlow(activity, billingFlowParams).responseCode
         if (responseCode != BillingClient.BillingResponseCode.OK) {
             Log.e(TAG, "Launch billing flow failed with code: $responseCode")

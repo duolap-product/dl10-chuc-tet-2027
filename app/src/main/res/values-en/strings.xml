@@ -55,8 +55,8 @@
     <string name="settings_title">App Settings</string>
     <string name="settings_sound_title">Festive Tet Music</string>
     <string name="settings_sound_desc">Firecracker sounds &amp; spring melodies</string>
-    <string name="settings_notification_title">Daily Countdown Reminder</string>
-    <string name="settings_notification_desc">Remind remaining days until Tet</string>
+    <string name="settings_notification_title">Monday morning reminder</string>
+    <string name="settings_notification_desc">8:30 AM every Monday: weeks left until Tết</string>
     <string name="msg_music_on">Festive Tet music enabled 🌸</string>
     <string name="msg_music_off">Background music muted 🔕</string>
     <string name="content_desc_music_turn_off">Mute Tet music</string>
@@ -102,6 +102,7 @@
     <string name="card_maker_font_italic">Elegant</string>
     <string name="card_maker_font_regular">Regular</string>
     <string name="card_maker_font_serif">Classic Serif</string>
+    <string name="card_maker_vip_font_label">👑 VIP calligraphy fonts</string>
     <string name="card_bg_free">FREE</string>
     <string name="card_bg_unlock_ad">Watch 0/3 ads to unlock</string>
     <string name="msg_storage_permission_needed">Storage permission is required to save cards publicly</string>
@@ -340,4 +341,174 @@
     <string name="music_selected_badge">Playing</string>
     <string name="music_btn_select">Select</string>
     <string name="music_change_song_setting">Change background song</string>
+
+    <!-- Wishing Tree -->
+    <string name="feature_wishing_tree">Wishing Tree</string>
+    <string name="feature_wishing_tree_desc">Spring dreams &amp; wishes</string>
+    <string name="wishing_tree_scroll_instruction">Write your wish and hang it on the apricot tree,\nwelcoming a bright and prosperous New Year!</string>
+    <string name="wishing_tree_stats_title">Your Wishes</string>
+    <string name="wishing_tree_stats_count_format">%s hung on the tree</string>
+    <string name="wishing_tree_btn_write_wish">Write a Wish Now</string>
+    <string name="wishing_tree_dialog_create_title">Your Wish</string>
+    <string name="wishing_tree_input_hint">E.g., May my family stay healthy,\nwork go smoothly and happily...</string>
+    <string name="wishing_tree_select_category">Choose category</string>
+    <string name="wishing_tree_btn_hang_wish">Hang Wish</string>
+    <string name="wishing_tree_hang_success">✨ Your wish has been hung on the tree! Wishing you a peaceful and lucky New Year!</string>
+    <string name="wishing_tree_input_empty_error">Please enter your wish</string>
+    <string name="wishing_tree_detail_title">Spring Wish</string>
+    <string name="wishing_tree_btn_bless">Bless 🙏</string>
+    <string name="wishing_tree_blessed_toast">You sent a blessing for this wish! ✨</string>
+    <string name="wishing_tree_my_wishes_title">My Wishes</string>
+    <string name="wishing_tree_my_wishes_empty">You haven\'t hung any wishes yet. Make a heartfelt wish for the New Year!</string>
+    <string name="wishing_tree_category_all">All</string>
+    <string name="wishing_tree_blessings_count">%1$d blessings</string>
+    <string name="wish_cat_health">Health</string>
+    <string name="wish_cat_career">Career</string>
+    <string name="wish_cat_love">Love</string>
+    <string name="wish_cat_study">Study</string>
+    <string name="wish_cat_finance">Wealth</string>
+    <string name="wish_cat_family">Family</string>
+    <string name="wish_cat_other">Other</string>
+
+    <!-- Ô Ăn Quan -->
+    <string name="oanquan_title">Mandarin Square</string>
+    <string name="oanquan_subtitle_format">Play with %s</string>
+    <string name="oanquan_btn_hint">Hint</string>
+    <string name="oanquan_btn_mode">Mode</string>
+    <string name="oanquan_btn_new_game">New Game</string>
+    <string name="oanquan_mode_title">Select Game Mode</string>
+    <string name="oanquan_mode_ai">Play vs Computer</string>
+    <string name="oanquan_mode_friends">Pass &amp; Play</string>
+    <string name="oanquan_mode_online">Play Online</string>
+    <string name="oanquan_rules_title">Game Rules</string>
+    <string name="oanquan_hint_title">Move Hint</string>
+    <string name="oanquan_hint_desc">Best move: Pick pit %1$d moving %2$s!</string>
+    <string name="oanquan_online_match_found">Opponent found! Match starting!</string>
+    <string name="oanquan_online_waiting">Waiting for opponent to join...</string>
+    <string name="oanquan_turn_your">YOUR TURN</string>
+    <string name="oanquan_turn_opp">OPPONENT\'S TURN</string>
+    <string name="oanquan_diff_easy">Novice</string>
+    <string name="oanquan_diff_medium">Moderate</string>
+    <string name="oanquan_diff_hard">Master</string>
+    <string name="oanquan_win_title">VICTORY! 🏆</string>
+    <string name="oanquan_lose_title">BETTER LUCK NEXT TIME! 🌸</string>
+    <string name="oanquan_draw_title">DRAW! 🤝</string>
+    <string name="oanquan_reward_coins_win">Victory reward: +100 Lucky Coins</string>
+    <string name="feature_o_an_quan">Mandarin Square</string>
+    <string name="feature_o_an_quan_desc">Folk strategy game</string>
+
+    <!-- Dap Chuot Game -->
+    <string name="feature_dap_chuot">Whack-a-Mole</string>
+    <string name="feature_dap_chuot_desc">Faster than your eyes</string>
+    <string name="dap_chuot_score">Score</string>
+    <string name="dap_chuot_combo">Combo</string>
+    <string name="dap_chuot_best">Best</string>
+    <string name="dap_chuot_ready">Ready!</string>
+    <string name="dap_chuot_start">START</string>
+    <string name="dap_chuot_result_title">Result</string>
+    <string name="dap_chuot_new_record">🏆 NEW RECORD!</string>
+    <string name="dap_chuot_play_again">Play Again</string>
+    <string name="dap_chuot_exit">Exit</string>
+    <string name="dap_chuot_countdown_go">GO!</string>
+    <string name="dap_chuot_hit_normal">+10</string>
+    <string name="dap_chuot_hit_golden">+30 ⭐</string>
+    <string name="dap_chuot_hit_bomb">-15 💥</string>
+    <string name="dap_chuot_combo_prefix">x</string>
+    <string name="msg_ad_not_ready">The video ad isn\'t ready yet. Please try again in a moment.</string>
+    <string name="settings_privacy_options_title">Privacy options</string>
+    <string name="settings_privacy_options_desc">Manage your ad consent choices</string>
+    <!-- Nội dung mẫu trong ảnh xem trước widget -->
+    <string name="widget_tet_arrived_title">Happy Lunar New Year!</string>
+    <string name="settings_add_widget_title">Add countdown widget</string>
+    <string name="msg_widget_pin_unsupported">Long-press your home screen → Widgets → find \"Chúc Tết 2027\" to add it.</string>
+    <string name="settings_header_subtitle">Tết Việt 2027 • Best wishes for the new year</string>
+    <string name="settings_section_sound">Sound &amp; Music</string>
+    <string name="settings_section_utilities">Notifications &amp; Tools</string>
+    <string name="settings_section_other">More</string>
+    <string name="settings_change_song_title">Change background song</string>
+    <string name="settings_change_song_desc">Pick your favorite spring tune</string>
+    <string name="settings_vip_cta">Upgrade</string>
+    <string name="settings_vip_active_cta">Active</string>
+    <string name="settings_vip_active_desc">Thank you for supporting Tết Việt!</string>
+    <string name="settings_check_update_title">Check for updates</string>
+    <string name="settings_version_placeholder">Current version</string>
+    <string name="settings_version_format">Version %1$s</string>
+    <string name="settings_footer_wish">Happy Lunar New Year 2027</string>
+    <string name="msg_monday_notification_disabled">Tết countdown notifications turned off.</string>
+    <string name="msg_notification_permission_denied">Please allow notifications for this app in your phone settings to get reminders.</string>
+    <!-- Widget đếm ngược Tết kiểu phong bao lì xì -->
+    <string name="widget_prefix"></string>
+    <string name="widget_suffix">\u0020left</string>
+    <string name="widget_preview_days_unit">\u0020days\u0020</string>
+    <string name="widget_preview_progress">75%</string>
+    <string name="widget_preview_info">Lunar 10/5 • Tết Feb 6, 2027</string>
+    <string name="widget_preview_wish">“Peace and prosperity”</string>
+    <string name="widget_progress_format">%1$d%%</string>
+    <string name="widget_lunar_format">Lunar %2$d/%1$d</string>
+    <string name="widget_lunar_leap_format">Lunar %2$d/%1$d (leap)</string>
+    <string name="widget_info_format">%1$s • Tết Feb 6, 2027</string>
+    <string name="widget_wish_format">“%1$s”</string>
+    <plurals name="widget_days_unit">
+        <item quantity="one">\u0020day\u0020</item>
+        <item quantity="other">\u0020days\u0020</item>
+    </plurals>
+    <string-array name="widget_daily_wishes">
+        <item>Peace and prosperity</item>
+        <item>May all your wishes come true</item>
+        <item>Wealth and good fortune</item>
+        <item>Wishing you great health</item>
+        <item>Prosperity all year long</item>
+        <item>Money flowing like water</item>
+        <item>A happy, united family</item>
+        <item>A home full of fortune</item>
+        <item>Success in everything</item>
+        <item>A peaceful new year</item>
+        <item>Fame and achievement</item>
+        <item>Thriving business</item>
+        <item>Love in full bloom</item>
+        <item>Grow happy and strong</item>
+        <item>Great progress in school</item>
+        <item>Luck and joy</item>
+        <item>Blessings and prosperity</item>
+        <item>Spring brings riches</item>
+        <item>Smooth sailing all year</item>
+        <item>Fortune at every turn</item>
+        <item>Harmony at home</item>
+        <item>A long and happy life</item>
+        <item>Booming business</item>
+        <item>Joy all year round</item>
+        <item>Full pockets, full heart</item>
+        <item>Double your returns</item>
+        <item>New year, new wins</item>
+        <item>A warm Tết together</item>
+        <item>Love that lasts forever</item>
+        <item>All the best for you</item>
+    </string-array>
+    <!-- Widget Cổ điển + bảng chọn widget -->
+    <string name="widget_classic_label">Tết Countdown • Classic</string>
+    <string name="widget_lixi_label">Tết Countdown • Lucky envelope</string>
+    <string name="widget_classic_description">Days left until Lunar New Year 2027</string>
+    <string name="widget_lixi_description">Second-by-second countdown with the lunar date and a daily wish</string>
+    <string name="widget_classic_preview_title">days until Tết</string>
+    <string name="widget_classic_date_label">Feb 6, 2027 • Lunar New Year</string>
+    <string name="widget_tet_arrived_subtitle">Year of the Goat 2027</string>
+    <string name="widget_picker_title">Choose a countdown widget</string>
+    <string name="widget_picker_desc">Tap the style you like to add it to your home screen</string>
+    <string name="widget_picker_classic_name">Classic</string>
+    <string name="widget_picker_classic_desc">Days until Tết in a gold frame with lucky clouds</string>
+    <string name="widget_picker_lixi_name">Lucky envelope</string>
+    <string name="widget_picker_lixi_desc">Live seconds, today\'s lunar date, stretch it for a daily wish</string>
+    <string name="settings_add_widget_desc">2 styles: Classic or Lucky envelope</string>
+    <plurals name="widget_classic_days_until_tet">
+        <item quantity="one">day until Tết</item>
+        <item quantity="other">days until Tết</item>
+    </plurals>
+    <!-- VIP fonts (Card maker + VIP screen) -->
+    <string name="dialog_vip_font_title">VIP Calligraphy Font</string>
+    <string name="dialog_vip_font_subtitle">The %1$s font is for VIP members only</string>
+    <string name="dialog_vip_font_preview_label">Preview of your wish</string>
+    <string name="vip_font_preview_fallback">Happy Lunar New Year</string>
+    <string name="vip_perk_fonts_title">VIP calligraphy fonts</string>
+    <string name="vip_perk_fonts_desc">7 exclusive handwritten fonts for your Tết card wishes</string>
+    <string name="vip_perk_fonts_sample">Happy New Year</string>
 </resources>

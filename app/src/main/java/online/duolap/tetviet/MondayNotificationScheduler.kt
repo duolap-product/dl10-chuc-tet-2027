@@ -12,6 +12,7 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
 import online.duolap.tetviet.activities.MainActivity
+import online.duolap.tetviet.ads.AppOpenGate
 import java.util.Calendar
 import java.util.TimeZone
 
@@ -21,6 +22,38 @@ object MondayNotificationScheduler {
     const val NOTIFICATION_ID = 2027
     const val ACTION_MONDAY_NOTIFICATION = "online.duolap.tetviet.ACTION_MONDAY_NOTIFICATION"
     const val EXTRA_OPEN_MONDAY_PAGE = "extra_open_monday_page"
+
+    private const val PREFS_NAME = "monday_notification_prefs"
+    private const val KEY_ENABLED = "enabled"
+    private const val REQUEST_CODE_ALARM = 1001
+
+    /** Người dùng bật/tắt trong Cài đặt; mặc định bật. */
+    fun isEnabled(context: Context): Boolean {
+        return context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE).getBoolean(KEY_ENABLED, true)
+    }
+
+    /** Lưu lựa chọn và lên lịch lại (bật) hoặc huỷ báo thức đã đặt (tắt). */
+    fun setEnabled(context: Context, enabled: Boolean) {
+        context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE).edit().putBoolean(KEY_ENABLED, enabled).apply()
+        if (enabled) {
+            scheduleNextMondayNotification(context)
+        } else {
+            val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as? AlarmManager ?: return
+            alarmManager.cancel(alarmPendingIntent(context))
+        }
+    }
+
+    private fun alarmPendingIntent(context: Context): PendingIntent {
+        val intent = Intent(context, MondayNotificationReceiver::class.java).apply {
+            action = ACTION_MONDAY_NOTIFICATION
+        }
+        return PendingIntent.getBroadcast(
+            context,
+            REQUEST_CODE_ALARM,
+            intent,
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+        )
+    }
 
     fun createNotificationChannel(context: Context) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -67,18 +100,11 @@ object MondayNotificationScheduler {
      * Lên lịch thông báo 8h30 sáng Thứ Hai hàng tuần
      */
     fun scheduleNextMondayNotification(context: Context) {
+        if (!isEnabled(context)) return
         createNotificationChannel(context)
 
         val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as? AlarmManager ?: return
-        val intent = Intent(context, MondayNotificationReceiver::class.java).apply {
-            action = ACTION_MONDAY_NOTIFICATION
-        }
-        val pendingIntent = PendingIntent.getBroadcast(
-            context,
-            1001,
-            intent,
-            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
-        )
+        val pendingIntent = alarmPendingIntent(context)
 
         val triggerTime = getNextMonday830Millis()
 
@@ -105,13 +131,16 @@ object MondayNotificationScheduler {
 
         val mondaysRemaining = calculateMondaysRemaining()
 
+        // CLEAR_TASK (không phải CLEAR_TOP): luôn chỉ còn đúng 1 màn hình để 1 lần Back là thoát, kể cả khi
+        // gốc của app đang là màn hình khác. Đổi cờ thì phải đổi request code (FLAG_UPDATE_CURRENT không thay cờ).
         val intent = Intent(context, MainActivity::class.java).apply {
-            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             putExtra(EXTRA_OPEN_MONDAY_PAGE, true)
+            putExtra(AppOpenGate.EXTRA_SKIP_APP_OPEN, true)
         }
         val pendingIntent = PendingIntent.getActivity(
             context,
-            2002,
+            2003,
             intent,
             PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
         )

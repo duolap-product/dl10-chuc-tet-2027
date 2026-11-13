@@ -6,7 +6,9 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import online.duolap.tetviet.ads.AdConsentManager
 import online.duolap.tetviet.ads.AdManager
+import online.duolap.tetviet.ads.AdPolicy
 import online.duolap.tetviet.billing.BillingManager
 import online.duolap.tetviet.data.local.VipPreferences
 import javax.inject.Singleton
@@ -32,11 +34,20 @@ object MonetizationModule {
 
     @Provides
     @Singleton
+    fun provideAdPolicy(@ApplicationContext context: Context): AdPolicy {
+        val prefs = context.getSharedPreferences(AdPolicy.PREFS_NAME, Context.MODE_PRIVATE)
+        return AdPolicy(AdPolicy.SharedPrefsStore(prefs))
+    }
+
+    @Provides
+    @Singleton
     fun provideAdManager(
         @ApplicationContext context: Context,
-        vipPreferences: VipPreferences
+        vipPreferences: VipPreferences,
+        adPolicy: AdPolicy,
+        consentManager: AdConsentManager
     ): AdManager {
-        return AdManager(context, vipPreferences)
+        return AdManager(context, vipPreferences, adPolicy, consentManager)
     }
 }
 

@@ -8,6 +8,7 @@ import com.google.android.play.core.appupdate.AppUpdateOptions
 import com.google.android.play.core.install.model.AppUpdateType
 import com.google.android.play.core.install.model.UpdateAvailability
 import dagger.hilt.android.qualifiers.ApplicationContext
+import online.duolap.tetviet.ads.AppOpenGate
 import online.duolap.tetviet.analytics.AppAnalytics
 import online.duolap.tetviet.analytics.AppCrashlytics
 import javax.inject.Inject
@@ -83,6 +84,8 @@ class PlayUpdateManager @Inject constructor(
         }
         return try {
             val options = AppUpdateOptions.newBuilder(updateType).build()
+            // Màn hình cập nhật của Google Play: không hiện App Open khi quay lại app
+            AppOpenGate.skipNextForeground()
             appUpdateManager.startUpdateFlowForResult(appUpdateInfo, activity, options, requestCode)
             true
         } catch (e: Exception) {

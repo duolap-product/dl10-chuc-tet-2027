@@ -26,13 +26,18 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.viewpager2.widget.ViewPager2
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.switchmaterial.SwitchMaterial
 import dagger.hilt.android.AndroidEntryPoint
+import online.duolap.tetviet.BuildConfig
 import online.duolap.tetviet.MondayNotificationScheduler
 import online.duolap.tetviet.R
 import online.duolap.tetviet.adapter.CountdownPagerAdapter
+import online.duolap.tetviet.ads.AdConsentManager
+import online.duolap.tetviet.ads.AdManager
+import online.duolap.tetviet.ads.AppOpenGate
 import online.duolap.tetviet.analytics.AppAnalytics
 import online.duolap.tetviet.analytics.AppCrashlytics
 import online.duolap.tetviet.audio.TetMusicManager
@@ -41,6 +46,10 @@ import online.duolap.tetviet.data.model.MondayCountdownInfo
 import online.duolap.tetviet.databinding.ActivityMainBinding
 import online.duolap.tetviet.update.PlayUpdateManager
 import online.duolap.tetviet.views.setSafeOnClickListener
+import online.duolap.tetviet.widget.TetCountdown
+import online.duolap.tetviet.widget.TetClassicWidgetProvider
+import online.duolap.tetviet.widget.TetLixiWidgetProvider
+import online.duolap.tetviet.widget.TetWidgetProviderBase
 import com.google.android.play.core.install.model.UpdateAvailability
 import java.util.Calendar
 import java.util.Locale
@@ -56,6 +65,12 @@ class MainActivity : AppCompatActivity() {
     @Inject
     lateinit var playUpdateManager: PlayUpdateManager
 
+    @Inject
+    lateinit var adConsentManager: AdConsentManager
+
+    @Inject
+    lateinit var adManager: AdManager
+
     private lateinit var binding: ActivityMainBinding
     private lateinit var countdownAdapter: CountdownPagerAdapter
 
@@ -63,19 +78,12 @@ class MainActivity : AppCompatActivity() {
     private var countdownRunnable: Runnable? = null
 
     // Target: Mùng 1 Tết Nguyên Đán Đinh Mùi 2027 (06/02/2027 00:00:00 GMT+7)
-    private val tet2027TargetMillis: Long by lazy {
-        val cal = Calendar.getInstance(TimeZone.getTimeZone("GMT+7"))
-        cal.set(Calendar.YEAR, 2027)
-        cal.set(Calendar.MONTH, Calendar.FEBRUARY)
-        cal.set(Calendar.DAY_OF_MONTH, 6)
-        cal.set(Calendar.HOUR_OF_DAY, 0)
-        cal.set(Calendar.MINUTE, 0)
-        cal.set(Calendar.SECOND, 0)
-        cal.set(Calendar.MILLISECOND, 0)
-        cal.timeInMillis
-    }
+    private val tet2027TargetMillis: Long = TetCountdown.TET_START_MILLIS
 
 //    private var selectedTabId = R.id.tabHome
+
+    // Công tắc thông báo trong Cài đặt đang mở (để tắt lại nếu người dùng từ chối quyền)
+    private var settingsNotificationSwitch: SwitchMaterial? = null
 
     private val requestNotificationPermissionLauncher =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
@@ -85,6 +93,15 @@ class MainActivity : AppCompatActivity() {
                     this,
                     getString(R.string.msg_monday_notification_enabled),
                     Toast.LENGTH_SHORT
+                ).show()
+            } else if (settingsNotificationSwitch != null) {
+                // Bật từ Cài đặt nhưng không được cấp quyền: trả công tắc về tắt
+                MondayNotificationScheduler.setEnabled(this, false)
+                settingsNotificationSwitch?.setCheckedSilently(false)
+                Toast.makeText(
+                    this,
+                    getString(R.string.msg_notification_permission_denied),
+                    Toast.LENGTH_LONG
                 ).show()
             }
         }
@@ -118,6 +135,21 @@ class MainActivity : AppCompatActivity() {
         handleNotificationIntent(intent)
         checkAndRequestNotificationPermission()
         checkGooglePlayUpdate()
+        initAdsWithConsent()
+    }
+
+    /**
+     * Xin đồng ý quảng cáo (UMP) rồi mới khởi tạo AdMob. Nếu đã có đồng ý từ phiên trước
+     * thì khởi tạo ngay song song để quảng cáo sẵn sàng sớm hơn.
+     */
+    private fun initAdsWithConsent() {
+        if (vipPreferences.isVip.value) return
+        adConsentManager.gatherConsent(this) { canRequestAds ->
+            if (canRequestAds) adManager.initialize()
+        }
+        if (adConsentManager.canRequestAds) {
+            adManager.initialize()
+        }
     }
 
     override fun onNewIntent(intent: Intent) {
@@ -137,6 +169,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun checkAndRequestNotificationPermission() {
         MondayNotificationScheduler.createNotificationChannel(this)
+        // Người dùng đã tắt thông báo trong Cài đặt: không xin quyền nữa
+        if (!MondayNotificationScheduler.isEnabled(this)) return
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             val permission = Manifest.permission.POST_NOTIFICATIONS
@@ -395,7 +429,18 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.cardOption3.setSafeOnClickListener {
-            Toast.makeText(this, getString(R.string.msg_feature_coming_soon), Toast.LENGTH_SHORT).show()
+            AppAnalytics.logFeatureClick("cay_dieu_uoc")
+            WishingTreeActivity.start(this)
+        }
+
+        binding.cardOption4.setSafeOnClickListener {
+            AppAnalytics.logFeatureClick("o_an_quan")
+            online.duolap.tetviet.game.oanquan.ui.OAnQuanActivity.start(this)
+        }
+
+        binding.cardOption5.setSafeOnClickListener {
+            AppAnalytics.logFeatureClick("dap_chuot")
+            online.duolap.tetviet.game.dapchuot.ui.DapChuotActivity.start(this)
         }
     }
 
@@ -459,6 +504,8 @@ class MainActivity : AppCompatActivity() {
             putExtra(Intent.EXTRA_SUBJECT, getString(R.string.wishes_share_subject))
             putExtra(Intent.EXTRA_TEXT, text)
         }
+        // Người dùng rời app có chủ đích (chia sẻ): không hiện App Open khi quay lại
+        AppOpenGate.skipNextForeground()
         startActivity(Intent.createChooser(intent, getString(R.string.wishes_share_chooser)))
     }
 
@@ -469,6 +516,16 @@ class MainActivity : AppCompatActivity() {
         val dialog = BottomSheetDialog(this, R.style.Theme_TetViet_BottomSheetDialog)
         val view = layoutInflater.inflate(R.layout.dialog_settings, null)
         dialog.setContentView(view)
+        dialog.behavior.state = BottomSheetBehavior.STATE_EXPANDED
+        dialog.behavior.skipCollapsed = true
+
+        // Thẻ VIP: mời nâng cấp, hoặc cảm ơn nếu đã là VIP
+        if (vipPreferences.isVip.value) {
+            view.findViewById<TextView>(R.id.tvVipSettingDesc)?.text = getString(R.string.settings_vip_active_desc)
+            view.findViewById<TextView>(R.id.tvVipSettingCta)?.text = getString(R.string.settings_vip_active_cta)
+        }
+        view.findViewById<TextView>(R.id.tvAppVersionSetting)?.text =
+            getString(R.string.settings_version_format, BuildConfig.VERSION_NAME)
 
         val switchSound = view.findViewById<SwitchMaterial>(R.id.switchSound)
         val btnClose = view.findViewById<ImageButton>(R.id.btnCloseSettings)
@@ -481,6 +538,16 @@ class MainActivity : AppCompatActivity() {
             updateMusicButtonUI(isChecked)
             AppAnalytics.logFeatureClick(if (isChecked) "enable_bgm_settings" else "disable_bgm_settings")
         }
+
+        // Thông báo đếm ngược: chỉ hiện bật khi người dùng bật VÀ app có quyền gửi thông báo
+        view.findViewById<SwitchMaterial>(R.id.switchNotification)?.let { switchNotification ->
+            settingsNotificationSwitch = switchNotification
+            switchNotification.isChecked = MondayNotificationScheduler.isEnabled(this) && hasNotificationPermission()
+            switchNotification.setOnCheckedChangeListener { _, isChecked ->
+                onNotificationSwitchChanged(isChecked)
+            }
+        }
+        dialog.setOnDismissListener { settingsNotificationSwitch = null }
 
         val tvCurrentSong = view.findViewById<TextView>(R.id.tvCurrentSongSetting)
         tvCurrentSong?.text = TetMusicManager.getCurrentSong(this).title
@@ -498,6 +565,19 @@ class MainActivity : AppCompatActivity() {
             dialog.dismiss()
             val intent = Intent(this, VipActivity::class.java)
             startActivity(intent)
+        }
+
+        view.findViewById<android.view.View>(R.id.layoutAddWidgetSetting)?.setOnClickListener {
+            dialog.dismiss()
+            showWidgetPickerDialog()
+        }
+
+        view.findViewById<android.view.View>(R.id.layoutPrivacyOptionsSetting)?.apply {
+            visibility = if (adConsentManager.isPrivacyOptionsRequired) android.view.View.VISIBLE else android.view.View.GONE
+            setOnClickListener {
+                dialog.dismiss()
+                adConsentManager.showPrivacyOptionsForm(this@MainActivity)
+            }
         }
 
         // Kiểm tra phiên bản mới thủ công khi bấm vào thông tin phiên bản
@@ -524,6 +604,67 @@ class MainActivity : AppCompatActivity() {
         }
 
         dialog.show()
+    }
+
+    /**
+     * Bảng chọn 1 trong 2 widget (Cổ điển / Lì xì). Bản xem trước là RemoteViews thật của widget
+     * (số ngày, đồng hồ đếm giây, âm lịch đúng hôm nay), phủ 1 lớp bắt chạm để không kích hoạt nút mở app của widget.
+     */
+    private fun showWidgetPickerDialog() {
+        AppAnalytics.logFeatureClick("open_widget_picker")
+        val dialog = BottomSheetDialog(this, R.style.Theme_TetViet_BottomSheetDialog)
+        val view = layoutInflater.inflate(R.layout.dialog_widget_picker, null)
+        dialog.setContentView(view)
+        dialog.behavior.state = BottomSheetBehavior.STATE_EXPANDED
+        dialog.behavior.skipCollapsed = true
+
+        val classicContainer = view.findViewById<android.widget.FrameLayout>(R.id.previewClassicContainer)
+        classicContainer.addView(TetClassicWidgetProvider.createViews(this).apply(this, classicContainer))
+        val lixiContainer = view.findViewById<android.widget.FrameLayout>(R.id.previewLixiContainer)
+        lixiContainer.addView(TetLixiWidgetProvider.createViews(this, isLarge = false).apply(this, lixiContainer))
+
+        fun pin(providerClass: Class<out TetWidgetProviderBase>, name: String) {
+            dialog.dismiss()
+            AppAnalytics.logFeatureClick("request_pin_widget_$name")
+            if (!TetWidgetProviderBase.requestPin(this, providerClass)) {
+                Toast.makeText(this, getString(R.string.msg_widget_pin_unsupported), Toast.LENGTH_LONG).show()
+            }
+        }
+        listOf(R.id.cardPickClassic, R.id.overlayClassic).forEach { id ->
+            view.findViewById<android.view.View>(id).setOnClickListener { pin(TetClassicWidgetProvider::class.java, "classic") }
+        }
+        listOf(R.id.cardPickLixi, R.id.overlayLixi).forEach { id ->
+            view.findViewById<android.view.View>(id).setOnClickListener { pin(TetLixiWidgetProvider::class.java, "lixi") }
+        }
+
+        dialog.show()
+    }
+
+    private fun hasNotificationPermission(): Boolean {
+        return Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU ||
+            ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED
+    }
+
+    private fun onNotificationSwitchChanged(isChecked: Boolean) {
+        MondayNotificationScheduler.setEnabled(this, isChecked)
+        AppAnalytics.logFeatureClick(if (isChecked) "enable_monday_notification" else "disable_monday_notification")
+
+        if (!isChecked) {
+            Toast.makeText(this, getString(R.string.msg_monday_notification_disabled), Toast.LENGTH_SHORT).show()
+            return
+        }
+        if (hasNotificationPermission()) {
+            Toast.makeText(this, getString(R.string.msg_monday_notification_enabled), Toast.LENGTH_SHORT).show()
+        } else {
+            requestNotificationPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+        }
+    }
+
+    /** Đổi trạng thái công tắc mà không kích hoạt lại listener. */
+    private fun SwitchMaterial.setCheckedSilently(checked: Boolean) {
+        setOnCheckedChangeListener(null)
+        isChecked = checked
+        setOnCheckedChangeListener { _, isChecked -> onNotificationSwitchChanged(isChecked) }
     }
 
     private fun updateMusicButtonUI(isMusicOn: Boolean) {

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/widgetRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginVertical="20dp"
+    android:background="@drawable/bg_widget_tet_countdown">
+
+    <ImageView
+        android:layout_width="52dp"
+        android:layout_height="26dp"
+        android:layout_gravity="top|start"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="7dp"
+        android:alpha="0.5"
+        android:importantForAccessibility="no"
+        android:scaleType="fitCenter"
+        android:src="@drawable/bg_cloud_02" />
+
+    <ImageView
+        android:layout_width="60dp"
+        android:layout_height="32dp"
+        android:layout_gravity="bottom|start"
+        android:layout_marginStart="26dp"
+        android:layout_marginBottom="6dp"
+        android:alpha="0.5"
+        android:importantForAccessibility="no"
+        android:scaleType="fitCenter"
+        android:src="@drawable/bg_cloud_01" />
+
+    <ImageView
+        android:layout_width="52dp"
+        android:layout_height="26dp"
+        android:layout_gravity="top|end"
+        android:layout_marginTop="7dp"
+        android:layout_marginEnd="30dp"
+        android:alpha="0.5"
+        android:importantForAccessibility="no"
+        android:scaleType="fitCenter"
+        android:scaleX="-1"
+        android:src="@drawable/bg_cloud_02" />
+
+    <ImageView
+        android:layout_width="60dp"
+        android:layout_height="32dp"
+        android:layout_gravity="bottom|end"
+        android:layout_marginEnd="26dp"
+        android:layout_marginBottom="6dp"
+        android:alpha="0.5"
+        android:importantForAccessibility="no"
+        android:scaleType="fitCenter"
+        android:scaleX="-1"
+        android:src="@drawable/bg_cloud_01" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="28dp">
+
+        <TextView
+            android:id="@+id/tvWidgetDays"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="14dp"
+            android:fontFamily="sans-serif-medium"
+            android:includeFontPadding="false"
+            android:shadowColor="#66000000"
+            android:shadowDy="2"
+            android:shadowRadius="4"
+            android:text="@string/widget_classic_preview_days"
+            android:textColor="#FFD15C"
+            android:textSize="36sp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvWidgetTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:fontFamily="sans-serif-medium"
+                android:maxLines="1"
+                android:shadowColor="#66000000"
+                android:shadowDy="1"
+                android:shadowRadius="3"
+                android:text="@string/widget_classic_preview_title"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvWidgetSubtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:ellipsize="end"
+                android:fontFamily="sans-serif"
+                android:maxLines="1"
+                android:text="@string/widget_classic_date_label"
+                android:textColor="#F5DDB8"
+                android:textSize="12sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+</FrameLayout>

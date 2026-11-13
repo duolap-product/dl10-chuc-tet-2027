@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Đuôi mây của widget Cổ điển: nét vàng mảnh, đậm ở đầu sát đám mây rồi nhạt dần.
+     Dùng scaleX="-1" trên view để lật cho các đám mây bên phải. -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+    <gradient
+        android:angle="0"
+        android:endColor="#00E9B949"
+        android:startColor="#F2C45A" />
+    <corners android:radius="1dp" />
+</shape>

@@ -105,7 +105,7 @@ class LuckyWheelView @JvmOverloads constructor(
         }
         if (tf == null) {
             try {
-                tf = ResourcesCompat.getFont(context, online.duolap.tetviet.R.font.liberationsans_bold)
+                tf = ResourcesCompat.getFont(context, online.duolap.tetviet.R.font.arimo_bold)
             } catch (_: Exception) {}
         }
         setWheelTypeface(tf)

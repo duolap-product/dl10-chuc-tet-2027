@@ -1,0 +1,558 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rootLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_dap_chuot_ground">
+
+    <!-- Background decorative image with soft festive tone -->
+    <ImageView
+        android:id="@+id/ivBackground"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/bg_tet_screen"
+        android:alpha="0.20"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <!-- Header bar -->
+    <LinearLayout
+        android:id="@+id/layoutHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingHorizontal="16dp"
+        android:paddingTop="16dp"
+        android:paddingBottom="8dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <ImageButton
+            android:id="@+id/btnBack"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:background="@drawable/bg_circle_back_button"
+            android:contentDescription="Quay lại"
+            android:padding="10dp"
+            android:src="@drawable/ic_arrow_back"
+            app:tint="#FFE8A3"/>
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:fontFamily="@font/arimo_bold"
+            android:includeFontPadding="false"
+            android:shadowColor="#80000000"
+            android:shadowDx="0"
+            android:shadowDy="2"
+            android:shadowRadius="4"
+            android:text="@string/feature_dap_chuot"
+            android:textColor="#FFE8A3"
+            android:textSize="22sp"
+            android:textStyle="bold"/>
+
+        <View
+            android:layout_width="44dp"
+            android:layout_height="44dp"/>
+    </LinearLayout>
+
+    <!-- Score Panel Card -->
+    <LinearLayout
+        android:id="@+id/scorePanel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/bg_dap_chuot_score_panel"
+        android:orientation="horizontal"
+        android:paddingHorizontal="12dp"
+        android:paddingVertical="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/layoutHeader">
+
+        <!-- Score -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/arimo_bold"
+                android:text="@string/dap_chuot_score"
+                android:textColor="#FFD700"
+                android:textSize="11sp"/>
+            <TextView
+                android:id="@+id/tvScore"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/arimo_bold"
+                android:text="0"
+                android:textColor="#FFFFFF"
+                android:textSize="26sp"/>
+        </LinearLayout>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="32dp"
+            android:layout_gravity="center_vertical"
+            android:background="#33FFD700"/>
+
+        <!-- Combo -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/arimo_bold"
+                android:text="@string/dap_chuot_combo"
+                android:textColor="#FFD700"
+                android:textSize="11sp"/>
+            <TextView
+                android:id="@+id/tvCombo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/arimo_bold"
+                android:text="x0"
+                android:textColor="#FFA726"
+                android:textSize="26sp"/>
+        </LinearLayout>
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="32dp"
+            android:layout_gravity="center_vertical"
+            android:background="#33FFD700"/>
+
+        <!-- Best Score -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/arimo_bold"
+                android:text="@string/dap_chuot_best"
+                android:textColor="#FFD700"
+                android:textSize="11sp"/>
+            <TextView
+                android:id="@+id/tvBest"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/arimo_bold"
+                android:text="0"
+                android:textColor="#FFFFFF"
+                android:textSize="26sp"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Timer Row -->
+    <LinearLayout
+        android:id="@+id/timerRow"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/scorePanel">
+
+        <TextView
+            android:id="@+id/tvTimerLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:fontFamily="@font/arimo_bold"
+            android:text="⏱️"
+            android:textSize="14sp"/>
+
+        <FrameLayout
+            android:id="@+id/timerBarContainer"
+            android:layout_width="0dp"
+            android:layout_height="16dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_dap_chuot_timer_bar_track">
+
+            <View
+                android:id="@+id/timerBarFill"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_dap_chuot_timer_bar_fill"/>
+
+            <TextView
+                android:id="@+id/tvTimer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/arimo_bold"
+                android:text="60s"
+                android:textColor="#FFFFFF"
+                android:textSize="10sp"/>
+        </FrameLayout>
+    </LinearLayout>
+
+    <!-- 3x3 Mole Holes Grid Container -->
+    <GridLayout
+        android:id="@+id/moleGrid"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="12dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="16dp"
+        android:alignmentMode="alignMargins"
+        android:columnCount="3"
+        android:rowCount="3"
+        android:useDefaultMargins="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/timerRow">
+
+        <!-- Hole 0 -->
+        <FrameLayout
+            android:id="@+id/hole0"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:padding="4dp">
+
+            <ImageView
+                android:id="@+id/ivHole0"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_mole_hole"/>
+
+            <ImageView
+                android:id="@+id/ivMole0"
+                android:layout_width="68dp"
+                android:layout_height="68dp"
+                android:layout_gravity="center|top"
+                android:layout_marginTop="4dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_mole_normal"
+                android:visibility="invisible"/>
+        </FrameLayout>
+
+        <!-- Hole 1 -->
+        <FrameLayout
+            android:id="@+id/hole1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:padding="4dp">
+
+            <ImageView
+                android:id="@+id/ivHole1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_mole_hole"/>
+
+            <ImageView
+                android:id="@+id/ivMole1"
+                android:layout_width="68dp"
+                android:layout_height="68dp"
+                android:layout_gravity="center|top"
+                android:layout_marginTop="4dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_mole_normal"
+                android:visibility="invisible"/>
+        </FrameLayout>
+
+        <!-- Hole 2 -->
+        <FrameLayout
+            android:id="@+id/hole2"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:padding="4dp">
+
+            <ImageView
+                android:id="@+id/ivHole2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_mole_hole"/>
+
+            <ImageView
+                android:id="@+id/ivMole2"
+                android:layout_width="68dp"
+                android:layout_height="68dp"
+                android:layout_gravity="center|top"
+                android:layout_marginTop="4dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_mole_normal"
+                android:visibility="invisible"/>
+        </FrameLayout>
+
+        <!-- Hole 3 -->
+        <FrameLayout
+            android:id="@+id/hole3"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:padding="4dp">
+
+            <ImageView
+                android:id="@+id/ivHole3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_mole_hole"/>
+
+            <ImageView
+                android:id="@+id/ivMole3"
+                android:layout_width="68dp"
+                android:layout_height="68dp"
+                android:layout_gravity="center|top"
+                android:layout_marginTop="4dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_mole_normal"
+                android:visibility="invisible"/>
+        </FrameLayout>
+
+        <!-- Hole 4 -->
+        <FrameLayout
+            android:id="@+id/hole4"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:padding="4dp">
+
+            <ImageView
+                android:id="@+id/ivHole4"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_mole_hole"/>
+
+            <ImageView
+                android:id="@+id/ivMole4"
+                android:layout_width="68dp"
+                android:layout_height="68dp"
+                android:layout_gravity="center|top"
+                android:layout_marginTop="4dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_mole_normal"
+                android:visibility="invisible"/>
+        </FrameLayout>
+
+        <!-- Hole 5 -->
+        <FrameLayout
+            android:id="@+id/hole5"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:padding="4dp">
+
+            <ImageView
+                android:id="@+id/ivHole5"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_mole_hole"/>
+
+            <ImageView
+                android:id="@+id/ivMole5"
+                android:layout_width="68dp"
+                android:layout_height="68dp"
+                android:layout_gravity="center|top"
+                android:layout_marginTop="4dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_mole_normal"
+                android:visibility="invisible"/>
+        </FrameLayout>
+
+        <!-- Hole 6 -->
+        <FrameLayout
+            android:id="@+id/hole6"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:padding="4dp">
+
+            <ImageView
+                android:id="@+id/ivHole6"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_mole_hole"/>
+
+            <ImageView
+                android:id="@+id/ivMole6"
+                android:layout_width="68dp"
+                android:layout_height="68dp"
+                android:layout_gravity="center|top"
+                android:layout_marginTop="4dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_mole_normal"
+                android:visibility="invisible"/>
+        </FrameLayout>
+
+        <!-- Hole 7 -->
+        <FrameLayout
+            android:id="@+id/hole7"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:padding="4dp">
+
+            <ImageView
+                android:id="@+id/ivHole7"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_mole_hole"/>
+
+            <ImageView
+                android:id="@+id/ivMole7"
+                android:layout_width="68dp"
+                android:layout_height="68dp"
+                android:layout_gravity="center|top"
+                android:layout_marginTop="4dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_mole_normal"
+                android:visibility="invisible"/>
+        </FrameLayout>
+
+        <!-- Hole 8 -->
+        <FrameLayout
+            android:id="@+id/hole8"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_columnWeight="1"
+            android:layout_rowWeight="1"
+            android:padding="4dp">
+
+            <ImageView
+                android:id="@+id/ivHole8"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_mole_hole"/>
+
+            <ImageView
+                android:id="@+id/ivMole8"
+                android:layout_width="68dp"
+                android:layout_height="68dp"
+                android:layout_gravity="center|top"
+                android:layout_marginTop="4dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_mole_normal"
+                android:visibility="invisible"/>
+        </FrameLayout>
+    </GridLayout>
+
+    <!-- Start & Ready Overlay -->
+    <FrameLayout
+        android:id="@+id/startOverlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#D0120101"
+        android:clickable="true"
+        android:focusable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="24dp">
+
+            <ImageView
+                android:layout_width="96dp"
+                android:layout_height="96dp"
+                android:src="@drawable/ic_mole_normal"/>
+
+            <TextView
+                android:id="@+id/tvCountdownOverlay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/arimo_bold"
+                android:text="@string/dap_chuot_ready"
+                android:textColor="#FFE8A3"
+                android:textSize="32sp"
+                android:textStyle="bold"
+                android:shadowColor="#000000"
+                android:shadowRadius="8"
+                android:gravity="center"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:fontFamily="@font/arimo_bold"
+                android:text="@string/feature_dap_chuot_desc"
+                android:textColor="#FFCA28"
+                android:textSize="14sp"/>
+
+            <Button
+                android:id="@+id/btnStart"
+                android:layout_width="220dp"
+                android:layout_height="54dp"
+                android:layout_marginTop="28dp"
+                android:background="@drawable/bg_dap_chuot_start_btn"
+                android:fontFamily="@font/arimo_bold"
+                android:text="@string/dap_chuot_start"
+                android:textColor="#7A090D"
+                android:textSize="18sp"
+                android:textStyle="bold"/>
+        </LinearLayout>
+    </FrameLayout>
+
+    <!-- Floating Score Popup -->
+    <TextView
+        android:id="@+id/tvScorePopup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/arimo_bold"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        android:textColor="#FFD700"
+        android:shadowColor="#80000000"
+        android:shadowDx="1"
+        android:shadowDy="2"
+        android:shadowRadius="4"
+        android:visibility="gone"
+        android:text="+10"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

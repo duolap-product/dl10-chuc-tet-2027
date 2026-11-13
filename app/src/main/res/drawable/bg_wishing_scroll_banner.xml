@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Outer Border / Shadow -->
+    <item>
+        <shape android:shape="rectangle">
+            <corners android:radius="20dp" />
+            <solid android:color="#ECCB8F" />
+        </shape>
+    </item>
+    <!-- Inner Parchment Surface -->
+    <item
+        android:left="2dp"
+        android:top="2dp"
+        android:right="2dp"
+        android:bottom="2dp">
+        <shape android:shape="rectangle">
+            <corners android:radius="18dp" />
+            <gradient
+                android:angle="270"
+                android:startColor="#FFF9EE"
+                android:endColor="#FDF1DC" />
+            <stroke
+                android:width="1.2dp"
+                android:color="#DFC17E" />
+        </shape>
+    </item>
+    <!-- Fine Inner Line -->
+    <item
+        android:left="5dp"
+        android:top="5dp"
+        android:right="5dp"
+        android:bottom="5dp">
+        <shape android:shape="rectangle">
+            <corners android:radius="15dp" />
+            <stroke
+                android:width="0.8dp"
+                android:color="#EEDBB0" />
+        </shape>
+    </item>
+</layer-list>
+

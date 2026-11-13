@@ -5,11 +5,12 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-@Database(entities = [CardMakerEntity::class, CardColorEntity::class], version = 4, exportSchema = false)
+@Database(entities = [CardMakerEntity::class, CardColorEntity::class, WishEntity::class], version = 5, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun cardMakerDao(): CardMakerDao
     abstract fun cardColorDao(): CardColorDao
+    abstract fun wishDao(): WishDao
 
     companion object {
         private const val DATABASE_NAME = "tet_viet_local.db"

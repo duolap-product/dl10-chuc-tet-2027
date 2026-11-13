@@ -57,7 +57,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/liberationsans_regular"
+                android:fontFamily="@font/arimo_regular"
                 android:includeFontPadding="false"
                 android:letterSpacing="0.02"
                 android:shadowColor="#B3000000"
@@ -73,7 +73,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="1dp"
-                android:fontFamily="@font/liberationsans_regular"
+                android:fontFamily="@font/arimo_regular"
                 android:includeFontPadding="false"
                 android:shadowColor="#B3000000"
                 android:shadowDx="0"
@@ -147,7 +147,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
-                android:fontFamily="@font/liberationsans_bold"
+                android:fontFamily="@font/arimo_bold"
                 android:letterSpacing="0.04"
                 android:padding="10dp"
                 android:text="@string/wheel_banner_title"
@@ -165,7 +165,7 @@
                     android:id="@+id/luckyWheelView"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:fontFamily="@font/liberationsans_bold" />
+                    android:fontFamily="@font/arimo_bold" />
 
             </FrameLayout>
 
@@ -174,7 +174,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:layout_marginTop="14dp"
-                android:fontFamily="@font/liberationsans_regular"
+                android:fontFamily="@font/arimo_regular"
                 android:includeFontPadding="false"
                 android:text="@string/wheel_instruction_default"
                 android:textColor="#FEE5A2"
@@ -189,7 +189,7 @@
                 android:layout_marginEnd="32dp"
                 android:backgroundTint="#FFB300"
                 android:elevation="8dp"
-                android:fontFamily="@font/liberationsans_bold"
+                android:fontFamily="@font/arimo_bold"
                 android:includeFontPadding="false"
                 android:letterSpacing="0.02"
                 android:text="@string/wheel_btn_spin"
@@ -216,7 +216,7 @@
                     android:layout_height="44dp"
                     android:layout_marginEnd="6dp"
                     android:layout_weight="1"
-                    android:fontFamily="@font/liberationsans_bold"
+                    android:fontFamily="@font/arimo_bold"
                     android:includeFontPadding="false"
                     android:text="@string/wheel_btn_customize"
                     android:textColor="#FEE5AA"
@@ -231,7 +231,7 @@
                     android:layout_height="44dp"
                     android:layout_marginStart="6dp"
                     android:layout_weight="1"
-                    android:fontFamily="@font/liberationsans_bold"
+                    android:fontFamily="@font/arimo_bold"
                     android:includeFontPadding="false"
                     android:text="@string/wheel_btn_history"
                     android:textColor="#FEE5AA"

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Nền widget phong bao lì xì: đỏ trơn đậm dần xuống dưới, không viền -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+    <gradient
+        android:angle="270"
+        android:endColor="#9A0F16"
+        android:startColor="#D42A2A" />
+    <corners android:radius="20dp" />
+</shape>

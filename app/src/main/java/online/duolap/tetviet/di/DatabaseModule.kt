@@ -9,6 +9,7 @@ import dagger.hilt.components.SingletonComponent
 import online.duolap.tetviet.data.local.AppDatabase
 import online.duolap.tetviet.data.local.CardColorDao
 import online.duolap.tetviet.data.local.CardMakerDao
+import online.duolap.tetviet.data.local.WishDao
 import online.duolap.tetviet.data.sync.FirestoreSyncManager
 import javax.inject.Singleton
 
@@ -32,6 +33,12 @@ object DatabaseModule {
     @Singleton
     fun provideCardColorDao(database: AppDatabase): CardColorDao {
         return database.cardColorDao()
+    }
+
+    @Provides
+    @Singleton
+    fun provideWishDao(database: AppDatabase): WishDao {
+        return database.wishDao()
     }
 
     @Provides

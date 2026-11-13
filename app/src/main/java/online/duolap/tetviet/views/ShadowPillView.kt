@@ -64,7 +64,7 @@ class ShadowPillView @JvmOverloads constructor(
     @ColorInt
     private var pillTextColor: Int = Color.parseColor("#7A090D")
     private var pillTextSizePx: Float = spToPx(12.5f)
-    private var pillFontResId: Int = R.font.liberationsans_bold
+    private var pillFontResId: Int = R.font.arimo_bold
     @DrawableRes
     private var pillIconResId: Int = 0
     @ColorInt

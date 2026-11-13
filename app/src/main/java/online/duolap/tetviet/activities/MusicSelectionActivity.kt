@@ -16,6 +16,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
+import online.duolap.tetviet.ads.AdManager
+import online.duolap.tetviet.ads.AdPlacement
 import kotlinx.coroutines.launch
 import online.duolap.tetviet.R
 import online.duolap.tetviet.adapter.TetSongAdapter
@@ -25,9 +27,13 @@ import online.duolap.tetviet.audio.TetSongRepository
 import online.duolap.tetviet.data.model.TetSong
 import online.duolap.tetviet.databinding.ActivityMusicSelectionBinding
 import online.duolap.tetviet.views.setSafeOnClickListener
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MusicSelectionActivity : AppCompatActivity() {
+
+    @Inject
+    lateinit var adManager: AdManager
 
     private lateinit var binding: ActivityMusicSelectionBinding
     private lateinit var songAdapter: TetSongAdapter
@@ -46,6 +52,7 @@ class MusicSelectionActivity : AppCompatActivity() {
         }
 
         AppAnalytics.logScreenView("MusicSelectionActivity")
+        adManager.attachBanner(this, binding.bannerAdContainer, AdPlacement.BANNER_MUSIC_SELECTION)
 
         setupListeners()
         setupDiscAnimation()

@@ -34,6 +34,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import online.duolap.tetviet.adapter.FullscreenImageAdapter
+import online.duolap.tetviet.ads.AppOpenGate
 import online.duolap.tetviet.analytics.AppAnalytics
 import online.duolap.tetviet.data.model.TetPhoto
 import online.duolap.tetviet.data.model.TetPhotoRepository
@@ -372,6 +373,8 @@ class PhotoViewerActivity : AppCompatActivity() {
                                 )
                                 addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
                             }
+                            // Người dùng rời app có chủ đích (chia sẻ): không hiện App Open khi quay lại
+                            AppOpenGate.skipNextForeground()
                             startActivity(Intent.createChooser(shareIntent, getString(online.duolap.tetviet.R.string.action_share)))
                         } else {
                             Toast.makeText(this@PhotoViewerActivity, getString(online.duolap.tetviet.R.string.photos_msg_share_failed), Toast.LENGTH_SHORT).show()

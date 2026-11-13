@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/tagRoot"
+    android:layout_width="68dp"
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    android:focusable="true"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <!-- Hanging Thread String -->
+    <ImageView
+        android:id="@+id/ivThread"
+        android:layout_width="16dp"
+        android:layout_height="14dp"
+        android:layout_marginBottom="-2dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/bg_wishing_tag_thread" />
+
+    <!-- Tag Body Card -->
+    <FrameLayout
+        android:id="@+id/tagCard"
+        android:layout_width="66dp"
+        android:layout_height="90dp"
+        android:background="@drawable/bg_wishing_tag_cream"
+        android:elevation="4dp"
+        android:paddingHorizontal="6dp"
+        android:paddingVertical="8dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvTagContent"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:fontFamily="@font/arimo_bold"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:lineSpacingExtra="1dp"
+                android:maxLines="3"
+                android:textColor="#7A090D"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                tools:text="Sức khỏe\nbình an" />
+
+            <ImageView
+                android:id="@+id/ivTagCategoryIcon"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_marginTop="3dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_wish_health" />
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+</LinearLayout>
+

@@ -1,0 +1,510 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/transparent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/dialogContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="24dp"
+        android:background="@drawable/bg_dialog_wishing_modal"
+        android:elevation="12dp"
+        android:paddingHorizontal="20dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="24dp">
+
+        <!-- Top-Left Blossom Decoration -->
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginStart="-12dp"
+            android:layout_marginTop="-12dp"
+            android:alpha="0.85"
+            android:src="@drawable/ic_bg_blossom_branch_left"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- Top-Right Blossom Decoration -->
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="-12dp"
+            android:layout_marginEnd="-12dp"
+            android:alpha="0.85"
+            android:src="@drawable/ic_bg_blossom_branch_right"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- Close Button (X) -->
+        <FrameLayout
+            android:id="@+id/btnClose"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:background="@drawable/bg_circle_close_btn"
+            android:clickable="true"
+            android:elevation="4dp"
+            android:focusable="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_clear"
+                app:tint="#7A090D" />
+        </FrameLayout>
+
+        <!-- Live Preview Glowing Sunburst / Halo -->
+        <View
+            android:id="@+id/viewHalo"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            android:background="@drawable/bg_wishing_halo"
+            app:layout_constraintBottom_toBottomOf="@+id/layoutPreviewTag"
+            app:layout_constraintEnd_toEndOf="@+id/layoutPreviewTag"
+            app:layout_constraintStart_toStartOf="@+id/layoutPreviewTag"
+            app:layout_constraintTop_toTopOf="@+id/layoutPreviewTag" />
+
+        <!-- Live Preview Tag -->
+        <LinearLayout
+            android:id="@+id/layoutPreviewTag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:layout_width="16dp"
+                android:layout_height="14dp"
+                android:layout_marginBottom="-2dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/bg_wishing_tag_thread" />
+
+            <FrameLayout
+                android:id="@+id/cardPreviewTagBody"
+                android:layout_width="82dp"
+                android:layout_height="112dp"
+                android:background="@drawable/bg_wishing_tag_cream"
+                android:elevation="6dp"
+                android:paddingHorizontal="8dp"
+                android:paddingVertical="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvPreviewTagContent"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:ellipsize="end"
+                        android:fontFamily="@font/arimo_bold"
+                        android:gravity="center"
+                        android:includeFontPadding="false"
+                        android:lineSpacingExtra="2dp"
+                        android:maxLines="3"
+                        android:text="Điều ước\ncủa bạn"
+                        android:textColor="#7A090D"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                    <ImageView
+                        android:id="@+id/ivPreviewCategoryIcon"
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:layout_marginTop="4dp"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/ic_wish_health" />
+                </LinearLayout>
+            </FrameLayout>
+        </LinearLayout>
+
+        <!-- Dialog Title -->
+        <TextView
+            android:id="@+id/tvDialogTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:fontFamily="@font/arimo_bold"
+            android:includeFontPadding="false"
+            android:text="@string/wishing_tree_dialog_create_title"
+            android:textColor="#8C1D24"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/layoutPreviewTag" />
+
+        <!-- Input Box -->
+        <FrameLayout
+            android:id="@+id/layoutInputBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/bg_wishing_input_box"
+            android:paddingHorizontal="14dp"
+            android:paddingTop="12dp"
+            android:paddingBottom="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvDialogTitle">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/etWishContent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:fontFamily="@font/arimo_regular"
+                    android:gravity="top|start"
+                    android:hint="@string/wishing_tree_input_hint"
+                    android:importantForAutofill="no"
+                    android:inputType="textMultiLine|textCapSentences"
+                    android:maxLength="100"
+                    android:minLines="3"
+                    android:textColor="#502016"
+                    android:textColorHint="#997C69"
+                    android:textSize="13.5sp" />
+
+                <TextView
+                    android:id="@+id/tvCharCounter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginTop="4dp"
+                    android:fontFamily="@font/arimo_regular"
+                    android:text="0/100"
+                    android:textColor="#9E8270"
+                    android:textSize="11sp" />
+            </LinearLayout>
+
+        </FrameLayout>
+
+        <!-- Category Selector Header -->
+        <LinearLayout
+            android:id="@+id/layoutCategoryHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/layoutInputBox">
+
+            <ImageView
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_marginEnd="6dp"
+                android:src="@drawable/sticker_apricot_flower" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/arimo_bold"
+                android:includeFontPadding="false"
+                android:text="@string/wishing_tree_select_category"
+                android:textColor="#7A090D"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <!-- Categories Row 1 (4 items: Sức khỏe, Công việc, Tình yêu, Học tập) -->
+        <LinearLayout
+            android:id="@+id/layoutCategoryRow1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/layoutCategoryHeader">
+
+            <!-- Sức khỏe -->
+            <LinearLayout
+                android:id="@+id/chipHealth"
+                android:layout_width="0dp"
+                android:layout_height="52dp"
+                android:layout_marginEnd="6dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_wishing_chip_selected"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/ivIconHealth"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:src="@drawable/ic_wish_health" />
+
+                <TextView
+                    android:id="@+id/tvLabelHealth"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:fontFamily="@font/arimo_bold"
+                    android:includeFontPadding="false"
+                    android:text="@string/wish_cat_health"
+                    android:textColor="#C62828"
+                    android:textSize="10.5sp" />
+            </LinearLayout>
+
+            <!-- Công việc -->
+            <LinearLayout
+                android:id="@+id/chipCareer"
+                android:layout_width="0dp"
+                android:layout_height="52dp"
+                android:layout_marginEnd="6dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_wishing_chip_normal"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/ivIconCareer"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:src="@drawable/ic_wish_career" />
+
+                <TextView
+                    android:id="@+id/tvLabelCareer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:fontFamily="@font/arimo_regular"
+                    android:includeFontPadding="false"
+                    android:text="@string/wish_cat_career"
+                    android:textColor="#6B3F21"
+                    android:textSize="10.5sp" />
+            </LinearLayout>
+
+            <!-- Tình yêu -->
+            <LinearLayout
+                android:id="@+id/chipLove"
+                android:layout_width="0dp"
+                android:layout_height="52dp"
+                android:layout_marginEnd="6dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_wishing_chip_normal"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/ivIconLove"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:src="@drawable/ic_wish_love" />
+
+                <TextView
+                    android:id="@+id/tvLabelLove"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:fontFamily="@font/arimo_regular"
+                    android:includeFontPadding="false"
+                    android:text="@string/wish_cat_love"
+                    android:textColor="#6B3F21"
+                    android:textSize="10.5sp" />
+            </LinearLayout>
+
+            <!-- Học tập -->
+            <LinearLayout
+                android:id="@+id/chipStudy"
+                android:layout_width="0dp"
+                android:layout_height="52dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_wishing_chip_normal"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/ivIconStudy"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:src="@drawable/ic_wish_study" />
+
+                <TextView
+                    android:id="@+id/tvLabelStudy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:fontFamily="@font/arimo_regular"
+                    android:includeFontPadding="false"
+                    android:text="@string/wish_cat_study"
+                    android:textColor="#6B3F21"
+                    android:textSize="10.5sp" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- Categories Row 2 (3 items: Tài chính, Gia đình, Khác) -->
+        <LinearLayout
+            android:id="@+id/layoutCategoryRow2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/layoutCategoryRow1">
+
+            <!-- Tài chính -->
+            <LinearLayout
+                android:id="@+id/chipFinance"
+                android:layout_width="0dp"
+                android:layout_height="52dp"
+                android:layout_marginEnd="6dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_wishing_chip_normal"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/ivIconFinance"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:src="@drawable/ic_wish_finance" />
+
+                <TextView
+                    android:id="@+id/tvLabelFinance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:fontFamily="@font/arimo_regular"
+                    android:includeFontPadding="false"
+                    android:text="@string/wish_cat_finance"
+                    android:textColor="#6B3F21"
+                    android:textSize="10.5sp" />
+            </LinearLayout>
+
+            <!-- Gia đình -->
+            <LinearLayout
+                android:id="@+id/chipFamily"
+                android:layout_width="0dp"
+                android:layout_height="52dp"
+                android:layout_marginEnd="6dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_wishing_chip_normal"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/ivIconFamily"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:src="@drawable/ic_wish_family" />
+
+                <TextView
+                    android:id="@+id/tvLabelFamily"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:fontFamily="@font/arimo_regular"
+                    android:includeFontPadding="false"
+                    android:text="@string/wish_cat_family"
+                    android:textColor="#6B3F21"
+                    android:textSize="10.5sp" />
+            </LinearLayout>
+
+            <!-- Khác -->
+            <LinearLayout
+                android:id="@+id/chipOther"
+                android:layout_width="0dp"
+                android:layout_height="52dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_wishing_chip_normal"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/ivIconOther"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:src="@drawable/ic_wish_other" />
+
+                <TextView
+                    android:id="@+id/tvLabelOther"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:fontFamily="@font/arimo_regular"
+                    android:includeFontPadding="false"
+                    android:text="@string/wish_cat_other"
+                    android:textColor="#6B3F21"
+                    android:textSize="10.5sp" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- CTA Button: Treo điều ước -->
+        <LinearLayout
+            android:id="@+id/btnHangWish"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="18dp"
+            android:background="@drawable/bg_wishing_cta_button"
+            android:clickable="true"
+            android:elevation="6dp"
+            android:focusable="true"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/layoutCategoryRow2">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginEnd="8dp"
+                android:src="@drawable/ic_wishing_tag"
+                app:tint="#FFFDF7" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/arimo_bold"
+                android:includeFontPadding="false"
+                android:shadowColor="#80000000"
+                android:shadowDx="0"
+                android:shadowDy="2"
+                android:shadowRadius="3"
+                android:text="@string/wishing_tree_btn_hang_wish"
+                android:textColor="#FFFDF7"
+                android:textSize="15.5sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>
+

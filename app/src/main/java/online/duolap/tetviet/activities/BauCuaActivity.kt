@@ -32,6 +32,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import online.duolap.tetviet.R
 import online.duolap.tetviet.ads.AdManager
+import online.duolap.tetviet.ads.AdPlacement
 import online.duolap.tetviet.analytics.AppAnalytics
 import online.duolap.tetviet.data.local.BauCuaPreferences
 import online.duolap.tetviet.data.model.BauCuaItem
@@ -691,6 +692,7 @@ class BauCuaActivity : AppCompatActivity() {
                 dialog.dismiss()
                 adManager.showRewardedAd(
                     activity = this,
+                    placement = AdPlacement.BAUCUA_DOUBLE_GIFT,
                     onUserEarnedReward = {
                         bauCuaPreferences.claimDailyGift(200)
                         playCoinRewardAnimation(200, "Nhân Đôi Lì Xì (x2) May Mắn")
@@ -712,6 +714,7 @@ class BauCuaActivity : AppCompatActivity() {
                 dialog.dismiss()
                 adManager.showRewardedAd(
                     activity = this,
+                    placement = AdPlacement.BAUCUA_EXTRA_COINS,
                     onUserEarnedReward = {
                         bauCuaPreferences.addCoins(150)
                         playCoinRewardAnimation(150, "Thưởng Video May Mắn")

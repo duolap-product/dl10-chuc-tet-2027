@@ -9,7 +9,7 @@
         android:id="@+id/tvCountdownTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/liberationsans_bold"
+        android:fontFamily="@font/arimo_bold"
         android:includeFontPadding="false"
         android:letterSpacing="0.02"
         android:text="@string/countdown_title"
@@ -39,7 +39,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/liberationsans_regular"
+                android:fontFamily="@font/arimo_regular"
                 android:includeFontPadding="false"
                 android:text="@string/countdown_con"
                 android:textColor="#8D5524"
@@ -55,7 +55,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/liberationsans_bold"
+                android:fontFamily="@font/arimo_bold"
                 android:includeFontPadding="false"
                 android:text="@string/countdown_ngay"
                 android:textColor="#8D5524"
@@ -92,7 +92,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/liberationsans_bold"
+                android:fontFamily="@font/arimo_bold"
                 android:includeFontPadding="false"
                 android:text="@string/countdown_gio"
                 android:textColor="#8D5524"
@@ -130,7 +130,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/liberationsans_bold"
+                android:fontFamily="@font/arimo_bold"
                 android:includeFontPadding="false"
                 android:text="@string/countdown_phut"
                 android:textColor="#8D5524"
@@ -168,7 +168,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/liberationsans_bold"
+                android:fontFamily="@font/arimo_bold"
                 android:includeFontPadding="false"
                 android:text="@string/countdown_giay"
                 android:textColor="#8D5524"
@@ -184,7 +184,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        android:fontFamily="@font/liberationsans_regular"
+        android:fontFamily="@font/arimo_regular"
         android:includeFontPadding="false"
         android:text="@string/countdown_welcome"
         android:textColor="#FEE5A2"

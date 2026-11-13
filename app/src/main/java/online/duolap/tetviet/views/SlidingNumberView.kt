@@ -42,9 +42,9 @@ class SlidingNumberView @JvmOverloads constructor(
         }
 
     init {
-        // Load custom font liberationsans_bold
+        // Load custom font arimo_bold
         try {
-            val tf = ResourcesCompat.getFont(context, R.font.liberationsans_bold)
+            val tf = ResourcesCompat.getFont(context, R.font.arimo_bold)
             tf?.let { textPaint.typeface = it }
         } catch (_: Exception) {
         }

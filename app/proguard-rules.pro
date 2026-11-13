@@ -17,6 +17,8 @@
 -keep class online.duolap.tetviet.data.local.** { *; }
 -keep class online.duolap.tetviet.data.sync.** { *; }
 -keep class online.duolap.tetviet.audio.TetSongRepository { *; }
+-keep class online.duolap.tetviet.game.oanquan.** { *; }
+-keep class online.duolap.tetviet.game.dapchuot.** { *; }
 
 # Room Database
 -keep class * extends androidx.room.RoomDatabase

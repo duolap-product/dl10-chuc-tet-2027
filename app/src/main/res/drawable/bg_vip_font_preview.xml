@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Khung xem trước phông chữ VIP: nền nâu trầm, viền vàng để chữ thư pháp vàng nổi rõ -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+    <gradient
+        android:angle="0"
+        android:endColor="#4A2208"
+        android:startColor="#2B1506" />
+    <corners android:radius="16dp" />
+    <stroke
+        android:width="1.5dp"
+        android:color="#E5B867" />
+</shape>

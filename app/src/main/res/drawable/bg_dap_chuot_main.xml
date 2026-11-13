@@ -1,0 +1,155 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="240dp"
+    android:height="308dp"
+    android:viewportWidth="240"
+    android:viewportHeight="308">
+
+    <!-- Gradient Background (warm festive red/crimson) -->
+    <path
+        android:fillColor="#8C141E"
+        android:pathData="M0,0 L240,0 L240,308 L0,308 Z"/>
+
+    <!-- Bottom gradient shadow -->
+    <path
+        android:fillColor="#5A0A10"
+        android:pathData="M0,180 L240,180 L240,308 L0,308 Z"/>
+
+    <!-- Decorative festive rays/sunburst -->
+    <path
+        android:fillColor="#15FFEAA7"
+        android:pathData="M120,130 L90,0 L150,0 Z"/>
+    <path
+        android:fillColor="#15FFEAA7"
+        android:pathData="M120,130 L200,20 L240,60 Z"/>
+    <path
+        android:fillColor="#15FFEAA7"
+        android:pathData="M120,130 L40,20 L0,60 Z"/>
+
+    <!-- Hole ellipse shadow -->
+    <path
+        android:fillColor="#350000"
+        android:pathData="M120,200m-65,0a65,22 0,1 1,130 0a65,22 0,1 1,-130 0"/>
+
+    <!-- Bamboo/Gold basket rim -->
+    <path
+        android:fillColor="#9C6B1F"
+        android:pathData="M55,195 Q120,180 185,195 L180,240 Q120,255 60,240 Z"/>
+    <path
+        android:strokeColor="#FFD700"
+        android:strokeWidth="2.5"
+        android:pathData="M55,195 Q120,180 185,195"/>
+
+    <!-- Cute cartoon rat body emerging from hole -->
+    <!-- Head / body -->
+    <path
+        android:fillColor="#E65A28"
+        android:pathData="M120,175 C90,175 75,150 75,120 C75,90 95,70 120,70 C145,70 165,90 165,120 C165,150 150,175 120,175 Z"/>
+    <!-- Cute belly -->
+    <path
+        android:fillColor="#FFB380"
+        android:pathData="M120,170 C102,170 90,154 90,136 C90,118 102,108 120,108 C138,108 150,118 150,136 C150,154 138,170 120,170 Z"/>
+
+    <!-- Ears -->
+    <path
+        android:fillColor="#E65A28"
+        android:pathData="M88,85 C80,68 68,66 72,80 C76,92 88,96 92,88 Z"/>
+    <path
+        android:fillColor="#FFB380"
+        android:pathData="M86,83 C82,72 74,72 76,80 C78,86 86,88 88,84 Z"/>
+    <path
+        android:fillColor="#E65A28"
+        android:pathData="M152,85 C160,68 172,66 168,80 C164,92 152,96 148,88 Z"/>
+    <path
+        android:fillColor="#FFB380"
+        android:pathData="M154,83 C158,72 166,72 164,80 C162,86 154,88 152,84 Z"/>
+
+    <!-- Cute eyes -->
+    <path
+        android:fillColor="#221100"
+        android:pathData="M106,110m-6,0a6,6 0,1 1,12 0a6,6 0,1 1,-12 0"/>
+    <path
+        android:fillColor="#221100"
+        android:pathData="M134,110m-6,0a6,6 0,1 1,12 0a6,6 0,1 1,-12 0"/>
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M108,107m-2.5,0a2.5,2.5 0,1 1,5 0a2.5,2.5 0,1 1,-5 0"/>
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M136,107m-2.5,0a2.5,2.5 0,1 1,5 0a2.5,2.5 0,1 1,-5 0"/>
+
+    <!-- Nose & Mouth -->
+    <path
+        android:fillColor="#D81B60"
+        android:pathData="M115,124 L120,119 L125,124 Q120,127 115,124 Z"/>
+    <path
+        android:strokeColor="#C2185B"
+        android:strokeWidth="2.5"
+        android:strokeLineCap="round"
+        android:pathData="M113,126 Q120,133 127,126"/>
+
+    <!-- Whiskers -->
+    <path
+        android:strokeColor="#9E5D2A"
+        android:strokeWidth="1.5"
+        android:pathData="M98,122 L82,120"/>
+    <path
+        android:strokeColor="#9E5D2A"
+        android:strokeWidth="1.5"
+        android:pathData="M97,127 L80,129"/>
+    <path
+        android:strokeColor="#9E5D2A"
+        android:strokeWidth="1.5"
+        android:pathData="M142,122 L158,120"/>
+    <path
+        android:strokeColor="#9E5D2A"
+        android:strokeWidth="1.5"
+        android:pathData="M143,127 L160,129"/>
+
+    <!-- Red envelope in hands -->
+    <path
+        android:fillColor="#D32F2F"
+        android:pathData="M105,145 L135,145 L135,170 L105,170 Z"/>
+    <path
+        android:fillColor="#FFD700"
+        android:pathData="M105,145 Q120,158 135,145 Z"/>
+    <path
+        android:fillColor="#FFD700"
+        android:pathData="M120,158m-5,0a5,5 0,1 1,10 0a5,5 0,1 1,-10 0"/>
+
+    <!-- Cute little paws holding envelope -->
+    <path
+        android:fillColor="#FFB380"
+        android:pathData="M100,152m-5,0a5,5 0,1 1,10 0a5,5 0,1 1,-10 0"/>
+    <path
+        android:fillColor="#FFB380"
+        android:pathData="M140,152m-5,0a5,5 0,1 1,10 0a5,5 0,1 1,-10 0"/>
+
+    <!-- Mallet / Hammer ready to whack (at top right angle) -->
+    <!-- Handle -->
+    <path
+        android:strokeColor="#C4883A"
+        android:strokeWidth="8"
+        android:strokeLineCap="round"
+        android:pathData="M175,55 L220,20"/>
+    <!-- Hammer head (wooden mallet with gold rings) -->
+    <path
+        android:fillColor="#8D5524"
+        android:pathData="M155,40 L195,75 L180,90 L140,55 Z"/>
+    <path
+        android:strokeColor="#FFD700"
+        android:strokeWidth="3"
+        android:pathData="M152,43 L167,58"/>
+    <path
+        android:strokeColor="#FFD700"
+        android:strokeWidth="3"
+        android:pathData="M183,72 L198,87"/>
+
+    <!-- Sparkles / Stars -->
+    <path
+        android:fillColor="#FFD700"
+        android:pathData="M50,45 L52,51 L58,51 L53,55 L55,61 L50,57 L45,61 L47,55 L42,51 L48,51 Z"/>
+    <path
+        android:fillColor="#FFD700"
+        android:pathData="M195,120 L196.5,125 L202,125 L197.5,128.5 L199,134 L195,130.5 L191,134 L192.5,128.5 L188,125 L193.5,125 Z"/>
+</vector>
+

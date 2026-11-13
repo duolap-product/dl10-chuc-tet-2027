@@ -54,8 +54,8 @@
     <string name="settings_title">Cài Đặt Ứng Dụng</string>
     <string name="settings_sound_title">Âm thanh Tết rộn ràng</string>
     <string name="settings_sound_desc">Hiệu ứng tiếng pháo &amp; giai điệu xuân</string>
-    <string name="settings_notification_title">Thông báo đếm ngược mỗi ngày</string>
-    <string name="settings_notification_desc">Nhắc nhở số ngày còn lại đến Tết Đinh Mùi</string>
+    <string name="settings_notification_title">Nhắc nhở sáng Thứ Hai</string>
+    <string name="settings_notification_desc">8h30 mỗi Thứ Hai: số tuần còn lại đến Tết</string>
     <string name="msg_music_on">Đã bật nhạc Tết rộn ràng 🌸</string>
     <string name="msg_music_off">Đã tắt nhạc nền 🔕</string>
     <string name="content_desc_music_turn_off">Tắt nhạc nền Tết</string>
@@ -101,6 +101,7 @@
     <string name="card_maker_font_italic">Nghiêng Lãng Mạn</string>
     <string name="card_maker_font_regular">Chuẩn Thẳng</string>
     <string name="card_maker_font_serif">Cổ Điển Serif</string>
+    <string name="card_maker_vip_font_label">👑 Phông thư pháp VIP</string>
     <string name="card_bg_free">FREE</string>
     <string name="card_bg_unlock_ad">Xem 0/3 quảng cáo để mở khoá</string>
     <string name="msg_storage_permission_needed">Cần cấp quyền bộ nhớ để lưu thiệp công khai vào thiết bị</string>
@@ -339,4 +340,174 @@
     <string name="music_selected_badge">Đang phát</string>
     <string name="music_btn_select">Chọn</string>
     <string name="music_change_song_setting">Đổi bài hát nền</string>
+
+    <!-- Cây Điều Ước -->
+    <string name="feature_wishing_tree">Cây Điều Ước</string>
+    <string name="feature_wishing_tree_desc">Đầu xuân gửi gắm ước mơ</string>
+    <string name="wishing_tree_scroll_instruction">Viết điều ước của bạn và treo lên cây mai,\nđể những ước mơ đẹp đón chào năm mới!</string>
+    <string name="wishing_tree_stats_title">Điều ước của bạn</string>
+    <string name="wishing_tree_stats_count_format">%s đã được gửi lên cây mai</string>
+    <string name="wishing_tree_btn_write_wish">Viết điều ước ngay</string>
+    <string name="wishing_tree_dialog_create_title">Điều ước của bạn</string>
+    <string name="wishing_tree_input_hint">Ví dụ: Gia đình luôn khỏe mạnh,\ncon công việc thuận lợi...</string>
+    <string name="wishing_tree_select_category">Chọn danh mục</string>
+    <string name="wishing_tree_btn_hang_wish">Treo điều ước</string>
+    <string name="wishing_tree_hang_success">✨ Điều ước của bạn đã được treo lên cây mai! Chúc bạn năm mới vạn sự như ý!</string>
+    <string name="wishing_tree_input_empty_error">Vui lòng nhập nội dung điều ước của bạn</string>
+    <string name="wishing_tree_detail_title">Lời Ước Đầu Xuân</string>
+    <string name="wishing_tree_btn_bless">Cầu chúc 🙏</string>
+    <string name="wishing_tree_blessed_toast">Bạn đã gửi lời cầu chúc cho điều ước này! ✨</string>
+    <string name="wishing_tree_my_wishes_title">Điều Ước Của Tôi</string>
+    <string name="wishing_tree_my_wishes_empty">Bạn chưa treo điều ước nào. Hãy viết một điều ước thật đẹp gửi lên cây mai nhé!</string>
+    <string name="wishing_tree_category_all">Tất cả</string>
+    <string name="wishing_tree_blessings_count">%1$d lượt chúc</string>
+    <string name="wish_cat_health">Sức khỏe</string>
+    <string name="wish_cat_career">Công việc</string>
+    <string name="wish_cat_love">Tình yêu</string>
+    <string name="wish_cat_study">Học tập</string>
+    <string name="wish_cat_finance">Tài chính</string>
+    <string name="wish_cat_family">Gia đình</string>
+    <string name="wish_cat_other">Khác</string>
+
+    <!-- Ô Ăn Quan -->
+    <string name="oanquan_title">Ô Ăn Quan</string>
+    <string name="oanquan_subtitle_format">Chơi với %s</string>
+    <string name="oanquan_btn_hint">Gợi Ý</string>
+    <string name="oanquan_btn_mode">Đổi Chế Độ</string>
+    <string name="oanquan_btn_new_game">Ván Mới</string>
+    <string name="oanquan_mode_title">Chọn Chế Độ Chơi</string>
+    <string name="oanquan_mode_ai">Chơi Với Máy</string>
+    <string name="oanquan_mode_friends">Chơi Với Bạn</string>
+    <string name="oanquan_mode_online">Chơi Online</string>
+    <string name="oanquan_rules_title">Luật Chơi Ô Ăn Quan</string>
+    <string name="oanquan_hint_title">Gợi Ý Nước Đi</string>
+    <string name="oanquan_hint_desc">Nước đi tối ưu: Bốc ô %1$d đi theo hướng %2$s!</string>
+    <string name="oanquan_online_match_found">Đã tìm thấy đối thủ! Trận đấu bắt đầu!</string>
+    <string name="oanquan_online_waiting">Đang chờ đối thủ vào phòng...</string>
+    <string name="oanquan_turn_your">LƯỢT CỦA BẠN</string>
+    <string name="oanquan_turn_opp">LƯỢT ĐỐI THỦ</string>
+    <string name="oanquan_diff_easy">Tập sự</string>
+    <string name="oanquan_diff_medium">Vừa sức</string>
+    <string name="oanquan_diff_hard">Cao thủ</string>
+    <string name="oanquan_win_title">CHIẾN THẮNG! 🏆</string>
+    <string name="oanquan_lose_title">CHÚC MAY MẮN LẦN SAU! 🌸</string>
+    <string name="oanquan_draw_title">HÒA CỜ! 🤝</string>
+    <string name="oanquan_reward_coins_win">Thưởng chiến thắng: +100 Xu May Mắn</string>
+    <string name="feature_o_an_quan">Ô Ăn Quan</string>
+    <string name="feature_o_an_quan_desc">Trí tuệ dân gian</string>
+
+    <!-- Đập Chuột Game -->
+    <string name="feature_dap_chuot">Đập Chuột</string>
+    <string name="feature_dap_chuot_desc">Tay nhanh hơn mắt</string>
+    <string name="dap_chuot_score">Điểm</string>
+    <string name="dap_chuot_combo">Combo</string>
+    <string name="dap_chuot_best">Kỷ lục</string>
+    <string name="dap_chuot_ready">Sẵn sàng!</string>
+    <string name="dap_chuot_start">BẮT ĐẦU</string>
+    <string name="dap_chuot_result_title">Kết Quả</string>
+    <string name="dap_chuot_new_record">🏆 KỶ LỤC!</string>
+    <string name="dap_chuot_play_again">Chơi Lại</string>
+    <string name="dap_chuot_exit">Thoát</string>
+    <string name="dap_chuot_countdown_go">GO!</string>
+    <string name="dap_chuot_hit_normal">+10</string>
+    <string name="dap_chuot_hit_golden">+30 ⭐</string>
+    <string name="dap_chuot_hit_bomb">-15 💥</string>
+    <string name="dap_chuot_combo_prefix">x</string>
+    <string name="msg_ad_not_ready">Video quảng cáo chưa sẵn sàng, bạn thử lại sau ít phút nhé.</string>
+    <string name="settings_privacy_options_title">Tùy chọn quyền riêng tư</string>
+    <string name="settings_privacy_options_desc">Quản lý lựa chọn đồng ý quảng cáo</string>
+    <!-- Nội dung mẫu trong ảnh xem trước widget -->
+    <string name="widget_tet_arrived_title">Chúc Mừng Năm Mới!</string>
+    <string name="settings_add_widget_title">Thêm widget đếm ngược</string>
+    <string name="msg_widget_pin_unsupported">Nhấn giữ vào màn hình chính → Widget → tìm \"Chúc Tết 2027\" để thêm.</string>
+    <string name="settings_header_subtitle">Tết Việt 2027 • Vạn Sự Như Ý</string>
+    <string name="settings_section_sound">Âm thanh &amp; Nhạc nền</string>
+    <string name="settings_section_utilities">Thông báo &amp; Tiện ích</string>
+    <string name="settings_section_other">Khác</string>
+    <string name="settings_change_song_title">Đổi bài hát nền</string>
+    <string name="settings_change_song_desc">Chọn giai điệu xuân yêu thích</string>
+    <string name="settings_vip_cta">Nâng cấp</string>
+    <string name="settings_vip_active_cta">Đang bật</string>
+    <string name="settings_vip_active_desc">Cảm ơn bạn đã đồng hành cùng Tết Việt!</string>
+    <string name="settings_check_update_title">Kiểm tra cập nhật</string>
+    <string name="settings_version_placeholder">Phiên bản hiện tại</string>
+    <string name="settings_version_format">Phiên bản %1$s</string>
+    <string name="settings_footer_wish">Chúc Mừng Năm Mới Đinh Mùi 2027</string>
+    <string name="msg_monday_notification_disabled">Đã tắt thông báo đếm ngược Tết.</string>
+    <string name="msg_notification_permission_denied">Hãy bật quyền thông báo cho app trong Cài đặt của máy để nhận nhắc nhở.</string>
+    <!-- Widget đếm ngược Tết kiểu phong bao lì xì -->
+    <string name="widget_prefix">Còn\u0020</string>
+    <string name="widget_suffix"></string>
+    <string name="widget_preview_days_unit">\u0020ngày\u0020</string>
+    <string name="widget_preview_progress">75%</string>
+    <string name="widget_preview_info">Âm lịch 5/10 • Tết 06/02/2027</string>
+    <string name="widget_preview_wish">“An khang thịnh vượng”</string>
+    <string name="widget_progress_format">%1$d%%</string>
+    <string name="widget_lunar_format">Âm lịch %1$d/%2$d</string>
+    <string name="widget_lunar_leap_format">Âm lịch %1$d/%2$d nhuận</string>
+    <string name="widget_info_format">%1$s • Tết 06/02/2027</string>
+    <string name="widget_wish_format">“%1$s”</string>
+    <plurals name="widget_days_unit">
+        <item quantity="other">\u0020ngày\u0020</item>
+    </plurals>
+    <string-array name="widget_daily_wishes">
+        <item>An khang thịnh vượng</item>
+        <item>Vạn sự như ý</item>
+        <item>Tấn tài tấn lộc</item>
+        <item>Sức khỏe dồi dào</item>
+        <item>Phát tài phát lộc</item>
+        <item>Tiền vô như nước</item>
+        <item>Gia đình hạnh phúc</item>
+        <item>Tài lộc đầy nhà</item>
+        <item>Mã đáo thành công</item>
+        <item>Năm mới bình an</item>
+        <item>Công thành danh toại</item>
+        <item>Làm ăn phát đạt</item>
+        <item>Tình duyên phơi phới</item>
+        <item>Hay ăn chóng lớn</item>
+        <item>Học hành tấn tới</item>
+        <item>Cát tường như ý</item>
+        <item>Phúc lộc song toàn</item>
+        <item>Xuân sang phú quý</item>
+        <item>Thuận buồm xuôi gió</item>
+        <item>Đắc lộc đắc tài</item>
+        <item>Trên thuận dưới hòa</item>
+        <item>Sống lâu trăm tuổi</item>
+        <item>Kinh doanh hồng phát</item>
+        <item>Vui vẻ cả năm</item>
+        <item>Tiền đầy túi, tình đầy tim</item>
+        <item>Một vốn bốn lời</item>
+        <item>Năm mới thắng lợi mới</item>
+        <item>Xuân an khang, Tết sum vầy</item>
+        <item>Bách niên giai lão</item>
+        <item>Mọi điều tốt lành</item>
+    </string-array>
+    <!-- Widget Cổ điển + bảng chọn widget -->
+    <string name="widget_classic_label">Đếm ngược Tết • Cổ điển</string>
+    <string name="widget_lixi_label">Đếm ngược Tết • Lì xì</string>
+    <string name="widget_classic_description">Số ngày còn lại đến Mùng 1 Tết Đinh Mùi 2027</string>
+    <string name="widget_lixi_description">Đếm từng giây đến Tết, kèm âm lịch và lời chúc mỗi ngày</string>
+    <string name="widget_classic_preview_days" translatable="false">87</string>
+    <string name="widget_lixi_preview_days" translatable="false">86</string>
+    <string name="widget_classic_preview_title">ngày đến Tết</string>
+    <string name="widget_classic_date_label">06/02/2027 • Mùng 1 Tết</string>
+    <string name="widget_tet_arrived_subtitle">Xuân Đinh Mùi 2027</string>
+    <string name="widget_picker_title">Chọn widget đếm ngược</string>
+    <string name="widget_picker_desc">Chạm vào mẫu bạn thích để đặt ra màn hình chính</string>
+    <string name="widget_picker_classic_name">Cổ điển</string>
+    <string name="widget_picker_classic_desc">Số ngày đến Tết, khung viền vàng và mây may mắn</string>
+    <string name="widget_picker_lixi_name">Lì xì</string>
+    <string name="widget_picker_lixi_desc">Đếm từng giây, âm lịch hôm nay, kéo cao để thêm lời chúc</string>
+    <string name="settings_add_widget_desc">2 mẫu: Cổ điển hoặc Lì xì</string>
+    <plurals name="widget_classic_days_until_tet">
+        <item quantity="other">ngày đến Tết</item>
+    </plurals>
+    <!-- Phông chữ VIP (Tạo thiệp + màn hình VIP) -->
+    <string name="dialog_vip_font_title">Phông Chữ Thư Pháp VIP</string>
+    <string name="dialog_vip_font_subtitle">Phông %1$s chỉ dành cho thành viên VIP</string>
+    <string name="dialog_vip_font_preview_label">Xem trước lời chúc của bạn</string>
+    <string name="vip_font_preview_fallback">Chúc Mừng Năm Mới</string>
+    <string name="vip_perk_fonts_title">Bộ phông chữ thư pháp VIP</string>
+    <string name="vip_perk_fonts_desc">7 phông chữ viết tay độc quyền cho lời chúc trên thiệp Tết</string>
+    <string name="vip_perk_fonts_sample">Chúc Mừng Năm Mới</string>
 </resources>

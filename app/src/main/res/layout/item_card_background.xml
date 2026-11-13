@@ -37,7 +37,7 @@
             android:layout_gravity="top|start"
             android:layout_margin="8dp"
             android:background="@drawable/bg_badge_free"
-            android:fontFamily="@font/liberationsans_bold"
+            android:fontFamily="@font/arimo_bold"
             android:includeFontPadding="false"
             android:paddingHorizontal="14dp"
             android:paddingVertical="6dp"
@@ -71,7 +71,7 @@
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/liberationsans_regular"
+                android:fontFamily="@font/arimo_regular"
                 android:gravity="center"
                 android:includeFontPadding="false"
                 android:paddingHorizontal="8dp"

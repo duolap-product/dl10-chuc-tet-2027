@@ -1,0 +1,45 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="80dp"
+    android:height="80dp"
+    android:viewportWidth="80"
+    android:viewportHeight="80">
+    <!-- Body -->
+    <path android:fillColor="#D4522A" android:pathData="M40,65 C25,65 15,55 15,43 C15,31 25,22 40,22 C55,22 65,31 65,43 C65,55 55,65 40,65 Z"/>
+    <!-- Belly -->
+    <path android:fillColor="#F4A87C" android:pathData="M40,60 C30,60 24,53 24,45 C24,37 30,32 40,32 C50,32 56,37 56,45 C56,53 50,60 40,60 Z"/>
+    <!-- Left ear -->
+    <path android:fillColor="#D4522A" android:pathData="M22,28 C18,20 12,18 14,26 C16,32 22,34 24,30 Z"/>
+    <!-- Left ear inner -->
+    <path android:fillColor="#F4A87C" android:pathData="M21,27 C19,21 15,21 16,26 C17,30 21,31 22,28 Z"/>
+    <!-- Right ear -->
+    <path android:fillColor="#D4522A" android:pathData="M58,28 C62,20 68,18 66,26 C64,32 58,34 56,30 Z"/>
+    <!-- Right ear inner -->
+    <path android:fillColor="#F4A87C" android:pathData="M59,27 C61,21 65,21 64,26 C63,30 59,31 58,28 Z"/>
+    <!-- Eyes -->
+    <path android:fillColor="#2D1B00" android:pathData="M33,38m-3.5,0a3.5,3.5 0,1 1,7 0a3.5,3.5 0,1 1,-7 0"/>
+    <path android:fillColor="#2D1B00" android:pathData="M47,38m-3.5,0a3.5,3.5 0,1 1,7 0a3.5,3.5 0,1 1,-7 0"/>
+    <!-- Eye shine -->
+    <path android:fillColor="#FFFFFF" android:pathData="M34.5,36.5m-1.2,0a1.2,1.2 0,1 1,2.4 0a1.2,1.2 0,1 1,-2.4 0"/>
+    <path android:fillColor="#FFFFFF" android:pathData="M48.5,36.5m-1.2,0a1.2,1.2 0,1 1,2.4 0a1.2,1.2 0,1 1,-2.4 0"/>
+    <!-- Nose -->
+    <path android:fillColor="#C1185B" android:pathData="M37,46 L40,43 L43,46 Q40,48 37,46 Z"/>
+    <!-- Mouth -->
+    <path android:fillColor="#C1185B" android:strokeColor="#C1185B" android:strokeWidth="1.5"
+          android:pathData="M36,47 Q40,51 44,47" android:strokeLineCap="round"/>
+    <!-- Whiskers left -->
+    <path android:strokeColor="#8B5E3C" android:strokeWidth="1" android:pathData="M28,44 L36,45"/>
+    <path android:strokeColor="#8B5E3C" android:strokeWidth="1" android:pathData="M26,47 L35,46.5"/>
+    <!-- Whiskers right -->
+    <path android:strokeColor="#8B5E3C" android:strokeWidth="1" android:pathData="M52,44 L44,45"/>
+    <path android:strokeColor="#8B5E3C" android:strokeWidth="1" android:pathData="M54,47 L45,46.5"/>
+    <!-- Cheek blush -->
+    <path android:fillColor="#F4A87C" android:pathData="M28,43m-4,0a4,2.5 0,1 1,8 0a4,2.5 0,1 1,-8 0"/>
+    <path android:fillColor="#F4A87C" android:pathData="M52,43m-4,0a4,2.5 0,1 1,8 0a4,2.5 0,1 1,-8 0"/>
+    <!-- Red envelope (lì xì) the mole is holding -->
+    <path android:fillColor="#C62828" android:pathData="M32,56 L32,68 L48,68 L48,56 Q40,62 32,56 Z"/>
+    <path android:fillColor="#C62828" android:pathData="M32,56 L48,56 L48,68 L32,68 Z"/>
+    <path android:fillColor="#D4AF37" android:pathData="M32,56 Q40,63 48,56 Z"/>
+    <!-- Gold circle on envelope -->
+    <path android:fillColor="#FFD700" android:pathData="M40,62m-4,0a4,4 0,1 1,8 0a4,4 0,1 1,-8 0"/>
+    <path android:fillColor="#C62828" android:pathData="M38,61 L40,59 L42,61 L41.5,63.5 L38.5,63.5 Z"/>
+</vector>

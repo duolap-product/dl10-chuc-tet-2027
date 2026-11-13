@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Widget Cổ điển: dải ngang 1 hàng, chỉ kéo giãn chiều ngang để giữ dáng viên thuốc.
+     updatePeriodMillis chỉ là dự phòng; cập nhật chính là báo thức lúc nửa đêm (TetWidgetProviderBase) -->
+<appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
+    android:description="@string/widget_classic_description"
+    android:initialLayout="@layout/widget_tet_classic"
+    android:minWidth="250dp"
+    android:minHeight="64dp"
+    android:minResizeWidth="200dp"
+    android:previewLayout="@layout/widget_tet_classic"
+    android:resizeMode="horizontal"
+    android:targetCellWidth="4"
+    android:targetCellHeight="1"
+    android:updatePeriodMillis="3600000"
+    android:widgetCategory="home_screen" />

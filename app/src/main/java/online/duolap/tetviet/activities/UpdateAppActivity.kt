@@ -16,6 +16,7 @@ import androidx.core.net.toUri
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import online.duolap.tetviet.R
+import online.duolap.tetviet.ads.AppOpenGate
 import online.duolap.tetviet.analytics.AppAnalytics
 import online.duolap.tetviet.analytics.AppCrashlytics
 import online.duolap.tetviet.databinding.ActivityUpdateAppBinding
@@ -163,6 +164,8 @@ class UpdateAppActivity : AppCompatActivity() {
         if (!customUrl.isNullOrBlank()) {
             val opened = runCatching {
                 val intent = Intent(Intent.ACTION_VIEW, customUrl.toUri())
+                // Mở trang cập nhật bên ngoài: không hiện App Open khi quay lại
+                AppOpenGate.skipNextForeground()
                 startActivity(intent)
                 true
             }.getOrDefault(false)
@@ -178,6 +181,8 @@ class UpdateAppActivity : AppCompatActivity() {
                 Intent.FLAG_ACTIVITY_NEW_DOCUMENT or
                 Intent.FLAG_ACTIVITY_MULTIPLE_TASK
             )
+            // Mở Google Play để cập nhật: không hiện App Open khi quay lại
+            AppOpenGate.skipNextForeground()
             startActivity(marketIntent)
         } catch (_: ActivityNotFoundException) {
             try {
@@ -185,6 +190,8 @@ class UpdateAppActivity : AppCompatActivity() {
                     Intent.ACTION_VIEW,
                     "https://play.google.com/store/apps/details?id=$appPackage".toUri()
                 )
+                // Mở trang cập nhật bên ngoài: không hiện App Open khi quay lại
+                AppOpenGate.skipNextForeground()
                 startActivity(webIntent)
             } catch (_: Exception) {
                 Toast.makeText(this, getString(R.string.update_msg_store_error), Toast.LENGTH_SHORT).show()

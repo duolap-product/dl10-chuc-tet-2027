@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="10dp"
+    android:background="@drawable/bg_wishing_scroll_banner"
+    android:orientation="vertical"
+    android:paddingHorizontal="16dp"
+    android:paddingVertical="12dp">
+
+    <!-- Header: Category & Date -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/ivItemCategoryIcon"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_marginEnd="6dp"
+            android:src="@drawable/ic_wish_health" />
+
+        <TextView
+            android:id="@+id/tvItemCategoryTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/arimo_bold"
+            android:includeFontPadding="false"
+            android:textColor="#C62828"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            tools:text="Sức khỏe" />
+
+        <TextView
+            android:id="@+id/tvItemDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/arimo_regular"
+            android:includeFontPadding="false"
+            android:textColor="#8D6E63"
+            android:textSize="11sp"
+            tools:text="28 Tết" />
+
+    </LinearLayout>
+
+    <!-- Wish Text -->
+    <TextView
+        android:id="@+id/tvItemContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/arimo_bold"
+        android:includeFontPadding="false"
+        android:lineSpacingExtra="2dp"
+        android:textColor="#5A1516"
+        android:textSize="13.5sp"
+        tools:text="Gia đình luôn bình an, mạnh khỏe. Công việc hanh thông, vạn sự như ý!" />
+
+    <!-- Footer: Blessings count -->
+    <TextView
+        android:id="@+id/tvItemBlessings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginTop="6dp"
+        android:fontFamily="@font/arimo_regular"
+        android:includeFontPadding="false"
+        android:textColor="#C62828"
+        android:textSize="11sp"
+        tools:text="🌸 1 lượt chúc" />
+
+</LinearLayout>
+

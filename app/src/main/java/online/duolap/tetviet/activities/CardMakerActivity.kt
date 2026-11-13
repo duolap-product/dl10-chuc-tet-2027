@@ -24,7 +24,9 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.Gravity
 import android.view.LayoutInflater
+import android.view.ViewGroup
 import android.widget.FrameLayout
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
@@ -54,6 +56,8 @@ import online.duolap.tetviet.R
 import online.duolap.tetviet.adapter.BackgroundGridAdapter
 import online.duolap.tetviet.adapter.StickerGridAdapter
 import online.duolap.tetviet.ads.AdManager
+import online.duolap.tetviet.ads.AdPlacement
+import online.duolap.tetviet.ads.AppOpenGate
 import online.duolap.tetviet.ads.UnlockVipFeatureDialog
 import online.duolap.tetviet.analytics.AppAnalytics
 import online.duolap.tetviet.analytics.AppCrashlytics
@@ -63,6 +67,8 @@ import online.duolap.tetviet.data.model.CardBackgroundManager
 import online.duolap.tetviet.data.model.CardColorManager
 import online.duolap.tetviet.data.model.CardStickerItem
 import online.duolap.tetviet.data.model.CardStickerManager
+import online.duolap.tetviet.data.model.VipCardFont
+import online.duolap.tetviet.data.model.VipCardFontManager
 import online.duolap.tetviet.databinding.ActivityCardMakerBinding
 import online.duolap.tetviet.databinding.DialogCardSavedBottomSheetBinding
 import online.duolap.tetviet.databinding.DialogChooseBgBottomSheetBinding
@@ -105,7 +111,13 @@ class CardMakerActivity : AppCompatActivity() {
 
     private var currentColor: Int = "#7A090D".toColorInt()
     private var currentGravity: Int = Gravity.CENTER
-    private var currentTypefaceResId: Int = R.font.liberationsans_bold
+    private var currentTypefaceResId: Int = R.font.arimo_bold
+
+    // Phông VIP người dùng vừa chọn khi chưa có VIP: mua xong quay lại thì áp dụng luôn
+    private var pendingVipFontResId: Int = 0
+
+    // Làm mới các chip phông chữ (biểu tượng khoá VIP) khi bảng chỉnh lời chúc đang mở
+    private var refreshFontChips: (() -> Unit)? = null
 
     private var tetColors: List<Pair<String, String>> = CardColorManager.COLORS.map { Pair(it.name, it.colorHex) }
 
@@ -540,6 +552,9 @@ class CardMakerActivity : AppCompatActivity() {
         val dialog = BottomSheetDialog(this, R.style.Theme_TetViet_BottomSheetDialog)
         val sheetBinding = DialogEditWishBottomSheetBinding.inflate(LayoutInflater.from(this))
         dialog.setContentView(sheetBinding.root)
+        // Lưới phông chữ làm bảng cao hơn: mở hết cỡ để người dùng thấy ngay, kéo xuống là đóng
+        dialog.behavior.state = BottomSheetBehavior.STATE_EXPANDED
+        dialog.behavior.skipCollapsed = true
 
         val currentText = binding.tvWish.text.toString()
         sheetBinding.etWishContent.setText(currentText)
@@ -582,6 +597,7 @@ class CardMakerActivity : AppCompatActivity() {
         setupColorPalette(sheetBinding)
         setupGravityControls(sheetBinding)
         setupFontControls(sheetBinding)
+        dialog.setOnDismissListener { refreshFontChips = null }
 
         sheetBinding.btnCloseSheet.setSafeOnClickListener(hasAnim = true) {
             dialog.dismiss()
@@ -670,13 +686,24 @@ class CardMakerActivity : AppCompatActivity() {
 
     private fun setupFontControls(sheetBinding: DialogEditWishBottomSheetBinding) {
         val fontOptions = listOf(
-            Triple(sheetBinding.btnFontLiberationBold, R.font.liberationsans_bold, Typeface.DEFAULT_BOLD),
-            Triple(sheetBinding.btnFontLobsterTwo, R.font.lobstertwo_bold, null),
-            Triple(sheetBinding.btnFontLobsterItalic, R.font.lobstertwo_bolditalic, null),
-            Triple(sheetBinding.btnFontLiberationRegular, R.font.liberationsans_regular, Typeface.DEFAULT),
+            Triple(sheetBinding.btnFontLiberationBold, R.font.arimo_bold, Typeface.DEFAULT_BOLD),
+            Triple(sheetBinding.btnFontLobsterTwo, R.font.lobster_regular, null),
+            Triple(sheetBinding.btnFontLobsterItalic, R.font.pacifico_regular, null),
+            Triple(sheetBinding.btnFontLiberationRegular, R.font.arimo_regular, Typeface.DEFAULT),
             Triple(sheetBinding.btnFontBangers, R.font.bangers_regular, null),
             Triple(sheetBinding.btnFontSerif, 0, Typeface.SERIF)
         )
+
+        // Phông thư pháp có độ cao dòng rất khác phông thường: cho mọi chip cùng chiều cao
+        fontOptions.forEach { (view, _, _) ->
+            view.minHeight = fontChipMinHeightPx()
+            view.gravity = Gravity.CENTER
+        }
+
+        // Phông chữ VIP: nhóm riêng có tiêu đề "Phông thư pháp VIP"
+        val vipFontChips = VipCardFontManager.FONTS.map { font ->
+            font to createVipFontChip(font).also { sheetBinding.layoutVipFontOptions.addView(it) }
+        }
 
         fun updateFontUI(selectedResId: Int) {
             fontOptions.forEach { (view, resId, _) ->
@@ -684,9 +711,29 @@ class CardMakerActivity : AppCompatActivity() {
                 view.setBackgroundResource(if (isSelected) R.drawable.bg_chip_selected else R.drawable.bg_chip_unselected)
                 view.setTextColor(if (isSelected) 0xFF2C1A00.toInt() else 0xFF5E5246.toInt())
             }
+            val isVip = vipPreferences.isVip.value
+            vipFontChips.forEach { (font, chip) ->
+                val isSelected = (font.fontResId == selectedResId)
+                chip.setBackgroundResource(if (isSelected) R.drawable.bg_chip_selected else R.drawable.bg_chip_unselected)
+                chip.setTextColor(if (isSelected) 0xFF2C1A00.toInt() else 0xFF5E5246.toInt())
+                chip.text = if (isVip) font.displayName else "👑 ${font.displayName}"
+            }
         }
 
         updateFontUI(currentTypefaceResId)
+        refreshFontChips = { updateFontUI(currentTypefaceResId) }
+
+        vipFontChips.forEach { (font, chip) ->
+            chip.setOnClickListener {
+                if (vipPreferences.isVip.value) {
+                    applyWishFont(font.fontResId)
+                    updateFontUI(font.fontResId)
+                    AppAnalytics.logFeatureClick("vip_font_selected_${font.id}")
+                } else {
+                    showVipFontLockedDialog(font)
+                }
+            }
+        }
 
         fontOptions.forEach { (view, resId, fallbackTypeface) ->
             view.setOnClickListener {
@@ -699,6 +746,59 @@ class CardMakerActivity : AppCompatActivity() {
                 binding.tvWish.typeface = tf
                 updateFontUI(resId)
             }
+        }
+    }
+
+    private fun createVipFontChip(font: VipCardFont): TextView {
+        val density = resources.displayMetrics.density
+        return TextView(this).apply {
+            // Khoảng cách giữa các chip do ChipGroup (app:chipSpacing) đảm nhận
+            layoutParams = ViewGroup.MarginLayoutParams(
+                ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT
+            )
+            setPadding((14 * density).toInt(), (5 * density).toInt(), (14 * density).toInt(), (5 * density).toInt())
+            typeface = ResourcesCompat.getFont(this@CardMakerActivity, font.fontResId)
+            // Phông thư pháp nét mảnh nên cần cỡ chữ lớn hơn chip thường (13–14sp)
+            textSize = 19f
+            maxLines = 1
+            // Mỗi phông có độ cao dòng khác nhau: cố định chiều cao để các chip đều nhau
+            minHeight = fontChipMinHeightPx()
+            gravity = Gravity.CENTER
+            isClickable = true
+            isFocusable = true
+        }
+    }
+
+    private fun fontChipMinHeightPx(): Int = (44 * resources.displayMetrics.density).toInt()
+
+    private fun applyWishFont(fontResId: Int) {
+        currentTypefaceResId = fontResId
+        binding.tvWish.typeface = ResourcesCompat.getFont(this, fontResId) ?: Typeface.DEFAULT
+    }
+
+    /** Phông VIP chỉ mở bằng cách mua VIP: hiện lời chúc hiện tại viết bằng phông đó để người dùng xem trước. */
+    private fun showVipFontLockedDialog(font: VipCardFont) {
+        AppAnalytics.logFeatureClick("vip_font_locked_${font.id}")
+        pendingVipFontResId = font.fontResId
+        val previewText = binding.tvWish.text.toString().lineSequence().firstOrNull { it.isNotBlank() }
+            ?.take(40)
+            ?: getString(R.string.vip_font_preview_fallback)
+        UnlockVipFeatureDialog.newVipOnlyInstance(
+            title = getString(R.string.dialog_vip_font_title),
+            subtitle = getString(R.string.dialog_vip_font_subtitle, font.displayName),
+            previewText = previewText,
+            previewFontResId = font.fontResId
+        ).show(supportFragmentManager, "VipFontLockedDialog")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        // Vừa mua VIP xong quay lại: áp dụng phông đã chọn và bỏ biểu tượng khoá trên các chip
+        if (pendingVipFontResId != 0 && vipPreferences.isVip.value) {
+            applyWishFont(pendingVipFontResId)
+            pendingVipFontResId = 0
+            refreshFontChips?.invoke()
         }
     }
 
@@ -804,13 +904,14 @@ class CardMakerActivity : AppCompatActivity() {
             shareCard()
         }
 
-        sheetBinding.btnDismissSavedCard.setOnClickListener {
+        // Chỉ hiện quảng cáo khi người dùng đã xem xong thiệp và đóng sheet (không chen vào luồng chia sẻ)
+        val closeAndShowAd = {
             dialog.dismiss()
+            adManager.showInterstitialAd(this, AdPlacement.CARD_SAVED)
         }
-
-        sheetBinding.btnCloseSavedSheet.setOnClickListener {
-            dialog.dismiss()
-        }
+        sheetBinding.btnDismissSavedCard.setOnClickListener { closeAndShowAd() }
+        sheetBinding.btnCloseSavedSheet.setOnClickListener { closeAndShowAd() }
+        dialog.setOnCancelListener { adManager.showInterstitialAd(this, AdPlacement.CARD_SAVED) }
 
         dialog.show()
     }
@@ -841,7 +942,6 @@ class CardMakerActivity : AppCompatActivity() {
                 if (savedUri != null) {
                     AppAnalytics.logFeatureClick("download_card_success")
                     showCardSavedBottomSheet(bitmap)
-                    adManager.showInterstitialAd(this@CardMakerActivity)
                 } else {
                     Toast.makeText(this@CardMakerActivity, getString(R.string.msg_save_card_failed), Toast.LENGTH_SHORT)
                         .show()
@@ -897,6 +997,8 @@ class CardMakerActivity : AppCompatActivity() {
                 }
 
                 AppAnalytics.logFeatureClick("share_card")
+                // Người dùng rời app có chủ đích (chia sẻ): không hiện App Open khi quay lại
+                AppOpenGate.skipNextForeground()
                 startActivity(Intent.createChooser(shareIntent, getString(R.string.share_chooser_title)))
             } catch (e: Exception) {
                 hideLoading()

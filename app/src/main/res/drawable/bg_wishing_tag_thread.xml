@@ -1,0 +1,17 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="20dp"
+    android:height="24dp"
+    android:viewportWidth="20"
+    android:viewportHeight="24">
+    <!-- Red ribbon loop -->
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M10,2 C6,2 6,18 10,20 C14,18 14,2 10,2 Z"
+        android:strokeColor="#D32F2F"
+        android:strokeWidth="1.8" />
+    <!-- Golden knot -->
+    <path
+        android:fillColor="#FFA000"
+        android:pathData="M8,18 h4 v3 h-4 z" />
+</vector>
+

@@ -1,0 +1,30 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="96dp"
+    android:height="80dp"
+    android:viewportWidth="96"
+    android:viewportHeight="80">
+    <!-- Hole shadow ellipse -->
+    <path android:fillColor="#33000000" android:pathData="M48,68m-38,0a38,8 0,1 1,76 0a38,8 0,1 1,-76 0"/>
+    <!-- Basket body - woven bamboo pattern -->
+    <path android:fillColor="#8B6914" android:pathData="M12,30 Q48,20 84,30 L84,70 Q48,76 12,70 Z"/>
+    <!-- Basket weave horizontal lines -->
+    <path android:strokeColor="#6B4F10" android:strokeWidth="1.5" android:pathData="M14,38 Q48,32 82,38"/>
+    <path android:strokeColor="#6B4F10" android:strokeWidth="1.5" android:pathData="M14,46 Q48,40 82,46"/>
+    <path android:strokeColor="#6B4F10" android:strokeWidth="1.5" android:pathData="M14,54 Q48,48 82,54"/>
+    <path android:strokeColor="#6B4F10" android:strokeWidth="1.5" android:pathData="M14,62 Q48,56 82,62"/>
+    <!-- Basket weave vertical lines -->
+    <path android:strokeColor="#6B4F10" android:strokeWidth="1" android:pathData="M25,30 L23,70"/>
+    <path android:strokeColor="#6B4F10" android:strokeWidth="1" android:pathData="M37,27 L35,72"/>
+    <path android:strokeColor="#6B4F10" android:strokeWidth="1" android:pathData="M48,26 L48,74"/>
+    <path android:strokeColor="#6B4F10" android:strokeWidth="1" android:pathData="M59,27 L61,72"/>
+    <path android:strokeColor="#6B4F10" android:strokeWidth="1" android:pathData="M71,30 L73,70"/>
+    <!-- Dark hole opening at top -->
+    <path android:fillColor="#1A0D00" android:pathData="M48,30m-34,0a34,10 0,1 1,68 0a34,10 0,1 1,-68 0"/>
+    <!-- Hole rim highlight -->
+    <path android:strokeColor="#A87832" android:strokeWidth="2" android:pathData="M16,28 Q48,20 80,28"/>
+    <!-- Grass tufts at base -->
+    <path android:fillColor="#4CAF50" android:pathData="M8,68 Q12,60 16,68 Q14,72 8,68 Z"/>
+    <path android:fillColor="#388E3C" android:pathData="M10,70 Q14,63 18,70 Z"/>
+    <path android:fillColor="#4CAF50" android:pathData="M76,68 Q80,60 84,68 Q82,72 76,68 Z"/>
+    <path android:fillColor="#388E3C" android:pathData="M78,70 Q82,63 86,70 Z"/>
+</vector>

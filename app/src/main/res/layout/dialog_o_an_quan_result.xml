@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/transparent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginVertical="24dp"
+        android:background="@drawable/bg_dialog_wishing_modal"
+        android:elevation="12dp"
+        android:paddingHorizontal="22dp"
+        android:paddingTop="22dp"
+        android:paddingBottom="24dp">
+
+        <TextView
+            android:id="@+id/tvResultHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/arimo_bold"
+            android:includeFontPadding="false"
+            android:text="CHIẾN THẮNG! 🏆"
+            android:textColor="#C62828"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvResultDesc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:fontFamily="@font/arimo_regular"
+            android:includeFontPadding="false"
+            android:text="Hết quan tàn dân • Phân định thắng bại"
+            android:textColor="#7A5230"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvResultHeader" />
+
+        <!-- Scoreboard Table Card -->
+        <LinearLayout
+            android:id="@+id/cardScoreboard"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/bg_wishing_stats_card"
+            android:orientation="vertical"
+            android:padding="14dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvResultDesc">
+
+            <!-- Table Header -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.4"
+                    android:fontFamily="@font/arimo_bold"
+                    android:text="Hạng mục"
+                    android:textColor="#5A1516"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/tvScoreboardP1Name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/arimo_bold"
+                    android:gravity="center"
+                    android:text="Bạn"
+                    android:textColor="#C62828"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/tvScoreboardP2Name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/arimo_bold"
+                    android:gravity="center"
+                    android:text="Đối thủ"
+                    android:textColor="#1565C0"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <!-- Row 1: Ăn trong trận -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.4"
+                    android:fontFamily="@font/arimo_regular"
+                    android:text="Điểm ăn quân"
+                    android:textColor="#7A5230"
+                    android:textSize="11.5sp" />
+
+                <TextView
+                    android:id="@+id/tvP1RawScore"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:textColor="#5A1516"
+                    android:textSize="11.5sp"
+                    tools:text="28" />
+
+                <TextView
+                    android:id="@+id/tvP2RawScore"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:textColor="#5A1516"
+                    android:textSize="11.5sp"
+                    tools:text="24" />
+            </LinearLayout>
+
+            <!-- Row 2: Thu sân nhà (Harvest) -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.4"
+                    android:fontFamily="@font/arimo_regular"
+                    android:text="Thu sân nhà"
+                    android:textColor="#7A5230"
+                    android:textSize="11.5sp" />
+
+                <TextView
+                    android:id="@+id/tvP1Harvest"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:textColor="#5A1516"
+                    android:textSize="11.5sp"
+                    tools:text="+4" />
+
+                <TextView
+                    android:id="@+id/tvP2Harvest"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:textColor="#5A1516"
+                    android:textSize="11.5sp"
+                    tools:text="+2" />
+            </LinearLayout>
+
+            <!-- Row 3: Nợ vay quân (Debt) -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.4"
+                    android:fontFamily="@font/arimo_regular"
+                    android:text="Nợ vay quân"
+                    android:textColor="#7A5230"
+                    android:textSize="11.5sp" />
+
+                <TextView
+                    android:id="@+id/tvP1Debt"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:textColor="#B71C1C"
+                    android:textSize="11.5sp"
+                    tools:text="0" />
+
+                <TextView
+                    android:id="@+id/tvP2Debt"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:textColor="#B71C1C"
+                    android:textSize="11.5sp"
+                    tools:text="0" />
+            </LinearLayout>
+
+            <!-- Divider -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginVertical="8dp"
+                android:background="#DFC17E" />
+
+            <!-- Row 4: Tổng điểm chung cuộc -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.4"
+                    android:fontFamily="@font/arimo_bold"
+                    android:text="TỔNG ĐIỂM"
+                    android:textColor="#5A1516"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvP1FinalScore"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/arimo_bold"
+                    android:gravity="center"
+                    android:textColor="#C62828"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    tools:text="32" />
+
+                <TextView
+                    android:id="@+id/tvP2FinalScore"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/arimo_bold"
+                    android:gravity="center"
+                    android:textColor="#1565C0"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    tools:text="26" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- Coin Reward Banner -->
+        <LinearLayout
+            android:id="@+id/layoutCoinReward"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardScoreboard">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginEnd="6dp"
+                android:src="@drawable/ic_coin_gold" />
+
+            <TextView
+                android:id="@+id/tvCoinRewardText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/arimo_bold"
+                android:includeFontPadding="false"
+                android:text="Thưởng chiến thắng: +100 Xu May Mắn"
+                android:textColor="#FFA000"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <!-- Action Buttons -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/layoutCoinReward">
+
+            <LinearLayout
+                android:id="@+id/btnReplayGame"
+                android:layout_width="0dp"
+                android:layout_height="46dp"
+                android:layout_marginEnd="8dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_wishing_cta_button"
+                android:clickable="true"
+                android:elevation="4dp"
+                android:focusable="true"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_marginEnd="6dp"
+                    android:src="@drawable/ic_replay"
+                    app:tint="#FFFDF7" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/arimo_bold"
+                    android:includeFontPadding="false"
+                    android:text="Chơi Lại"
+                    android:textColor="#FFFDF7"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/btnResultChangeMode"
+                android:layout_width="0dp"
+                android:layout_height="46dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_wishing_stats_card"
+                android:clickable="true"
+                android:elevation="3dp"
+                android:focusable="true"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/arimo_bold"
+                    android:includeFontPadding="false"
+                    android:text="Đổi Chế Độ"
+                    android:textColor="#7A090D"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>
+

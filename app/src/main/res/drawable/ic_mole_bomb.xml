@@ -1,0 +1,31 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="80dp"
+    android:height="80dp"
+    android:viewportWidth="80"
+    android:viewportHeight="80">
+    <!-- Bomb body -->
+    <path android:fillColor="#2C2C2C" android:pathData="M40,48m-22,0a22,22 0,1 1,44 0a22,22 0,1 1,-44 0"/>
+    <!-- Shine -->
+    <path android:fillColor="#44FFFFFF" android:pathData="M30,34 C32,30 38,30 42,34 Q38,34 30,34 Z"/>
+    <!-- Skull face -->
+    <path android:fillColor="#EEEEEE" android:pathData="M33,46m-5,0a5,5 0,1 1,10 0a5,5 0,1 1,-10 0"/>
+    <path android:fillColor="#EEEEEE" android:pathData="M47,46m-5,0a5,5 0,1 1,10 0a5,5 0,1 1,-10 0"/>
+    <path android:fillColor="#EEEEEE" android:pathData="M28,54 L52,54 L52,58 L28,58 Z"/>
+    <path android:fillColor="#2C2C2C" android:pathData="M30,54 L33,58 L36,54 L39,58 L42,54 L45,58 L48,54 L50,58 L50,54 Z"/>
+    <!-- Eye holes -->
+    <path android:fillColor="#2C2C2C" android:pathData="M33,46m-3.2,0a3.2,3.2 0,1 1,6.4 0a3.2,3.2 0,1 1,-6.4 0"/>
+    <path android:fillColor="#2C2C2C" android:pathData="M47,46m-3.2,0a3.2,3.2 0,1 1,6.4 0a3.2,3.2 0,1 1,-6.4 0"/>
+    <!-- Nose hole -->
+    <path android:fillColor="#2C2C2C" android:pathData="M38.5,51 L40,49 L41.5,51 Z"/>
+    <!-- Fuse -->
+    <path android:strokeColor="#8B6914" android:strokeWidth="2.5" android:strokeLineCap="round"
+          android:pathData="M40,26 C42,22 38,18 42,14 C46,10 44,6 46,4"
+          android:fillColor="#00000000"/>
+    <!-- Spark at top of fuse -->
+    <path android:fillColor="#FFD700" android:pathData="M46,4m-4,0a4,4 0,1 1,8 0a4,4 0,1 1,-8 0"/>
+    <path android:fillColor="#FF6600" android:pathData="M46,0 L47.5,3 L51,2 L48.5,5 L51,7 L47.5,6 L46,9 L44.5,6 L41,7 L43.5,5 L41,2 L44.5,3 Z"/>
+    <!-- Warning sign -->
+    <path android:fillColor="#FF4444" android:pathData="M62,15 L70,30 L54,30 Z"/>
+    <path android:fillColor="#FFFFFF" android:pathData="M64,20 L64,25 L66,25 L66,20 Z"/>
+    <path android:fillColor="#FFFFFF" android:pathData="M65,27.5m-1.2,0a1.2,1.2 0,1 1,2.4 0a1.2,1.2 0,1 1,-2.4 0"/>
+</vector>

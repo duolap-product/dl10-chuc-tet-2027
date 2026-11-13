@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import dagger.hilt.android.AndroidEntryPoint
 import online.duolap.tetviet.ads.AdManager
+import online.duolap.tetviet.ads.AdPlacement
 import online.duolap.tetviet.analytics.AppAnalytics
 import online.duolap.tetviet.analytics.AppCrashlytics
 import online.duolap.tetviet.data.local.VipPreferences
@@ -170,13 +171,12 @@ class LuckyWheelActivity : AppCompatActivity() {
             AppAnalytics.logSpinWheel(wonItem.text)
             AppCrashlytics.log("Người dùng quay trúng giải: ${wonItem.text}")
 
+
+            if (isFinishing || isDestroyed) return@startSpin
+
             // Show congratulations popup
             showResultDialog(wonItem.text)
-
             spinCount++
-            if (spinCount % 3 == 0) {
-                adManager.showInterstitialAd(this)
-            }
         }
     }
 
@@ -188,9 +188,13 @@ class LuckyWheelActivity : AppCompatActivity() {
         dialogBinding.tvResultPrize.text = prizeText
         dialogBinding.btnSpinAgain.setOnClickListener {
             dialog.dismiss()
-            startLuckySpin()
+            // Điểm dừng tự nhiên: hiện quảng cáo trước lượt quay mới (cứ 3 lượt), AdPolicy quyết định tần suất cuối cùng
+            if (spinCount % 3 == 0) {
+                adManager.showInterstitialAd(this, AdPlacement.LUCKY_WHEEL_SPIN) { startLuckySpin() }
+            } else {
+                startLuckySpin()
+            }
         }
-
         dialog.show()
     }
 

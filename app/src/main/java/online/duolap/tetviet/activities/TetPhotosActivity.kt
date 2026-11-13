@@ -11,15 +11,23 @@ import androidx.core.graphics.toColorInt
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.GridLayoutManager
+import dagger.hilt.android.AndroidEntryPoint
 import online.duolap.tetviet.R
 import online.duolap.tetviet.adapter.TetPhotoAdapter
+import online.duolap.tetviet.ads.AdManager
+import online.duolap.tetviet.ads.AdPlacement
 import online.duolap.tetviet.analytics.AppAnalytics
 import online.duolap.tetviet.data.model.TetPhoto
 import online.duolap.tetviet.data.model.TetPhotoRepository
 import online.duolap.tetviet.databinding.ActivityTetPhotosBinding
 import online.duolap.tetviet.views.setSafeOnClickListener
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class TetPhotosActivity : AppCompatActivity() {
+
+    @Inject
+    lateinit var adManager: AdManager
 
     private lateinit var binding: ActivityTetPhotosBinding
     private lateinit var adapter: TetPhotoAdapter
@@ -40,12 +48,15 @@ class TetPhotosActivity : AppCompatActivity() {
                 binding.rvPhotos.paddingLeft,
                 binding.rvPhotos.paddingTop,
                 binding.rvPhotos.paddingRight,
-                systemBars.bottom + 16
+                16
             )
+            // Khung banner luôn hiện: có banner thì banner nằm trên thanh điều hướng, VIP thì chỉ là khoảng đệm
+            binding.bannerAdContainer.setPadding(0, 0, 0, systemBars.bottom)
             insets
         }
 
         AppAnalytics.logScreenView("TetPhotosActivity")
+        adManager.attachBanner(this, binding.bannerAdContainer, AdPlacement.BANNER_TET_PHOTOS)
 
         setupRecyclerView()
         setupCategoryChips()

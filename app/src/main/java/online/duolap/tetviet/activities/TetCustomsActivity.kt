@@ -13,8 +13,11 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import dagger.hilt.android.AndroidEntryPoint
 import online.duolap.tetviet.R
 import online.duolap.tetviet.adapter.TetCustomsAdapter
+import online.duolap.tetviet.ads.AdManager
+import online.duolap.tetviet.ads.AdPlacement
 import online.duolap.tetviet.analytics.AppAnalytics
 import online.duolap.tetviet.analytics.AppCrashlytics
 import online.duolap.tetviet.data.TetCustomCategory
@@ -22,8 +25,13 @@ import online.duolap.tetviet.data.TetCustomItem
 import online.duolap.tetviet.data.TetCustomRepository
 import online.duolap.tetviet.databinding.ActivityTetCustomsBinding
 import online.duolap.tetviet.databinding.DialogTetCustomDetailBinding
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class TetCustomsActivity : AppCompatActivity() {
+
+    @Inject
+    lateinit var adManager: AdManager
 
     private lateinit var binding: ActivityTetCustomsBinding
     private lateinit var adapter: TetCustomsAdapter
@@ -42,6 +50,7 @@ class TetCustomsActivity : AppCompatActivity() {
         AppCrashlytics.log("Vào màn hình Phong Tục Tết")
 
         setupWindowInsets()
+        adManager.attachBanner(this, binding.bannerAdContainer, AdPlacement.BANNER_TET_CUSTOMS)
         setupViews()
         setupCategoryChips()
         setupSearch()

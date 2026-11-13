@@ -199,7 +199,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:fontFamily="@font/liberationsans_bold"
+                        android:fontFamily="@font/arimo_bold"
                         android:gravity="center"
                         android:includeFontPadding="false"
                         android:text="@string/feature_tu_vi"
@@ -237,7 +237,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:fontFamily="@font/liberationsans_bold"
+                        android:fontFamily="@font/arimo_bold"
                         android:gravity="center"
                         android:includeFontPadding="false"
                         android:text="@string/feature_loi_chuc"
@@ -285,7 +285,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:fontFamily="@font/liberationsans_bold"
+                        android:fontFamily="@font/arimo_bold"
                         android:gravity="center"
                         android:includeFontPadding="false"
                         android:text="@string/feature_phong_tuc"
@@ -343,7 +343,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
-                            android:fontFamily="@font/liberationsans_bold"
+                            android:fontFamily="@font/arimo_bold"
                             android:gravity="center"
                             android:includeFontPadding="false"
                             android:text="@string/feature_tao_thiep"
@@ -383,7 +383,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@drawable/bg_badge_gold"
-                        android:fontFamily="@font/liberationsans_regular"
+                        android:fontFamily="@font/arimo_regular"
                         android:includeFontPadding="false"
                         android:paddingHorizontal="8dp"
                         android:paddingVertical="4dp"
@@ -397,7 +397,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:fontFamily="@font/liberationsans_bold"
+                        android:fontFamily="@font/arimo_bold"
                         android:includeFontPadding="false"
                         android:text="@string/feature_lucky_wheel"
                         android:textColor="#7A090D"
@@ -408,7 +408,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="2dp"
-                        android:fontFamily="@font/liberationsans_regular"
+                        android:fontFamily="@font/arimo_regular"
                         android:includeFontPadding="false"
                         android:text="@string/feature_lucky_wheel_desc"
                         android:textColor="#8D5524"
@@ -418,7 +418,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="6dp"
-                        android:fontFamily="@font/liberationsans_regular"
+                        android:fontFamily="@font/arimo_regular"
                         android:includeFontPadding="false"
                         android:textColor="#C41E24"
                         android:textSize="13sp"
@@ -449,18 +449,22 @@
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/liberationsans_bold"
+                    android:fontFamily="@font/arimo_bold"
                     android:includeFontPadding="false"
                     android:padding="5dp"
                     android:text="Khám phá Tết Việt"
                     android:textColor="#7A090D" />
 
-                <androidx.core.widget.NestedScrollView
+                <HorizontalScrollView
+                    android:id="@+id/scrollExplore"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:clipToPadding="false"
+                    android:overScrollMode="never"
+                    android:scrollbars="none">
 
                     <androidx.appcompat.widget.LinearLayoutCompat
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:orientation="horizontal">
@@ -493,7 +497,7 @@
                                 android:layout_gravity="center_horizontal|bottom"
                                 android:layout_marginTop="6dp"
                                 android:layout_marginBottom="4dp"
-                                android:fontFamily="@font/liberationsans_bold"
+                                android:fontFamily="@font/arimo_bold"
                                 android:gravity="center"
                                 android:includeFontPadding="false"
                                 android:paddingHorizontal="10dp"
@@ -530,45 +534,135 @@
                             </androidx.cardview.widget.CardView>
                         </FrameLayout>
 
-                        <LinearLayout
+                        <FrameLayout
                             android:id="@+id/cardOption3"
                             android:layout_width="120dp"
                             android:layout_height="154dp"
                             android:layout_marginEnd="15dp"
-                            android:background="@drawable/bg_feature_card"
                             android:clickable="true"
-                            android:elevation="5dp"
-                            android:focusable="true"
-                            android:gravity="center"
-                            android:orientation="vertical"
-                            android:padding="8dp">
+                            android:focusable="true">
 
-                            <ImageView
-                                android:id="@+id/ivOption3"
-                                android:layout_width="56dp"
-                                android:layout_height="56dp"
-                                android:contentDescription="Tính năng bổ sung 2"
-                                android:scaleType="fitCenter"
-                                android:src="@drawable/sticker_lantern" />
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                app:cardCornerRadius="14dp"
+                                app:cardElevation="0dp">
 
-                            <TextView
-                                android:id="@+id/tvOption3"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="6dp"
-                                android:fontFamily="@font/liberationsans_bold"
-                                android:gravity="center"
-                                android:includeFontPadding="false"
-                                android:text="@string/coming_soon"
-                                android:textColor="#7A090D"
-                                android:textSize="13.5sp"
-                                android:textStyle="bold" />
+                                <ImageView
+                                    android:id="@+id/ivOption3"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:contentDescription="@string/feature_wishing_tree"
+                                    android:scaleType="centerCrop"
+                                    android:src="@drawable/bg_wishing" />
 
-                        </LinearLayout>
+                                <TextView
+                                    android:id="@+id/tvOption3"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="bottom|center_horizontal"
+                                    android:layout_marginBottom="8dp"
+                                    android:fontFamily="@font/arimo_bold"
+                                    android:includeFontPadding="false"
+                                    android:shadowColor="#80000000"
+                                    android:shadowDx="0"
+                                    android:shadowDy="2"
+                                    android:shadowRadius="3"
+                                    android:text="@string/feature_wishing_tree"
+                                    android:textColor="#FFF7E2"
+                                    android:textSize="12.5sp"
+                                    android:textStyle="bold" />
+
+                            </androidx.cardview.widget.CardView>
+                        </FrameLayout>
+
+                        <FrameLayout
+                            android:id="@+id/cardOption4"
+                            android:layout_width="120dp"
+                            android:layout_height="154dp"
+                            android:layout_marginEnd="15dp"
+                            android:clickable="true"
+                            android:focusable="true">
+
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                app:cardCornerRadius="14dp"
+                                app:cardElevation="0dp">
+
+                                <ImageView
+                                    android:id="@+id/ivOption4"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:contentDescription="@string/feature_o_an_quan"
+                                    android:scaleType="centerCrop"
+                                    android:src="@drawable/bg_o_an_quan_main" />
+
+                                <TextView
+                                    android:id="@+id/tvOption4"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="bottom|center_horizontal"
+                                    android:layout_marginBottom="8dp"
+                                    android:fontFamily="@font/arimo_bold"
+                                    android:includeFontPadding="false"
+                                    android:shadowColor="#80000000"
+                                    android:shadowDx="0"
+                                    android:shadowDy="2"
+                                    android:shadowRadius="3"
+                                    android:text="@string/feature_o_an_quan"
+                                    android:textColor="#FFF7E2"
+                                    android:textSize="12.5sp"
+                                    android:textStyle="bold" />
+
+                            </androidx.cardview.widget.CardView>
+                        </FrameLayout>
+
+                        <FrameLayout
+                            android:id="@+id/cardOption5"
+                            android:layout_width="120dp"
+                            android:layout_height="154dp"
+                            android:layout_marginEnd="15dp"
+                            android:clickable="true"
+                            android:focusable="true">
+
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                app:cardCornerRadius="14dp"
+                                app:cardElevation="0dp">
+
+                                <ImageView
+                                    android:id="@+id/ivOption5"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:contentDescription="@string/feature_dap_chuot"
+                                    android:scaleType="centerCrop"
+                                    android:src="@drawable/bg_dap_chuot_main" />
+
+                                <TextView
+                                    android:id="@+id/tvOption5"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="bottom|center_horizontal"
+                                    android:layout_marginBottom="8dp"
+                                    android:fontFamily="@font/arimo_bold"
+                                    android:includeFontPadding="false"
+                                    android:shadowColor="#80000000"
+                                    android:shadowDx="0"
+                                    android:shadowDy="2"
+                                    android:shadowRadius="3"
+                                    android:text="@string/feature_dap_chuot"
+                                    android:textColor="#FFF7E2"
+                                    android:textSize="12.5sp"
+                                    android:textStyle="bold" />
+
+                            </androidx.cardview.widget.CardView>
+                        </FrameLayout>
 
                     </androidx.appcompat.widget.LinearLayoutCompat>
 
-                </androidx.core.widget.NestedScrollView>
+                </HorizontalScrollView>
             </androidx.appcompat.widget.LinearLayoutCompat>
         </androidx.appcompat.widget.LinearLayoutCompat>
     </androidx.core.widget.NestedScrollView>

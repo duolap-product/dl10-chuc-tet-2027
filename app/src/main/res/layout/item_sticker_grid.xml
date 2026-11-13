@@ -24,7 +24,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ellipsize="end"
-        android:fontFamily="@font/liberationsans_bold"
+        android:fontFamily="@font/arimo_bold"
         android:maxLines="1"
         android:textColor="#5D4037"
         android:textSize="11.5sp" />

@@ -1,0 +1,39 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="64dp"
+    android:height="64dp"
+    android:viewportWidth="64"
+    android:viewportHeight="64">
+    <!-- Trophy cup -->
+    <path
+        android:fillColor="#FFD700"
+        android:pathData="M18,10 L46,10 L46,26 C46,35 39,42 32,42 C25,42 18,35 18,26 Z"/>
+    <!-- Trophy inside shadow -->
+    <path
+        android:fillColor="#E5B800"
+        android:pathData="M22,10 L42,10 L42,14 L22,14 Z"/>
+    <!-- Trophy star on cup -->
+    <path
+        android:fillColor="#FFF7C2"
+        android:pathData="M32,18 L33.5,22.5 L38,22.5 L34.5,25.2 L35.8,29.5 L32,26.8 L28.2,29.5 L29.5,25.2 L26,22.5 L30.5,22.5 Z"/>
+    <!-- Left handle -->
+    <path
+        android:fillColor="#E5B800"
+        android:pathData="M18,14 C12,14 8,18 8,24 C8,30 13,34 19,34 L19,30 C15,30 12,27 12,24 C12,20 15,18 18,18 Z"/>
+    <!-- Right handle -->
+    <path
+        android:fillColor="#E5B800"
+        android:pathData="M46,14 C52,14 56,18 56,24 C56,30 51,34 45,34 L45,30 C49,30 52,27 52,24 C52,20 49,18 46,18 Z"/>
+    <!-- Stem -->
+    <path
+        android:fillColor="#D4AF37"
+        android:pathData="M29,42 L35,42 L36,50 L28,50 Z"/>
+    <!-- Base tier 1 -->
+    <path
+        android:fillColor="#B8860B"
+        android:pathData="M24,50 L40,50 L42,54 L22,54 Z"/>
+    <!-- Base tier 2 -->
+    <path
+        android:fillColor="#7A090D"
+        android:pathData="M18,54 L46,54 L46,58 L18,58 Z"/>
+</vector>
+

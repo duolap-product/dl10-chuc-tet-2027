@@ -27,7 +27,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:fontFamily="@font/liberationsans_bold"
+            android:fontFamily="@font/arimo_bold"
             android:includeFontPadding="false"
             android:text="@string/card_maker_edit_wish_title"
             android:textColor="#7A090D"
@@ -66,7 +66,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/liberationsans_regular"
+                android:fontFamily="@font/arimo_regular"
                 android:includeFontPadding="false"
                 android:text="@string/card_maker_edit_wish_subtitle"
                 android:textColor="#5E5246"
@@ -84,7 +84,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@android:color/transparent"
-                    android:fontFamily="@font/liberationsans_regular"
+                    android:fontFamily="@font/arimo_regular"
                     android:gravity="top|start"
                     android:hint="@string/card_maker_wish_hint"
                     android:importantForAutofill="no"
@@ -139,7 +139,7 @@
                         android:background="@drawable/bg_chip_unselected"
                         android:clickable="true"
                         android:focusable="true"
-                        android:fontFamily="@font/liberationsans_regular"
+                        android:fontFamily="@font/arimo_regular"
                         android:includeFontPadding="false"
                         android:paddingStart="12dp"
                         android:paddingTop="6dp"
@@ -157,7 +157,7 @@
                         android:background="@drawable/bg_chip_unselected"
                         android:clickable="true"
                         android:focusable="true"
-                        android:fontFamily="@font/liberationsans_regular"
+                        android:fontFamily="@font/arimo_regular"
                         android:includeFontPadding="false"
                         android:paddingStart="12dp"
                         android:paddingTop="6dp"
@@ -175,7 +175,7 @@
                         android:background="@drawable/bg_chip_unselected"
                         android:clickable="true"
                         android:focusable="true"
-                        android:fontFamily="@font/liberationsans_regular"
+                        android:fontFamily="@font/arimo_regular"
                         android:includeFontPadding="false"
                         android:paddingStart="12dp"
                         android:paddingTop="6dp"
@@ -193,7 +193,7 @@
                         android:background="@drawable/bg_chip_unselected"
                         android:clickable="true"
                         android:focusable="true"
-                        android:fontFamily="@font/liberationsans_regular"
+                        android:fontFamily="@font/arimo_regular"
                         android:includeFontPadding="false"
                         android:paddingStart="12dp"
                         android:paddingTop="6dp"
@@ -210,7 +210,7 @@
                         android:background="@drawable/bg_chip_unselected"
                         android:clickable="true"
                         android:focusable="true"
-                        android:fontFamily="@font/liberationsans_regular"
+                        android:fontFamily="@font/arimo_regular"
                         android:includeFontPadding="false"
                         android:paddingStart="12dp"
                         android:paddingTop="6dp"
@@ -229,7 +229,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="18dp"
-                android:fontFamily="@font/liberationsans_bold"
+                android:fontFamily="@font/arimo_bold"
                 android:includeFontPadding="false"
                 android:text="@string/card_maker_color_label"
                 android:textColor="#5E5246"
@@ -256,7 +256,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="18dp"
-                android:fontFamily="@font/liberationsans_bold"
+                android:fontFamily="@font/arimo_bold"
                 android:includeFontPadding="false"
                 android:text="@string/card_maker_align_label"
                 android:textColor="#5E5246"
@@ -293,7 +293,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="6dp"
-                        android:fontFamily="@font/liberationsans_regular"
+                        android:fontFamily="@font/arimo_regular"
                         android:includeFontPadding="false"
                         android:text="@string/card_maker_align_left"
                         android:textColor="#5E5246"
@@ -324,7 +324,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="6dp"
-                        android:fontFamily="@font/liberationsans_regular"
+                        android:fontFamily="@font/arimo_regular"
                         android:includeFontPadding="false"
                         android:text="@string/card_maker_align_center"
                         android:textColor="#2C1A00"
@@ -355,7 +355,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="6dp"
-                        android:fontFamily="@font/liberationsans_regular"
+                        android:fontFamily="@font/arimo_regular"
                         android:includeFontPadding="false"
                         android:text="@string/card_maker_align_right"
                         android:textColor="#5E5246"
@@ -369,36 +369,32 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="18dp"
-                android:fontFamily="@font/liberationsans_bold"
+                android:fontFamily="@font/arimo_bold"
                 android:includeFontPadding="false"
                 android:text="@string/card_maker_font_label"
                 android:textColor="#5E5246"
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
-            <HorizontalScrollView
+            <!-- Dạng lưới tự xuống dòng để người dùng thấy hết các phông, không cần biết phải vuốt ngang -->
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/layoutFontOptions"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:overScrollMode="never"
-                android:scrollbars="none">
-
-                <LinearLayout
-                    android:id="@+id/layoutFontOptions"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                app:chipSpacingHorizontal="8dp"
+                app:chipSpacingVertical="8dp"
+                app:singleLine="false">
 
                     <!-- Font 1: Liberation Bold -->
                     <TextView
                         android:id="@+id/btnFontLiberationBold"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp"
                         android:background="@drawable/bg_chip_selected"
                         android:clickable="true"
                         android:focusable="true"
-                        android:fontFamily="@font/liberationsans_bold"
+                        android:fontFamily="@font/arimo_bold"
                         android:paddingStart="14dp"
                         android:paddingTop="9dp"
                         android:paddingEnd="14dp"
@@ -413,11 +409,10 @@
                         android:id="@+id/btnFontLobsterTwo"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp"
                         android:background="@drawable/bg_chip_unselected"
                         android:clickable="true"
                         android:focusable="true"
-                        android:fontFamily="@font/lobstertwo_bold"
+                        android:fontFamily="@font/lobster_regular"
                         android:paddingStart="14dp"
                         android:paddingTop="9dp"
                         android:paddingEnd="14dp"
@@ -431,11 +426,10 @@
                         android:id="@+id/btnFontLobsterItalic"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp"
                         android:background="@drawable/bg_chip_unselected"
                         android:clickable="true"
                         android:focusable="true"
-                        android:fontFamily="@font/lobstertwo_bolditalic"
+                        android:fontFamily="@font/pacifico_regular"
                         android:paddingStart="14dp"
                         android:paddingTop="9dp"
                         android:paddingEnd="14dp"
@@ -449,11 +443,10 @@
                         android:id="@+id/btnFontLiberationRegular"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp"
                         android:background="@drawable/bg_chip_unselected"
                         android:clickable="true"
                         android:focusable="true"
-                        android:fontFamily="@font/liberationsans_regular"
+                        android:fontFamily="@font/arimo_regular"
                         android:paddingStart="14dp"
                         android:paddingTop="9dp"
                         android:paddingEnd="14dp"
@@ -495,9 +488,27 @@
                         android:textColor="#5E5246"
                         android:textSize="13sp" />
 
-                </LinearLayout>
+            </com.google.android.material.chip.ChipGroup>
 
-            </HorizontalScrollView>
+            <!-- Phông thư pháp VIP (chip được thêm trong CardMakerActivity.setupFontControls) -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/arimo_bold"
+                android:includeFontPadding="false"
+                android:text="@string/card_maker_vip_font_label"
+                android:textColor="#A0522D"
+                android:textSize="13sp" />
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/layoutVipFontOptions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:chipSpacingHorizontal="8dp"
+                app:chipSpacingVertical="8dp"
+                app:singleLine="false" />
 
         </LinearLayout>
 

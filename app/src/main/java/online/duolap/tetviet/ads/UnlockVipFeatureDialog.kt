@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.FontRes
+import androidx.core.content.res.ResourcesCompat
 import android.widget.Toast
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -19,6 +21,9 @@ import javax.inject.Inject
  * Cung cấp 2 lựa chọn:
  * 1. Xem 1 video quảng cáo ngắn để mở khoá miễn phí trong 24h.
  * 2. Nâng cấp VIP để sở hữu vĩnh viễn không giới hạn và không quảng cáo.
+ *
+ * Chế độ "chỉ dành cho VIP" ([newVipOnlyInstance]) ẩn lựa chọn xem quảng cáo và có thể hiện ô xem trước,
+ * vd. lời chúc viết bằng phông chữ VIP.
  */
 @AndroidEntryPoint
 class UnlockVipFeatureDialog : BottomSheetDialogFragment() {
@@ -35,11 +40,13 @@ class UnlockVipFeatureDialog : BottomSheetDialogFragment() {
     private var featureId: String = ""
     private var featureName: String = ""
     private var onUnlockedCallback: (() -> Unit)? = null
+    private var isVipOnly: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         featureId = arguments?.getString(ARG_FEATURE_ID) ?: ""
         featureName = arguments?.getString(ARG_FEATURE_NAME) ?: ""
+        isVipOnly = arguments?.getBoolean(ARG_VIP_ONLY) ?: false
     }
 
     override fun onCreateView(
@@ -56,6 +63,20 @@ class UnlockVipFeatureDialog : BottomSheetDialogFragment() {
 
         if (featureName.isNotEmpty()) {
             binding.tvUnlockFeatureName.text = featureName
+        }
+
+        if (isVipOnly) {
+            binding.btnWatchAdUnlock.visibility = View.GONE
+            arguments?.getString(ARG_TITLE)?.let { binding.tvUnlockTitle.text = it }
+            val previewFontResId = arguments?.getInt(ARG_PREVIEW_FONT_RES) ?: 0
+            val previewText = arguments?.getString(ARG_PREVIEW_TEXT).orEmpty()
+            if (previewFontResId != 0 && previewText.isNotEmpty()) {
+                binding.tvUnlockPreview.typeface = ResourcesCompat.getFont(requireContext(), previewFontResId)
+                binding.tvUnlockPreview.text = previewText
+                binding.layoutUnlockPreview.visibility = View.VISIBLE
+            }
+            // Chỉ còn 1 lựa chọn nên làm nổi nút nâng cấp bằng viền vàng
+            binding.btnGoVip.setBackgroundResource(R.drawable.bg_vip_card_gold)
         }
 
         binding.btnWatchAdUnlock.setOnClickListener {
@@ -80,6 +101,7 @@ class UnlockVipFeatureDialog : BottomSheetDialogFragment() {
 
         adManager.showRewardedAd(
             activity = currentActivity,
+            placement = AdPlacement.UNLOCK_FEATURE,
             onUserEarnedReward = {
                 vipPreferences.unlockFeatureTemporarily(featureId)
                 Toast.makeText(
@@ -111,6 +133,32 @@ class UnlockVipFeatureDialog : BottomSheetDialogFragment() {
     companion object {
         private const val ARG_FEATURE_ID = "arg_feature_id"
         private const val ARG_FEATURE_NAME = "arg_feature_name"
+        private const val ARG_VIP_ONLY = "arg_vip_only"
+        private const val ARG_TITLE = "arg_title"
+        private const val ARG_PREVIEW_TEXT = "arg_preview_text"
+        private const val ARG_PREVIEW_FONT_RES = "arg_preview_font_res"
+
+        /**
+         * Tính năng chỉ mở bằng cách mua VIP (không có lựa chọn xem quảng cáo).
+         * @param subtitle dòng mô tả dưới tiêu đề
+         * @param previewText nội dung xem trước, hiển thị bằng [previewFontResId] (0 = không xem trước)
+         */
+        fun newVipOnlyInstance(
+            title: String,
+            subtitle: String,
+            previewText: String = "",
+            @FontRes previewFontResId: Int = 0
+        ): UnlockVipFeatureDialog {
+            return UnlockVipFeatureDialog().apply {
+                arguments = Bundle().apply {
+                    putBoolean(ARG_VIP_ONLY, true)
+                    putString(ARG_TITLE, title)
+                    putString(ARG_FEATURE_NAME, subtitle)
+                    putString(ARG_PREVIEW_TEXT, previewText)
+                    putInt(ARG_PREVIEW_FONT_RES, previewFontResId)
+                }
+            }
+        }
 
         fun newInstance(
             featureId: String,

@@ -8,6 +8,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import javax.inject.Inject
 import javax.inject.Singleton
+import androidx.core.content.edit
 
 /**
  * Quản lý lưu trữ trạng thái tài khoản VIP và các quyền lợi mở khóa tính năng
@@ -22,14 +23,14 @@ class VipPreferences @Inject constructor(
     private val _isVip = MutableStateFlow(prefs.getBoolean(KEY_IS_VIP, false))
     val isVip: StateFlow<Boolean> = _isVip.asStateFlow()
 
-    private val _unlockedFeatures = MutableStateFlow<Set<String>>(loadUnlockedFeatures())
+    private val _unlockedFeatures = MutableStateFlow(loadUnlockedFeatures())
     val unlockedFeatures: StateFlow<Set<String>> = _unlockedFeatures.asStateFlow()
 
     /**
      * Cập nhật trạng thái VIP vĩnh viễn hoặc theo kỳ hạn từ Google Play Billing.
      */
     fun setVip(vip: Boolean) {
-        prefs.edit().putBoolean(KEY_IS_VIP, vip).apply()
+        prefs.edit { putBoolean(KEY_IS_VIP, vip) }
         _isVip.value = vip
     }
 
@@ -49,9 +50,9 @@ class VipPreferences @Inject constructor(
      */
     fun unlockFeatureTemporarily(featureId: String, durationMillis: Long = DEFAULT_UNLOCK_DURATION_MS) {
         val expiryTime = System.currentTimeMillis() + durationMillis
-        prefs.edit()
-            .putLong(KEY_FEATURE_EXPIRY_PREFIX + featureId, expiryTime)
-            .apply()
+        prefs.edit {
+            putLong(KEY_FEATURE_EXPIRY_PREFIX + featureId, expiryTime)
+        }
         _unlockedFeatures.value = loadUnlockedFeatures()
     }
 

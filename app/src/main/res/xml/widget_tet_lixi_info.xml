@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Widget Lì xì. updatePeriodMillis chỉ là dự phòng; cập nhật chính là báo thức lúc nửa đêm (TetWidgetProviderBase) -->
+<appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
+    android:description="@string/widget_lixi_description"
+    android:initialLayout="@layout/widget_tet_lixi"
+    android:minWidth="250dp"
+    android:minHeight="40dp"
+    android:minResizeWidth="200dp"
+    android:minResizeHeight="40dp"
+    android:previewLayout="@layout/widget_tet_lixi"
+    android:resizeMode="horizontal|vertical"
+    android:targetCellWidth="4"
+    android:targetCellHeight="1"
+    android:updatePeriodMillis="3600000"
+    android:widgetCategory="home_screen" />

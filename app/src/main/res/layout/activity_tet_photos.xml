@@ -43,7 +43,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:fontFamily="@font/liberationsans_bold"
+                android:fontFamily="@font/arimo_bold"
                 android:includeFontPadding="false"
                 android:text="@string/photos_gallery_title"
                 android:textColor="#FFFFFF"
@@ -72,12 +72,20 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvPhotos"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:clipToPadding="false"
             android:overScrollMode="never"
             android:paddingHorizontal="10dp"
             android:paddingBottom="24dp"
             tools:listitem="@layout/item_tet_photo" />
+
+        <!-- Banner quảng cáo (AdManager.attachBanner), trống với VIP.
+             Padding dưới = thanh điều hướng, đặt trong TetPhotosActivity -->
+        <FrameLayout
+            android:id="@+id/bannerAdContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
     </LinearLayout>
 
 </FrameLayout>

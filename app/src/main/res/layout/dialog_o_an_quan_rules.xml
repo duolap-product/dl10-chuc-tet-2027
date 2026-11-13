@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/transparent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginVertical="24dp"
+        android:background="@drawable/bg_dialog_wishing_modal"
+        android:elevation="12dp"
+        android:paddingHorizontal="22dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="24dp">
+
+        <FrameLayout
+            android:id="@+id/btnCloseRules"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:background="@drawable/bg_circle_close_btn"
+            android:clickable="true"
+            android:elevation="4dp"
+            android:focusable="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_clear"
+                app:tint="#7A090D" />
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/tvRulesTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/arimo_bold"
+            android:includeFontPadding="false"
+            android:text="@string/oanquan_rules_title"
+            android:textColor="#8C1D24"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ScrollView
+            android:layout_width="0dp"
+            android:layout_height="360dp"
+            android:layout_marginTop="14dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvRulesTitle">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/arimo_bold"
+                    android:text="1. Bàn cờ &amp; Quân chơi"
+                    android:textColor="#C62828"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:fontFamily="@font/arimo_regular"
+                    android:lineSpacingExtra="2dp"
+                    android:text="• Bàn cờ gồm 10 Ô Dân (mỗi bên 5 ô) và 2 Ô Quan hình bán nguyệt ở 2 đầu.\n• Mỗi ô dân ban đầu có 5 viên sỏi (1 điểm/viên). Mỗi ô quan có 1 Quan lớn (10 điểm)."
+                    android:textColor="#5A1516"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:fontFamily="@font/arimo_bold"
+                    android:text="2. Cách rải quân"
+                    android:textColor="#C62828"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:fontFamily="@font/arimo_regular"
+                    android:lineSpacingExtra="2dp"
+                    android:text="• Đến lượt mình, chọn 1 ô dân bên sân nhà có quân, bốc lên và rải từng viên theo chiều kim đồng hồ hoặc ngược lại.\n• Sau khi viên cuối rơi xuống:\n  - Nếu ô tiếp theo là ô dân có quân: Bốc tiếp rải cùng chiều.\n  - Nếu ô tiếp theo là Ô Quan: Dừng lượt (Chững quan).\n  - Nếu ô tiếp theo là ô trống, và ô sau ô trống có quân: ĂN QUÂN!"
+                    android:textColor="#5A1516"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:fontFamily="@font/arimo_bold"
+                    android:text="3. Ăn liên hoàn (Chẹt)"
+                    android:textColor="#C62828"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:fontFamily="@font/arimo_regular"
+                    android:lineSpacingExtra="2dp"
+                    android:text="• Nếu sau ô vừa ăn lại là 1 ô trống, và sau đó là 1 ô có quân, người chơi được tiếp tục ăn ô đó (Ăn cách quãng liên tiếp)."
+                    android:textColor="#5A1516"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:fontFamily="@font/arimo_bold"
+                    android:text="4. Rải quân cứu trợ (Vay quân)"
+                    android:textColor="#C62828"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:fontFamily="@font/arimo_regular"
+                    android:lineSpacingExtra="2dp"
+                    android:text="• Đến lượt mà 5 ô nhà đều trống, người chơi phải lấy 5 viên sỏi từ kho điểm rải vào 5 ô nhà để đi tiếp. Nếu không đủ 5 viên, người chơi sẽ vay nợ đối thủ."
+                    android:textColor="#5A1516"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:fontFamily="@font/arimo_bold"
+                    android:text="5. Kết thúc ván (Hết quan tàn dân)"
+                    android:textColor="#C62828"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:fontFamily="@font/arimo_regular"
+                    android:lineSpacingExtra="2dp"
+                    android:text="• Khi cả 2 ô quan đều đã bị ăn hết, ván cờ kết thúc. Quân còn lại trên sân nhà bên nào thuộc về bên đó. Sau khi trừ nợ vay quân, ai nhiều điểm hơn sẽ thắng!"
+                    android:textColor="#5A1516"
+                    android:textSize="13sp" />
+
+            </LinearLayout>
+
+        </ScrollView>
+
+        <LinearLayout
+            android:id="@+id/btnUnderstood"
+            android:layout_width="0dp"
+            android:layout_height="46dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/bg_wishing_cta_button"
+            android:clickable="true"
+            android:elevation="4dp"
+            android:focusable="true"
+            android:gravity="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnCloseRules">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/arimo_bold"
+                android:includeFontPadding="false"
+                android:text="Đã Hiểu"
+                android:textColor="#FFFDF7"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>
+
