@@ -285,6 +285,7 @@
     <string name="vip_active_badge">You are a VIP Member 👑</string>
     <string name="vip_already_active_desc">You already have full access to all premium Tet Viet features!</string>
     <string name="dialog_unlock_vip_title">Unlock VIP Feature</string>
+    <string name="dialog_unlock_free_title">Unlock for Free</string>
     <string name="dialog_unlock_vip_subtitle">This feature belongs to Tet Viet VIP exclusive package</string>
     <string name="btn_watch_ad_unlock_title">Watch a short video to unlock</string>
     <string name="btn_watch_ad_unlock_desc">Watch once to use free for 24 hours</string>

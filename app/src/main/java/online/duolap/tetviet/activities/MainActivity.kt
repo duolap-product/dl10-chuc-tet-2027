@@ -25,6 +25,7 @@ import androidx.core.graphics.toColorInt
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.isVisible
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -365,6 +366,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupClickListeners() {
         // Top action icons
+        binding.btnVip.isVisible = BuildConfig.IAP_ENABLED
         binding.btnVip.setSafeOnClickListener(hasAnim = true) {
             AppAnalytics.logFeatureClick("open_vip_from_main")
             val intent = Intent(this, VipActivity::class.java)
@@ -520,6 +522,7 @@ class MainActivity : AppCompatActivity() {
         dialog.behavior.skipCollapsed = true
 
         // Thẻ VIP: mời nâng cấp, hoặc cảm ơn nếu đã là VIP
+        view.findViewById<android.view.View>(R.id.layoutVipSetting)?.isVisible = BuildConfig.IAP_ENABLED
         if (vipPreferences.isVip.value) {
             view.findViewById<TextView>(R.id.tvVipSettingDesc)?.text = getString(R.string.settings_vip_active_desc)
             view.findViewById<TextView>(R.id.tvVipSettingCta)?.text = getString(R.string.settings_vip_active_cta)

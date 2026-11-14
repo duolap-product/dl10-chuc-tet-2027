@@ -284,6 +284,7 @@
     <string name="vip_active_badge">Bạn đang là Thành Viên VIP 👑</string>
     <string name="vip_already_active_desc">Bạn đang sở hữu mọi đặc quyền cao cấp nhất của Tết Việt!</string>
     <string name="dialog_unlock_vip_title">Mở Khóa Tính Năng VIP</string>
+    <string name="dialog_unlock_free_title">Mở Khóa Miễn Phí</string>
     <string name="dialog_unlock_vip_subtitle">Tính năng này thuộc gói đặc quyền VIP Tết Việt</string>
     <string name="btn_watch_ad_unlock_title">Xem 1 video ngắn để mở khoá</string>
     <string name="btn_watch_ad_unlock_desc">Xem xong là dùng ngay miễn phí trong 24h</string>

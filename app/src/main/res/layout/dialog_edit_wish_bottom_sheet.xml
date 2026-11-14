@@ -492,6 +492,7 @@
 
             <!-- Phông thư pháp VIP (chip được thêm trong CardMakerActivity.setupFontControls) -->
             <TextView
+                android:id="@+id/tvVipFontLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"

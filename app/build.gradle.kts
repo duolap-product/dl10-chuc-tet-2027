@@ -58,6 +58,9 @@ android {
         buildConfigField("String", "ADMOB_BANNER_ID", "\"$admobTestBannerId\"")
         admobBannerPlacementKeys.forEach { buildConfigField("String", it, "\"$admobTestBannerId\"") }
         buildConfigField("String", "ADMOB_APP_OPEN_ID", "\"$admobTestAppOpenId\"")
+
+        // Mua trong ứng dụng (gói VIP, phông chữ VIP). Tắt cho đến khi cấu hình xong sản phẩm trên Play Console.
+        buildConfigField("boolean", "IAP_ENABLED", "false")
     }
 
     val keystorePropertiesFile = rootProject.file("keystore.properties")

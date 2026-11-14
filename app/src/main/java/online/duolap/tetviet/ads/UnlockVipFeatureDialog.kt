@@ -10,6 +10,7 @@ import androidx.core.content.res.ResourcesCompat
 import android.widget.Toast
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
+import online.duolap.tetviet.BuildConfig
 import online.duolap.tetviet.R
 import online.duolap.tetviet.activities.VipActivity
 import online.duolap.tetviet.data.local.VipPreferences
@@ -77,6 +78,12 @@ class UnlockVipFeatureDialog : BottomSheetDialogFragment() {
             }
             // Chỉ còn 1 lựa chọn nên làm nổi nút nâng cấp bằng viền vàng
             binding.btnGoVip.setBackgroundResource(R.drawable.bg_vip_card_gold)
+        }
+
+        // Chưa bán gói VIP: chỉ còn cách xem quảng cáo, nên không nhắc tới VIP trong tiêu đề
+        if (!BuildConfig.IAP_ENABLED) {
+            binding.btnGoVip.visibility = View.GONE
+            binding.tvUnlockTitle.text = getString(R.string.dialog_unlock_free_title)
         }
 
         binding.btnWatchAdUnlock.setOnClickListener {

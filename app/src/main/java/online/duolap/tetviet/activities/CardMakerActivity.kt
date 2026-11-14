@@ -52,6 +52,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import online.duolap.tetviet.BuildConfig
 import online.duolap.tetviet.R
 import online.duolap.tetviet.adapter.BackgroundGridAdapter
 import online.duolap.tetviet.adapter.StickerGridAdapter
@@ -700,8 +701,11 @@ class CardMakerActivity : AppCompatActivity() {
             view.gravity = Gravity.CENTER
         }
 
-        // Phông chữ VIP: nhóm riêng có tiêu đề "Phông thư pháp VIP"
-        val vipFontChips = VipCardFontManager.FONTS.map { font ->
+        // Phông chữ VIP: nhóm riêng có tiêu đề "Phông thư pháp VIP", ẩn hẳn khi chưa bật mua trong ứng dụng
+        sheetBinding.tvVipFontLabel.isVisible = BuildConfig.IAP_ENABLED
+        sheetBinding.layoutVipFontOptions.isVisible = BuildConfig.IAP_ENABLED
+        val vipFonts = if (BuildConfig.IAP_ENABLED) VipCardFontManager.FONTS else emptyList()
+        val vipFontChips = vipFonts.map { font ->
             font to createVipFontChip(font).also { sheetBinding.layoutVipFontOptions.addView(it) }
         }
 
