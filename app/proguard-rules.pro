@@ -21,7 +21,10 @@
 -keep class online.duolap.tetviet.game.dapchuot.** { *; }
 
 # Room Database
--keep class * extends androidx.room.RoomDatabase
+# Room tạo *_Impl bằng reflection (getDeclaredConstructor), nên phải giữ cả constructor rỗng.
+# Thiếu <init>() thì R8 full mode xoá constructor của WorkDatabase_Impl (WorkManager, đi kèm AdMob/UMP)
+# và app crash ngay khi khởi động.
+-keep class * extends androidx.room.RoomDatabase { <init>(); }
 -dontwarn androidx.room.paging.**
 
 # ------------------------------------------------------------------------------
