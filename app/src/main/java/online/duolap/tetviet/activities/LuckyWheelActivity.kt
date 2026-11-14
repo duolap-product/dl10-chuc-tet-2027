@@ -125,7 +125,7 @@ class LuckyWheelActivity : AppCompatActivity() {
         }
 
         binding.btnSpin.setOnClickListener {
-            startLuckySpin()
+            spinWithAdBreak()
         }
     }
 
@@ -144,6 +144,20 @@ class LuckyWheelActivity : AppCompatActivity() {
             randomWeight -= w
         }
         return items.indices.random()
+    }
+
+    /**
+     * Điểm dừng tự nhiên: từ lượt quay thứ 2 trở đi, xét quảng cáo trước khi quay.
+     * Tần suất do AdPolicy quyết định theo thời gian (khoảng cách tối thiểu, giới hạn phiên/ngày).
+     * Gọi từ cả nút "Quay" lẫn "Quay lại" để đóng bảng kết quả rồi bấm "Quay" cũng được xét.
+     */
+    private fun spinWithAdBreak() {
+        if (binding.luckyWheelView.isSpinning) return
+        if (spinCount > 0 && wheelItems.size >= 2) {
+            adManager.showInterstitialAd(this, AdPlacement.LUCKY_WHEEL_SPIN) { startLuckySpin() }
+        } else {
+            startLuckySpin()
+        }
     }
 
     @SuppressLint("SetTextI18n")
@@ -188,12 +202,7 @@ class LuckyWheelActivity : AppCompatActivity() {
         dialogBinding.tvResultPrize.text = prizeText
         dialogBinding.btnSpinAgain.setOnClickListener {
             dialog.dismiss()
-            // Điểm dừng tự nhiên: hiện quảng cáo trước lượt quay mới (cứ 3 lượt), AdPolicy quyết định tần suất cuối cùng
-            if (spinCount % 3 == 0) {
-                adManager.showInterstitialAd(this, AdPlacement.LUCKY_WHEEL_SPIN) { startLuckySpin() }
-            } else {
-                startLuckySpin()
-            }
+            spinWithAdBreak()
         }
         dialog.show()
     }

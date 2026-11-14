@@ -17,13 +17,16 @@ class AdPolicy(
 ) {
 
     data class Config(
-        val minIntervalBetweenInterstitialsMs: Long = 90_000L,
-        val cooldownAfterRewardedMs: Long = 120_000L,
-        val maxInterstitialsPerSession: Int = 4,
-        val maxInterstitialsPerDay: Int = 12,
+        val minIntervalBetweenInterstitialsMs: Long = 60_000L,
+        val cooldownAfterRewardedMs: Long = 60_000L,
+        val maxInterstitialsPerSession: Int = 6,
+        val maxInterstitialsPerDay: Int = 15,
         // Cùng cách tính phiên với Firebase Analytics: ở nền quá 30 phút thì tính là phiên mới
         val sessionTimeoutMs: Long = 30 * 60_000L,
         val firstSessionAdFree: Boolean = true,
+        // Người dùng mới: không có interstitial trong vài phút đầu kể từ lần mở app đầu tiên.
+        // Sau đó interstitial được phép ngay cả trong phiên đầu (App Open vẫn chờ tới phiên 2).
+        val newUserInterstitialGraceMs: Long = 3 * 60_000L,
         // App Open: tối đa 1 lần mỗi 6 giờ, chỉ khi quay lại sau khi ở nền đủ lâu
         val appOpenCooldownMs: Long = 6 * 60 * 60_000L,
         val minBackgroundForAppOpenMs: Long = 30_000L
@@ -71,6 +74,9 @@ class AdPolicy(
             interstitialsThisSession = 0
             store.putLong(KEY_SESSION_COUNT, store.getLong(KEY_SESSION_COUNT, 0L) + 1)
         }
+        if (store.getLong(KEY_FIRST_OPEN_AT, 0L) == 0L) {
+            store.putLong(KEY_FIRST_OPEN_AT, currentTime)
+        }
     }
 
     /** Gọi khi toàn bộ app chuyển vào nền. */
@@ -81,7 +87,10 @@ class AdPolicy(
     fun checkInterstitial(): Decision {
         val currentTime = now()
 
-        if (config.firstSessionAdFree && store.getLong(KEY_SESSION_COUNT, 0L) <= 1L) {
+        val firstOpenAt = store.getLong(KEY_FIRST_OPEN_AT, 0L)
+        if (config.firstSessionAdFree && store.getLong(KEY_SESSION_COUNT, 0L) <= 1L &&
+            (firstOpenAt == 0L || currentTime - firstOpenAt < config.newUserInterstitialGraceMs)
+        ) {
             return Decision.FIRST_SESSION
         }
         if (interstitialsThisSession >= config.maxInterstitialsPerSession) {
@@ -167,5 +176,6 @@ class AdPolicy(
         private const val KEY_LAST_INTERSTITIAL_AT = "last_interstitial_at"
         private const val KEY_LAST_REWARDED_AT = "last_rewarded_at"
         private const val KEY_LAST_APP_OPEN_AT = "last_app_open_at"
+        private const val KEY_FIRST_OPEN_AT = "first_open_at"
     }
 }

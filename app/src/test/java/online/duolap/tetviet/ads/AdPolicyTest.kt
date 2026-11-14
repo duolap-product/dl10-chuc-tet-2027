@@ -39,7 +39,7 @@ class AdPolicyTest {
     private fun showInterstitialAndWait(policy: AdPolicy) {
         assertEquals(Decision.ALLOWED, policy.checkInterstitial())
         policy.recordInterstitialShown()
-        advance(TimeUnit.SECONDS.toMillis(91))
+        advance(TimeUnit.SECONDS.toMillis(61))
     }
 
     @Before
@@ -60,11 +60,21 @@ class AdPolicyTest {
     }
 
     @Test
+    fun firstSessionAllowsInterstitialAfterGracePeriod() {
+        val policy = newPolicy()
+        policy.onAppForeground()
+        advance(TimeUnit.SECONDS.toMillis(170))
+        assertEquals(Decision.FIRST_SESSION, policy.checkInterstitial())
+        advance(TimeUnit.SECONDS.toMillis(11))
+        assertEquals(Decision.ALLOWED, policy.checkInterstitial())
+    }
+
+    @Test
     fun shortBackgroundDoesNotStartNewSession() {
         val policy = newPolicy()
         policy.onAppForeground()
         policy.onAppBackground()
-        advance(TimeUnit.MINUTES.toMillis(5))
+        advance(TimeUnit.MINUTES.toMillis(1))
         policy.onAppForeground()
         assertEquals(Decision.FIRST_SESSION, policy.checkInterstitial())
     }
@@ -86,9 +96,9 @@ class AdPolicyTest {
     fun minimumIntervalBetweenInterstitials() {
         val policy = returningUserPolicy()
         policy.recordInterstitialShown()
-        advance(TimeUnit.SECONDS.toMillis(60))
+        advance(TimeUnit.SECONDS.toMillis(50))
         assertEquals(Decision.TOO_SOON, policy.checkInterstitial())
-        advance(TimeUnit.SECONDS.toMillis(31))
+        advance(TimeUnit.SECONDS.toMillis(11))
         assertEquals(Decision.ALLOWED, policy.checkInterstitial())
     }
 
@@ -96,16 +106,16 @@ class AdPolicyTest {
     fun cooldownAfterRewarded() {
         val policy = returningUserPolicy()
         policy.recordRewardedShown()
-        advance(TimeUnit.SECONDS.toMillis(100))
+        advance(TimeUnit.SECONDS.toMillis(50))
         assertEquals(Decision.AFTER_REWARDED, policy.checkInterstitial())
-        advance(TimeUnit.SECONDS.toMillis(21))
+        advance(TimeUnit.SECONDS.toMillis(11))
         assertEquals(Decision.ALLOWED, policy.checkInterstitial())
     }
 
     @Test
     fun sessionCapResetsInNewSession() {
         val policy = returningUserPolicy()
-        repeat(4) { showInterstitialAndWait(policy) }
+        repeat(6) { showInterstitialAndWait(policy) }
         assertEquals(Decision.SESSION_CAP, policy.checkInterstitial())
 
         policy.onAppBackground()
@@ -118,7 +128,7 @@ class AdPolicyTest {
     fun dailyCapResetsNextDay() {
         val policy = returningUserPolicy()
         repeat(3) {
-            repeat(4) { showInterstitialAndWait(policy) }
+            repeat(5) { showInterstitialAndWait(policy) }
             policy.onAppBackground()
             advance(TimeUnit.MINUTES.toMillis(31))
             policy.onAppForeground()
