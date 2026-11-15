@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Đập Chuột v2: hình vẽ chủ đề Tết, tạo bởi script, chỉnh tay được -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android" xmlns:aapt="http://schemas.android.com/aapt"
+    android:width="100dp"
+    android:height="100dp"
+    android:viewportWidth="100"
+    android:viewportHeight="100">
+    <path android:pathData="M16,46 Q16,42 20,42 L36,42 Q40,42 40,46 L40,100 L16,100 Z">
+        <aapt:attr name="android:fillColor">
+            <gradient android:type="linear" android:startX="16" android:startY="0" android:endX="40" android:endY="0"
+                android:startColor="#FFE53935" android:endColor="#FFB71C1C" />
+        </aapt:attr>
+    </path>
+    <path android:pathData="M60,46 Q60,42 64,42 L80,42 Q84,42 84,46 L84,100 L60,100 Z">
+        <aapt:attr name="android:fillColor">
+            <gradient android:type="linear" android:startX="60" android:startY="0" android:endX="84" android:endY="0"
+                android:startColor="#FFE53935" android:endColor="#FFB71C1C" />
+        </aapt:attr>
+    </path>
+    <path android:pathData="M37,34 Q37,30 41,30 L59,30 Q63,30 63,34 L63,100 L37,100 Z">
+        <aapt:attr name="android:fillColor">
+            <gradient android:type="linear" android:startX="37" android:startY="0" android:endX="63" android:endY="0"
+                android:startColor="#FFF44336" android:endColor="#FFC62828" />
+        </aapt:attr>
+    </path>
+    <path android:pathData="M16,50 L84,50 L84,55 L16,55 Z"
+        android:fillColor="#FFFFC107" />
+    <path android:pathData="M16,88 L84,88 L84,93 L16,93 Z"
+        android:fillColor="#FFFFC107" />
+    <path android:pathData="M41,32 L41,98"
+        android:strokeColor="#FFFFFFFF"
+        android:strokeWidth="2.5"
+        android:strokeAlpha="0.3"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round" />
+    <path android:pathData="M50,62 L58,70 L50,78 L42,70 Z"
+        android:fillColor="#FFFFD54F"
+        android:strokeColor="#FFFF8F00"
+        android:strokeWidth="1" />
+    <path android:pathData="M43,39 L48.5,42.5 M57,39 L51.5,42.5"
+        android:strokeColor="#FF2B1B17"
+        android:strokeWidth="2.2"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round" />
+    <path android:pathData="M44.3,45.5 A2.2,2.2 0 1,0 48.7,45.5 A2.2,2.2 0 1,0 44.3,45.5 Z"
+        android:fillColor="#FF2B1B17" />
+    <path android:pathData="M51.3,45.5 A2.2,2.2 0 1,0 55.7,45.5 A2.2,2.2 0 1,0 51.3,45.5 Z"
+        android:fillColor="#FF2B1B17" />
+    <path android:pathData="M50,30 Q55,20 47,11"
+        android:strokeColor="#FF5D4037"
+        android:strokeWidth="2.6"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round" />
+    <path android:pathData="M47,0.5 L48.75,5.97 L54.36,4.75 L50.5,9 L54.36,13.25 L48.75,12.03 L47,17.5 L45.25,12.03 L39.64,13.25 L43.5,9 L39.64,4.75 L45.25,5.97 Z"
+        android:fillColor="#FFFF9100" />
+    <path android:pathData="M49.5,4.67 L48.91,7.9 L52,9 L48.91,10.1 L49.5,13.33 L47,11.2 L44.5,13.33 L45.09,10.1 L42,9 L45.09,7.9 L44.5,4.67 L47,6.8 Z"
+        android:fillColor="#FFFFEB3B" />
+    <path android:pathData="M45.4,9 A1.6,1.6 0 1,0 48.6,9 A1.6,1.6 0 1,0 45.4,9 Z"
+        android:fillColor="#FFFFFFFF" />
+</vector>

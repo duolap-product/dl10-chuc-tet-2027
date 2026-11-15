@@ -26,7 +26,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Top Action Buttons: Music & Settings -->
     <LinearLayout
         android:id="@+id/layoutTopActions"
         android:layout_width="0dp"
@@ -52,7 +51,7 @@
             android:gravity="center_vertical"
             android:paddingHorizontal="10dp">
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:layout_width="16dp"
                 android:layout_height="16dp"
                 android:src="@drawable/ic_vip_crown" />
@@ -68,25 +67,21 @@
                 android:textSize="12sp" />
         </LinearLayout>
 
-        <!-- Nút Bật/Tắt Nhạc Tết -->
-        <ImageButton
+        <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/btnMusicToggle"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginEnd="10dp"
             android:background="@drawable/bg_glass_circle"
-            android:contentDescription="Bật/Tắt nhạc nền Tết"
             android:padding="9dp"
             android:src="@drawable/ic_music_note"
             app:tint="#FFE8A3" />
 
-        <!-- Nút Cài Đặt -->
-        <ImageButton
+        <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/btnSettings"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:background="@drawable/bg_glass_circle"
-            android:contentDescription="Cài đặt"
             android:padding="9dp"
             android:src="@drawable/ic_settings"
             app:tint="#FFE8A3" />
@@ -118,7 +113,6 @@
             android:layout_height="164dp"
             android:overScrollMode="never" />
 
-        <!-- Indicators: 2 dots for 2 pages -->
         <LinearLayout
             android:id="@+id/layoutIndicators"
             android:layout_width="wrap_content"
@@ -163,6 +157,14 @@
             android:layout_marginEnd="16dp"
             android:orientation="vertical"
             android:paddingBottom="92dp">
+
+            <!-- Khu "Sân Chơi Ngày Tết": điểm danh nhận lì xì + 3 game, đặt đầu tiên cho nổi bật -->
+            <include
+                android:id="@+id/gameZone"
+                layout="@layout/layout_home_game_zone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp" />
 
             <!-- Row 1: Tử Vi & Tử Khởi | Lời Chúc Ý Nghĩa -->
             <LinearLayout
@@ -436,7 +438,8 @@
 
             </LinearLayout>
 
-            <!-- Row 4: Hàng 3 Item (Hình Ảnh Tết & 2 Tính Năng Dự Phòng) -->
+            <!-- Row 4: Khám phá Tết Việt. Thẻ Bầu Cua / Ô Ăn Quan / Đập Chuột (cardOption2/4/5) đã chuyển lên
+                 khu game ở đầu trang; giữ lại nhưng ẩn (visibility="gone"). -->
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -509,6 +512,7 @@
 
                         <FrameLayout
                             android:id="@+id/cardOption2"
+                            android:visibility="gone"
                             android:layout_width="120dp"
                             android:layout_height="154dp"
                             android:layout_marginEnd="15dp"
@@ -578,6 +582,7 @@
 
                         <FrameLayout
                             android:id="@+id/cardOption4"
+                            android:visibility="gone"
                             android:layout_width="120dp"
                             android:layout_height="154dp"
                             android:layout_marginEnd="15dp"
@@ -596,7 +601,7 @@
                                     android:layout_height="match_parent"
                                     android:contentDescription="@string/feature_o_an_quan"
                                     android:scaleType="centerCrop"
-                                    android:src="@drawable/bg_o_an_quan_main" />
+                                    android:src="@drawable/bg_oaq_home_card" />
 
                                 <TextView
                                     android:id="@+id/tvOption4"
@@ -620,6 +625,7 @@
 
                         <FrameLayout
                             android:id="@+id/cardOption5"
+                            android:visibility="gone"
                             android:layout_width="120dp"
                             android:layout_height="154dp"
                             android:layout_marginEnd="15dp"
@@ -638,7 +644,7 @@
                                     android:layout_height="match_parent"
                                     android:contentDescription="@string/feature_dap_chuot"
                                     android:scaleType="centerCrop"
-                                    android:src="@drawable/bg_dap_chuot_main" />
+                                    android:src="@drawable/bg_dc_home_card" />
 
                                 <TextView
                                     android:id="@+id/tvOption5"

@@ -9,6 +9,7 @@
     <string name="app_footer_brand">Tet Viet 2027 • DuoLap</string>
     <string name="app_version_info">Version 1.0 • Happy Lunar New Year 2027</string>
     <string name="action_close">Close</string>
+    <string name="action_back">Back</string>
     <string name="action_cancel">Cancel</string>
     <string name="action_confirm">Confirm</string>
     <string name="action_save">Save</string>
@@ -363,6 +364,36 @@
     <string name="wishing_tree_my_wishes_empty">You haven\'t hung any wishes yet. Make a heartfelt wish for the New Year!</string>
     <string name="wishing_tree_category_all">All</string>
     <string name="wishing_tree_blessings_count">%1$d blessings</string>
+    <!-- Lanterns on the Wishing Tree: tap for a random greeting -->
+    <string name="wishing_lantern_content_desc">Lucky lantern, tap to receive a greeting</string>
+    <string name="wishing_lantern_dialog_title">A Greeting From the Lantern</string>
+    <string name="wishing_lantern_dialog_hint">Tap a lantern on the tree for another greeting!</string>
+    <string name="wishing_lantern_btn_another">Another one</string>
+    <string name="wishing_lantern_share_format">🏮 A spring greeting from the Wishing Tree:\n\n“%1$s”\n\nGet your own New Year greetings in the Tết Việt app!</string>
+    <string-array name="wishing_lantern_greetings">
+        <item>Wishing you peace, prosperity and a smile that never fades this New Year.</item>
+        <item>May this year bring you great health, high spirits and smooth sailing in everything you do.</item>
+        <item>May money flow in like a river and out like a trickle, keeping your pockets full all year.</item>
+        <item>Wishing your family a year of togetherness, harmony and warm happiness.</item>
+        <item>May your career soar and every plan you make turn into a brilliant success.</item>
+        <item>Wishing you great progress in your studies and success in every exam.</item>
+        <item>May love blossom for you this year, and may you find the person your heart is looking for.</item>
+        <item>The lantern lights your path to luck: wishing you a safe year full of good things.</item>
+        <item>Wishing you swift success and a business that thrives all year round.</item>
+        <item>May you eat well, sleep well and worry less, with every day a happy one.</item>
+        <item>As the apricot blossoms bloom, may blessings and fortune fill your home.</item>
+        <item>May you rise above every challenge and reach every dream this year.</item>
+        <item>Wishing you new joys, new friends and beautiful journeys in the New Year.</item>
+        <item>May you and your loved ones stay healthy, safe and live a long, happy life.</item>
+        <item>Wishing you a year full of luck, with helpful people at every turn.</item>
+        <item>A peaceful spring and a joyful Tết: may your New Year overflow with energy and hope.</item>
+        <item>May your pockets be full of money, your heart full of love and your home full of joy.</item>
+        <item>May every wish you make this spring come true soon.</item>
+        <item>New year, new wins: may you move forward with confidence and reap great rewards.</item>
+        <item>The red lantern sends its wish: may you always be loved and truly happy.</item>
+        <item>Wishing you a calm, easy year with peace in your heart, however busy life gets.</item>
+        <item>Wishing you fortune, wealth and a business that keeps on growing.</item>
+    </string-array>
     <string name="wish_cat_health">Health</string>
     <string name="wish_cat_career">Career</string>
     <string name="wish_cat_love">Love</string>
@@ -395,6 +426,52 @@
     <string name="oanquan_lose_title">BETTER LUCK NEXT TIME! 🌸</string>
     <string name="oanquan_draw_title">DRAW! 🤝</string>
     <string name="oanquan_reward_coins_win">Victory reward: +100 Lucky Coins</string>
+    <!-- Ô Ăn Quan v2 -->
+    <string name="oanquan_you">You</string>
+    <string name="oanquan_vs">VS</string>
+    <string name="oanquan_player_1">Player 1</string>
+    <string name="oanquan_player_2">Player 2</string>
+    <string name="oanquan_opp_ai_format">Bot (%s)</string>
+    <string name="oanquan_opp_online">Online opponent</string>
+    <string name="oanquan_mode_sub_ai">Vs Bot · %s ▾</string>
+    <string name="oanquan_mode_sub_pass">Vs Friend (same device) ▾</string>
+    <string name="oanquan_mode_sub_online">Online (PvP) ▾</string>
+    <string name="oanquan_first_move">%s goes first!</string>
+    <string name="oanquan_thinking">Thinking…</string>
+    <string name="oanquan_turn_waiting">WAITING</string>
+    <string name="oanquan_turn_now">PLAYING</string>
+    <string name="oanquan_banner_capture">Captured +%d!</string>
+    <string name="oanquan_banner_capture_quan">Quan captured! +%d</string>
+    <string name="oanquan_banner_chain">Chain capture x%d!</string>
+    <string name="oanquan_banner_opp_capture">Opponent +%d</string>
+    <string name="oanquan_banner_chung_quan">Stopped by Quan!</string>
+    <string name="oanquan_banner_relief">Out of stones! Reseeding</string>
+    <string name="oanquan_banner_relief_debt">Out of stones! Borrowed %d</string>
+    <string name="oanquan_banner_game_over">No Quan left, game over!</string>
+    <string name="oanquan_banner_undo">Move undone!</string>
+    <string name="oanquan_hint_banner">Hint: glowing pit, blinking arrow</string>
+    <string name="oanquan_hint_none">No moves left</string>
+    <string name="oanquan_free">Free</string>
+    <string name="oanquan_btn_undo">Undo</string>
+    <string name="oanquan_result_win">Victory!</string>
+    <string name="oanquan_result_lose">Defeat</string>
+    <string name="oanquan_result_draw">Draw!</string>
+    <string name="oanquan_result_player_wins">%s Wins!</string>
+    <string name="oanquan_result_desc_win">You gathered more stones. Great job!</string>
+    <string name="oanquan_result_desc_lose">So close! Undo your last move and turn the tables?</string>
+    <string name="oanquan_result_desc_lose_plain">Better luck next round!</string>
+    <string name="oanquan_result_desc_draw">Evenly matched!</string>
+    <string name="oanquan_result_row_captured">Captured</string>
+    <string name="oanquan_result_row_harvest">End-of-game stones</string>
+    <string name="oanquan_result_row_debt">Borrowed</string>
+    <string name="oanquan_result_row_total">Total</string>
+    <string name="oanquan_result_coins">+%d Coins</string>
+    <string name="oanquan_result_coins_label">Reward</string>
+    <string name="oanquan_result_double">Double coins</string>
+    <string name="oanquan_result_double_done">Got %d coins!</string>
+    <string name="oanquan_result_undo">Undo last move</string>
+    <string name="oanquan_play_again">Play Again</string>
+    <string name="oanquan_points_format">%d pts</string>
     <string name="feature_o_an_quan">Mandarin Square</string>
     <string name="feature_o_an_quan_desc">Folk strategy game</string>
 
@@ -415,6 +492,29 @@
     <string name="dap_chuot_hit_golden">+30 ⭐</string>
     <string name="dap_chuot_hit_bomb">-15 💥</string>
     <string name="dap_chuot_combo_prefix">x</string>
+    <string name="dap_chuot_timer_format">%1$ds</string>
+    <string name="dap_chuot_tagline">Whack the cheeky mice, catch New Year luck!</string>
+    <string name="dap_chuot_legend_normal">Mouse</string>
+    <string name="dap_chuot_legend_golden">Golden mouse</string>
+    <string name="dap_chuot_legend_bomb">Firecracker, avoid!</string>
+    <string name="dap_chuot_combo_banner">COMBO x%1$d!</string>
+    <string name="dap_chuot_praise_good">Great!</string>
+    <string name="dap_chuot_praise_great">Awesome!</string>
+    <string name="dap_chuot_praise_legend">Unstoppable!</string>
+    <string name="dap_chuot_bomb_hit">Oops! Firecracker</string>
+    <string name="dap_chuot_last_seconds">10 seconds left!</string>
+    <string name="dap_chuot_time_up">TIME\'S UP!</string>
+    <string name="dap_chuot_revive_title">Play 10 more seconds?</string>
+    <string name="dap_chuot_revive_desc">Watch a short video for 10 more seconds and keep your score.</string>
+    <string name="dap_chuot_revive_watch">Watch video +10s</string>
+    <string name="dap_chuot_revive_skip">See results (%1$d)</string>
+    <string name="dap_chuot_coins_earned">+%1$d coins</string>
+    <string name="dap_chuot_double_coins">Double coins</string>
+    <string name="dap_chuot_double_coins_done">Doubled: +%1$d coins</string>
+    <string name="dap_chuot_coins_label">Coins</string>
+    <string name="dap_chuot_exit_confirm_message">Quit while the game is still running?</string>
+    <string name="dap_chuot_exit_confirm_yes">Quit</string>
+    <string name="dap_chuot_exit_confirm_no">Keep playing</string>
     <string name="msg_ad_not_ready">The video ad isn\'t ready yet. Please try again in a moment.</string>
     <string name="settings_privacy_options_title">Privacy options</string>
     <string name="settings_privacy_options_desc">Manage your ad consent choices</string>
@@ -512,4 +612,71 @@
     <string name="vip_perk_fonts_title">VIP calligraphy fonts</string>
     <string name="vip_perk_fonts_desc">7 exclusive handwritten fonts for your Tết card wishes</string>
     <string name="vip_perk_fonts_sample">Happy New Year</string>
+
+    <!-- Tết Game Corner + daily check-in -->
+    <string name="game_zone_title">Tết Game Corner</string>
+    <string name="game_zone_subtitle">Check in for coins, play folk games</string>
+    <string name="game_zone_play_now">▶ Play</string>
+    <string name="game_zone_bau_cua">Bau Cua</string>
+    <string name="game_zone_badge_hot">HOT</string>
+    <string name="game_zone_badge_new">NEW</string>
+    <string name="game_zone_badge_strategy">STRATEGY</string>
+    <string name="game_zone_coin_desc">You have %1$s coins</string>
+    <string name="checkin_title">Daily lucky money</string>
+    <string name="checkin_day_label">Day %1$d</string>
+    <string name="checkin_reward_short">+%1$d</string>
+    <string name="checkin_subtitle_streak">%1$d-day streak · Day 7 gives %2$d coins</string>
+    <string name="checkin_subtitle_start">Check in daily · Day 7 gives %1$d coins</string>
+    <string name="checkin_cta_claim">Claim +%1$d coins</string>
+    <string name="checkin_cta_wait">Come back in %1$s for +%2$d coins</string>
+    <string name="checkin_dialog_title">Day %1$d Lucky Money</string>
+    <string name="checkin_dialog_desc">Check in every day: the longer your streak, the bigger the lucky money. Miss a day and you start again from day 1. Day 7 gives %1$d coins!</string>
+    <string name="checkin_dialog_claimed_title">Lucky Money Claimed!</string>
+    <string name="checkin_dialog_amount">+%1$d coins</string>
+    <string name="checkin_dialog_claimed_desc">Coins work in Bau Cua, Mandarin Square and Whack-a-Mole.</string>
+    <string name="checkin_btn_double">Watch a video for x2 (+%1$d coins)</string>
+    <string name="checkin_btn_normal">Claim +%1$d coins</string>
+    <string name="checkin_come_back">Come back tomorrow for +%1$d coins!</string>
+    <string name="checkin_come_back_big">Tomorrow is day 7: big lucky money of %1$d coins!</string>
+    <string name="checkin_reminder_on">🔔 We\'ll remind you at 7 PM if you forget</string>
+    <string name="checkin_reminder_off">Turn on notifications to get a daily check-in reminder</string>
+    <string name="checkin_enable_reminder">Turn on reminders</string>
+    <string name="checkin_btn_play_bau_cua">Play Bau Cua now</string>
+    <string name="checkin_btn_continue">Keep playing</string>
+    <string name="checkin_channel_name">Daily check-in reminder</string>
+    <string name="checkin_channel_desc">Reminds you at 7 PM if you haven\'t claimed today\'s lucky money</string>
+    <string name="checkin_notif_title_start">🧧 Today\'s lucky money is ready!</string>
+    <string name="checkin_notif_text_start">Open the app to claim +%1$d coins for Bau Cua, Mandarin Square and Whack-a-Mole!</string>
+    <string name="checkin_notif_title_streak">🧧 Day %1$d lucky money is waiting!</string>
+    <string name="checkin_notif_text_streak">Claim +%1$d coins now and keep your %2$d-day streak alive!</string>
+    <string name="checkin_notif_title_big">🧧 It\'s day 7: big lucky money!</string>
+    <string name="checkin_notif_text_big">Check in now to claim %1$d coins before the day ends!</string>
+    <string name="settings_checkin_reminder_title">Check-in reminder</string>
+    <string name="settings_checkin_reminder_desc">Every day at 7 PM if you haven\'t claimed</string>
+
+    <!-- Coin gain effect + x2 video reward in Bau Cua -->
+    <string name="coin_fly_gain">+%1$d coins</string>
+    <string name="baucua_relief_claimed_desc_x2">You already claimed today\'s %1$d-coin lucky money (see you tomorrow)!\n\nWatch a short video to get double: +%2$d lucky coins!</string>
+    <string name="baucua_btn_watch_ad_x2">Watch Video for x2: +%1$d Coins</string>
+    <string name="baucua_reward_video_desc">Lucky video reward</string>
+    <string name="baucua_relief_video_desc">You already claimed today\'s %1$d-coin lucky money (see you tomorrow)!\n\nWatch a short video for +%2$d more lucky coins, as many times as you like!</string>
+    <string name="baucua_btn_watch_ad_amount">Watch Video for +%1$d Coins</string>
+
+    <!-- Buy us a coffee (developer tip) -->
+    <string name="settings_donate_title">Buy the developer a coffee</string>
+    <string name="settings_donate_desc">Support new features for Chúc Tết</string>
+    <string name="donate_title">Buy Us a Coffee ☕</string>
+    <string name="donate_desc">Chúc Tết is a free app made by a small team. If it brought you a little Tết joy, buy us a coffee to keep us motivated to build new features!</string>
+    <string name="donate_coffee_title">Black coffee</string>
+    <string name="donate_coffee_desc">One cup for a bright morning</string>
+    <string name="donate_milk_coffee_title">Iced milk coffee</string>
+    <string name="donate_milk_coffee_desc">A little spring sweetness</string>
+    <string name="donate_coffee_cake_title">Coffee and cake</string>
+    <string name="donate_coffee_cake_desc">Fuel for a whole night of coding</string>
+    <string name="donate_price_loading">…</string>
+    <string name="donate_note">Secure payment through Google Play. This is a voluntary tip and does not unlock any features.</string>
+    <string name="donate_unavailable">Couldn\'t load Google Play details, please try again later.</string>
+    <string name="donate_thanks_title">Thank you so much! ❤️</string>
+    <string name="donate_thanks_desc">Your coffee has reached the team. Wishing you and your family a happy and prosperous New Year!</string>
+    <string name="donate_thanks_btn">Happy New Year!</string>
 </resources>

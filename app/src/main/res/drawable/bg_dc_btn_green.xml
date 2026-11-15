@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Đập Chuột v2: nút nổi 3D, nhấn xuống khi bấm -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="true">
+        <layer-list>
+            <item android:top="5dp">
+                <shape android:shape="rectangle"><corners android:radius="26dp" /><solid android:color="#FF1B4D1E" /></shape>
+            </item>
+            <item android:top="5dp" android:bottom="1dp">
+                <shape android:shape="rectangle"><corners android:radius="26dp" />
+                    <gradient android:angle="270" android:startColor="#FF66BB6A" android:endColor="#FF2E7D32" />
+                    <stroke android:width="2dp" android:color="#FFC8E6C9" /></shape>
+            </item>
+        </layer-list>
+    </item>
+    <item>
+        <layer-list>
+            <item android:top="5dp">
+                <shape android:shape="rectangle"><corners android:radius="26dp" /><solid android:color="#FF1B4D1E" /></shape>
+            </item>
+            <item android:bottom="6dp">
+                <shape android:shape="rectangle"><corners android:radius="26dp" />
+                    <gradient android:angle="270" android:startColor="#FF66BB6A" android:endColor="#FF2E7D32" />
+                    <stroke android:width="2dp" android:color="#FFC8E6C9" /></shape>
+            </item>
+        </layer-list>
+    </item>
+</selector>

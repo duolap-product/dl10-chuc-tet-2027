@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Lá điều ước treo trên cây (thay cho view_wishing_tag.xml, file cũ vẫn giữ).
+     Không dùng elevation: bóng đã vẽ sẵn trong bg_wishing_leaf_*, nên xoay đung đưa rất nhẹ. -->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/leafRoot"
+    android:layout_width="64dp"
+    android:layout_height="112dp"
+    android:clickable="true"
+    android:focusable="true">
+
+    <ImageView
+        android:id="@+id/ivLeafBg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:importantForAccessibility="no"
+        android:scaleType="fitXY"
+        android:src="@drawable/bg_wishing_leaf_cream" />
+
+    <TextView
+        android:id="@+id/tvLeafContent"
+        android:layout_width="46dp"
+        android:layout_height="44dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30dp"
+        android:ellipsize="end"
+        android:fontFamily="@font/arimo_bold"
+        android:gravity="center"
+        android:includeFontPadding="false"
+        android:lineSpacingExtra="1dp"
+        android:maxLines="3"
+        android:textColor="#7A090D"
+        android:textSize="10sp"
+        tools:text="Sức khỏe\nbình an" />
+
+    <!-- Icon ic_wish_leaf_* đã gồm huy hiệu tròn viền vàng -->
+    <ImageView
+        android:id="@+id/ivLeafCategoryIcon"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="71dp"
+        android:importantForAccessibility="no"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_wish_leaf_health" />
+
+</FrameLayout>

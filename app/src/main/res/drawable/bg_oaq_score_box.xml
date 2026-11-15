@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Ô Ăn Quan v2: ô điểm trên thẻ người chơi -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+    <corners android:radius="14dp" />
+    <gradient android:angle="270" android:startColor="#FFFFFBEF" android:endColor="#FFFFE0B2" />
+    <stroke android:width="2dp" android:color="#FFFFC94A" />
+</shape>

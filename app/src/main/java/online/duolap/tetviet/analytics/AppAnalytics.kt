@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import com.google.firebase.analytics.FirebaseAnalytics
+import online.duolap.tetviet.BuildConfig
 
 /**
  * Helper quản lý Firebase Analytics tập trung.
@@ -16,7 +17,10 @@ object AppAnalytics {
 
     fun init(context: Context) {
         try {
-            firebaseAnalytics = FirebaseAnalytics.getInstance(context)
+            firebaseAnalytics = FirebaseAnalytics.getInstance(context).apply {
+                // Bản debug không gửi sự kiện lên Firebase (manifest cũng tắt sẵn từ lúc khởi động)
+                setAnalyticsCollectionEnabled(!BuildConfig.DEBUG)
+            }
             Log.d(TAG, "Firebase Analytics initialized successfully")
         } catch (e: Exception) {
             Log.e(TAG, "Failed to initialize Firebase Analytics", e)

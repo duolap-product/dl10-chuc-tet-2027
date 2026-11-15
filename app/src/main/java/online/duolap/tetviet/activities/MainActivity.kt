@@ -32,6 +32,10 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.switchmaterial.SwitchMaterial
 import dagger.hilt.android.AndroidEntryPoint
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
+import kotlinx.coroutines.launch
 import online.duolap.tetviet.BuildConfig
 import online.duolap.tetviet.MondayNotificationScheduler
 import online.duolap.tetviet.R
@@ -41,6 +45,12 @@ import online.duolap.tetviet.ads.AdManager
 import online.duolap.tetviet.ads.AppOpenGate
 import online.duolap.tetviet.analytics.AppAnalytics
 import online.duolap.tetviet.analytics.AppCrashlytics
+import online.duolap.tetviet.billing.BillingManager
+import online.duolap.tetviet.billing.DonateCoffeeDialog
+import online.duolap.tetviet.checkin.DailyCheckInPreferences
+import online.duolap.tetviet.checkin.DailyCheckInReminder
+import online.duolap.tetviet.data.local.BauCuaPreferences
+import online.duolap.tetviet.home.HomeGameZoneController
 import online.duolap.tetviet.audio.TetMusicManager
 import online.duolap.tetviet.data.local.VipPreferences
 import online.duolap.tetviet.data.model.MondayCountdownInfo
@@ -72,31 +82,47 @@ class MainActivity : AppCompatActivity() {
     @Inject
     lateinit var adManager: AdManager
 
+    @Inject
+    lateinit var checkInPrefs: DailyCheckInPreferences
+
+    @Inject
+    lateinit var coinPrefs: BauCuaPreferences
+
+    @Inject
+    lateinit var billingManager: BillingManager
+
+    private lateinit var gameZone: HomeGameZoneController
+    private var settingsCheckInSwitch: SwitchMaterial? = null
+
     private lateinit var binding: ActivityMainBinding
     private lateinit var countdownAdapter: CountdownPagerAdapter
 
     private val handler = Handler(Looper.getMainLooper())
     private var countdownRunnable: Runnable? = null
 
-    // Target: Mùng 1 Tết Nguyên Đán Đinh Mùi 2027 (06/02/2027 00:00:00 GMT+7)
     private val tet2027TargetMillis: Long = TetCountdown.TET_START_MILLIS
-
-//    private var selectedTabId = R.id.tabHome
-
-    // Công tắc thông báo trong Cài đặt đang mở (để tắt lại nếu người dùng từ chối quyền)
     private var settingsNotificationSwitch: SwitchMaterial? = null
 
     private val requestNotificationPermissionLauncher =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
             if (isGranted) {
+                DailyCheckInReminder.schedule(this, checkInPrefs)
                 MondayNotificationScheduler.scheduleNextMondayNotification(this)
                 Toast.makeText(
                     this,
                     getString(R.string.msg_monday_notification_enabled),
                     Toast.LENGTH_SHORT
                 ).show()
+            } else if (settingsCheckInSwitch?.isChecked == true && !hasNotificationPermission()) {
+                // Người dùng vừa bật nhắc điểm danh trong Cài đặt nhưng từ chối quyền
+                checkInPrefs.isReminderEnabled = false
+                settingsCheckInSwitch?.setCheckedSilentlyCheckIn(false)
+                Toast.makeText(
+                    this,
+                    getString(R.string.msg_notification_permission_denied),
+                    Toast.LENGTH_LONG
+                ).show()
             } else if (settingsNotificationSwitch != null) {
-                // Bật từ Cài đặt nhưng không được cấp quyền: trả công tắc về tắt
                 MondayNotificationScheduler.setEnabled(this, false)
                 settingsNotificationSwitch?.setCheckedSilently(false)
                 Toast.makeText(
@@ -128,6 +154,8 @@ class MainActivity : AppCompatActivity() {
         setupCountdownViewPager()
         startCountdownTimer()
         setupClickListeners()
+        gameZone = HomeGameZoneController(this, binding.gameZone, checkInPrefs, coinPrefs, adManager)
+        observeDonations()
         updateMusicButtonUI(TetMusicManager.isMusicEnabled(this))
 
         AppAnalytics.logScreenView("MainActivity")
@@ -143,6 +171,17 @@ class MainActivity : AppCompatActivity() {
      * Xin đồng ý quảng cáo (UMP) rồi mới khởi tạo AdMob. Nếu đã có đồng ý từ phiên trước
      * thì khởi tạo ngay song song để quảng cáo sẵn sàng sớm hơn.
      */
+    /** Lời cảm ơn khi một lượt "mời cà phê" hoàn tất trên Google Play. */
+    private fun observeDonations() {
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                billingManager.donationCompleted.collect { productId ->
+                    DonateCoffeeDialog.showThanks(this@MainActivity, productId)
+                }
+            }
+        }
+    }
+
     private fun initAdsWithConsent() {
         if (vipPreferences.isVip.value) return
         adConsentManager.gatherConsent(this) { canRequestAds ->
@@ -160,6 +199,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun handleNotificationIntent(intent: Intent?) {
+        if (intent?.getBooleanExtra(DailyCheckInReminder.EXTRA_OPEN_DAILY_CHECKIN, false) == true) {
+            intent.removeExtra(DailyCheckInReminder.EXTRA_OPEN_DAILY_CHECKIN)
+            AppAnalytics.logFeatureClick("daily_checkin_from_notification")
+            binding.scrollView.post {
+                binding.scrollView.smoothScrollTo(0, 0)
+                gameZone.openCheckIn("notification")
+            }
+        }
         val openMonday = intent?.getBooleanExtra(MondayNotificationScheduler.EXTRA_OPEN_MONDAY_PAGE, false) ?: false
         if (openMonday) {
             binding.vpCountdown.post {
@@ -170,6 +217,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun checkAndRequestNotificationPermission() {
         MondayNotificationScheduler.createNotificationChannel(this)
+        DailyCheckInReminder.createNotificationChannel(this)
         // Người dùng đã tắt thông báo trong Cài đặt: không xin quyền nữa
         if (!MondayNotificationScheduler.isEnabled(this)) return
 
@@ -271,6 +319,7 @@ class MainActivity : AppCompatActivity() {
             val seconds = totalSeconds % 60L
 
             countdownAdapter.updateTimer(days, hours, minutes, seconds, false)
+            if (::gameZone.isInitialized) gameZone.onTick()
         } else {
             countdownAdapter.updateTimer(0, 0, 0, 0, true)
         }
@@ -550,7 +599,21 @@ class MainActivity : AppCompatActivity() {
                 onNotificationSwitchChanged(isChecked)
             }
         }
-        dialog.setOnDismissListener { settingsNotificationSwitch = null }
+        // Mời cà phê (Google Play Billing): luôn hiện, độc lập với cờ VIP IAP_ENABLED
+        view.findViewById<android.view.View>(R.id.btnDonateSetting)?.setSafeOnClickListener {
+            DonateCoffeeDialog.show(this, billingManager)
+        }
+
+        // Nhắc điểm danh nhận lì xì (19:00 nếu chưa nhận)
+        view.findViewById<SwitchMaterial>(R.id.switchCheckInReminder)?.let { switchCheckIn ->
+            settingsCheckInSwitch = switchCheckIn
+            switchCheckIn.isChecked = checkInPrefs.isReminderEnabled && hasNotificationPermission()
+            switchCheckIn.setOnCheckedChangeListener { _, isChecked -> onCheckInReminderSwitchChanged(isChecked) }
+        }
+        dialog.setOnDismissListener {
+            settingsNotificationSwitch = null
+            settingsCheckInSwitch = null
+        }
 
         val tvCurrentSong = view.findViewById<TextView>(R.id.tvCurrentSongSetting)
         tvCurrentSong?.text = TetMusicManager.getCurrentSong(this).title
@@ -663,6 +726,25 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun onCheckInReminderSwitchChanged(isChecked: Boolean) {
+        checkInPrefs.isReminderEnabled = isChecked
+        AppAnalytics.logFeatureClick(if (isChecked) "enable_checkin_reminder" else "disable_checkin_reminder")
+        if (isChecked) {
+            DailyCheckInReminder.schedule(this, checkInPrefs)
+            if (!hasNotificationPermission()) {
+                requestNotificationPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+            }
+        } else {
+            DailyCheckInReminder.cancel(this)
+        }
+    }
+
+    private fun SwitchMaterial.setCheckedSilentlyCheckIn(checked: Boolean) {
+        setOnCheckedChangeListener(null)
+        isChecked = checked
+        setOnCheckedChangeListener { _, isChecked -> onCheckInReminderSwitchChanged(isChecked) }
+    }
+
     /** Đổi trạng thái công tắc mà không kích hoạt lại listener. */
     private fun SwitchMaterial.setCheckedSilently(checked: Boolean) {
         setOnCheckedChangeListener(null)
@@ -694,6 +776,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
+        gameZone.onResume()
         updateMusicButtonUI(TetMusicManager.isMusicEnabled(this))
         updateVipBadgeUI()
         checkPendingGooglePlayUpdate()
@@ -719,6 +802,11 @@ class MainActivity : AppCompatActivity() {
                 playUpdateManager.startUpdateFlow(this, appUpdateInfo)
             }
         }
+    }
+
+    override fun onPause() {
+        gameZone.onPause()
+        super.onPause()
     }
 
     override fun onDestroy() {

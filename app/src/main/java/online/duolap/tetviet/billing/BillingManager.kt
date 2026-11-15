@@ -8,6 +8,7 @@ import com.android.billingclient.api.BillingClient
 import com.android.billingclient.api.BillingClientStateListener
 import com.android.billingclient.api.BillingFlowParams
 import com.android.billingclient.api.BillingResult
+import com.android.billingclient.api.ConsumeParams
 import com.android.billingclient.api.PendingPurchasesParams
 import com.android.billingclient.api.ProductDetails
 import com.android.billingclient.api.Purchase
@@ -18,7 +19,9 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
@@ -29,7 +32,8 @@ import javax.inject.Singleton
 
 /**
  * Trình quản lý thanh toán in-app billing qua Google Play Billing Library 7.x.
- * Hỗ trợ các gói VIP: Gói tháng, Gói năm và Gói trọn đời.
+ * Hỗ trợ các gói VIP: Gói tháng, Gói năm và Gói trọn đời, cùng các gói "mời cà phê" ([DONATION_PRODUCTS]):
+ * gói ủng hộ tự nguyện, mua một lần và tiêu thụ (consume) ngay để mời lại được nhiều lần, KHÔNG cấp VIP.
  */
 @Singleton
 class BillingManager @Inject constructor(
@@ -46,6 +50,10 @@ class BillingManager @Inject constructor(
     val productsMap: StateFlow<Map<String, ProductDetails>> = _productsMap.asStateFlow()
 
     private var billingClient: BillingClient? = null
+
+    /** Phát ra mã gói cà phê mỗi khi một lượt mời cà phê hoàn tất (đã tiêu thụ), để màn hình cảm ơn. */
+    private val _donationCompleted = MutableSharedFlow<String>(extraBufferCapacity = 4)
+    val donationCompleted: SharedFlow<String> = _donationCompleted
 
     init {
         initializeBillingClient()
@@ -125,12 +133,12 @@ class BillingManager @Inject constructor(
         }
 
         // 2. Gói In-App Purchase (Trọn đời)
-        val inAppList = listOf(
+        val inAppList = (listOf(PRODUCT_VIP_LIFETIME) + DONATION_PRODUCTS).map { id ->
             QueryProductDetailsParams.Product.newBuilder()
-                .setProductId(PRODUCT_VIP_LIFETIME)
+                .setProductId(id)
                 .setProductType(BillingClient.ProductType.INAPP)
                 .build()
-        )
+        }
 
         val inAppParams = QueryProductDetailsParams.newBuilder()
             .setProductList(inAppList)
@@ -203,22 +211,44 @@ class BillingManager @Inject constructor(
         }
     }
 
+    private fun isDonation(purchase: Purchase) = purchase.products.any { it in DONATION_PRODUCTS }
+
+    /** Chỉ các gói VIP mới cấp VIP (gói cà phê thì không). */
+    private fun isVipPurchase(purchase: Purchase) = purchase.products.any { it in VIP_PRODUCTS }
+
+    /** Mời cà phê: tiêu thụ để có thể mời lại, rồi báo cho màn hình cảm ơn. */
+    private fun consumeDonation(purchase: Purchase) {
+        val params = ConsumeParams.newBuilder().setPurchaseToken(purchase.purchaseToken).build()
+        billingClient?.consumeAsync(params) { result, _ ->
+            if (result.responseCode == BillingClient.BillingResponseCode.OK) {
+                Log.i(TAG, "Donation consumed: ${purchase.orderId}")
+                _donationCompleted.tryEmit(purchase.products.first())
+            } else {
+                Log.e(TAG, "Failed to consume donation: ${result.debugMessage}")
+            }
+        }
+    }
+
     private fun handlePurchase(purchase: Purchase) {
-        if (purchase.purchaseState == Purchase.PurchaseState.PURCHASED) {
-            scope.launch {
-                vipPreferences.setVip(true)
+        if (purchase.purchaseState != Purchase.PurchaseState.PURCHASED) return
+        if (isDonation(purchase)) {
+            consumeDonation(purchase)
+            return
+        }
+        if (!isVipPurchase(purchase)) return
+        scope.launch {
+            vipPreferences.setVip(true)
 
-                if (!purchase.isAcknowledged) {
-                    val acknowledgeParams = AcknowledgePurchaseParams.newBuilder()
-                        .setPurchaseToken(purchase.purchaseToken)
-                        .build()
+            if (!purchase.isAcknowledged) {
+                val acknowledgeParams = AcknowledgePurchaseParams.newBuilder()
+                    .setPurchaseToken(purchase.purchaseToken)
+                    .build()
 
-                    billingClient?.acknowledgePurchase(acknowledgeParams) { result ->
-                        if (result.responseCode == BillingClient.BillingResponseCode.OK) {
-                            Log.i(TAG, "Purchase acknowledged successfully: ${purchase.orderId}")
-                        } else {
-                            Log.e(TAG, "Failed to acknowledge purchase: ${result.debugMessage}")
-                        }
+                billingClient?.acknowledgePurchase(acknowledgeParams) { result ->
+                    if (result.responseCode == BillingClient.BillingResponseCode.OK) {
+                        Log.i(TAG, "Purchase acknowledged successfully: ${purchase.orderId}")
+                    } else {
+                        Log.e(TAG, "Failed to acknowledge purchase: ${result.debugMessage}")
                     }
                 }
             }
@@ -246,7 +276,8 @@ class BillingManager @Inject constructor(
             if (result.responseCode == BillingClient.BillingResponseCode.OK) {
                 purchases.forEach { purchase ->
                     if (purchase.purchaseState == Purchase.PurchaseState.PURCHASED) {
-                        foundVip = true
+                        // Lượt mời cà phê chưa kịp tiêu thụ (ví dụ thanh toán chờ xử lý): tiêu thụ, không tính là VIP
+                        if (isVipPurchase(purchase)) foundVip = true
                         handlePurchase(purchase)
                     }
                 }
@@ -260,7 +291,7 @@ class BillingManager @Inject constructor(
             client.queryPurchasesAsync(subsParams) { subsResult, subsPurchases ->
                 if (subsResult.responseCode == BillingClient.BillingResponseCode.OK) {
                     subsPurchases.forEach { purchase ->
-                        if (purchase.purchaseState == Purchase.PurchaseState.PURCHASED) {
+                        if (purchase.purchaseState == Purchase.PurchaseState.PURCHASED && isVipPurchase(purchase)) {
                             foundVip = true
                             handlePurchase(purchase)
                         }
@@ -283,6 +314,13 @@ class BillingManager @Inject constructor(
         const val PRODUCT_VIP_MONTHLY = "tetviet_vip_monthly"
         const val PRODUCT_VIP_YEARLY = "tetviet_vip_yearly"
         const val PRODUCT_VIP_LIFETIME = "tetviet_vip_lifetime"
+
+        /** Gói "mời cà phê" (Managed product, consumable). Tạo trên Play Console với đúng các mã này. */
+        const val PRODUCT_DONATE_COFFEE = "tetviet_donate_coffee"
+        const val PRODUCT_DONATE_MILK_COFFEE = "tetviet_donate_milk_coffee"
+        const val PRODUCT_DONATE_COFFEE_CAKE = "tetviet_donate_coffee_cake"
+        val DONATION_PRODUCTS = listOf(PRODUCT_DONATE_COFFEE, PRODUCT_DONATE_MILK_COFFEE, PRODUCT_DONATE_COFFEE_CAKE)
+        private val VIP_PRODUCTS = setOf(PRODUCT_VIP_MONTHLY, PRODUCT_VIP_YEARLY, PRODUCT_VIP_LIFETIME)
     }
 }
 

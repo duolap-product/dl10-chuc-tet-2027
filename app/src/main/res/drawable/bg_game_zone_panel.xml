@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Khung khu game ở màn hình chính: đỏ thẫm viền vàng, nổi bật giữa các thẻ màu kem -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <corners android:radius="20dp" />
+    <gradient
+        android:angle="270"
+        android:startColor="#A3141A"
+        android:centerColor="#7E0B10"
+        android:endColor="#5E0408" />
+    <stroke
+        android:width="1.6dp"
+        android:color="#F2C14E" />
+</shape>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Đập Chuột v2: hình vẽ chủ đề Tết, tạo bởi script, chỉnh tay được -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android" xmlns:aapt="http://schemas.android.com/aapt"
+    android:width="200dp"
+    android:height="110dp"
+    android:viewportWidth="200"
+    android:viewportHeight="110">
+    <path android:pathData="M4,58 A96,44 0 1,0 196,58 A96,44 0 1,0 4,58 Z">
+        <aapt:attr name="android:fillColor">
+            <gradient android:type="linear" android:startX="0" android:startY="14" android:endX="0" android:endY="102"
+                android:startColor="#FFB07A4E" android:endColor="#FF7A4A2C" />
+        </aapt:attr>
+    </path>
+    <path android:pathData="M20,58 A80,34 0 1,0 180,58 A80,34 0 1,0 20,58 Z">
+        <aapt:attr name="android:fillColor">
+            <gradient android:type="linear" android:startX="0" android:startY="24" android:endX="0" android:endY="92"
+                android:startColor="#FF120603" android:endColor="#FF4A2A18" />
+        </aapt:attr>
+    </path>
+    <path android:pathData="M24,52 A80,34 0 0,1 176,52"
+        android:strokeColor="#FF2A140A"
+        android:strokeWidth="3"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round" />
+</vector>

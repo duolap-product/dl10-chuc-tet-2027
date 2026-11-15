@@ -114,10 +114,7 @@ class CardMakerActivity : AppCompatActivity() {
     private var currentGravity: Int = Gravity.CENTER
     private var currentTypefaceResId: Int = R.font.arimo_bold
 
-    // Phông VIP người dùng vừa chọn khi chưa có VIP: mua xong quay lại thì áp dụng luôn
     private var pendingVipFontResId: Int = 0
-
-    // Làm mới các chip phông chữ (biểu tượng khoá VIP) khi bảng chỉnh lời chúc đang mở
     private var refreshFontChips: (() -> Unit)? = null
 
     private var tetColors: List<Pair<String, String>> = CardColorManager.COLORS.map { Pair(it.name, it.colorHex) }
@@ -172,7 +169,7 @@ class CardMakerActivity : AppCompatActivity() {
         if (bgItem.url?.startsWith("http://") == true || bgItem.url?.startsWith("https://") == true) {
             Glide.with(this)
                 .load(bgItem.url)
-                .placeholder(R.drawable.bg_card_free_01)
+                .placeholder(R.drawable.bg_tet_screen)
                 .centerCrop()
                 .into(binding.ivCardBg)
         } else if (bgItem.resId != 0) {
@@ -695,13 +692,11 @@ class CardMakerActivity : AppCompatActivity() {
             Triple(sheetBinding.btnFontSerif, 0, Typeface.SERIF)
         )
 
-        // Phông thư pháp có độ cao dòng rất khác phông thường: cho mọi chip cùng chiều cao
         fontOptions.forEach { (view, _, _) ->
             view.minHeight = fontChipMinHeightPx()
             view.gravity = Gravity.CENTER
         }
 
-        // Phông chữ VIP: nhóm riêng có tiêu đề "Phông thư pháp VIP", ẩn hẳn khi chưa bật mua trong ứng dụng
         sheetBinding.tvVipFontLabel.isVisible = BuildConfig.IAP_ENABLED
         sheetBinding.layoutVipFontOptions.isVisible = BuildConfig.IAP_ENABLED
         val vipFonts = if (BuildConfig.IAP_ENABLED) VipCardFontManager.FONTS else emptyList()
@@ -992,16 +987,10 @@ class CardMakerActivity : AppCompatActivity() {
                 val shareIntent = Intent(Intent.ACTION_SEND).apply {
                     type = "image/png"
                     putExtra(Intent.EXTRA_STREAM, contentUri)
-                    putExtra(Intent.EXTRA_SUBJECT, getString(R.string.share_card_subject))
-                    putExtra(
-                        Intent.EXTRA_TEXT,
-                        getString(R.string.share_card_message)
-                    )
                     addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
                 }
 
                 AppAnalytics.logFeatureClick("share_card")
-                // Người dùng rời app có chủ đích (chia sẻ): không hiện App Open khi quay lại
                 AppOpenGate.skipNextForeground()
                 startActivity(Intent.createChooser(shareIntent, getString(R.string.share_chooser_title)))
             } catch (e: Exception) {
@@ -1011,8 +1000,7 @@ class CardMakerActivity : AppCompatActivity() {
                     this@CardMakerActivity,
                     getString(R.string.msg_share_card_error, e.message.orEmpty()),
                     Toast.LENGTH_SHORT
-                )
-                    .show()
+                ).show()
             }
         }
     }

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Quầng sáng toả quanh đèn lồng (phóng to/nhấp nháy bằng scale + alpha, không vẽ lại). -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:width="110dp"
+    android:height="110dp"
+    android:viewportWidth="110"
+    android:viewportHeight="110">
+    <path
+        android:pathData="M0.00,55.00 a55,55 0,1 0,110.00,0 a55,55 0,1 0,-110.00,0 Z">
+        <aapt:attr name="android:fillColor">
+            <gradient android:type="radial" android:centerX="55" android:centerY="55" android:gradientRadius="55">
+                <item android:color="#B3FFD36A" android:offset="0" />
+                <item android:color="#66FFA63D" android:offset="0.35" />
+                <item android:color="#1FFF7A1F" android:offset="0.7" />
+                <item android:color="#00FF6A00" android:offset="1" />
+            </gradient>
+        </aapt:attr>
+    </path>
+</vector>

@@ -386,6 +386,63 @@
             android:layout_marginStart="68dp"
             android:background="#F3E8D6" />
 
+        <!-- Nhắc điểm danh nhận lì xì hằng ngày -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:minHeight="64dp"
+            android:orientation="horizontal"
+            android:paddingHorizontal="14dp"
+            android:paddingVertical="10dp">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/bg_settings_icon_chip"
+                android:backgroundTint="#FFE9E6"
+                android:importantForAccessibility="no"
+                android:padding="8dp"
+                android:src="@drawable/ic_custom_red_packet" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="14dp"
+                android:layout_marginEnd="8dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="@string/settings_checkin_reminder_title"
+                    android:textColor="#3D3025"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:fontFamily="sans-serif"
+                    android:text="@string/settings_checkin_reminder_desc"
+                    android:textColor="#8C6E52"
+                    android:textSize="12.5sp" />
+            </LinearLayout>
+
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/switchCheckInReminder"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="68dp"
+            android:background="#F3E8D6" />
+
         <LinearLayout
             android:id="@+id/layoutAddWidgetSetting"
             android:layout_width="match_parent"
@@ -464,6 +521,76 @@
         android:layout_marginHorizontal="16dp"
         android:background="@drawable/bg_settings_group"
         android:orientation="vertical">
+
+        <!-- Mời cà phê (gói ủng hộ qua Google Play), luôn hiện, không phụ thuộc cờ VIP IAP_ENABLED -->
+        <LinearLayout
+            android:id="@+id/layoutDonateSetting"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/btnDonateSetting"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center_vertical"
+                android:minHeight="64dp"
+                android:orientation="horizontal"
+                android:paddingHorizontal="14dp"
+                android:paddingVertical="10dp">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/bg_settings_icon_chip"
+                    android:backgroundTint="#FBEFE0"
+                    android:importantForAccessibility="no"
+                    android:padding="5dp"
+                    android:src="@drawable/ic_donate_coffee" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="14dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-medium"
+                        android:text="@string/settings_donate_title"
+                        android:textColor="#3D3025"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:fontFamily="sans-serif"
+                        android:text="@string/settings_donate_desc"
+                        android:textColor="#8C6E52"
+                        android:textSize="12.5sp" />
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:importantForAccessibility="no"
+                    android:src="@drawable/ic_chevron_right"
+                    app:tint="#C9B49A" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="68dp"
+                android:background="#F3E8D6" />
+        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/layoutAppVersion"

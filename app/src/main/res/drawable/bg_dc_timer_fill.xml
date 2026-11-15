@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Thanh thời gian: chạy bằng level (0..10000) để thu ngắn mượt -->
+<clip xmlns:android="http://schemas.android.com/apk/res/android"
+    android:clipOrientation="horizontal"
+    android:drawable="@drawable/bg_dc_timer_fill_shape"
+    android:gravity="start" />

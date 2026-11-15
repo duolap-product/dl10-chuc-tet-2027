@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Đập Chuột v2: trời hoàng hôn ngày Tết -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+    <gradient
+        android:angle="270"
+        android:startColor="#FF4A070C"
+        android:centerColor="#FFA3201B"
+        android:endColor="#FFF08A24" />
+</shape>

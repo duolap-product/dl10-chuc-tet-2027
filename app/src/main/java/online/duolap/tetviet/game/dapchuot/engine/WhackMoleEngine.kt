@@ -16,6 +16,8 @@ class WhackMoleEngine(
     private var combo = 0
     private var consecutiveHits = 0
     private var remainingSeconds = gameDurationSeconds
+    // Tổng số giây đã chơi (kể cả phần chơi tiếp), dùng để tính độ khó
+    private var elapsedSeconds = 0
     private val activeMoles = mutableMapOf<Int, MoleState>() // holeIndex -> MoleState
     private var gameJob: Job? = null
     private var timerJob: Job? = null
@@ -50,6 +52,24 @@ class WhackMoleEngine(
         combo = 0
         consecutiveHits = 0
         remainingSeconds = gameDurationSeconds
+        elapsedSeconds = 0
+        difficultyLevel = 1
+        activeMoles.clear()
+        scope = coroutineScope
+        startTimer()
+        startMoleSpawner()
+    }
+
+    /**
+     * Chơi tiếp thêm [extraSeconds] giây sau khi hết giờ (ví dụ sau khi xem quảng cáo thưởng).
+     * Giữ nguyên điểm và độ khó, chỉ reset chuỗi combo.
+     */
+    fun continueWithExtraTime(coroutineScope: CoroutineScope, extraSeconds: Int) {
+        if (isRunning || extraSeconds <= 0) return
+        isRunning = true
+        combo = 0
+        consecutiveHits = 0
+        remainingSeconds = extraSeconds
         activeMoles.clear()
         scope = coroutineScope
         startTimer()
@@ -96,7 +116,8 @@ class WhackMoleEngine(
             while (isRunning && remainingSeconds > 0) {
                 delay(1000L)
                 remainingSeconds--
-                difficultyLevel = ((gameDurationSeconds - remainingSeconds) / 8) + 1
+                elapsedSeconds++
+                difficultyLevel = (elapsedSeconds / 8) + 1
                 onTimerTick(remainingSeconds)
                 if (remainingSeconds <= 0) {
                     isRunning = false
@@ -172,5 +193,6 @@ class WhackMoleEngine(
     }
 
     fun getCurrentScore() = score
+    fun getRemainingSeconds() = remainingSeconds
     fun isGameRunning() = isRunning
 }

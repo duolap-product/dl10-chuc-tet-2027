@@ -7,48 +7,57 @@ import online.duolap.tetviet.R
 enum class WishCategory(
     @param:StringRes val titleRes: Int,
     @param:DrawableRes val iconRes: Int,
+    /** Icon trên lá điều ước (huy hiệu tròn kiểu Tết), khác bộ icon phẳng [iconRes]. */
+    @param:DrawableRes val leafIconRes: Int,
     val colorHex: Long,
     @param:DrawableRes val defaultTagBgRes: Int
 ) {
     HEALTH(
         titleRes = R.string.wish_cat_health,
         iconRes = R.drawable.ic_wish_health,
+        leafIconRes = R.drawable.ic_wish_leaf_health,
         colorHex = 0xFFE53935,
         defaultTagBgRes = R.drawable.bg_wishing_tag_cream
     ),
     CAREER(
         titleRes = R.string.wish_cat_career,
         iconRes = R.drawable.ic_wish_career,
+        leafIconRes = R.drawable.ic_wish_leaf_career,
         colorHex = 0xFF8D5B4C,
         defaultTagBgRes = R.drawable.bg_wishing_tag_cream
     ),
     LOVE(
         titleRes = R.string.wish_cat_love,
         iconRes = R.drawable.ic_wish_love,
+        leafIconRes = R.drawable.ic_wish_leaf_love,
         colorHex = 0xFFE91E63,
         defaultTagBgRes = R.drawable.bg_wishing_tag_cream
     ),
     STUDY(
         titleRes = R.string.wish_cat_study,
         iconRes = R.drawable.ic_wish_study,
+        leafIconRes = R.drawable.ic_wish_leaf_study,
         colorHex = 0xFF5D4037,
         defaultTagBgRes = R.drawable.bg_wishing_tag_cream
     ),
     FINANCE(
         titleRes = R.string.wish_cat_finance,
         iconRes = R.drawable.ic_wish_finance,
+        leafIconRes = R.drawable.ic_wish_leaf_finance,
         colorHex = 0xFFF57F17,
         defaultTagBgRes = R.drawable.bg_wishing_tag_cream
     ),
     FAMILY(
         titleRes = R.string.wish_cat_family,
         iconRes = R.drawable.ic_wish_family,
+        leafIconRes = R.drawable.ic_wish_leaf_family,
         colorHex = 0xFF5D4037,
         defaultTagBgRes = R.drawable.bg_wishing_tag_cream
     ),
     OTHER(
         titleRes = R.string.wish_cat_other,
         iconRes = R.drawable.ic_wish_other,
+        leafIconRes = R.drawable.ic_wish_leaf_other,
         colorHex = 0xFFFFA000,
         defaultTagBgRes = R.drawable.bg_wishing_tag_cream
     );

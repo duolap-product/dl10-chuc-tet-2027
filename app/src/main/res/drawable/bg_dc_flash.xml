@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Viền đỏ chớp khi đập trúng pháo -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+    <gradient android:type="radial" android:gradientRadius="75%p"
+        android:startColor="#00FF1744" android:centerColor="#00FF1744" android:endColor="#CCFF1744" />
+</shape>

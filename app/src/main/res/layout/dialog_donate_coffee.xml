@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Bottom sheet "Mời cà phê" (Cài đặt). Thanh toán qua Google Play, gói consumable, không cấp VIP. -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_dialog_wishing_modal"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:paddingHorizontal="18dp"
+    android:paddingTop="20dp"
+    android:paddingBottom="24dp">
+
+    <ImageView
+        android:layout_width="76dp"
+        android:layout_height="76dp"
+        android:importantForAccessibility="no"
+        android:src="@drawable/ic_donate_coffee" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:fontFamily="@font/lobster_regular"
+        android:includeFontPadding="false"
+        android:text="@string/donate_title"
+        android:textColor="#8C1D24"
+        android:textSize="24sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/arimo_regular"
+        android:gravity="center"
+        android:lineSpacingExtra="3dp"
+        android:text="@string/donate_desc"
+        android:textColor="#6B3F21"
+        android:textSize="13.5sp" />
+
+    <include
+        android:id="@+id/optionCoffee"
+        layout="@layout/item_donate_option"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp" />
+
+    <include
+        android:id="@+id/optionMilkCoffee"
+        layout="@layout/item_donate_option"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp" />
+
+    <include
+        android:id="@+id/optionCoffeeCake"
+        layout="@layout/item_donate_option"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:fontFamily="@font/arimo_regular"
+        android:gravity="center"
+        android:text="@string/donate_note"
+        android:textColor="#A0825F"
+        android:textSize="11.5sp" />
+
+</LinearLayout>

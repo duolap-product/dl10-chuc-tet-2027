@@ -34,6 +34,9 @@ import online.duolap.tetviet.R
 import online.duolap.tetviet.ads.AdManager
 import online.duolap.tetviet.ads.AdPlacement
 import online.duolap.tetviet.analytics.AppAnalytics
+import online.duolap.tetviet.checkin.DailyCheckInDialog
+import online.duolap.tetviet.checkin.DailyCheckInPreferences
+import online.duolap.tetviet.views.CoinFlyAnimator
 import online.duolap.tetviet.data.local.BauCuaPreferences
 import online.duolap.tetviet.data.model.BauCuaItem
 import online.duolap.tetviet.databinding.ActivityBauCuaBinding
@@ -50,6 +53,9 @@ class BauCuaActivity : AppCompatActivity() {
 
     @Inject
     lateinit var adManager: AdManager
+
+    @Inject
+    lateinit var checkInPrefs: DailyCheckInPreferences
 
     private lateinit var binding: ActivityBauCuaBinding
 
@@ -103,7 +109,8 @@ class BauCuaActivity : AppCompatActivity() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 bauCuaPreferences.coinsFlow.collect { coins ->
-                    binding.tvUserCoins.text = coins.toString()
+                    // Đang chờ xu bay vào: để CoinFlyAnimator đếm số lên
+                    if (!CoinFlyAnimator.isHeld(binding.tvUserCoins)) binding.tvUserCoins.text = coins.toString()
                 }
             }
         }
@@ -668,62 +675,61 @@ class BauCuaActivity : AppCompatActivity() {
     }
 
     private fun showReliefCoinsDialog() {
+        // Quà hằng ngày giờ là điểm danh chung (chuỗi 7 ngày) với màn hình chính.
+        // Nhánh "chưa nhận" cũ của bottom sheet này không còn dùng.
+        if (!checkInPrefs.hasClaimedToday()) {
+            DailyCheckInDialog.show(
+                activity = this,
+                prefs = checkInPrefs,
+                adManager = adManager,
+                source = "bau_cua",
+                primaryActionText = getString(R.string.checkin_btn_continue),
+                coinCounter = binding.tvUserCoins,
+                onCoinsAdded = { amount, fx, fy ->
+                    val end = bauCuaPreferences.getCoins()
+                    vibrateWinCelebration()
+                    CoinFlyAnimator.fly(
+                        this, fx, fy, binding.layoutCoinBalance, binding.tvUserCoins,
+                        startValue = end - amount, endValue = end
+                    )
+                }
+            )
+            return
+        }
+
         val dialog = BottomSheetDialog(this, R.style.Theme_TetViet_BottomSheetDialog)
         val sheetBinding = DialogBaucuaReliefBinding.inflate(layoutInflater)
         dialog.setContentView(sheetBinding.root)
 
-        val hasClaimedToday = bauCuaPreferences.hasClaimedDailyGiftToday()
+        // Xem video: x2 lì xì hôm nay, tối đa VIDEO_REWARD_CAP xu mỗi lần, không giới hạn số lần
+        val todayReward = checkInPrefs.status.value.todayReward
+        val adReward = DailyCheckInPreferences.videoRewardFor(todayReward)
+        sheetBinding.tvReliefTitle.text = getString(R.string.baucua_dialog_relief_claimed_title)
+        sheetBinding.tvReliefDesc.text = getString(R.string.baucua_relief_video_desc, todayReward, adReward)
+        sheetBinding.btnWatchAdForCoins.text = getString(R.string.baucua_btn_watch_ad_amount, adReward)
 
-        if (!hasClaimedToday) {
-            sheetBinding.tvReliefTitle.text = getString(R.string.baucua_dialog_relief_title)
-            sheetBinding.tvReliefDesc.text = getString(R.string.baucua_dialog_relief_desc)
+        sheetBinding.btnWatchAdForDouble.visibility = View.GONE
+        sheetBinding.btnClaimFree.visibility = View.GONE
+        sheetBinding.btnWatchAdForCoins.visibility = View.VISIBLE
 
-            sheetBinding.btnWatchAdForDouble.visibility = View.VISIBLE
-            sheetBinding.btnClaimFree.visibility = View.VISIBLE
-            sheetBinding.btnWatchAdForCoins.visibility = View.GONE
-
-            sheetBinding.btnClaimFree.setSafeOnClickListener(hasAnim = true) {
-                dialog.dismiss()
-                bauCuaPreferences.claimDailyGift(100)
-                playCoinRewardAnimation(100, "Lì Xì May Mắn Đầu Xuân")
-            }
-
-            sheetBinding.btnWatchAdForDouble.setSafeOnClickListener(hasAnim = true) {
-                dialog.dismiss()
-                adManager.showRewardedAd(
-                    activity = this,
-                    placement = AdPlacement.BAUCUA_DOUBLE_GIFT,
-                    onUserEarnedReward = {
-                        bauCuaPreferences.claimDailyGift(200)
-                        playCoinRewardAnimation(200, "Nhân Đôi Lì Xì (x2) May Mắn")
-                    },
-                    onError = { errorMsg ->
-                        Toast.makeText(this, errorMsg, Toast.LENGTH_SHORT).show()
-                    }
-                )
-            }
-        } else {
-            sheetBinding.tvReliefTitle.text = getString(R.string.baucua_dialog_relief_claimed_title)
-            sheetBinding.tvReliefDesc.text = getString(R.string.baucua_dialog_relief_claimed_desc)
-
-            sheetBinding.btnWatchAdForDouble.visibility = View.GONE
-            sheetBinding.btnClaimFree.visibility = View.GONE
-            sheetBinding.btnWatchAdForCoins.visibility = View.VISIBLE
-
-            sheetBinding.btnWatchAdForCoins.setSafeOnClickListener(hasAnim = true) {
-                dialog.dismiss()
-                adManager.showRewardedAd(
-                    activity = this,
-                    placement = AdPlacement.BAUCUA_EXTRA_COINS,
-                    onUserEarnedReward = {
-                        bauCuaPreferences.addCoins(150)
-                        playCoinRewardAnimation(150, "Thưởng Video May Mắn")
-                    },
-                    onError = { errorMsg ->
-                        Toast.makeText(this, errorMsg, Toast.LENGTH_SHORT).show()
-                    }
-                )
-            }
+        sheetBinding.btnWatchAdForCoins.setSafeOnClickListener(hasAnim = true) {
+            dialog.dismiss()
+            var earned = 0
+            adManager.showRewardedAd(
+                activity = this,
+                placement = AdPlacement.BAUCUA_EXTRA_COINS,
+                // Cộng xu ngay để không mất thưởng; thẻ thưởng và xu bay chỉ chạy khi quảng cáo đã đóng
+                onUserEarnedReward = {
+                    CoinFlyAnimator.hold(binding.tvUserCoins)
+                    earned = checkInPrefs.claimVideoReward()
+                },
+                onDismissed = {
+                    if (earned > 0) playCoinRewardAnimation(earned, getString(R.string.baucua_reward_video_desc))
+                },
+                onError = { errorMsg ->
+                    Toast.makeText(this, errorMsg, Toast.LENGTH_SHORT).show()
+                }
+            )
         }
 
         dialog.show()
@@ -759,46 +765,20 @@ class BauCuaActivity : AppCompatActivity() {
                 shakeView(card)
 
                 card.postDelayed({
-                    val balanceLoc = IntArray(2)
-                    binding.layoutCoinBalance.getLocationInWindow(balanceLoc)
-
-                    val cardLoc = IntArray(2)
-                    card.getLocationInWindow(cardLoc)
-
-                    val targetX = (balanceLoc[0] - cardLoc[0]).toFloat()
-                    val targetY = (balanceLoc[1] - cardLoc[1]).toFloat()
-
+                    // Xu bung ra từ thẻ thưởng rồi bay theo đường cong vào ô số dư, số dư đếm lên dần
+                    val (fx, fy) = CoinFlyAnimator.centerOnScreen(tvAmount)
+                    val end = bauCuaPreferences.getCoins()
+                    CoinFlyAnimator.fly(
+                        this, fx, fy, binding.layoutCoinBalance, binding.tvUserCoins,
+                        startValue = end - amount, endValue = end
+                    )
                     card.animate()
-                        .translationX(targetX)
-                        .translationY(targetY)
-                        .scaleX(0.2f)
-                        .scaleY(0.2f)
-                        .alpha(0.0f)
-                        .setDuration(520)
-                        .setInterpolator(AccelerateDecelerateInterpolator())
-                        .withEndAction {
-                            overlay.visibility = View.GONE
-                            card.translationX = 0f
-                            card.translationY = 0f
-
-                            // Nảy ô số dư trên topBar khi xu bay vào
-                            binding.layoutCoinBalance.animate()
-                                .scaleX(1.35f)
-                                .scaleY(1.35f)
-                                .setDuration(180)
-                                .withEndAction {
-                                    binding.layoutCoinBalance.animate()
-                                        .scaleX(1.0f)
-                                        .scaleY(1.0f)
-                                        .setDuration(160)
-                                        .start()
-                                }
-                                .start()
-
-                            vibrateLight(35)
-                        }
+                        .scaleX(0.85f)
+                        .scaleY(0.85f)
+                        .alpha(0f)
+                        .setDuration(320)
+                        .withEndAction { overlay.visibility = View.GONE }
                         .start()
-
                 }, 800)
             }
             .start()

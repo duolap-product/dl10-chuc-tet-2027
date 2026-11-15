@@ -1,7 +1,6 @@
 package online.duolap.tetviet.game.dapchuot.ui
 
 import android.animation.Animator
-import android.animation.AnimatorListenerAdapter
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
@@ -9,33 +8,42 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
 import android.os.VibrationEffect
 import android.os.Vibrator
 import android.os.VibratorManager
-import android.view.LayoutInflater
+import android.view.Gravity
+import android.view.MotionEvent
 import android.view.View
+import android.view.ViewGroup
 import android.view.animation.AccelerateInterpolator
 import android.view.animation.DecelerateInterpolator
+import android.view.animation.LinearInterpolator
 import android.view.animation.OvershootInterpolator
 import android.widget.FrameLayout
-import android.widget.ImageView
+import android.widget.TextView
+import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import online.duolap.tetviet.R
+import online.duolap.tetviet.ads.AdManager
+import online.duolap.tetviet.ads.AdPlacement
 import online.duolap.tetviet.data.local.BauCuaPreferences
-import online.duolap.tetviet.databinding.ActivityDapChuotBinding
-import online.duolap.tetviet.databinding.DialogDapChuotResultBinding
+import online.duolap.tetviet.views.CoinFlyAnimator
+import online.duolap.tetviet.databinding.ActivityDapChuotV2Binding
+import online.duolap.tetviet.databinding.DialogDapChuotResultV2Binding
 import online.duolap.tetviet.game.dapchuot.engine.DapChuotPreferences
 import online.duolap.tetviet.game.dapchuot.engine.MoleType
 import online.duolap.tetviet.game.dapchuot.engine.WhackMoleEngine
@@ -45,482 +53,715 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class DapChuotActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityDapChuotBinding
+    private lateinit var binding: ActivityDapChuotV2Binding
     private lateinit var prefs: DapChuotPreferences
 
     @Inject
     lateinit var coinPrefs: BauCuaPreferences
 
+    @Inject
+    lateinit var adManager: AdManager
+
     private lateinit var engine: WhackMoleEngine
-    private val holeViews = ArrayList<FrameLayout>(9)
-    private val moleViews = ArrayList<ImageView>(9)
+    private val holes = ArrayList<MoleHoleView>(HOLE_COUNT)
+    private val point = FloatArray(2)
+
     private var countdownJob: Job? = null
-    private var resultDialog: AlertDialog? = null
+    private var reviveCountdownJob: Job? = null
+    private var timerAnimator: ValueAnimator? = null
+    private val startScreenAnimators = mutableListOf<Animator>()
+    private var timerUrgent = false
+
+    // Trạng thái một ván
+    private var timerTotalSeconds = GAME_SECONDS
+    private var reviveUsed = false
+    private var lastDelta = 0
+    private var lastCombo = 0
+    private var pendingHitHole = -1
+    private var resultBinding: DialogDapChuotResultV2Binding? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        binding = ActivityDapChuotBinding.inflate(layoutInflater)
+        binding = ActivityDapChuotV2Binding.inflate(layoutInflater)
         setContentView(binding.root)
 
         prefs = DapChuotPreferences(this)
 
         setupWindowInsets()
-        initViews()
+        initHoles()
         initEngine()
         setupListeners()
         updateBestScoreView()
+        updateCoinsView()
+        resetTimerBar()
+        showStartScreen()
     }
 
     private fun setupWindowInsets() {
+        val headerTop = binding.layoutHeader.paddingTop
+        val fieldBottom = (binding.fieldContainer.layoutParams as ViewGroup.MarginLayoutParams).bottomMargin
         ViewCompat.setOnApplyWindowInsetsListener(binding.root) { _, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            val bars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             binding.layoutHeader.setPadding(
-                binding.layoutHeader.paddingLeft,
-                systemBars.top + 8,
-                binding.layoutHeader.paddingRight,
-                binding.layoutHeader.paddingBottom
+                binding.layoutHeader.paddingLeft, bars.top + headerTop,
+                binding.layoutHeader.paddingRight, binding.layoutHeader.paddingBottom
             )
+            binding.ivGarland.translationY = bars.top.toFloat()
+            (binding.fieldContainer.layoutParams as ViewGroup.MarginLayoutParams).bottomMargin = bars.bottom + fieldBottom
+            binding.fieldContainer.requestLayout()
             insets
         }
     }
 
-    private fun initViews() {
-        holeViews.clear()
-        moleViews.clear()
-
-        // 9 holes and moles
-        val holes = listOf(
+    @SuppressLint("ClickableViewAccessibility")
+    private fun initHoles() {
+        holes.clear()
+        holes += listOf(
             binding.hole0, binding.hole1, binding.hole2,
             binding.hole3, binding.hole4, binding.hole5,
             binding.hole6, binding.hole7, binding.hole8
         )
-        val moles = listOf(
-            binding.ivMole0, binding.ivMole1, binding.ivMole2,
-            binding.ivMole3, binding.ivMole4, binding.ivMole5,
-            binding.ivMole6, binding.ivMole7, binding.ivMole8
-        )
-
-        holeViews.addAll(holes)
-        moleViews.addAll(moles)
-
-        // Clip holes to ensure moles slide up smoothly from within the hole
-        for (i in 0 until 9) {
-            val mole = moleViews[i]
-            mole.visibility = View.INVISIBLE
-            mole.scaleX = 1f
-            mole.scaleY = 1f
+        holes.forEachIndexed { index, hole ->
+            // Phản hồi ngay khi chạm xuống, không đợi nhấc tay như onClick
+            hole.setOnTouchListener { v, event ->
+                if (event.actionMasked == MotionEvent.ACTION_DOWN) {
+                    onHoleTapped(index)
+                    v.performClick()
+                }
+                true
+            }
         }
     }
 
     private fun initEngine() {
         engine = WhackMoleEngine(
-            holeCount = 9,
-            gameDurationSeconds = 60,
-            onMoleAppear = { holeIndex, type ->
-                runOnUiThread {
-                    animateMoleAppear(holeIndex, type)
-                }
-            },
+            holeCount = HOLE_COUNT,
+            gameDurationSeconds = GAME_SECONDS,
+            onMoleAppear = { holeIndex, type -> runOnUiThread { holes.getOrNull(holeIndex)?.popUp(type) } },
             onMoleDisappear = { holeIndex ->
-                runOnUiThread {
-                    animateMoleDisappear(holeIndex)
-                }
+                runOnUiThread { if (holeIndex != pendingHitHole) holes.getOrNull(holeIndex)?.hide() }
             },
-            onScoreChanged = { newScore, delta, combo ->
-                runOnUiThread {
-                    onScoreUpdated(newScore, delta, combo)
-                }
-            },
-            onTimerTick = { remainingSeconds ->
-                runOnUiThread {
-                    updateTimerUI(remainingSeconds)
-                }
-            },
-            onGameOver = { finalScore ->
-                runOnUiThread {
-                    onGameEnded(finalScore)
-                }
-            }
+            onScoreChanged = { newScore, delta, combo -> runOnUiThread { onScoreUpdated(newScore, delta, combo) } },
+            onTimerTick = { remaining -> runOnUiThread { updateTimerUI(remaining) } },
+            onGameOver = { finalScore -> runOnUiThread { onTimeUp(finalScore) } }
         )
     }
 
     private fun setupListeners() {
-        binding.btnBack.setSafeOnClickListener {
-            vibrateLight(15)
-            if (engine.isGameRunning()) {
-                showExitConfirmationDialog()
-            } else {
-                finish()
-            }
-        }
+        binding.btnBack.setSafeOnClickListener { handleBack() }
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() = handleBack()
+        })
 
         binding.btnStart.setSafeOnClickListener {
-            vibrateLight(20)
-            startReadyCountdown()
+            vibrate(20)
+            startReadyCountdown(continueAfterRevive = false)
         }
-
-        // Tap listener for each hole
-        for (i in 0 until 9) {
-            val holeIndex = i
-            holeViews[i].setOnClickListener {
-                onHoleTapped(holeIndex)
-            }
+        binding.btnRevive.setSafeOnClickListener { watchReviveAd() }
+        binding.btnReviveSkip.setSafeOnClickListener {
+            reviveCountdownJob?.cancel()
+            showResult(engine.getCurrentScore())
         }
     }
+
+    private fun handleBack() {
+        vibrate(15)
+        when {
+            engine.isGameRunning() -> showExitConfirmationDialog()
+            binding.resultOverlay.isVisible -> leaveAfterBreak()
+            else -> finish()
+        }
+    }
+
+    // ---------------------------------------------------------------- Màn hình bắt đầu
+
+    private fun showStartScreen() {
+        binding.startOverlay.visibility = View.VISIBLE
+        binding.startOverlay.alpha = 1f
+        binding.startContent.visibility = View.VISIBLE
+        binding.startContent.alpha = 1f
+        binding.startContent.scaleX = 1f
+        binding.startContent.scaleY = 1f
+        binding.tvCountdown.visibility = View.GONE
+        binding.effectsView.setAmbientPetals(true)
+
+        stopStartScreenAnimations()
+        // Tiêu đề rơi xuống nảy nhẹ, nút bắt đầu "thở" để mời bấm, chuột ló lên ló xuống
+        binding.tvStartTitle.translationY = -dp(60f)
+        binding.tvStartTitle.alpha = 0f
+        binding.tvStartTitle.animate().translationY(0f).alpha(1f)
+            .setDuration(520L).setInterpolator(OvershootInterpolator(2.2f)).start()
+
+        startScreenAnimators += ObjectAnimator.ofFloat(binding.tvStartTitle, View.ROTATION, -2.5f, 2.5f).apply {
+            duration = 1400L
+            repeatCount = ValueAnimator.INFINITE
+            repeatMode = ValueAnimator.REVERSE
+            start()
+        }
+        startScreenAnimators += AnimatorSet().apply {
+            playTogether(
+                pulse(binding.btnStart, View.SCALE_X, 1.07f),
+                pulse(binding.btnStart, View.SCALE_Y, 1.07f)
+            )
+            start()
+        }
+        binding.heroHole.post {
+            if (binding.startOverlay.isVisible) startScreenAnimators += binding.heroHole.peekLoop()
+        }
+    }
+
+    private fun pulse(view: View, property: android.util.Property<View, Float>, to: Float) =
+        ObjectAnimator.ofFloat(view, property, 1f, to).apply {
+            duration = 650L
+            repeatCount = ValueAnimator.INFINITE
+            repeatMode = ValueAnimator.REVERSE
+            interpolator = DecelerateInterpolator()
+        }
+
+    private fun stopStartScreenAnimations() {
+        startScreenAnimators.forEach { it.cancel() }
+        startScreenAnimators.clear()
+        binding.btnStart.scaleX = 1f
+        binding.btnStart.scaleY = 1f
+        binding.tvStartTitle.rotation = 0f
+        binding.heroHole.reset()
+    }
+
+    /** Đếm 3-2-1 rồi vào ván; sau khi xem quảng cáo chơi tiếp thì đếm lại để người chơi kịp chuẩn bị. */
+    private fun startReadyCountdown(continueAfterRevive: Boolean) {
+        countdownJob?.cancel()
+        stopStartScreenAnimations()
+        binding.effectsView.setAmbientPetals(false)
+        binding.startOverlay.visibility = View.VISIBLE
+        binding.startOverlay.alpha = 1f
+        binding.startContent.visibility = View.GONE
+        binding.tvCountdown.visibility = View.VISIBLE
+
+        countdownJob = lifecycleScope.launch {
+            val steps = listOf("3", "2", "1", getString(R.string.dap_chuot_countdown_go))
+            for ((i, step) in steps.withIndex()) {
+                val isGo = i == steps.lastIndex
+                binding.tvCountdown.text = step
+                binding.tvCountdown.textSize = if (isGo) 84f else 110f
+                binding.tvCountdown.scaleX = 2.2f
+                binding.tvCountdown.scaleY = 2.2f
+                binding.tvCountdown.alpha = 0f
+                binding.tvCountdown.rotation = if (isGo) -8f else 0f
+                binding.tvCountdown.animate().scaleX(1f).scaleY(1f).alpha(1f).rotation(0f)
+                    .setDuration(260L).setInterpolator(OvershootInterpolator(2.4f)).start()
+                vibrate(if (isGo) 40 else 18)
+                if (isGo) {
+                    binding.root.post {
+                        binding.effectsView.burstStars(binding.root.width / 2f, binding.root.height / 2f, golden = true)
+                    }
+                }
+                delay(if (isGo) 520L else 700L)
+            }
+            binding.startOverlay.animate().alpha(0f).setDuration(220L).withEndAction {
+                binding.startOverlay.visibility = View.GONE
+                binding.tvCountdown.visibility = View.GONE
+                if (continueAfterRevive) {
+                    engine.continueWithExtraTime(lifecycleScope, REVIVE_SECONDS)
+                } else {
+                    engine.start(lifecycleScope)
+                }
+            }.start()
+        }
+    }
+
+    // ---------------------------------------------------------------- Trong ván
 
     private fun onHoleTapped(holeIndex: Int) {
         if (!engine.isGameRunning()) return
+        val hole = holes.getOrNull(holeIndex) ?: return
+        hole.moleCenterIn(binding.root, point)
+        val x = point[0]
+        val y = point[1]
+        swingHammer(x, y)
 
-        val mole = moleViews.getOrNull(holeIndex) ?: return
-        if (mole.visibility != View.VISIBLE || mole.alpha < 0.2f) {
-            // Tapped on empty hole
-            vibrateLight(10)
+        val type = hole.currentType
+        if (type == null) {
+            binding.effectsView.puffDust(x, y + hole.height * 0.2f)
+            vibrate(8)
             return
         }
 
+        // Engine báo "biến mất" ngay trong lúc xử lý cú đập: bỏ qua để chạy hoạt cảnh bị đập thay vì trốn
+        pendingHitHole = holeIndex
         val wasHit = engine.hitMole(holeIndex)
-        if (wasHit) {
-            animateMoleHit(holeIndex)
+        pendingHitHole = -1
+        if (!wasHit) {
+            hole.hide()
+            return
         }
-    }
+        hole.hit()
 
-    private fun animateMoleAppear(holeIndex: Int, type: MoleType) {
-        val mole = moleViews.getOrNull(holeIndex) ?: return
-        mole.animate().cancel()
-
-        // Set visual style based on mole type
         when (type) {
-            MoleType.NORMAL -> mole.setImageResource(R.drawable.ic_mole_normal)
-            MoleType.GOLDEN -> mole.setImageResource(R.drawable.ic_mole_golden)
-            MoleType.BOMB -> mole.setImageResource(R.drawable.ic_mole_bomb)
+            MoleType.BOMB -> onBombHit(x, y)
+            MoleType.GOLDEN -> {
+                binding.effectsView.burstStars(x, y, golden = true)
+                vibrate(45)
+            }
+            MoleType.NORMAL -> {
+                binding.effectsView.burstStars(x, y, golden = false)
+                vibrate(22)
+            }
         }
-
-        mole.alpha = 1f
-        mole.scaleX = 1f
-        mole.scaleY = 1f
-        mole.visibility = View.VISIBLE
-
-        // Slide up smoothly with juicy spring overshoot
-        val height = if (mole.height > 0) mole.height.toFloat() else 180f
-        mole.translationY = height * 0.75f
-
-        val popAnim = ObjectAnimator.ofFloat(mole, "translationY", mole.translationY, 0f).apply {
-            duration = 240L
-            interpolator = OvershootInterpolator(1.4f)
-        }
-        popAnim.start()
+        showFloatingScore(x, y, lastDelta, lastCombo)
+        if (type != MoleType.BOMB) maybeShowComboBanner(lastCombo)
     }
 
-    private fun animateMoleHit(holeIndex: Int) {
-        val mole = moleViews.getOrNull(holeIndex) ?: return
-        mole.animate().cancel()
+    private fun swingHammer(x: Float, y: Float) {
+        val hammer = binding.ivHammer
+        val w = if (hammer.width > 0) hammer.width.toFloat() else dp(88f)
+        val h = if (hammer.height > 0) hammer.height.toFloat() else dp(88f)
+        // Chuôi búa đặt dưới bên phải chuột; xoay quanh đuôi chuôi để đầu búa đập đúng vào giữa
+        hammer.pivotX = w * 0.5f
+        hammer.pivotY = h * 0.95f
+        hammer.x = x + w * 0.55f - hammer.pivotX
+        hammer.y = y + h * 0.55f - hammer.pivotY
+        hammer.animate().cancel()
+        hammer.visibility = View.VISIBLE
+        hammer.alpha = 1f
+        hammer.rotation = 12f
+        hammer.animate().rotation(-42f).setDuration(70L).setInterpolator(AccelerateInterpolator())
+            .withEndAction {
+                hammer.animate().rotation(-28f).alpha(0f).setStartDelay(90L).setDuration(160L)
+                    .setInterpolator(DecelerateInterpolator())
+                    .withEndAction { hammer.visibility = View.GONE; hammer.animate().setStartDelay(0L) }
+                    .start()
+            }.start()
+    }
 
-        // Squish and sink animation
-        val scaleDownX = ObjectAnimator.ofFloat(mole, "scaleX", 1.25f, 0.7f).apply {
-            duration = 160L
-        }
-        val scaleDownY = ObjectAnimator.ofFloat(mole, "scaleY", 0.65f, 0.4f).apply {
-            duration = 160L
-        }
-        val sink = ObjectAnimator.ofFloat(mole, "translationY", 0f, 60f).apply {
-            duration = 160L
-        }
-        val fade = ObjectAnimator.ofFloat(mole, "alpha", 1f, 0f).apply {
-            duration = 160L
-        }
+    private fun onBombHit(x: Float, y: Float) {
+        vibrate(90)
+        binding.effectsView.burstSparks(x, y)
 
-        AnimatorSet().apply {
-            playTogether(scaleDownX, scaleDownY, sink, fade)
-            addListener(object : AnimatorListenerAdapter() {
-                override fun onAnimationEnd(animation: Animator) {
-                    mole.visibility = View.INVISIBLE
-                    mole.scaleX = 1f
-                    mole.scaleY = 1f
-                    mole.alpha = 1f
-                    mole.translationY = 0f
-                }
-            })
+        val boom = binding.ivBoom
+        val size = dp(150f)
+        boom.x = x - size / 2f
+        boom.y = y - size / 2f
+        boom.animate().cancel()
+        boom.visibility = View.VISIBLE
+        boom.alpha = 1f
+        boom.scaleX = 0.3f
+        boom.scaleY = 0.3f
+        boom.rotation = 0f
+        boom.animate().scaleX(1.25f).scaleY(1.25f).rotation(25f).alpha(0f)
+            .setDuration(480L).setInterpolator(DecelerateInterpolator())
+            .withEndAction { boom.visibility = View.GONE }.start()
+
+        // Màn hình rung và viền đỏ chớp
+        ObjectAnimator.ofFloat(binding.gameContent, View.TRANSLATION_X, 0f, -dp(14f), dp(12f), -dp(9f), dp(6f), -dp(3f), 0f).apply {
+            duration = 380L
             start()
         }
-    }
-
-    private fun animateMoleDisappear(holeIndex: Int) {
-        val mole = moleViews.getOrNull(holeIndex) ?: return
-        if (mole.visibility != View.VISIBLE || mole.alpha <= 0.1f) return
-
-        mole.animate().cancel()
-        val height = if (mole.height > 0) mole.height.toFloat() else 180f
-        mole.animate()
-            .translationY(height * 0.75f)
-            .alpha(0f)
-            .setDuration(180L)
-            .setInterpolator(AccelerateInterpolator())
-            .withEndAction {
-                mole.visibility = View.INVISIBLE
-                mole.translationY = 0f
-                mole.alpha = 1f
-            }
-            .start()
+        binding.flashOverlay.animate().cancel()
+        binding.flashOverlay.alpha = 1f
+        binding.flashOverlay.animate().alpha(0f).setDuration(450L).start()
+        showBanner(getString(R.string.dap_chuot_bomb_hit), Color.parseColor("#FF8A80"), 32f)
     }
 
     private fun onScoreUpdated(newScore: Int, delta: Int, combo: Int) {
+        lastDelta = delta
+        lastCombo = combo
         binding.tvScore.text = newScore.toString()
+        bounce(binding.chipScore, 1.12f)
 
-        // Pulse score text
-        binding.tvScore.animate().cancel()
-        binding.tvScore.scaleX = 1.3f
-        binding.tvScore.scaleY = 1.3f
-        binding.tvScore.animate()
-            .scaleX(1.0f)
-            .scaleY(1.0f)
-            .setDuration(200L)
-            .setInterpolator(OvershootInterpolator(2.0f))
-            .start()
-
-        // Update Combo
-        if (combo > 1) {
-            binding.tvCombo.text = getString(R.string.dap_chuot_combo_prefix) + combo
-            binding.tvCombo.setTextColor(Color.parseColor("#FF6D00"))
-            binding.tvCombo.animate().cancel()
-            binding.tvCombo.scaleX = 1.35f
-            binding.tvCombo.scaleY = 1.35f
-            binding.tvCombo.animate()
-                .scaleX(1.0f)
-                .scaleY(1.0f)
-                .setDuration(180L)
-                .start()
-        } else {
-            binding.tvCombo.text = "x0"
-            binding.tvCombo.setTextColor(Color.parseColor("#FFA726"))
-        }
-
-        // Haptic feel
-        when {
-            delta > 20 -> vibrateLight(45) // Golden or high combo
-            delta < 0 -> vibrateLight(80)  // Bomb hit
-            else -> vibrateLight(25)       // Normal
-        }
-
-        // Floating score popup effect
-        showFloatingScore(delta, combo)
+        binding.tvCombo.text = getString(R.string.dap_chuot_combo_prefix) + combo
+        binding.tvCombo.setTextColor(
+            when {
+                combo >= 8 -> Color.parseColor("#FF5252")
+                combo >= 5 -> Color.parseColor("#FFEB3B")
+                combo >= 3 -> Color.parseColor("#FFB74D")
+                else -> Color.parseColor("#FFE0B2")
+            }
+        )
+        if (combo >= 3) bounce(binding.chipCombo, 1.15f)
     }
 
-    private fun showFloatingScore(delta: Int, combo: Int) {
-        val text = when {
-            delta > 25 -> "+$delta ⭐"
-            delta > 0 && combo >= 3 -> "+$delta (x$combo)!"
-            delta > 0 -> "+$delta"
-            else -> "$delta 💥"
-        }
+    private fun bounce(view: View, to: Float) {
+        view.animate().cancel()
+        view.scaleX = to
+        view.scaleY = to
+        view.animate().scaleX(1f).scaleY(1f).setDuration(220L).setInterpolator(OvershootInterpolator(3f)).start()
+    }
 
-        val color = when {
-            delta > 20 -> Color.parseColor("#FFD700")
-            delta < 0 -> Color.parseColor("#FF3D00")
-            else -> Color.parseColor("#FFF9C4")
-        }
-
-        binding.tvScorePopup.text = text
-        binding.tvScorePopup.setTextColor(color)
-        binding.tvScorePopup.visibility = View.VISIBLE
-        binding.tvScorePopup.alpha = 1f
-        binding.tvScorePopup.scaleX = 0.6f
-        binding.tvScorePopup.scaleY = 0.6f
-
-        // Center on score panel
-        binding.tvScorePopup.x = (binding.root.width - binding.tvScorePopup.width) / 2f
-        binding.tvScorePopup.y = binding.scorePanel.y + binding.scorePanel.height + 20f
-
-        val moveUp = ObjectAnimator.ofFloat(binding.tvScorePopup, "translationY", 0f, -50f)
-        val scaleUp = ObjectAnimator.ofFloat(binding.tvScorePopup, "scaleX", 0.6f, 1.15f)
-        val scaleUpY = ObjectAnimator.ofFloat(binding.tvScorePopup, "scaleY", 0.6f, 1.15f)
-        val fadeOut = ObjectAnimator.ofFloat(binding.tvScorePopup, "alpha", 1f, 0f).apply {
-            startDelay = 220L
-            duration = 250L
-        }
-
-        AnimatorSet().apply {
-            playTogether(moveUp, scaleUp, scaleUpY, fadeOut)
-            duration = 450L
-            addListener(object : AnimatorListenerAdapter() {
-                override fun onAnimationEnd(animation: Animator) {
-                    binding.tvScorePopup.visibility = View.GONE
+    private fun showFloatingScore(x: Float, y: Float, delta: Int, combo: Int) {
+        val tv = TextView(this).apply {
+            text = when {
+                delta < 0 -> delta.toString()
+                combo >= 3 -> "+$delta  x$combo"
+                else -> "+$delta"
+            }
+            setTextColor(
+                when {
+                    delta < 0 -> Color.parseColor("#FF5252")
+                    delta >= 30 -> Color.parseColor("#FFD54F")
+                    else -> Color.WHITE
                 }
-            })
-            start()
+            )
+            textSize = if (delta >= 30 || delta < 0) 30f else 24f
+            typeface = ResourcesCompat.getFont(context, R.font.arimo_bold)
+            setShadowLayer(8f, 0f, 3f, Color.parseColor("#CC000000"))
+            gravity = Gravity.CENTER
         }
+        binding.root.addView(tv, FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT))
+        tv.post {
+            tv.x = x - tv.width / 2f
+            tv.y = y - tv.height
+            tv.scaleX = 0.4f
+            tv.scaleY = 0.4f
+            tv.animate().scaleX(1.1f).scaleY(1.1f).translationYBy(-dp(70f))
+                .setDuration(520L).setInterpolator(DecelerateInterpolator()).start()
+            tv.animate().alpha(0f).setStartDelay(380L).setDuration(260L)
+                .withEndAction { binding.root.removeView(tv) }.start()
+        }
+    }
+
+    private fun maybeShowComboBanner(combo: Int) {
+        val praise = when (combo) {
+            3 -> null
+            5 -> getString(R.string.dap_chuot_praise_good)
+            8 -> getString(R.string.dap_chuot_praise_great)
+            12, 16, 20 -> getString(R.string.dap_chuot_praise_legend)
+            else -> return
+        }
+        val text = getString(R.string.dap_chuot_combo_banner, combo) + (praise?.let { "\n$it" } ?: "")
+        val color = if (combo >= 8) Color.parseColor("#FF6E40") else Color.parseColor("#FFEB3B")
+        showBanner(text, color, if (combo >= 5) 40f else 34f)
+        if (combo >= 5) vibrate(35)
+    }
+
+    private fun showBanner(text: String, color: Int, sizeSp: Float) {
+        val tv = binding.tvBanner
+        tv.animate().cancel()
+        tv.text = text
+        tv.setTextColor(color)
+        tv.textSize = sizeSp
+        tv.visibility = View.VISIBLE
+        tv.alpha = 0f
+        tv.scaleX = 0.3f
+        tv.scaleY = 0.3f
+        tv.rotation = -8f
+        tv.animate().alpha(1f).scaleX(1f).scaleY(1f).rotation(0f)
+            .setDuration(280L).setInterpolator(OvershootInterpolator(2.6f))
+            .withEndAction {
+                tv.animate().alpha(0f).translationYBy(-dp(30f)).setStartDelay(520L).setDuration(240L)
+                    .withEndAction {
+                        tv.visibility = View.GONE
+                        tv.translationY = 0f
+                        tv.animate().setStartDelay(0L)
+                    }.start()
+            }.start()
     }
 
     private fun updateTimerUI(remainingSeconds: Int) {
-        binding.tvTimer.text = "${remainingSeconds}s"
+        binding.tvTimer.text = getString(R.string.dap_chuot_timer_format, remainingSeconds)
+        val fill = binding.timerBarFill
+        val target = (remainingSeconds * 10_000 / timerTotalSeconds.coerceAtLeast(1)).coerceIn(0, 10_000)
+        timerAnimator?.cancel()
+        timerAnimator = ValueAnimator.ofInt(fill.background.level, target).apply {
+            duration = 950L
+            interpolator = LinearInterpolator()
+            addUpdateListener { fill.background.level = it.animatedValue as Int }
+            start()
+        }
 
-        // Smooth width change for progress bar
-        val totalWidth = binding.timerBarContainer.width
-        val targetWidth = (totalWidth * (remainingSeconds / 60f)).toInt()
-        val params = binding.timerBarFill.layoutParams
-        params.width = targetWidth
-        binding.timerBarFill.layoutParams = params
-
-        // Urgency color when low on time
-        if (remainingSeconds <= 10) {
-            binding.tvTimer.setTextColor(Color.parseColor("#FF1744"))
-            binding.tvTimer.animate().cancel()
-            binding.tvTimer.scaleX = 1.25f
-            binding.tvTimer.scaleY = 1.25f
-            binding.tvTimer.animate().scaleX(1.0f).scaleY(1.0f).setDuration(200L).start()
-        } else {
-            binding.tvTimer.setTextColor(Color.WHITE)
+        val urgent = remainingSeconds <= LAST_SECONDS
+        if (urgent != timerUrgent) {
+            // Đổi sang thanh đỏ khi sắp hết giờ, giữ nguyên độ dài đang chạy
+            timerUrgent = urgent
+            val level = fill.background.level
+            fill.setBackgroundResource(if (urgent) R.drawable.bg_dc_timer_fill_urgent else R.drawable.bg_dc_timer_fill)
+            fill.background.level = level
+            binding.tvTimer.setTextColor(Color.parseColor(if (urgent) "#FFFFFFFF" else "#FF5D2A12"))
+        }
+        if (urgent && remainingSeconds > 0) {
+            bounce(binding.timerBarContainer, 1.06f)
+            if (remainingSeconds <= 5) vibrate(12)
+        }
+        if (remainingSeconds == LAST_SECONDS && timerTotalSeconds > LAST_SECONDS) {
+            showBanner(getString(R.string.dap_chuot_last_seconds), Color.parseColor("#FF8A80"), 34f)
         }
     }
 
-    private fun startReadyCountdown() {
-        countdownJob?.cancel()
-        countdownJob = lifecycleScope.launch {
-            binding.btnStart.visibility = View.GONE
-            val steps = listOf("3", "2", "1", getString(R.string.dap_chuot_countdown_go))
+    private fun resetTimerBar() {
+        timerAnimator?.cancel()
+        timerUrgent = false
+        binding.timerBarFill.setBackgroundResource(R.drawable.bg_dc_timer_fill)
+        binding.timerBarFill.background.level = 10_000
+        binding.tvTimer.setTextColor(Color.parseColor("#FF5D2A12"))
+        binding.tvTimer.text = getString(R.string.dap_chuot_timer_format, timerTotalSeconds)
+    }
 
-            for (step in steps) {
-                binding.tvCountdownOverlay.text = step
-                binding.tvCountdownOverlay.scaleX = 0.3f
-                binding.tvCountdownOverlay.scaleY = 0.3f
-                binding.tvCountdownOverlay.alpha = 0f
-                binding.tvCountdownOverlay.animate()
-                    .scaleX(1.3f)
-                    .scaleY(1.3f)
-                    .alpha(1f)
-                    .setDuration(220L)
-                    .setInterpolator(OvershootInterpolator(2f))
-                    .start()
+    // ---------------------------------------------------------------- Hết giờ, chơi tiếp, kết quả
 
-                vibrateLight(20)
-                delay(650L)
+    private fun onTimeUp(finalScore: Int) {
+        holes.forEach { it.hide() }
+        showBanner(getString(R.string.dap_chuot_time_up), Color.parseColor("#FFEB3B"), 48f)
+        vibrate(60)
+        lifecycleScope.launch {
+            delay(1000L)
+            if (isFinishing || isDestroyed) return@launch
+            if (!reviveUsed && finalScore > 0) showReviveOffer() else showResult(finalScore)
+        }
+    }
+
+    private fun showReviveOffer() {
+        binding.timeUpOverlay.visibility = View.VISIBLE
+        binding.timeUpOverlay.alpha = 0f
+        binding.timeUpOverlay.animate().alpha(1f).setDuration(200L).start()
+        binding.reviveCard.scaleX = 0.6f
+        binding.reviveCard.scaleY = 0.6f
+        binding.reviveCard.animate().scaleX(1f).scaleY(1f).setDuration(320L)
+            .setInterpolator(OvershootInterpolator(1.8f)).start()
+
+        reviveCountdownJob?.cancel()
+        reviveCountdownJob = lifecycleScope.launch {
+            // Không bắt người chơi chờ: tự chuyển sang kết quả sau vài giây nếu không bấm
+            for (s in REVIVE_OFFER_SECONDS downTo 1) {
+                binding.btnReviveSkip.text = getString(R.string.dap_chuot_revive_skip, s)
+                delay(1000L)
             }
-
-            // Hide overlay
-            binding.startOverlay.animate()
-                .alpha(0f)
-                .setDuration(250L)
-                .withEndAction {
-                    binding.startOverlay.visibility = View.GONE
-                    engine.start(lifecycleScope)
-                }
-                .start()
+            showResult(engine.getCurrentScore())
         }
     }
 
-    private fun onGameEnded(finalScore: Int) {
+    private fun watchReviveAd() {
+        reviveCountdownJob?.cancel()
+        binding.btnRevive.isEnabled = false
+        Toast.makeText(this, R.string.msg_ad_loading_short, Toast.LENGTH_SHORT).show()
+        var rewarded = false
+        adManager.showRewardedAd(
+            activity = this,
+            placement = AdPlacement.DAP_CHUOT_REVIVE,
+            onUserEarnedReward = { rewarded = true },
+            onDismissed = {
+                binding.btnRevive.isEnabled = true
+                if (rewarded) resumeAfterRevive() else showResult(engine.getCurrentScore())
+            },
+            onError = { message ->
+                binding.btnRevive.isEnabled = true
+                Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+                showResult(engine.getCurrentScore())
+            }
+        )
+    }
+
+    private fun resumeAfterRevive() {
+        reviveUsed = true
+        binding.timeUpOverlay.visibility = View.GONE
+        timerTotalSeconds = REVIVE_SECONDS
+        resetTimerBar()
+        startReadyCountdown(continueAfterRevive = true)
+    }
+
+    private fun showResult(finalScore: Int) {
+        if (isFinishing || isDestroyed || binding.resultOverlay.isVisible) return
+        reviveCountdownJob?.cancel()
+        binding.timeUpOverlay.visibility = View.GONE
+
         val oldHigh = prefs.highScore
         val isNewRecord = finalScore > oldHigh
         if (isNewRecord) {
             prefs.highScore = finalScore
             updateBestScoreView()
-            vibrateCelebration()
-        } else if (finalScore > 0) {
-            vibrateLight(40)
         }
-
         prefs.totalGamesPlayed++
 
-        // Bonus lucky coins: 1 coin per 10 points
+        // 1 Xu cho mỗi 10 điểm, cộng vào ví Xu dùng chung với Bầu Cua
         val earnedCoins = finalScore / 10
+        val coinsBefore = coinPrefs.getCoins()
         if (earnedCoins > 0) {
+            // Giữ số dư cũ tới khi xu bay từ thẻ kết quả lên thanh trên cùng
+            CoinFlyAnimator.hold(binding.tvCoins)
             coinPrefs.addCoins(earnedCoins)
         }
+        updateCoinsView()
 
-        showResultDialog(finalScore, prefs.highScore, isNewRecord, earnedCoins)
+        val rb = DialogDapChuotResultV2Binding.inflate(layoutInflater, binding.resultOverlay, false)
+        resultBinding = rb
+        binding.resultOverlay.removeAllViews()
+        binding.resultOverlay.addView(rb.root, FrameLayout.LayoutParams(
+            ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, Gravity.CENTER
+        ))
+
+        rb.tvNewRecord.visibility = View.GONE
+        rb.tvResultBest.text = prefs.highScore.toString()
+        rb.tvResultCoins.text = getString(R.string.dap_chuot_coins_earned, earnedCoins)
+        rb.btnDoubleCoins.visibility = if (earnedCoins > 0) View.VISIBLE else View.GONE
+
+        rb.btnDoubleCoins.setSafeOnClickListener { watchDoubleCoinsAd(rb, earnedCoins) }
+        rb.btnPlayAgain.setSafeOnClickListener { playAgainAfterBreak() }
+        rb.btnExitResult.setSafeOnClickListener { leaveAfterBreak() }
+
+        binding.resultOverlay.visibility = View.VISIBLE
+        binding.resultOverlay.alpha = 0f
+        binding.resultOverlay.animate().alpha(1f).setDuration(200L).start()
+        rb.root.scaleX = 0.5f
+        rb.root.scaleY = 0.5f
+        rb.root.animate().scaleX(1f).scaleY(1f).setDuration(380L).setInterpolator(OvershootInterpolator(1.6f)).start()
+
+        animateResult(rb, finalScore, isNewRecord)
+        if (earnedCoins > 0) {
+            rb.root.postDelayed({ flyCoinsToHud(rb, coinsBefore, coinsBefore + earnedCoins) }, 900L)
+        }
     }
 
-    @SuppressLint("SetTextI18n")
-    private fun showResultDialog(score: Int, best: Int, isNewRecord: Boolean, earnedCoins: Int) {
-        if (isFinishing || isDestroyed) return
+    /** Xu bay từ ô xu trên thẻ kết quả vào ô số dư ở thanh trên cùng, số dư đếm lên dần. */
+    private fun flyCoinsToHud(rb: DialogDapChuotResultV2Binding, start: Int, end: Int) {
+        if (resultBinding !== rb || !rb.boxCoins.isAttachedToWindow) {
+            CoinFlyAnimator.release(binding.tvCoins)
+            updateCoinsView()
+            return
+        }
+        val (fx, fy) = CoinFlyAnimator.centerOnScreen(rb.boxCoins)
+        CoinFlyAnimator.fly(this, fx, fy, binding.tvCoins.parent as View, binding.tvCoins, start, end)
+    }
 
-        val dialogBinding = DialogDapChuotResultBinding.inflate(LayoutInflater.from(this))
-        val dialog = AlertDialog.Builder(this)
-            .setView(dialogBinding.root)
-            .setCancelable(false)
-            .create()
+    private fun animateResult(rb: DialogDapChuotResultV2Binding, score: Int, isNewRecord: Boolean) {
+        ValueAnimator.ofInt(0, score).apply {
+            duration = (500L + score).coerceAtMost(1400L)
+            startDelay = 250L
+            interpolator = DecelerateInterpolator()
+            addUpdateListener { rb.tvResultScore.text = (it.animatedValue as Int).toString() }
+            start()
+        }
 
-        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-
-        dialogBinding.tvResultScore.text = score.toString()
-        dialogBinding.tvResultBest.text = best.toString()
+        val stars = starsFor(score)
+        listOf(rb.ivStar1, rb.ivStar2, rb.ivStar3).forEachIndexed { i, star ->
+            if (i >= stars) return@forEachIndexed
+            rb.root.postDelayed({
+                if (resultBinding !== rb) return@postDelayed
+                star.setImageResource(R.drawable.ic_dc_star_filled)
+                star.scaleX = 2.2f
+                star.scaleY = 2.2f
+                star.rotation = -30f
+                star.animate().scaleX(1f).scaleY(1f).rotation(0f).setDuration(320L)
+                    .setInterpolator(OvershootInterpolator(2.4f)).start()
+                star.getLocationInWindow(location)
+                binding.resultEffectsView.burstStars(location[0] + star.width / 2f, location[1] + star.height / 2f, golden = true)
+                vibrate(25)
+            }, 600L + i * 320L)
+        }
 
         if (isNewRecord) {
-            dialogBinding.tvNewRecord.visibility = View.VISIBLE
-            dialogBinding.tvResultTitle.text = getString(R.string.dap_chuot_new_record)
-        } else {
-            dialogBinding.tvNewRecord.visibility = View.GONE
-            dialogBinding.tvResultTitle.text = getString(R.string.dap_chuot_result_title)
+            rb.root.postDelayed({
+                if (resultBinding !== rb) return@postDelayed
+                rb.tvNewRecord.visibility = View.VISIBLE
+                rb.tvNewRecord.scaleX = 0f
+                rb.tvNewRecord.scaleY = 0f
+                rb.tvNewRecord.animate().scaleX(1f).scaleY(1f).setDuration(300L)
+                    .setInterpolator(OvershootInterpolator(3f)).start()
+                binding.resultEffectsView.rainConfetti()
+                vibrateCelebration()
+            }, 600L + stars * 320L)
         }
+    }
 
-        if (earnedCoins > 0) {
-            dialogBinding.tvResultScoreLabel.text = "${getString(R.string.dap_chuot_score)} (+$earnedCoins Xu)"
-        }
+    private val location = IntArray(2)
 
-        dialogBinding.btnPlayAgain.setSafeOnClickListener {
-            dialog.dismiss()
+    private fun watchDoubleCoinsAd(rb: DialogDapChuotResultV2Binding, earnedCoins: Int) {
+        rb.btnDoubleCoins.isEnabled = false
+        Toast.makeText(this, R.string.msg_ad_loading_short, Toast.LENGTH_SHORT).show()
+        var earned = false
+        var before = 0
+        adManager.showRewardedAd(
+            activity = this,
+            placement = AdPlacement.DAP_CHUOT_DOUBLE_COINS,
+            // Cộng xu ngay để không mất thưởng; hiệu ứng chạy khi quảng cáo đã đóng để người chơi thấy
+            onUserEarnedReward = {
+                earned = true
+                before = coinPrefs.getCoins()
+                CoinFlyAnimator.hold(binding.tvCoins)
+                coinPrefs.addCoins(earnedCoins)
+            },
+            onDismissed = {
+                rb.btnDoubleCoins.isEnabled = !earned
+                if (!earned) return@showRewardedAd
+                rb.tvResultCoins.text = getString(R.string.dap_chuot_coins_earned, earnedCoins * 2)
+                rb.tvDoubleCoins.text = getString(R.string.dap_chuot_double_coins_done, earnedCoins * 2)
+                rb.boxCoins.getLocationInWindow(location)
+                binding.resultEffectsView.burstCoins(location[0] + rb.boxCoins.width / 2f, location[1] + rb.boxCoins.height / 2f, 14)
+                bounce(rb.boxCoins, 1.2f)
+                vibrateCelebration()
+                rb.root.postDelayed({ flyCoinsToHud(rb, before, before + earnedCoins) }, 450L)
+            },
+            onError = { message ->
+                rb.btnDoubleCoins.isEnabled = true
+                Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+            }
+        )
+    }
+
+    /** Đóng thẻ kết quả trước, rồi mới xét quảng cáo xen kẽ ở điểm nghỉ tự nhiên giữa hai ván. */
+    private fun playAgainAfterBreak() {
+        hideResult()
+        adManager.showInterstitialAd(this, AdPlacement.DAP_CHUOT_BREAK) {
             resetGameUI()
-            startReadyCountdown()
+            startReadyCountdown(continueAfterRevive = false)
         }
+    }
 
-        dialogBinding.btnExitResult.setSafeOnClickListener {
-            dialog.dismiss()
-            finish()
-        }
+    private fun leaveAfterBreak() {
+        hideResult()
+        adManager.showInterstitialAd(this, AdPlacement.DAP_CHUOT_BREAK) { finish() }
+    }
 
-        resultDialog = dialog
-        dialog.show()
+    private fun hideResult() {
+        resultBinding = null
+        binding.resultEffectsView.clear()
+        binding.resultOverlay.visibility = View.GONE
+        binding.resultOverlay.removeAllViews()
     }
 
     private fun resetGameUI() {
+        reviveUsed = false
+        timerTotalSeconds = GAME_SECONDS
         binding.tvScore.text = "0"
-        binding.tvCombo.text = "x0"
-        binding.tvTimer.text = "60s"
-        val params = binding.timerBarFill.layoutParams
-        params.width = binding.timerBarContainer.width
-        binding.timerBarFill.layoutParams = params
-
-        for (mole in moleViews) {
-            mole.animate().cancel()
-            mole.visibility = View.INVISIBLE
-            mole.translationY = 0f
-            mole.alpha = 1f
-            mole.scaleX = 1f
-            mole.scaleY = 1f
-        }
-
-        binding.startOverlay.visibility = View.VISIBLE
-        binding.startOverlay.alpha = 1f
-        binding.btnStart.visibility = View.VISIBLE
-        binding.tvCountdownOverlay.text = getString(R.string.dap_chuot_ready)
+        binding.tvCombo.text = getString(R.string.dap_chuot_combo_prefix) + 0
+        binding.tvCombo.setTextColor(Color.parseColor("#FFE0B2"))
+        resetTimerBar()
+        holes.forEach { it.reset() }
+        binding.effectsView.clear()
+        binding.tvBanner.visibility = View.GONE
     }
 
     private fun updateBestScoreView() {
         binding.tvBest.text = prefs.highScore.toString()
     }
 
+    private fun updateCoinsView() {
+        if (CoinFlyAnimator.isHeld(binding.tvCoins)) return
+        binding.tvCoins.text = coinPrefs.getCoins().toString()
+    }
+
     private fun showExitConfirmationDialog() {
         AlertDialog.Builder(this)
             .setTitle(getString(R.string.feature_dap_chuot))
-            .setMessage("Bạn có chắc muốn thoát khi ván chơi đang diễn ra?")
-            .setPositiveButton("Thoát") { _, _ ->
+            .setMessage(R.string.dap_chuot_exit_confirm_message)
+            .setPositiveButton(R.string.dap_chuot_exit_confirm_yes) { _, _ ->
                 engine.stop()
                 finish()
             }
-            .setNegativeButton("Tiếp tục", null)
+            .setNegativeButton(R.string.dap_chuot_exit_confirm_no, null)
             .show()
     }
 
-    private fun vibrateLight(millis: Long) {
-        runCatching {
-            val vibrator = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                val vm = getSystemService(VIBRATOR_MANAGER_SERVICE) as? VibratorManager
-                vm?.defaultVibrator
-            } else {
-                @Suppress("DEPRECATION")
-                getSystemService(VIBRATOR_SERVICE) as? Vibrator
-            }
+    private fun dp(v: Float) = v * resources.displayMetrics.density
 
+    private fun vibrator(): Vibrator? = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+        (getSystemService(VIBRATOR_MANAGER_SERVICE) as? VibratorManager)?.defaultVibrator
+    } else {
+        @Suppress("DEPRECATION")
+        getSystemService(VIBRATOR_SERVICE) as? Vibrator
+    }
+
+    private fun vibrate(millis: Long) {
+        runCatching {
+            val vibrator = vibrator()
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 vibrator?.vibrate(VibrationEffect.createOneShot(millis, VibrationEffect.DEFAULT_AMPLITUDE))
             } else {
@@ -532,14 +773,7 @@ class DapChuotActivity : AppCompatActivity() {
 
     private fun vibrateCelebration() {
         runCatching {
-            val vibrator = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                val vm = getSystemService(VIBRATOR_MANAGER_SERVICE) as? VibratorManager
-                vm?.defaultVibrator
-            } else {
-                @Suppress("DEPRECATION")
-                getSystemService(VIBRATOR_SERVICE) as? Vibrator
-            }
-
+            val vibrator = vibrator()
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 val timings = longArrayOf(0, 70, 80, 70, 80, 110)
                 val amplitudes = intArrayOf(0, 180, 0, 210, 0, 255)
@@ -553,12 +787,12 @@ class DapChuotActivity : AppCompatActivity() {
 
     override fun onPause() {
         super.onPause()
-        if (engine.isGameRunning()) {
+        // Rời app giữa ván thì huỷ ván và quay về màn hình bắt đầu (không áp dụng lúc đang xem quảng cáo)
+        if (engine.isGameRunning() || countdownJob?.isActive == true) {
             engine.stop()
-            binding.startOverlay.visibility = View.VISIBLE
-            binding.startOverlay.alpha = 1f
-            binding.btnStart.visibility = View.VISIBLE
-            binding.tvCountdownOverlay.text = getString(R.string.dap_chuot_ready)
+            countdownJob?.cancel()
+            resetGameUI()
+            showStartScreen()
         }
     }
 
@@ -566,14 +800,26 @@ class DapChuotActivity : AppCompatActivity() {
         super.onDestroy()
         engine.stop()
         countdownJob?.cancel()
-        resultDialog?.dismiss()
+        reviveCountdownJob?.cancel()
+        timerAnimator?.cancel()
+        stopStartScreenAnimations()
     }
 
     companion object {
+        private const val HOLE_COUNT = 9
+        private const val GAME_SECONDS = 60
+        private const val REVIVE_SECONDS = 10
+        private const val REVIVE_OFFER_SECONDS = 5
+        private const val LAST_SECONDS = 10
+
+        // Mốc điểm cho 1, 2, 3 sao
+        private val STAR_THRESHOLDS = intArrayOf(100, 250, 450)
+
+        fun starsFor(score: Int): Int = STAR_THRESHOLDS.count { score >= it }
+
         fun start(context: Context) {
             val intent = Intent(context, DapChuotActivity::class.java)
             context.startActivity(intent)
         }
     }
 }
-

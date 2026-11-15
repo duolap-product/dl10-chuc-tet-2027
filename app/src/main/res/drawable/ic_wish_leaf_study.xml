@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Icon danh mục trên lá điều ước: huy hiệu tròn viền vàng, hình đỏ son theo biểu tượng Tết.
+     Nền tròn nằm sẵn trong icon nên đặt được trên cả lá kem, đỏ và vàng. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <path
+        android:pathData="M0.60,12.00 a11.4,11.4 0,1 0,22.80,0 a11.4,11.4 0,1 0,-22.80,0 Z"
+        android:fillColor="#E3B04B" />
+    <path
+        android:pathData="M1.80,12.00 a10.2,10.2 0,1 0,20.40,0 a10.2,10.2 0,1 0,-20.40,0 Z"
+        android:fillColor="#FFF8E7" />
+    <path
+        android:pathData="M2.70,12.00 a9.3,9.3 0,1 0,18.60,0 a9.3,9.3 0,1 0,-18.60,0 Z"
+        android:fillColor="#00000000"
+        android:strokeColor="#B3261E"
+        android:strokeWidth="0.45"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round" />
+    <path
+        android:pathData="M12,8.4 C10.3,7.2 8,6.8 5.4,7.2 L5.4,16.8 C8,16.4 10.3,16.8 12,18 C13.7,16.8 16,16.4 18.6,16.8 L18.6,7.2 C16,6.8 13.7,7.2 12,8.4 Z"
+        android:fillColor="#B3261E" />
+    <path
+        android:pathData="M12,8.8 L12,17.4 M7.3,10.2 Q9.2,10 10.6,10.7 M7.3,12.6 Q9.2,12.4 10.6,13.1 M13.4,10.7 Q14.8,10 16.7,10.2 M13.4,13.1 Q14.8,12.4 16.7,12.6"
+        android:fillColor="#00000000"
+        android:strokeColor="#FFF8E7"
+        android:strokeWidth="0.75"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round" />
+</vector>

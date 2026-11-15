@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Ô Ăn Quan v2: thẻ người chơi đang tới lượt (viền vàng sáng) -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+            <corners android:radius="20dp" />
+            <solid android:color="#40FFD54F" />
+        </shape>
+    </item>
+    <item android:left="2dp" android:top="2dp" android:right="2dp" android:bottom="2dp">
+        <shape android:shape="rectangle">
+            <corners android:radius="18dp" />
+            <gradient android:angle="270" android:startColor="#E6A3201B" android:endColor="#E65A0B10" />
+            <stroke android:width="2.5dp" android:color="#FFFFD54F" />
+        </shape>
+    </item>
+</layer-list>

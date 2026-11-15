@@ -1,0 +1,674 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Đập Chuột v2. Bản cũ vẫn giữ ở activity_dap_chuot.xml -->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rootLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_dc_sky"
+    android:clipChildren="false">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/gameContent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipChildren="false">
+
+        <ImageView
+            android:id="@+id/ivGarland"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:importantForAccessibility="no"
+            android:src="@drawable/ic_dc_lantern_garland"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/layoutHeader"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingHorizontal="16dp"
+            android:paddingTop="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageButton
+                android:id="@+id/btnBack"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:background="@drawable/bg_circle_back_button"
+                android:contentDescription="@string/action_back"
+                android:padding="10dp"
+                android:src="@drawable/ic_arrow_back"
+                app:tint="#FFE8A3" />
+
+            <TextView
+                android:id="@+id/tvTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/lobster_regular"
+                android:gravity="center"
+                android:shadowColor="#B3000000"
+                android:shadowDy="3"
+                android:shadowRadius="6"
+                android:text="@string/feature_dap_chuot"
+                android:textColor="#FFE8A3"
+                android:textSize="28sp" />
+
+            <LinearLayout
+                android:id="@+id/coinChip"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:background="@drawable/bg_dc_hud_chip"
+                android:gravity="center_vertical"
+                android:minWidth="44dp"
+                android:orientation="horizontal"
+                android:paddingHorizontal="10dp">
+
+                <ImageView
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:importantForAccessibility="no"
+                    android:src="@drawable/ic_coin_gold" />
+
+                <TextView
+                    android:id="@+id/tvCoins"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:fontFamily="@font/arimo_bold"
+                    android:textColor="#FFFFFF"
+                    android:textSize="14sp"
+                    tools:text="1250" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/scorePanel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/layoutHeader">
+
+            <LinearLayout
+                android:id="@+id/chipScore"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                
+                android:background="@drawable/bg_dc_hud_chip"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:paddingVertical="6dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/arimo_bold"
+                    android:text="@string/dap_chuot_score"
+                    android:textAllCaps="true"
+                    android:textColor="#FFFFC94A"
+                    android:textSize="10sp" />
+
+                <TextView
+                    android:id="@+id/tvScore"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/arimo_bold"
+                    android:text="0"
+                    android:textColor="#FFFFFFFF"
+                    android:textSize="24sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/chipCombo"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginHorizontal="8dp"
+                android:background="@drawable/bg_dc_hud_chip"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:paddingVertical="6dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/arimo_bold"
+                    android:text="@string/dap_chuot_combo"
+                    android:textAllCaps="true"
+                    android:textColor="#FFFFC94A"
+                    android:textSize="10sp" />
+
+                <TextView
+                    android:id="@+id/tvCombo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/arimo_bold"
+                    android:text="x0"
+                    android:textColor="#FFFFB74D"
+                    android:textSize="24sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/chipBest"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                
+                android:background="@drawable/bg_dc_hud_chip"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:paddingVertical="6dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/arimo_bold"
+                    android:text="@string/dap_chuot_best"
+                    android:textAllCaps="true"
+                    android:textColor="#FFFFC94A"
+                    android:textSize="10sp" />
+
+                <TextView
+                    android:id="@+id/tvBest"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/arimo_bold"
+                    android:text="0"
+                    android:textColor="#FFFFFFFF"
+                    android:textSize="24sp" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <FrameLayout
+            android:id="@+id/timerBarContainer"
+            android:layout_width="0dp"
+            android:layout_height="22dp"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/bg_dc_timer_track"
+            android:padding="3dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/scorePanel">
+
+            <View
+                android:id="@+id/timerBarFill"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_dc_timer_fill" />
+
+            <TextView
+                android:id="@+id/tvTimer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/arimo_bold"
+                android:shadowColor="#80FFFFFF"
+                android:shadowDy="1"
+                android:shadowRadius="1"
+                android:text="60s"
+                android:textColor="#FF5D2A12"
+                android:textSize="13sp" />
+        </FrameLayout>
+
+        <ImageView
+            android:id="@+id/ivHills"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="-36dp"
+            android:adjustViewBounds="true"
+            android:importantForAccessibility="no"
+            android:src="@drawable/ic_dc_hills"
+            app:layout_constraintBottom_toTopOf="@id/fieldContainer"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <FrameLayout
+            android:id="@+id/fieldContainer"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginTop="44dp"
+            android:layout_marginBottom="12dp"
+            android:background="@drawable/bg_dc_field"
+            android:clipChildren="false"
+            android:paddingHorizontal="6dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="14dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/timerBarContainer">
+
+            <GridLayout
+                android:id="@+id/moleGrid"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/ic_dc_lawn_stripes"
+                android:clipChildren="false"
+                android:columnCount="3"
+                android:rowCount="3">
+
+                <online.duolap.tetviet.game.dapchuot.ui.MoleHoleView
+                    android:id="@+id/hole0"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_rowWeight="1"
+                    android:layout_columnWeight="1" />
+
+                <online.duolap.tetviet.game.dapchuot.ui.MoleHoleView
+                    android:id="@+id/hole1"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_rowWeight="1"
+                    android:layout_columnWeight="1" />
+
+                <online.duolap.tetviet.game.dapchuot.ui.MoleHoleView
+                    android:id="@+id/hole2"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_rowWeight="1"
+                    android:layout_columnWeight="1" />
+
+                <online.duolap.tetviet.game.dapchuot.ui.MoleHoleView
+                    android:id="@+id/hole3"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_rowWeight="1"
+                    android:layout_columnWeight="1" />
+
+                <online.duolap.tetviet.game.dapchuot.ui.MoleHoleView
+                    android:id="@+id/hole4"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_rowWeight="1"
+                    android:layout_columnWeight="1" />
+
+                <online.duolap.tetviet.game.dapchuot.ui.MoleHoleView
+                    android:id="@+id/hole5"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_rowWeight="1"
+                    android:layout_columnWeight="1" />
+
+                <online.duolap.tetviet.game.dapchuot.ui.MoleHoleView
+                    android:id="@+id/hole6"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_rowWeight="1"
+                    android:layout_columnWeight="1" />
+
+                <online.duolap.tetviet.game.dapchuot.ui.MoleHoleView
+                    android:id="@+id/hole7"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_rowWeight="1"
+                    android:layout_columnWeight="1" />
+
+                <online.duolap.tetviet.game.dapchuot.ui.MoleHoleView
+                    android:id="@+id/hole8"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_rowWeight="1"
+                    android:layout_columnWeight="1" />
+
+            </GridLayout>
+        </FrameLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <View
+        android:id="@+id/flashOverlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0"
+        android:background="@drawable/bg_dc_flash"
+        android:importantForAccessibility="no" />
+
+    <ImageView
+        android:id="@+id/ivBoom"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:importantForAccessibility="no"
+        android:src="@drawable/ic_dc_boom"
+        android:visibility="gone" />
+
+    <online.duolap.tetviet.game.dapchuot.ui.DapChuotEffectsView
+        android:id="@+id/effectsView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <ImageView
+        android:id="@+id/ivHammer"
+        android:layout_width="88dp"
+        android:layout_height="88dp"
+        android:importantForAccessibility="no"
+        android:src="@drawable/ic_dc_hammer"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/tvBanner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:fontFamily="@font/arimo_bold"
+        android:gravity="center"
+        android:shadowColor="#E6000000"
+        android:shadowDy="4"
+        android:shadowRadius="10"
+        android:textColor="#FFFFEB3B"
+        android:textSize="40sp"
+        android:visibility="gone"
+        tools:text="COMBO x5!" />
+
+    <!-- Màn hình bắt đầu -->
+    <FrameLayout
+        android:id="@+id/startOverlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#C2200305"
+        android:clickable="true"
+        android:focusable="true">
+
+        <LinearLayout
+            android:id="@+id/startContent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:paddingHorizontal="24dp">
+
+            <TextView
+                android:id="@+id/tvStartTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/lobster_regular"
+                android:shadowColor="#FFB71C1C"
+                android:shadowDy="5"
+                android:shadowRadius="2"
+                android:text="@string/feature_dap_chuot"
+                android:textColor="#FFFFD54F"
+                android:textSize="56sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/arimo_bold"
+                android:gravity="center"
+                android:text="@string/dap_chuot_tagline"
+                android:textColor="#FFFFE8A3"
+                android:textSize="15sp" />
+
+            <online.duolap.tetviet.game.dapchuot.ui.MoleHoleView
+                android:id="@+id/heroHole"
+                android:layout_width="190dp"
+                android:layout_height="180dp"
+                android:layout_marginTop="12dp" />
+
+            <LinearLayout
+                android:id="@+id/legend"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/bg_dc_legend"
+                android:orientation="horizontal"
+                android:paddingVertical="10dp">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="44dp"
+                        android:layout_height="44dp"
+                        android:importantForAccessibility="no"
+                        android:src="@drawable/ic_dc_mouse" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:fontFamily="@font/arimo_bold"
+                        android:text="+10"
+                        android:textColor="#FFFFFFFF"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/arimo_regular"
+                        android:gravity="center"
+                        android:text="@string/dap_chuot_legend_normal"
+                        android:textColor="#FFFFE8A3"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="44dp"
+                        android:layout_height="44dp"
+                        android:importantForAccessibility="no"
+                        android:src="@drawable/ic_dc_mouse_golden" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:fontFamily="@font/arimo_bold"
+                        android:text="+30"
+                        android:textColor="#FFFFD54F"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/arimo_regular"
+                        android:gravity="center"
+                        android:text="@string/dap_chuot_legend_golden"
+                        android:textColor="#FFFFE8A3"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="44dp"
+                        android:layout_height="44dp"
+                        android:importantForAccessibility="no"
+                        android:src="@drawable/ic_dc_firecracker" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:fontFamily="@font/arimo_bold"
+                        android:text="-15"
+                        android:textColor="#FFFF8A80"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/arimo_regular"
+                        android:gravity="center"
+                        android:text="@string/dap_chuot_legend_bomb"
+                        android:textColor="#FFFFE8A3"
+                        android:textSize="12sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/btnStart"
+                android:layout_width="240dp"
+                android:layout_height="64dp"
+                android:layout_marginTop="22dp"
+                android:background="@drawable/bg_dc_btn_gold"
+                android:fontFamily="@font/arimo_bold"
+                android:paddingBottom="6dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:text="@string/dap_chuot_start"
+                android:textColor="#FF7A090D"
+                android:textSize="22sp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvCountdown"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/arimo_bold"
+            android:shadowColor="#FFB71C1C"
+            android:shadowDy="6"
+            android:shadowRadius="4"
+            android:textColor="#FFFFD54F"
+            android:textSize="110sp"
+            android:visibility="gone"
+            tools:text="3" />
+    </FrameLayout>
+
+    <!-- Hết giờ: mời xem video để chơi tiếp 10 giây -->
+    <FrameLayout
+        android:id="@+id/timeUpOverlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#C2200305"
+        android:clickable="true"
+        android:focusable="true"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:id="@+id/reviveCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="28dp"
+            android:background="@drawable/bg_dc_result_card"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:paddingHorizontal="20dp"
+            android:paddingTop="20dp"
+            android:paddingBottom="22dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/arimo_bold"
+                android:text="@string/dap_chuot_time_up"
+                android:textColor="#FFC62828"
+                android:textSize="30sp" />
+
+            <ImageView
+                android:layout_width="96dp"
+                android:layout_height="96dp"
+                android:layout_marginTop="6dp"
+                android:importantForAccessibility="no"
+                android:src="@drawable/ic_dc_mouse_hit" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/arimo_bold"
+                android:text="@string/dap_chuot_revive_title"
+                android:textColor="#FF5D2A12"
+                android:textSize="20sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/arimo_regular"
+                android:gravity="center"
+                android:text="@string/dap_chuot_revive_desc"
+                android:textColor="#FF7A4A2C"
+                android:textSize="14sp" />
+
+            <LinearLayout
+                android:id="@+id/btnRevive"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/bg_dc_btn_green"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingBottom="6dp">
+
+                <ImageView
+                    android:layout_width="26dp"
+                    android:layout_height="26dp"
+                    android:importantForAccessibility="no"
+                    android:src="@drawable/ic_dc_video" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:fontFamily="@font/arimo_bold"
+                    android:text="@string/dap_chuot_revive_watch"
+                    android:textColor="#FFFFFFFF"
+                    android:textSize="18sp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/btnReviveSkip"
+                android:layout_width="wrap_content"
+                android:layout_height="44dp"
+                android:layout_marginTop="6dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:fontFamily="@font/arimo_bold"
+                android:gravity="center"
+                android:paddingHorizontal="16dp"
+                android:textColor="#FF8D5524"
+                android:textSize="15sp"
+                tools:text="Xem kết quả (5)" />
+        </LinearLayout>
+    </FrameLayout>
+
+    <!-- Kết quả: nạp dialog_dap_chuot_result_v2 vào đây, hiệu ứng pháo giấy vẽ đè lên trên -->
+    <FrameLayout
+        android:id="@+id/resultOverlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#C2200305"
+        android:clickable="true"
+        android:focusable="true"
+        android:paddingHorizontal="16dp"
+        android:visibility="gone" />
+
+    <online.duolap.tetviet.game.dapchuot.ui.DapChuotEffectsView
+        android:id="@+id/resultEffectsView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</FrameLayout>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Nhãn MỚI / ĐẤU TRÍ trên thẻ game -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <corners android:radius="8dp" />
+    <gradient
+        android:angle="0"
+        android:startColor="#FFE28A"
+        android:endColor="#F2B23A" />
+    <stroke
+        android:width="0.8dp"
+        android:color="#A3141A" />
+</shape>

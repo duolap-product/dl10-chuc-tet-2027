@@ -21,4 +21,25 @@
     <style name="TetVietModalBottomSheetStyle" parent="Widget.Design.BottomSheet.Modal">
         <item name="android:background">@android:color/transparent</item>
     </style>
+
+    <!-- Ô Ăn Quan v2: bảng chi tiết điểm trên thẻ kết quả -->
+    <style name="OaqResultLabel">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingVertical">3dp</item>
+        <item name="android:fontFamily">@font/arimo_regular</item>
+        <item name="android:textColor">#FF8D5524</item>
+        <item name="android:textSize">13sp</item>
+    </style>
+
+    <style name="OaqResultValue">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:minWidth">52dp</item>
+        <item name="android:paddingVertical">3dp</item>
+        <item name="android:gravity">end</item>
+        <item name="android:fontFamily">@font/arimo_bold</item>
+        <item name="android:textColor">#FF5D2A12</item>
+        <item name="android:textSize">14sp</item>
+    </style>
 </resources>

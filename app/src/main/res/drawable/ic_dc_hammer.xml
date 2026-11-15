@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Đập Chuột v2: hình vẽ chủ đề Tết, tạo bởi script, chỉnh tay được -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android" xmlns:aapt="http://schemas.android.com/aapt"
+    android:width="100dp"
+    android:height="100dp"
+    android:viewportWidth="100"
+    android:viewportHeight="100">
+    <path android:pathData="M45,40 L55,40 L56,95 Q50,99 44,95 Z">
+        <aapt:attr name="android:fillColor">
+            <gradient android:type="linear" android:startX="44" android:startY="0" android:endX="56" android:endY="0"
+                android:startColor="#FFC68A4E" android:endColor="#FF8D5524" />
+        </aapt:attr>
+    </path>
+    <path android:pathData="M48,48 L48.5,90 M52,52 L52.3,84"
+        android:strokeColor="#FF6D3F18"
+        android:strokeWidth="1"
+        android:strokeAlpha="0.6"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round" />
+    <path android:pathData="M42,88 L58,88 L58,97 Q50,100 42,97 Z"
+        android:fillColor="#FFFFC107" />
+    <path android:pathData="M18,14 L82,14 Q88,14 88,20 L88,40 Q88,46 82,46 L18,46 Q12,46 12,40 L12,20 Q12,14 18,14 Z">
+        <aapt:attr name="android:fillColor">
+            <gradient android:type="linear" android:startX="0" android:startY="14" android:endX="0" android:endY="46"
+                android:startColor="#FFEF5350" android:endColor="#FFB71C1C" />
+        </aapt:attr>
+    </path>
+    <path android:pathData="M12,20 Q12,14 18,14 L20,14 L20,46 L18,46 Q12,46 12,40 Z"
+        android:fillColor="#FF8E1414" />
+    <path android:pathData="M80,14 L82,14 Q88,14 88,20 L88,40 Q88,46 82,46 L80,46 Z"
+        android:fillColor="#FF8E1414" />
+    <path android:pathData="M25,14 L31,14 L31,46 L25,46 Z"
+        android:fillColor="#FFFFC107" />
+    <path android:pathData="M69,14 L75,14 L75,46 L69,46 Z"
+        android:fillColor="#FFFFC107" />
+    <path android:pathData="M21,19 L79,19"
+        android:strokeColor="#FFFFFFFF"
+        android:strokeWidth="2.5"
+        android:strokeAlpha="0.45"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round" />
+    <path android:pathData="M43.5,30 A6.5,6.5 0 1,0 56.5,30 A6.5,6.5 0 1,0 43.5,30 Z"
+        android:fillColor="#FFFFD54F"
+        android:strokeColor="#FFFF8F00"
+        android:strokeWidth="1.2" />
+</vector>

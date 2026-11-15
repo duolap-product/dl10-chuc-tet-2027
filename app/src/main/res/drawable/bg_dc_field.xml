@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Đập Chuột v2: bãi cỏ chứa 9 hang -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+            <corners android:radius="28dp" />
+            <solid android:color="#FF2E5A1C" />
+        </shape>
+    </item>
+    <item android:bottom="5dp">
+        <shape android:shape="rectangle">
+            <corners android:radius="28dp" />
+            <gradient android:angle="270" android:startColor="#FF8BC34A" android:endColor="#FF558B2F" />
+            <stroke android:width="3dp" android:color="#FFC5E1A5" />
+        </shape>
+    </item>
+</layer-list>

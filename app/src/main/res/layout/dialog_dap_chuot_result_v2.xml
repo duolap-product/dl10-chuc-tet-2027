@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Đập Chuột v2: thẻ kết quả. Bản cũ vẫn giữ ở dialog_dap_chuot_result.xml -->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clipChildren="false"
+    android:clipToPadding="false"
+    android:paddingHorizontal="12dp"
+    android:paddingTop="22dp">
+
+    <LinearLayout
+        android:id="@+id/resultCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_dc_result_card"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:paddingHorizontal="20dp"
+        android:paddingTop="34dp"
+        android:paddingBottom="22dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="bottom"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/ivStar1"
+                android:layout_width="52dp"
+                android:layout_height="52dp"
+                android:importantForAccessibility="no"
+                android:src="@drawable/ic_dc_star_empty" />
+
+            <ImageView
+                android:id="@+id/ivStar2"
+                android:layout_width="68dp"
+                android:layout_height="68dp"
+                android:layout_marginHorizontal="4dp"
+                android:layout_marginBottom="10dp"
+                android:importantForAccessibility="no"
+                android:src="@drawable/ic_dc_star_empty" />
+
+            <ImageView
+                android:id="@+id/ivStar3"
+                android:layout_width="52dp"
+                android:layout_height="52dp"
+                android:importantForAccessibility="no"
+                android:src="@drawable/ic_dc_star_empty" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvNewRecord"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/bg_dc_ribbon"
+            android:fontFamily="@font/arimo_bold"
+            android:paddingHorizontal="14dp"
+            android:paddingVertical="4dp"
+            android:text="@string/dap_chuot_new_record"
+            android:textColor="#FFFFEB3B"
+            android:textSize="14sp"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/tvResultScore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/arimo_bold"
+            android:shadowColor="#66B26A00"
+            android:shadowDy="3"
+            android:shadowRadius="2"
+            android:text="0"
+            android:textColor="#FFC62828"
+            android:textSize="64sp"
+            tools:text="420" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="6dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_dc_stat_box"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:paddingVertical="8dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/arimo_bold"
+                    android:text="@string/dap_chuot_best"
+                    android:textColor="#FF8D5524"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/tvResultBest"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/arimo_bold"
+                    android:textColor="#FF5D2A12"
+                    android:textSize="20sp"
+                    tools:text="520" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/boxCoins"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_dc_stat_box"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:paddingVertical="8dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/arimo_bold"
+                    android:text="@string/dap_chuot_coins_label"
+                    android:textColor="#FF8D5524"
+                    android:textSize="12sp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:importantForAccessibility="no"
+                        android:src="@drawable/ic_coin_gold" />
+
+                    <TextView
+                        android:id="@+id/tvResultCoins"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:fontFamily="@font/arimo_bold"
+                        android:textColor="#FF5D2A12"
+                        android:textSize="20sp"
+                        tools:text="+42 Xu" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/btnDoubleCoins"
+            android:layout_width="match_parent"
+            android:layout_height="58dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/bg_dc_btn_green"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingBottom="6dp">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:importantForAccessibility="no"
+                android:src="@drawable/ic_dc_video" />
+
+            <TextView
+                android:id="@+id/tvDoubleCoins"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:fontFamily="@font/arimo_bold"
+                android:text="@string/dap_chuot_double_coins"
+                android:textColor="#FFFFFFFF"
+                android:textSize="17sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/btnExitResult"
+                android:layout_width="0dp"
+                android:layout_height="56dp"
+                android:layout_marginEnd="6dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_dc_btn_red"
+                android:fontFamily="@font/arimo_bold"
+                android:paddingBottom="6dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:text="@string/dap_chuot_exit"
+                android:textColor="#FFFFFFFF"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/btnPlayAgain"
+                android:layout_width="0dp"
+                android:layout_height="56dp"
+                android:layout_marginStart="6dp"
+                android:layout_weight="1.6"
+                android:background="@drawable/bg_dc_btn_gold"
+                android:fontFamily="@font/arimo_bold"
+                android:paddingBottom="6dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:text="@string/dap_chuot_play_again"
+                android:textColor="#FF7A090D"
+                android:textSize="18sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvResultTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="44dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="-22dp"
+        android:background="@drawable/bg_dc_ribbon"
+        android:fontFamily="@font/arimo_bold"
+        android:gravity="center"
+        android:paddingHorizontal="28dp"
+        android:text="@string/dap_chuot_result_title"
+        android:textColor="#FFFFE8A3"
+        android:textSize="20sp" />
+</FrameLayout>

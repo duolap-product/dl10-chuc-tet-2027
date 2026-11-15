@@ -44,6 +44,14 @@
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="${admobAppId}" />
 
+        <!-- Firebase Analytics/Crashlytics: tắt ở bản debug ngay từ lúc khởi động tiến trình (see app/build.gradle.kts) -->
+        <meta-data
+            android:name="firebase_analytics_collection_enabled"
+            android:value="${firebaseCollectionEnabled}" />
+        <meta-data
+            android:name="firebase_crashlytics_collection_enabled"
+            android:value="${firebaseCollectionEnabled}" />
+
         <activity
             android:name=".activities.LuckyWheelActivity"
             android:exported="true" />
@@ -114,6 +122,16 @@
             android:exported="false">
             <intent-filter>
                 <action android:name="online.duolap.tetviet.ACTION_MONDAY_NOTIFICATION" />
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+        <!-- Nhắc điểm danh nhận lì xì hằng ngày (19:00 nếu chưa nhận) -->
+        <receiver
+            android:name=".checkin.DailyCheckInReminderReceiver"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="online.duolap.tetviet.ACTION_DAILY_CHECKIN_REMIND" />
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>

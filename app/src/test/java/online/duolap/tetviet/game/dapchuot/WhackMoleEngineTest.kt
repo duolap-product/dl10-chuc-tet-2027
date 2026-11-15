@@ -73,4 +73,34 @@ class WhackMoleEngineTest {
         assertEquals(30, MoleType.GOLDEN.points)
         assertEquals(-15, MoleType.BOMB.points)
     }
+
+    @Test
+    fun continueWithExtraTimeRestartsTimerAndKeepsScore() {
+        val scope = CoroutineScope(Dispatchers.Default)
+        val engine = WhackMoleEngine(
+            holeCount = 9,
+            gameDurationSeconds = 60,
+            onMoleAppear = { _, _ -> },
+            onMoleDisappear = { _ -> },
+            onScoreChanged = { _, _, _ -> },
+            onTimerTick = { _ -> },
+            onGameOver = { _ -> }
+        )
+
+        // Đang chơi thì không cho chơi tiếp chồng lên
+        engine.start(scope)
+        engine.continueWithExtraTime(scope, 10)
+        assertEquals(60, engine.getRemainingSeconds())
+
+        engine.stop()
+        engine.continueWithExtraTime(scope, 10)
+        assertTrue(engine.isGameRunning())
+        assertEquals(10, engine.getRemainingSeconds())
+        assertEquals(0, engine.getCurrentScore())
+
+        engine.stop()
+        engine.continueWithExtraTime(scope, 0)
+        assertFalse(engine.isGameRunning())
+        scope.cancel()
+    }
 }

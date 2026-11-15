@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Vệt sáng lướt qua ảnh thẻ game (di chuyển bằng translationX) -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <gradient
+        android:angle="0"
+        android:centerColor="#66FFFFFF"
+        android:endColor="#00FFFFFF"
+        android:startColor="#00FFFFFF" />
+</shape>

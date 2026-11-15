@@ -50,7 +50,7 @@ class UserWishesAdapter(
             val context: Context = binding.root.context
             val category = WishCategory.fromName(item.category)
 
-            binding.ivItemCategoryIcon.setImageResource(category.iconRes)
+            binding.ivItemCategoryIcon.setImageResource(category.leafIconRes)
             binding.tvItemCategoryTitle.setText(category.titleRes)
             binding.tvItemDate.text = dateFormat.format(Date(item.createdAt))
             binding.tvItemContent.text = item.content

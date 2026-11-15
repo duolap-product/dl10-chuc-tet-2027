@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Khu "Sân Chơi Ngày Tết" ở đầu màn hình chính: số xu, điểm danh nhận lì xì 7 ngày và 3 game.
+     Thay cho 3 thẻ game cũ trong hàng "Khám phá Tết Việt" (các thẻ đó vẫn giữ trong activity_main.xml, chỉ ẩn đi). -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layoutGameZone"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_game_zone_panel"
+    android:elevation="6dp"
+    android:orientation="vertical"
+    android:padding="12dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/lobster_regular"
+                android:includeFontPadding="false"
+                android:shadowColor="#80000000"
+                android:shadowDy="2"
+                android:shadowRadius="3"
+                android:text="@string/game_zone_title"
+                android:textColor="#FFE08A"
+                android:textSize="21sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:fontFamily="@font/arimo_regular"
+                android:includeFontPadding="false"
+                android:text="@string/game_zone_subtitle"
+                android:textColor="#F8D7A8"
+                android:textSize="11.5sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/chipCoinBalance"
+            android:layout_width="wrap_content"
+            android:layout_height="32dp"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/bg_coin_chip"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingStart="6dp"
+            android:paddingEnd="10dp">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:importantForAccessibility="no"
+                android:src="@drawable/ic_coin_gold" />
+
+            <TextView
+                android:id="@+id/tvCoinBalance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:fontFamily="@font/arimo_bold"
+                android:includeFontPadding="false"
+                android:textColor="#FFF3C4"
+                android:textSize="14sp"
+                tools:text="1.250" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Điểm danh nhận lì xì -->
+    <LinearLayout
+        android:id="@+id/cardCheckIn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/bg_checkin_card"
+        android:clickable="true"
+        android:focusable="true"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/ivCheckInEnvelope"
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:importantForAccessibility="no"
+                android:src="@drawable/ic_custom_red_packet" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/arimo_bold"
+                    android:includeFontPadding="false"
+                    android:text="@string/checkin_title"
+                    android:textColor="#7A090D"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/tvCheckInSubtitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:fontFamily="@font/arimo_regular"
+                    android:includeFontPadding="false"
+                    android:textColor="#8D5524"
+                    android:textSize="11.5sp"
+                    tools:text="Chuỗi 2 ngày · Ngày 7 nhận lì xì 888 xu" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layoutCheckInDays"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal" />
+
+        <FrameLayout
+            android:id="@+id/btnCheckIn"
+            android:layout_width="match_parent"
+            android:layout_height="42dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/bg_wishing_cta_button"
+            android:clickable="true"
+            android:focusable="true">
+
+            <TextView
+                android:id="@+id/tvCheckInCta"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/arimo_bold"
+                android:includeFontPadding="false"
+                android:textColor="#FFFDF7"
+                android:textSize="14sp"
+                tools:text="Nhận lì xì +150 xu" />
+        </FrameLayout>
+    </LinearLayout>
+
+    <!-- 3 game -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:baselineAligned="false"
+        android:orientation="horizontal">
+
+        <include
+            android:id="@+id/gameBauCua"
+            layout="@layout/item_home_game_card"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
+            android:layout_weight="1" />
+
+        <include
+            android:id="@+id/gameOAnQuan"
+            layout="@layout/item_home_game_card"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="5dp"
+            android:layout_weight="1" />
+
+        <include
+            android:id="@+id/gameDapChuot"
+            layout="@layout/item_home_game_card"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+</LinearLayout>

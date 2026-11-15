@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Đập Chuột v2: thẻ kết quả -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+            <corners android:radius="28dp" />
+            <solid android:color="#FFB26A00" />
+        </shape>
+    </item>
+    <item android:bottom="6dp">
+        <shape android:shape="rectangle">
+            <corners android:radius="28dp" />
+            <gradient android:angle="270" android:startColor="#FFFFFBEF" android:endColor="#FFFFE0B2" />
+            <stroke android:width="3dp" android:color="#FFFFC94A" />
+        </shape>
+    </item>
+</layer-list>

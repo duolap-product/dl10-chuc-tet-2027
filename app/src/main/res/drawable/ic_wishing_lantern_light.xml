@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Ánh nến bên trong đèn lồng (chồng lên ic_wishing_lantern, nhấp nháy bằng alpha). -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:width="52dp"
+    android:height="100dp"
+    android:viewportWidth="52"
+    android:viewportHeight="100">
+    <path
+        android:pathData="M10.00,43.00 a16,17 0,1 0,32.00,0 a16,17 0,1 0,-32.00,0 Z">
+        <aapt:attr name="android:fillColor">
+            <gradient android:type="radial" android:centerX="26" android:centerY="42" android:gradientRadius="17">
+                <item android:color="#E6FFF6C4" android:offset="0" />
+                <item android:color="#80FFC857" android:offset="0.5" />
+                <item android:color="#00FF9A2E" android:offset="1" />
+            </gradient>
+        </aapt:attr>
+    </path>
+</vector>

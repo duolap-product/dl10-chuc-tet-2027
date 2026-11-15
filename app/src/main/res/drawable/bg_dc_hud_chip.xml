@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Đập Chuột v2: ô điểm / combo / kỷ lục -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+    <corners android:radius="18dp" />
+    <gradient android:angle="270" android:startColor="#CC5A0B10" android:endColor="#CC2E0508" />
+    <stroke android:width="2dp" android:color="#FFFFC94A" />
+</shape>

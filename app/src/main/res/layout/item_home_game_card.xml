@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Thẻ game trong khu "Sân Chơi Ngày Tết" ở màn hình chính -->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/gameCardRoot"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_weight="1"
+    android:clickable="true"
+    android:focusable="true">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="#5E0408"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="0dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:id="@+id/layoutGameArt"
+                android:layout_width="match_parent"
+                android:layout_height="118dp">
+
+                <ImageView
+                    android:id="@+id/ivGameArt"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:importantForAccessibility="no"
+                    android:scaleType="centerCrop"
+                    tools:src="@drawable/bg_dc_home_card" />
+
+                <!-- Vệt sáng lướt qua ảnh, chạy định kỳ -->
+                <View
+                    android:id="@+id/viewGameShine"
+                    android:layout_width="40dp"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bg_game_shine"
+                    android:rotation="14"
+                    android:scaleY="1.5"
+                    android:translationX="-60dp" />
+            </FrameLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_game_card_strip"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:paddingHorizontal="4dp"
+                android:paddingTop="6dp"
+                android:paddingBottom="8dp">
+
+                <TextView
+                    android:id="@+id/tvGameTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/arimo_bold"
+                    android:includeFontPadding="false"
+                    android:maxLines="1"
+                    android:textColor="#FFF3C4"
+                    android:textSize="13.5sp"
+                    tools:text="Đập Chuột" />
+
+                <TextView
+                    android:id="@+id/tvGamePlay"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/bg_play_pill"
+                    android:fontFamily="@font/arimo_bold"
+                    android:includeFontPadding="false"
+                    android:paddingHorizontal="10dp"
+                    android:paddingVertical="4dp"
+                    android:text="@string/game_zone_play_now"
+                    android:textColor="#7A090D"
+                    android:textSize="10.5sp" />
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_game_card_frame" />
+
+    <TextView
+        android:id="@+id/tvGameBadge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="6dp"
+        android:background="@drawable/bg_game_badge_hot"
+        android:fontFamily="@font/arimo_bold"
+        android:includeFontPadding="false"
+        android:paddingHorizontal="6dp"
+        android:paddingVertical="3dp"
+        android:textColor="#FFF3C4"
+        android:textSize="9sp"
+        android:visibility="gone"
+        tools:text="HOT"
+        tools:visibility="visible" />
+
+</FrameLayout>

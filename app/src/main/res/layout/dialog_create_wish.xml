@@ -72,65 +72,49 @@
             app:layout_constraintStart_toStartOf="@+id/layoutPreviewTag"
             app:layout_constraintTop_toTopOf="@+id/layoutPreviewTag" />
 
-        <!-- Live Preview Tag -->
-        <LinearLayout
+        <!-- Live Preview Tag: cùng thiết kế với lá trên cây (view_wishing_leaf.xml), phóng 1.25x -->
+        <FrameLayout
             android:id="@+id/layoutPreviewTag"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:orientation="vertical"
+            android:layout_width="80dp"
+            android:layout_height="140dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
-                android:layout_width="16dp"
-                android:layout_height="14dp"
-                android:layout_marginBottom="-2dp"
+                android:id="@+id/ivPreviewLeafBg"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:importantForAccessibility="no"
+                android:scaleType="fitXY"
+                android:src="@drawable/bg_wishing_leaf_cream" />
+
+            <TextView
+                android:id="@+id/tvPreviewTagContent"
+                android:layout_width="58dp"
+                android:layout_height="55dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="37dp"
+                android:ellipsize="end"
+                android:fontFamily="@font/arimo_bold"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:lineSpacingExtra="1dp"
+                android:maxLines="3"
+                android:text="Điều ước\ncủa bạn"
+                android:textColor="#7A090D"
+                android:textSize="12.5sp" />
+
+            <ImageView
+                android:id="@+id/ivPreviewCategoryIcon"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="89dp"
+                android:importantForAccessibility="no"
                 android:scaleType="fitCenter"
-                android:src="@drawable/bg_wishing_tag_thread" />
-
-            <FrameLayout
-                android:id="@+id/cardPreviewTagBody"
-                android:layout_width="82dp"
-                android:layout_height="112dp"
-                android:background="@drawable/bg_wishing_tag_cream"
-                android:elevation="6dp"
-                android:paddingHorizontal="8dp"
-                android:paddingVertical="10dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/tvPreviewTagContent"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
-                        android:ellipsize="end"
-                        android:fontFamily="@font/arimo_bold"
-                        android:gravity="center"
-                        android:includeFontPadding="false"
-                        android:lineSpacingExtra="2dp"
-                        android:maxLines="3"
-                        android:text="Điều ước\ncủa bạn"
-                        android:textColor="#7A090D"
-                        android:textSize="12sp"
-                        android:textStyle="bold" />
-
-                    <ImageView
-                        android:id="@+id/ivPreviewCategoryIcon"
-                        android:layout_width="22dp"
-                        android:layout_height="22dp"
-                        android:layout_marginTop="4dp"
-                        android:scaleType="fitCenter"
-                        android:src="@drawable/ic_wish_health" />
-                </LinearLayout>
-            </FrameLayout>
-        </LinearLayout>
+                android:src="@drawable/ic_wish_leaf_health" />
+        </FrameLayout>
 
         <!-- Dialog Title -->
         <TextView
@@ -251,9 +235,9 @@
 
                 <ImageView
                     android:id="@+id/ivIconHealth"
-                    android:layout_width="18dp"
-                    android:layout_height="18dp"
-                    android:src="@drawable/ic_wish_health" />
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:src="@drawable/ic_wish_leaf_health" />
 
                 <TextView
                     android:id="@+id/tvLabelHealth"
@@ -282,9 +266,9 @@
 
                 <ImageView
                     android:id="@+id/ivIconCareer"
-                    android:layout_width="18dp"
-                    android:layout_height="18dp"
-                    android:src="@drawable/ic_wish_career" />
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:src="@drawable/ic_wish_leaf_career" />
 
                 <TextView
                     android:id="@+id/tvLabelCareer"
@@ -313,9 +297,9 @@
 
                 <ImageView
                     android:id="@+id/ivIconLove"
-                    android:layout_width="18dp"
-                    android:layout_height="18dp"
-                    android:src="@drawable/ic_wish_love" />
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:src="@drawable/ic_wish_leaf_love" />
 
                 <TextView
                     android:id="@+id/tvLabelLove"
@@ -343,9 +327,9 @@
 
                 <ImageView
                     android:id="@+id/ivIconStudy"
-                    android:layout_width="18dp"
-                    android:layout_height="18dp"
-                    android:src="@drawable/ic_wish_study" />
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:src="@drawable/ic_wish_leaf_study" />
 
                 <TextView
                     android:id="@+id/tvLabelStudy"
@@ -387,9 +371,9 @@
 
                 <ImageView
                     android:id="@+id/ivIconFinance"
-                    android:layout_width="18dp"
-                    android:layout_height="18dp"
-                    android:src="@drawable/ic_wish_finance" />
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:src="@drawable/ic_wish_leaf_finance" />
 
                 <TextView
                     android:id="@+id/tvLabelFinance"
@@ -418,9 +402,9 @@
 
                 <ImageView
                     android:id="@+id/ivIconFamily"
-                    android:layout_width="18dp"
-                    android:layout_height="18dp"
-                    android:src="@drawable/ic_wish_family" />
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:src="@drawable/ic_wish_leaf_family" />
 
                 <TextView
                     android:id="@+id/tvLabelFamily"
@@ -448,9 +432,9 @@
 
                 <ImageView
                     android:id="@+id/ivIconOther"
-                    android:layout_width="18dp"
-                    android:layout_height="18dp"
-                    android:src="@drawable/ic_wish_other" />
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:src="@drawable/ic_wish_leaf_other" />
 
                 <TextView
                     android:id="@+id/tvLabelOther"

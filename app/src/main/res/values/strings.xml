@@ -8,6 +8,7 @@
     <string name="app_footer_brand">Tết Việt 2027 • DuoLap</string>
     <string name="app_version_info">Phiên bản 1.0 • Chúc Mừng Năm Mới Đinh Mùi 2027</string>
     <string name="action_close">Đóng</string>
+    <string name="action_back">Quay lại</string>
     <string name="action_cancel">Hủy</string>
     <string name="action_confirm">Xác Nhận</string>
     <string name="action_save">Lưu</string>
@@ -362,6 +363,36 @@
     <string name="wishing_tree_my_wishes_empty">Bạn chưa treo điều ước nào. Hãy viết một điều ước thật đẹp gửi lên cây mai nhé!</string>
     <string name="wishing_tree_category_all">Tất cả</string>
     <string name="wishing_tree_blessings_count">%1$d lượt chúc</string>
+    <!-- Đèn lồng trên Cây Điều Ước: chạm để nhận lời chúc ngẫu nhiên -->
+    <string name="wishing_lantern_content_desc">Đèn lồng may mắn, chạm để nhận lời chúc</string>
+    <string name="wishing_lantern_dialog_title">Đèn Lồng Gửi Lời Chúc</string>
+    <string name="wishing_lantern_dialog_hint">Chạm đèn lồng trên cây để nhận thêm lời chúc nhé!</string>
+    <string name="wishing_lantern_btn_another">Lời chúc khác</string>
+    <string name="wishing_lantern_share_format">🏮 Lời chúc đầu xuân từ Cây Điều Ước:\n\n“%1$s”\n\nCùng nhận lời chúc năm mới tại ứng dụng Tết Việt!</string>
+    <string-array name="wishing_lantern_greetings">
+        <item>Năm mới chúc bạn an khang thịnh vượng, vạn sự như ý, nụ cười luôn rạng rỡ trên môi.</item>
+        <item>Chúc bạn một năm sức khỏe dồi dào, tinh thần phơi phới, làm gì cũng thuận buồm xuôi gió.</item>
+        <item>Xuân sang chúc bạn tiền vào như nước, tiền ra nhỏ giọt, túi lúc nào cũng rủng rỉnh.</item>
+        <item>Chúc gia đình bạn năm mới sum vầy, trên thuận dưới hòa, ấm êm hạnh phúc.</item>
+        <item>Chúc bạn công danh tấn tới, sự nghiệp thăng hoa, mọi dự định đều thành công rực rỡ.</item>
+        <item>Năm mới chúc bạn học hành tấn tới, thi đâu đỗ đó, kiến thức ngày càng mở mang.</item>
+        <item>Chúc bạn tình duyên phơi phới, gặp đúng người thương, yêu thương trọn vẹn cả năm.</item>
+        <item>Đèn lồng sáng soi đường may mắn: chúc bạn một năm bình an, gặp toàn điều tốt lành.</item>
+        <item>Chúc bạn mã đáo thành công, buôn may bán đắt, làm ăn phát đạt quanh năm.</item>
+        <item>Chúc bạn năm mới ăn ngon ngủ kỹ, không âu lo, ngày nào cũng là một ngày vui.</item>
+        <item>Mai vàng nở rộ, phúc lộc đầy nhà: chúc bạn một năm phúc lộc song toàn.</item>
+        <item>Chúc bạn mạnh mẽ vượt mọi thử thách, ước mơ nào cũng chạm tới được trong năm nay.</item>
+        <item>Năm mới chúc bạn có thêm nhiều niềm vui mới, bạn bè mới và những chuyến đi thật đẹp.</item>
+        <item>Chúc bạn và người thân luôn mạnh khỏe, bình an, sống lâu trăm tuổi.</item>
+        <item>Chúc bạn một năm đong đầy may mắn: đi đâu cũng gặp quý nhân, làm gì cũng có người giúp.</item>
+        <item>Xuân an khang, Tết sum vầy, chúc bạn năm mới tràn đầy năng lượng và hy vọng.</item>
+        <item>Chúc bạn tiền đầy túi, tình đầy tim, sức khỏe đầy mình, niềm vui đầy nhà.</item>
+        <item>Chúc bạn cát tường như ý, những điều mong ước đầu xuân đều sớm thành hiện thực.</item>
+        <item>Năm mới thắng lợi mới: chúc bạn vững bước tiến lên, gặt hái thật nhiều thành quả.</item>
+        <item>Đèn lồng đỏ thắm gửi lời chúc: bạn luôn được yêu thương và hạnh phúc trọn vẹn.</item>
+        <item>Chúc bạn một năm nhẹ nhàng, thảnh thơi, giữ được bình yên trong lòng dù bộn bề.</item>
+        <item>Chúc bạn đắc lộc đắc tài, một vốn bốn lời, kinh doanh hồng phát.</item>
+    </string-array>
     <string name="wish_cat_health">Sức khỏe</string>
     <string name="wish_cat_career">Công việc</string>
     <string name="wish_cat_love">Tình yêu</string>
@@ -394,6 +425,52 @@
     <string name="oanquan_lose_title">CHÚC MAY MẮN LẦN SAU! 🌸</string>
     <string name="oanquan_draw_title">HÒA CỜ! 🤝</string>
     <string name="oanquan_reward_coins_win">Thưởng chiến thắng: +100 Xu May Mắn</string>
+    <!-- Ô Ăn Quan v2 -->
+    <string name="oanquan_you">Bạn</string>
+    <string name="oanquan_vs">VS</string>
+    <string name="oanquan_player_1">Người chơi 1</string>
+    <string name="oanquan_player_2">Người chơi 2</string>
+    <string name="oanquan_opp_ai_format">Máy (%s)</string>
+    <string name="oanquan_opp_online">Đối thủ Online</string>
+    <string name="oanquan_mode_sub_ai">Chơi với Máy · %s ▾</string>
+    <string name="oanquan_mode_sub_pass">Chơi với Bạn (cùng máy) ▾</string>
+    <string name="oanquan_mode_sub_online">Chơi Online (PvP) ▾</string>
+    <string name="oanquan_first_move">%s đi trước!</string>
+    <string name="oanquan_thinking">Đang suy nghĩ…</string>
+    <string name="oanquan_turn_waiting">CHỜ LƯỢT</string>
+    <string name="oanquan_turn_now">ĐANG ĐI</string>
+    <string name="oanquan_banner_capture">Ăn +%d!</string>
+    <string name="oanquan_banner_capture_quan">Ăn Quan! +%d</string>
+    <string name="oanquan_banner_chain">Ăn liên hoàn x%d!</string>
+    <string name="oanquan_banner_opp_capture">Đối thủ ăn +%d</string>
+    <string name="oanquan_banner_chung_quan">Chững Quan!</string>
+    <string name="oanquan_banner_relief">Hết quân! Rải lại 5 ô</string>
+    <string name="oanquan_banner_relief_debt">Hết quân! Vay %d quân</string>
+    <string name="oanquan_banner_game_over">Hết quan, tàn dân!</string>
+    <string name="oanquan_banner_undo">Đã đi lại!</string>
+    <string name="oanquan_hint_banner">Gợi ý: ô sáng, mũi tên nháy</string>
+    <string name="oanquan_hint_none">Không còn nước đi nào</string>
+    <string name="oanquan_free">Miễn phí</string>
+    <string name="oanquan_btn_undo">Đi Lại</string>
+    <string name="oanquan_result_win">Chiến Thắng!</string>
+    <string name="oanquan_result_lose">Thua Rồi!</string>
+    <string name="oanquan_result_draw">Hòa Cờ!</string>
+    <string name="oanquan_result_player_wins">%s Thắng!</string>
+    <string name="oanquan_result_desc_win">Bạn đã gom được nhiều quân hơn. Tuyệt vời!</string>
+    <string name="oanquan_result_desc_lose">Chỉ một nước thôi! Đi lại nước cuối để lật ngược thế cờ?</string>
+    <string name="oanquan_result_desc_lose_plain">Thua keo này ta bày keo khác!</string>
+    <string name="oanquan_result_desc_draw">Kẻ tám lạng, người nửa cân!</string>
+    <string name="oanquan_result_row_captured">Ăn được</string>
+    <string name="oanquan_result_row_harvest">Thu dân cuối ván</string>
+    <string name="oanquan_result_row_debt">Nợ quân</string>
+    <string name="oanquan_result_row_total">Tổng điểm</string>
+    <string name="oanquan_result_coins">+%d Xu</string>
+    <string name="oanquan_result_coins_label">Xu thưởng</string>
+    <string name="oanquan_result_double">Nhân đôi Xu</string>
+    <string name="oanquan_result_double_done">Đã nhận %d Xu!</string>
+    <string name="oanquan_result_undo">Đi lại nước cuối</string>
+    <string name="oanquan_play_again">Chơi Lại</string>
+    <string name="oanquan_points_format">%d đ</string>
     <string name="feature_o_an_quan">Ô Ăn Quan</string>
     <string name="feature_o_an_quan_desc">Trí tuệ dân gian</string>
 
@@ -414,6 +491,29 @@
     <string name="dap_chuot_hit_golden">+30 ⭐</string>
     <string name="dap_chuot_hit_bomb">-15 💥</string>
     <string name="dap_chuot_combo_prefix">x</string>
+    <string name="dap_chuot_timer_format">%1$ds</string>
+    <string name="dap_chuot_tagline">Đập chuột tinh nghịch, rước lộc đầu xuân!</string>
+    <string name="dap_chuot_legend_normal">Chuột</string>
+    <string name="dap_chuot_legend_golden">Chuột vàng</string>
+    <string name="dap_chuot_legend_bomb">Pháo, né ra!</string>
+    <string name="dap_chuot_combo_banner">COMBO x%1$d!</string>
+    <string name="dap_chuot_praise_good">Tuyệt vời!</string>
+    <string name="dap_chuot_praise_great">Quá đỉnh!</string>
+    <string name="dap_chuot_praise_legend">Thần sầu!</string>
+    <string name="dap_chuot_bomb_hit">Ối! Trúng pháo</string>
+    <string name="dap_chuot_last_seconds">Còn 10 giây!</string>
+    <string name="dap_chuot_time_up">HẾT GIỜ!</string>
+    <string name="dap_chuot_revive_title">Chơi tiếp 10 giây?</string>
+    <string name="dap_chuot_revive_desc">Xem 1 video ngắn để có thêm 10 giây, giữ nguyên điểm đang có.</string>
+    <string name="dap_chuot_revive_watch">Xem video +10 giây</string>
+    <string name="dap_chuot_revive_skip">Xem kết quả (%1$d)</string>
+    <string name="dap_chuot_coins_earned">+%1$d Xu</string>
+    <string name="dap_chuot_double_coins">Nhân đôi Xu</string>
+    <string name="dap_chuot_double_coins_done">Đã nhân đôi: +%1$d Xu</string>
+    <string name="dap_chuot_coins_label">Xu nhận</string>
+    <string name="dap_chuot_exit_confirm_message">Bạn có chắc muốn thoát khi ván chơi đang diễn ra?</string>
+    <string name="dap_chuot_exit_confirm_yes">Thoát</string>
+    <string name="dap_chuot_exit_confirm_no">Chơi tiếp</string>
     <string name="msg_ad_not_ready">Video quảng cáo chưa sẵn sàng, bạn thử lại sau ít phút nhé.</string>
     <string name="settings_privacy_options_title">Tùy chọn quyền riêng tư</string>
     <string name="settings_privacy_options_desc">Quản lý lựa chọn đồng ý quảng cáo</string>
@@ -511,4 +611,71 @@
     <string name="vip_perk_fonts_title">Bộ phông chữ thư pháp VIP</string>
     <string name="vip_perk_fonts_desc">7 phông chữ viết tay độc quyền cho lời chúc trên thiệp Tết</string>
     <string name="vip_perk_fonts_sample">Chúc Mừng Năm Mới</string>
+
+    <!-- Sân Chơi Ngày Tết + điểm danh nhận lì xì hằng ngày -->
+    <string name="game_zone_title">Sân Chơi Ngày Tết</string>
+    <string name="game_zone_subtitle">Điểm danh nhận xu, chơi trò dân gian</string>
+    <string name="game_zone_play_now">▶ Chơi ngay</string>
+    <string name="game_zone_bau_cua">Bầu Cua</string>
+    <string name="game_zone_badge_hot">HOT</string>
+    <string name="game_zone_badge_new">MỚI</string>
+    <string name="game_zone_badge_strategy">ĐẤU TRÍ</string>
+    <string name="game_zone_coin_desc">Bạn đang có %1$s xu</string>
+    <string name="checkin_title">Điểm danh nhận lì xì</string>
+    <string name="checkin_day_label">Ngày %1$d</string>
+    <string name="checkin_reward_short">+%1$d</string>
+    <string name="checkin_subtitle_streak">Chuỗi %1$d ngày · Ngày 7 nhận %2$d xu</string>
+    <string name="checkin_subtitle_start">Điểm danh mỗi ngày · Ngày 7 nhận %1$d xu</string>
+    <string name="checkin_cta_claim">Nhận lì xì +%1$d xu</string>
+    <string name="checkin_cta_wait">Quay lại sau %1$s nhận +%2$d xu</string>
+    <string name="checkin_dialog_title">Lì Xì Ngày %1$d</string>
+    <string name="checkin_dialog_desc">Điểm danh mỗi ngày, chuỗi càng dài lì xì càng lớn. Bỏ lỡ một ngày sẽ bắt đầu lại từ ngày 1. Ngày 7 nhận %1$d xu!</string>
+    <string name="checkin_dialog_claimed_title">Đã Nhận Lì Xì!</string>
+    <string name="checkin_dialog_amount">+%1$d xu</string>
+    <string name="checkin_dialog_claimed_desc">Xu dùng chung cho Bầu Cua, Ô Ăn Quan và Đập Chuột.</string>
+    <string name="checkin_btn_double">Xem video nhận x2 (+%1$d xu)</string>
+    <string name="checkin_btn_normal">Nhận +%1$d xu</string>
+    <string name="checkin_come_back">Ngày mai quay lại nhận +%1$d xu nhé!</string>
+    <string name="checkin_come_back_big">Ngày mai là ngày 7: lì xì lớn %1$d xu!</string>
+    <string name="checkin_reminder_on">🔔 Mình sẽ nhắc bạn lúc 19:00 nếu bạn quên</string>
+    <string name="checkin_reminder_off">Bật thông báo để được nhắc điểm danh mỗi ngày</string>
+    <string name="checkin_enable_reminder">Bật nhắc nhở</string>
+    <string name="checkin_btn_play_bau_cua">Chơi Bầu Cua ngay</string>
+    <string name="checkin_btn_continue">Tiếp tục chơi</string>
+    <string name="checkin_channel_name">Nhắc điểm danh nhận lì xì</string>
+    <string name="checkin_channel_desc">Nhắc lúc 19:00 nếu hôm đó bạn chưa nhận lì xì hằng ngày</string>
+    <string name="checkin_notif_title_start">🧧 Lì xì hôm nay đã sẵn sàng!</string>
+    <string name="checkin_notif_text_start">Mở app điểm danh nhận +%1$d xu chơi Bầu Cua, Ô Ăn Quan, Đập Chuột nhé!</string>
+    <string name="checkin_notif_title_streak">🧧 Lì xì ngày %1$d đang chờ bạn!</string>
+    <string name="checkin_notif_text_streak">Nhận ngay +%1$d xu. Đừng để đứt chuỗi %2$d ngày nhé!</string>
+    <string name="checkin_notif_title_big">🧧 Hôm nay là ngày 7: lì xì lớn!</string>
+    <string name="checkin_notif_text_big">Điểm danh ngay để nhận %1$d xu trước khi hết ngày!</string>
+    <string name="settings_checkin_reminder_title">Nhắc điểm danh</string>
+    <string name="settings_checkin_reminder_desc">19:00 mỗi ngày nếu bạn chưa nhận lì xì</string>
+
+    <!-- Hiệu ứng cộng xu + thưởng video x2 trong Bầu Cua -->
+    <string name="coin_fly_gain">+%1$d xu</string>
+    <string name="baucua_relief_claimed_desc_x2">Hôm nay bạn đã nhận lì xì %1$d xu rồi (hẹn bạn ngày mai nhé)!\n\nXem video ngắn để nhận gấp đôi: +%2$d xu may mắn!</string>
+    <string name="baucua_btn_watch_ad_x2">Xem Video Nhận x2: +%1$d Xu</string>
+    <string name="baucua_reward_video_desc">Thưởng xem video may mắn</string>
+    <string name="baucua_relief_video_desc">Hôm nay bạn đã nhận lì xì %1$d xu rồi (hẹn bạn ngày mai nhé)!\n\nXem video ngắn để nhận thêm +%2$d xu may mắn, xem bao nhiêu lần tuỳ bạn!</string>
+    <string name="baucua_btn_watch_ad_amount">Xem Video Nhận +%1$d Xu</string>
+
+    <!-- Mời cà phê (ủng hộ nhà phát triển) -->
+    <string name="settings_donate_title">Mời nhà phát triển ly cà phê</string>
+    <string name="settings_donate_desc">Ủng hộ để Chúc Tết có thêm tính năng mới</string>
+    <string name="donate_title">Mời Ly Cà Phê ☕</string>
+    <string name="donate_desc">Chúc Tết là ứng dụng miễn phí do một nhóm nhỏ làm ra. Nếu ứng dụng mang lại cho bạn chút niềm vui ngày Tết, hãy mời chúng mình một ly cà phê để có thêm động lực làm tính năng mới nhé!</string>
+    <string name="donate_coffee_title">Cà phê đen</string>
+    <string name="donate_coffee_desc">Một ly cho buổi sáng tỉnh táo</string>
+    <string name="donate_milk_coffee_title">Cà phê sữa đá</string>
+    <string name="donate_milk_coffee_desc">Thêm chút ngọt ngào đầu xuân</string>
+    <string name="donate_coffee_cake_title">Cà phê kèm bánh</string>
+    <string name="donate_coffee_cake_desc">Tiếp sức cho cả đêm làm app</string>
+    <string name="donate_price_loading">…</string>
+    <string name="donate_note">Thanh toán an toàn qua Google Play. Đây là ủng hộ tự nguyện, không mở khoá thêm tính năng.</string>
+    <string name="donate_unavailable">Chưa tải được thông tin từ Google Play, bạn thử lại sau nhé.</string>
+    <string name="donate_thanks_title">Cảm ơn bạn rất nhiều! ❤️</string>
+    <string name="donate_thanks_desc">Ly cà phê của bạn đã tới tay nhóm làm app. Chúc bạn và gia đình năm mới an khang thịnh vượng!</string>
+    <string name="donate_thanks_btn">Chúc mừng năm mới!</string>
 </resources>

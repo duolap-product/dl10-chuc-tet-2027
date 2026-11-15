@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Đèn lồng treo trên Cây Điều Ước. Quầng sáng và ánh nến chỉ đổi alpha/scale (thuộc tính RenderNode)
+     nên hiệu ứng sáng không vẽ lại view. Chỉ phần thân (ivLanternBody) nhận chạm để không che lá. -->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/lanternRoot"
+    android:layout_width="110dp"
+    android:layout_height="222dp">
+
+    <!-- Dây treo dài luồn qua khe giữa các cột lá lên tới cành mai; đèn xoay quanh đầu dây -->
+    <View
+        android:id="@+id/viewLanternCord"
+        android:layout_width="1.4dp"
+        android:layout_height="114dp"
+        android:layout_gravity="center_horizontal"
+        android:background="#B71C1C" />
+
+    <ImageView
+        android:id="@+id/ivLanternGlow"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        android:layout_marginTop="110dp"
+        android:importantForAccessibility="no"
+        android:src="@drawable/bg_wishing_lantern_glow" />
+
+    <ImageView
+        android:id="@+id/ivLanternBody"
+        android:layout_width="52dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="120dp"
+        android:clickable="true"
+        android:contentDescription="@string/wishing_lantern_content_desc"
+        android:focusable="true"
+        android:src="@drawable/ic_wishing_lantern" />
+
+    <ImageView
+        android:id="@+id/ivLanternLight"
+        android:layout_width="52dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="120dp"
+        android:importantForAccessibility="no"
+        android:src="@drawable/ic_wishing_lantern_light" />
+
+</FrameLayout>

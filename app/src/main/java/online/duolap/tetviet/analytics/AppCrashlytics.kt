@@ -2,6 +2,7 @@ package online.duolap.tetviet.analytics
 
 import android.util.Log
 import com.google.firebase.crashlytics.FirebaseCrashlytics
+import online.duolap.tetviet.BuildConfig
 
 /**
  * Helper quản lý Firebase Crashlytics tập trung.
@@ -15,7 +16,8 @@ object AppCrashlytics {
     fun init() {
         try {
             val crashlytics = FirebaseCrashlytics.getInstance()
-            crashlytics.isCrashlyticsCollectionEnabled = true
+            // Bản debug không gửi crash lên Firebase. Cờ này được SDK lưu lại, nên đặt lại mỗi lần khởi động
+            crashlytics.isCrashlyticsCollectionEnabled = !BuildConfig.DEBUG
             crashlytics.setCustomKey("app_initialized_at", System.currentTimeMillis())
             isInitialized = true
             Log.d(TAG, "Firebase Crashlytics initialized successfully")

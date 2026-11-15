@@ -47,20 +47,21 @@ android {
         applicationId = "online.duolap.tetviet"
         minSdk = 24
         targetSdk = 36
-        versionCode = 8
-        versionName = "1.0.0-8"
+        versionCode = 9
+        versionName = "1.0.0-9"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
         manifestPlaceholders["admobAppId"] = admobTestAppId
+        // Firebase Analytics + Crashlytics chỉ thu thập ở bản release (bản debug tắt, xem buildTypes.debug)
+        manifestPlaceholders["firebaseCollectionEnabled"] = "true"
         buildConfigField("String", "ADMOB_REWARDED_ID", "\"$admobTestRewardedId\"")
         buildConfigField("String", "ADMOB_INTERSTITIAL_ID", "\"$admobTestInterstitialId\"")
         buildConfigField("String", "ADMOB_BANNER_ID", "\"$admobTestBannerId\"")
         admobBannerPlacementKeys.forEach { buildConfigField("String", it, "\"$admobTestBannerId\"") }
         buildConfigField("String", "ADMOB_APP_OPEN_ID", "\"$admobTestAppOpenId\"")
 
-        // Mua trong ứng dụng (gói VIP, phông chữ VIP). Tắt cho đến khi cấu hình xong sản phẩm trên Play Console.
-        buildConfigField("boolean", "IAP_ENABLED", "false")
+        buildConfigField("boolean", "IAP_ENABLED", "true")
     }
 
     val keystorePropertiesFile = rootProject.file("keystore.properties")
@@ -79,6 +80,9 @@ android {
     }
 
     buildTypes {
+        debug {
+            manifestPlaceholders["firebaseCollectionEnabled"] = "false"
+        }
         release {
             isMinifyEnabled = true
             isShrinkResources = true

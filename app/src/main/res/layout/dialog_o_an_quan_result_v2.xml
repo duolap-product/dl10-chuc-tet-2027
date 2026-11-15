@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Ô Ăn Quan v2: thẻ kết quả. Bản cũ vẫn giữ ở dialog_o_an_quan_result.xml -->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clipChildren="false"
+    android:clipToPadding="false"
+    android:paddingTop="22dp">
+
+    <LinearLayout
+        android:id="@+id/resultCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_dc_result_card"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:paddingHorizontal="18dp"
+        android:paddingTop="32dp"
+        android:paddingBottom="20dp">
+
+        <LinearLayout
+            android:id="@+id/layoutStars"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="bottom"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/ivStar1"
+                android:layout_width="46dp"
+                android:layout_height="46dp"
+                android:importantForAccessibility="no"
+                android:src="@drawable/ic_dc_star_empty" />
+
+            <ImageView
+                android:id="@+id/ivStar2"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginHorizontal="4dp"
+                android:layout_marginBottom="8dp"
+                android:importantForAccessibility="no"
+                android:src="@drawable/ic_dc_star_empty" />
+
+            <ImageView
+                android:id="@+id/ivStar3"
+                android:layout_width="46dp"
+                android:layout_height="46dp"
+                android:importantForAccessibility="no"
+                android:src="@drawable/ic_dc_star_empty" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvResultDesc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:fontFamily="@font/arimo_regular"
+            android:gravity="center"
+            android:textColor="#FF8D5524"
+            android:textSize="13sp"
+            tools:text="Bạn đã gom được nhiều quân hơn. Tuyệt vời!" />
+
+        <!-- Tỉ số đối đầu -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvP1Name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/arimo_bold"
+                    android:maxLines="1"
+                    android:textColor="#FF8D5524"
+                    android:textSize="13sp"
+                    tools:text="Bạn" />
+
+                <TextView
+                    android:id="@+id/tvP1Final"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/arimo_bold"
+                    android:shadowColor="#66B26A00"
+                    android:shadowDy="3"
+                    android:shadowRadius="2"
+                    android:text="0"
+                    android:textColor="#FFC62828"
+                    android:textSize="48sp"
+                    tools:text="38" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/lobster_regular"
+                android:text="@string/oanquan_vs"
+                android:textColor="#FFB26A00"
+                android:textSize="24sp" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvP2Name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/arimo_bold"
+                    android:maxLines="1"
+                    android:textColor="#FF8D5524"
+                    android:textSize="13sp"
+                    tools:text="Máy (Vừa sức)" />
+
+                <TextView
+                    android:id="@+id/tvP2Final"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/arimo_bold"
+                    android:shadowColor="#66B26A00"
+                    android:shadowDy="3"
+                    android:shadowRadius="2"
+                    android:text="0"
+                    android:textColor="#FF5D2A12"
+                    android:textSize="48sp"
+                    tools:text="22" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Chi tiết điểm -->
+        <TableLayout
+            android:id="@+id/tableBreakdown"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:background="@drawable/bg_dc_stat_box"
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="6dp"
+            android:stretchColumns="0">
+
+            <TableRow>
+                <TextView style="@style/OaqResultLabel" android:text="@string/oanquan_result_row_captured" />
+                <TextView android:id="@+id/tvP1Captured" style="@style/OaqResultValue" tools:text="30" />
+                <TextView android:id="@+id/tvP2Captured" style="@style/OaqResultValue" tools:text="18" />
+            </TableRow>
+
+            <TableRow>
+                <TextView style="@style/OaqResultLabel" android:text="@string/oanquan_result_row_harvest" />
+                <TextView android:id="@+id/tvP1Harvest" style="@style/OaqResultValue" tools:text="+8" />
+                <TextView android:id="@+id/tvP2Harvest" style="@style/OaqResultValue" tools:text="+4" />
+            </TableRow>
+
+            <TableRow>
+                <TextView style="@style/OaqResultLabel" android:text="@string/oanquan_result_row_debt" />
+                <TextView android:id="@+id/tvP1Debt" style="@style/OaqResultValue" tools:text="-0" />
+                <TextView android:id="@+id/tvP2Debt" style="@style/OaqResultValue" tools:text="-0" />
+            </TableRow>
+        </TableLayout>
+
+        <LinearLayout
+            android:id="@+id/boxCoins"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/bg_dc_stat_box"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="6dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/arimo_bold"
+                android:text="@string/oanquan_result_coins_label"
+                android:textColor="#FF8D5524"
+                android:textSize="13sp" />
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="8dp"
+                android:importantForAccessibility="no"
+                android:src="@drawable/ic_coin_gold" />
+
+            <TextView
+                android:id="@+id/tvResultCoins"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:fontFamily="@font/arimo_bold"
+                android:textColor="#FF5D2A12"
+                android:textSize="20sp"
+                tools:text="+100 Xu" />
+        </LinearLayout>
+
+        <!-- Nút quảng cáo có thưởng: nhân đôi Xu (thắng) hoặc đi lại nước cuối (thua) -->
+        <LinearLayout
+            android:id="@+id/btnRewarded"
+            android:layout_width="match_parent"
+            android:layout_height="58dp"
+            android:layout_marginTop="14dp"
+            android:background="@drawable/bg_dc_btn_green"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingBottom="6dp">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:importantForAccessibility="no"
+                android:src="@drawable/ic_dc_video" />
+
+            <TextView
+                android:id="@+id/tvRewarded"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:fontFamily="@font/arimo_bold"
+                android:textColor="#FFFFFFFF"
+                android:textSize="17sp"
+                tools:text="Nhân đôi Xu" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/btnResultChangeMode"
+                android:layout_width="0dp"
+                android:layout_height="56dp"
+                android:layout_marginEnd="6dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_dc_btn_red"
+                android:clickable="true"
+                android:focusable="true"
+                android:fontFamily="@font/arimo_bold"
+                android:gravity="center"
+                android:paddingBottom="6dp"
+                android:text="@string/oanquan_btn_mode"
+                android:textColor="#FFFFFFFF"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/btnReplayGame"
+                android:layout_width="0dp"
+                android:layout_height="56dp"
+                android:layout_marginStart="6dp"
+                android:layout_weight="1.5"
+                android:background="@drawable/bg_dc_btn_gold"
+                android:clickable="true"
+                android:focusable="true"
+                android:fontFamily="@font/arimo_bold"
+                android:gravity="center"
+                android:paddingBottom="6dp"
+                android:text="@string/oanquan_play_again"
+                android:textColor="#FF7A090D"
+                android:textSize="18sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvResultTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="44dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="-22dp"
+        android:background="@drawable/bg_dc_ribbon"
+        android:fontFamily="@font/arimo_bold"
+        android:gravity="center"
+        android:paddingHorizontal="28dp"
+        android:textColor="#FFFFE8A3"
+        android:textSize="20sp"
+        tools:text="Chiến Thắng!" />
+</FrameLayout>
