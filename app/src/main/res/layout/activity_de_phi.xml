@@ -1,0 +1,623 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Màn chơi "Cùng Dê Phi Đón Tết": màn chơi vẽ bằng Canvas (DePhiGameView) + HUD + các lớp phủ
+     (màn chờ, tạm dừng, kết quả). Dùng lại khung nút/thẻ kết quả của Đập Chuột v2 (bg_dc_*). -->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rootDePhi"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFE3B5">
+
+    <online.duolap.tetviet.game.dephi.ui.DePhiGameView
+        android:id="@+id/gameView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:contentDescription="@string/de_phi_game_area_desc" />
+
+    <!-- Màn chờ: toàn màn hình, cảnh chạy phía sau -->
+    <LinearLayout
+        android:id="@+id/layoutStart"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_dp_scrim"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:paddingHorizontal="24dp">
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/lobster_regular"
+            android:includeFontPadding="false"
+            android:shadowColor="#B37A090D"
+            android:shadowDy="3"
+            android:shadowRadius="4"
+            android:text="@string/de_phi_title_line1"
+            android:textColor="#FFE08A"
+            android:textSize="38sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/lobster_regular"
+            android:includeFontPadding="false"
+            android:shadowColor="#B37A090D"
+            android:shadowDy="3"
+            android:shadowRadius="4"
+            android:text="@string/de_phi_title_line2"
+            android:textColor="#FFFFFF"
+            android:textSize="46sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/bg_dp_title_pill"
+            android:fontFamily="@font/arimo_bold"
+            android:paddingHorizontal="14dp"
+            android:paddingVertical="6dp"
+            android:text="@string/de_phi_tagline"
+            android:textColor="#FFF3C4"
+            android:textSize="13.5sp" />
+
+        <!-- Chú dê đang dùng trên bục -->
+        <FrameLayout
+            android:layout_width="200dp"
+            android:layout_height="190dp"
+            android:layout_marginTop="12dp">
+
+            <View
+                android:layout_width="170dp"
+                android:layout_height="46dp"
+                android:layout_gravity="bottom|center_horizontal"
+                android:background="@drawable/bg_dp_podium" />
+
+            <ImageView
+                android:id="@+id/ivStartGoat"
+                android:layout_width="170dp"
+                android:layout_height="158dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="4dp"
+                android:importantForAccessibility="no"
+                android:src="@drawable/ic_dp_goat_run1" />
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/tvStartSkin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:fontFamily="@font/arimo_bold"
+            android:shadowColor="#CC000000"
+            android:shadowDy="1"
+            android:shadowRadius="2"
+            android:textColor="#FFF3C4"
+            android:textSize="14sp"
+            tools:text="Dê Trắng" />
+
+        <TextView
+            android:id="@+id/tvStartBest"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:fontFamily="@font/arimo_regular"
+            android:shadowColor="#CC000000"
+            android:shadowDy="1"
+            android:shadowRadius="2"
+            android:textColor="#FFE9C4"
+            android:textSize="13sp"
+            tools:text="Kỷ lục: 512 m" />
+
+        <TextView
+            android:id="@+id/btnPlay"
+            android:layout_width="240dp"
+            android:layout_height="58dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/bg_dc_btn_gold"
+            android:fontFamily="@font/arimo_bold"
+            android:gravity="center"
+            android:text="@string/de_phi_play_now"
+            android:textColor="#7A090D"
+            android:textSize="19sp" />
+
+        <LinearLayout
+            android:id="@+id/btnShopStart"
+            android:layout_width="240dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/bg_dc_btn_red"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="28dp"
+                android:layout_marginEnd="6dp"
+                android:importantForAccessibility="no"
+                android:src="@drawable/ic_dp_goat_vang_run1" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/arimo_bold"
+                android:text="@string/de_phi_shop"
+                android:textColor="#FFFFFF"
+                android:textSize="15sp" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:layout_marginBottom="28dp"
+            android:fontFamily="@font/arimo_regular"
+            android:gravity="center"
+            android:lineSpacingExtra="2dp"
+            android:shadowColor="#CC000000"
+            android:shadowDy="1"
+            android:shadowRadius="2"
+            android:text="@string/de_phi_how_to"
+            android:textColor="#FFE9C4"
+            android:textSize="12.5sp" />
+    </LinearLayout>
+
+    <!-- Tạm dừng -->
+    <TextView
+        android:id="@+id/tvPaused"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@drawable/bg_dc_hud_chip"
+        android:fontFamily="@font/arimo_bold"
+        android:paddingHorizontal="22dp"
+        android:paddingVertical="14dp"
+        android:text="@string/de_phi_paused"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        android:visibility="gone" />
+
+    <!-- Hồi sinh bằng video (1 lần mỗi ván) -->
+    <FrameLayout
+        android:id="@+id/layoutRevive"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#C2200305"
+        android:clickable="true"
+        android:focusable="true"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:id="@+id/reviveCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="28dp"
+            android:background="@drawable/bg_dc_result_card"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:paddingHorizontal="20dp"
+            android:paddingTop="20dp"
+            android:paddingBottom="18dp">
+
+            <ImageView
+                android:id="@+id/ivReviveGoat"
+                android:layout_width="96dp"
+                android:layout_height="90dp"
+                android:importantForAccessibility="no"
+                android:src="@drawable/ic_dp_goat_jump" />
+
+            <TextView
+                android:id="@+id/tvReviveTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:fontFamily="@font/lobster_regular"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:textColor="#FFC62828"
+                android:textSize="25sp"
+                tools:text="Chạy tiếp từ 128 m?" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/arimo_regular"
+                android:gravity="center"
+                android:lineSpacingExtra="2dp"
+                android:text="@string/de_phi_revive_desc"
+                android:textColor="#FF7A4A2C"
+                android:textSize="14sp" />
+
+            <LinearLayout
+                android:id="@+id/btnRevive"
+                android:layout_width="match_parent"
+                android:layout_height="54dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/bg_dc_btn_green"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:layout_marginEnd="8dp"
+                    android:importantForAccessibility="no"
+                    android:src="@drawable/ic_dc_video" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/arimo_bold"
+                    android:text="@string/de_phi_revive_watch"
+                    android:textColor="#FFFFFFFF"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/btnReviveSkip"
+                android:layout_width="wrap_content"
+                android:layout_height="44dp"
+                android:layout_marginTop="6dp"
+                android:background="?attr/selectableItemBackground"
+                android:fontFamily="@font/arimo_bold"
+                android:gravity="center"
+                android:paddingHorizontal="16dp"
+                android:textColor="#FF8D5524"
+                android:textSize="14sp"
+                tools:text="Xem kết quả (5)" />
+        </LinearLayout>
+    </FrameLayout>
+
+    <!-- Kết quả -->
+    <FrameLayout
+        android:id="@+id/layoutResult"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#99000000"
+        android:clickable="true"
+        android:focusable="true"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:id="@+id/resultCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="24dp"
+            android:background="@drawable/bg_dc_result_card"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:paddingHorizontal="18dp"
+            android:paddingTop="20dp"
+            android:paddingBottom="18dp">
+
+            <TextView
+                android:id="@+id/tvResultTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/lobster_regular"
+                android:includeFontPadding="false"
+                android:textColor="#FFC62828"
+                android:textSize="27sp"
+                tools:text="Dê vấp ngã rồi!" />
+
+            <TextView
+                android:id="@+id/tvResultDistance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/arimo_bold"
+                android:includeFontPadding="false"
+                android:textColor="#FF7A090D"
+                android:textSize="46sp"
+                tools:text="512 m" />
+
+            <TextView
+                android:id="@+id/tvResultScore"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/arimo_bold"
+                android:textColor="#FF8D5524"
+                android:textSize="14sp"
+                tools:text="Điểm: 980 · Kỷ lục: 1.024" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:baselineAligned="false"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_dc_stat_box"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="10dp">
+
+                    <ImageView
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:importantForAccessibility="no"
+                        android:src="@drawable/ic_dp_gold" />
+
+                    <TextView
+                        android:id="@+id/tvCountGold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:fontFamily="@font/arimo_bold"
+                        android:textColor="#FF5D2A12"
+                        android:textSize="15sp"
+                        tools:text="18" />
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginStart="10dp"
+                        android:importantForAccessibility="no"
+                        android:src="@drawable/ic_custom_red_packet" />
+
+                    <TextView
+                        android:id="@+id/tvCountLixi"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:fontFamily="@font/arimo_bold"
+                        android:textColor="#FF5D2A12"
+                        android:textSize="15sp"
+                        tools:text="2" />
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_marginStart="10dp"
+                        android:importantForAccessibility="no"
+                        android:src="@drawable/ic_dp_banh_chung" />
+
+                    <TextView
+                        android:id="@+id/tvCountBanhChung"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:fontFamily="@font/arimo_bold"
+                        android:textColor="#FF5D2A12"
+                        android:textSize="15sp"
+                        tools:text="3" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/boxCoins"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bg_dc_stat_box"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="12dp">
+
+                    <ImageView
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:importantForAccessibility="no"
+                        android:src="@drawable/ic_coin_gold" />
+
+                    <TextView
+                        android:id="@+id/tvResultXu"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:fontFamily="@font/arimo_bold"
+                        android:textColor="#FF5D2A12"
+                        android:textSize="15sp"
+                        tools:text="+33" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/btnDoubleCoins"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="14dp"
+                android:background="@drawable/bg_dc_btn_green"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:visibility="gone"
+                tools:visibility="visible">
+
+                <ImageView
+                    android:id="@+id/ivDoubleCoinsVideo"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginEnd="8dp"
+                    android:importantForAccessibility="no"
+                    android:src="@drawable/ic_dc_video" />
+
+                <TextView
+                    android:id="@+id/tvDoubleCoins"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/arimo_bold"
+                    android:textColor="#FFFFFFFF"
+                    android:textSize="15sp"
+                    tools:text="Xem video nhân đôi xu (+33)" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/btnPlayAgain"
+                android:layout_width="match_parent"
+                android:layout_height="54dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/bg_dc_btn_gold"
+                android:fontFamily="@font/arimo_bold"
+                android:gravity="center"
+                android:text="@string/de_phi_play_again"
+                android:textColor="#FF7A090D"
+                android:textSize="17sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/btnExitResult"
+                    android:layout_width="0dp"
+                    android:layout_height="46dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_dc_btn_red"
+                    android:fontFamily="@font/arimo_bold"
+                    android:gravity="center"
+                    android:text="@string/de_phi_exit"
+                    android:textColor="#FFFFFFFF"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/btnShopResult"
+                    android:layout_width="0dp"
+                    android:layout_height="46dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_dc_btn_red"
+                    android:fontFamily="@font/arimo_bold"
+                    android:gravity="center"
+                    android:text="@string/de_phi_shop"
+                    android:textColor="#FFFFFFFF"
+                    android:textSize="15sp" />
+            </LinearLayout>
+        </LinearLayout>
+    </FrameLayout>
+
+    <!-- HUD -->
+    <LinearLayout
+        android:id="@+id/hud"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="14dp"
+        android:paddingTop="12dp">
+
+        <FrameLayout
+            android:id="@+id/btnBack"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/bg_dc_hud_chip"
+            android:clickable="true"
+            android:contentDescription="@string/action_close"
+            android:focusable="true">
+
+            <ImageView
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:layout_gravity="center"
+                android:importantForAccessibility="no"
+                android:src="@drawable/ic_arrow_back"
+                app:tint="#FFF3C4" />
+        </FrameLayout>
+
+        <LinearLayout
+            android:id="@+id/hudCenter"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <!-- Băng rôn số mét -->
+            <TextView
+                android:id="@+id/tvDistance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_dc_ribbon"
+                android:fontFamily="@font/arimo_bold"
+                android:includeFontPadding="false"
+                android:minWidth="104dp"
+                android:gravity="center"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="6dp"
+                android:shadowColor="#99000000"
+                android:shadowDy="1.5"
+                android:shadowRadius="2"
+                android:textColor="#FFF3C4"
+                android:textSize="22sp"
+                tools:text="128 m" />
+
+            <!-- Tiến độ so với kỷ lục -->
+            <FrameLayout
+                android:id="@+id/progressTrack"
+                android:layout_width="120dp"
+                android:layout_height="7dp"
+                android:layout_marginTop="6dp"
+                android:background="@drawable/bg_dp_progress_track">
+
+                <View
+                    android:id="@+id/progressFill"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bg_dp_progress_fill"
+                    android:scaleX="0" />
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/tvRunXu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/arimo_bold"
+                android:includeFontPadding="false"
+                android:shadowColor="#CC000000"
+                android:shadowDy="1"
+                android:shadowRadius="2"
+                android:textColor="#FFF3C4"
+                android:textSize="12.5sp"
+                tools:text="+12 xu · 230 điểm · Kỷ lục 512 m" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/chipCoins"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:background="@drawable/bg_dc_hud_chip"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingHorizontal="10dp">
+
+            <ImageView
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:importantForAccessibility="no"
+                android:src="@drawable/ic_coin_gold" />
+
+            <TextView
+                android:id="@+id/tvCoins"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:fontFamily="@font/arimo_bold"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                tools:text="1250" />
+        </LinearLayout>
+    </LinearLayout>
+
+</FrameLayout>

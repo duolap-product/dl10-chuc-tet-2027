@@ -98,8 +98,7 @@ class WhackMoleEngine(
             consecutiveHits++
             if (consecutiveHits >= 3) {
                 combo++
-                val comboBonus = combo * 5
-                delta = mole.type.points + comboBonus
+                delta = mole.type.points + comboBonus(combo)
             } else {
                 delta = mole.type.points
             }
@@ -195,4 +194,17 @@ class WhackMoleEngine(
     fun getCurrentScore() = score
     fun getRemainingSeconds() = remainingSeconds
     fun isGameRunning() = isRunning
+
+    companion object {
+        const val COMBO_BONUS_STEP = 5
+        /** Thưởng combo chỉ tăng tới bậc này (+25 điểm/cú), tránh điểm tăng theo bình phương độ dài chuỗi. */
+        const val MAX_COMBO_LEVEL = 5
+        const val SCORE_PER_COIN = 20
+        /** Trần xu mỗi ván (kể cả phần chơi tiếp), cân với lì xì điểm danh 10→100 xu/ngày. */
+        const val MAX_COINS_PER_GAME = 60
+
+        fun comboBonus(combo: Int): Int = combo.coerceIn(0, MAX_COMBO_LEVEL) * COMBO_BONUS_STEP
+
+        fun coinsForScore(score: Int): Int = (score / SCORE_PER_COIN).coerceIn(0, MAX_COINS_PER_GAME)
+    }
 }

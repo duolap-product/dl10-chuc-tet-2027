@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Bục đứng của chú dê ở màn chờ -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:top="10dp">
+        <shape android:shape="oval"><solid android:color="#7A090D" /></shape>
+    </item>
+    <item android:bottom="8dp">
+        <shape android:shape="oval">
+            <gradient android:angle="270" android:startColor="#FFE28A" android:endColor="#E0A030" />
+            <stroke android:width="2dp" android:color="#FFF3C4" />
+        </shape>
+    </item>
+</layer-list>

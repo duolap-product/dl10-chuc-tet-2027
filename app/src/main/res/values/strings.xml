@@ -678,4 +678,78 @@
     <string name="donate_thanks_title">Cảm ơn bạn rất nhiều! ❤️</string>
     <string name="donate_thanks_desc">Ly cà phê của bạn đã tới tay nhóm làm app. Chúc bạn và gia đình năm mới an khang thịnh vượng!</string>
     <string name="donate_thanks_btn">Chúc mừng năm mới!</string>
+
+    <!-- Cùng Dê Phi Đón Tết -->
+    <string name="de_phi_title">Cùng Dê Phi Đón Tết</string>
+    <string name="de_phi_tagline">Nhảy thật khéo – Hốt lộc đầu xuân!</string>
+    <string name="de_phi_how_to">Chạm màn hình để nhảy qua dây pháo, chậu mai và hộp quà.\nNhặt vàng, bánh chưng và lì xì để nhận xu.</string>
+    <string name="de_phi_best">Kỷ lục: %1$d m</string>
+    <string name="de_phi_tap_to_start">Chạm để bắt đầu</string>
+    <string name="de_phi_paused">Tạm dừng · Chạm để chơi tiếp</string>
+    <string name="de_phi_meters">%1$d m</string>
+    <string name="de_phi_run_xu">+%1$d xu · %2$d điểm</string>
+    <string name="de_phi_game_over">Dê vấp ngã rồi!</string>
+    <string name="de_phi_new_record">Kỷ lục mới!</string>
+    <string name="de_phi_result_score">Điểm: %1$d · Kỷ lục: %2$d m</string>
+    <string name="de_phi_result_xu">+%1$d</string>
+    <string name="de_phi_exit">Thoát</string>
+    <string name="de_phi_play_again">Chơi lại</string>
+    <string name="de_phi_game_area_desc">Màn chơi, chạm để nhảy</string>
+    <string name="game_zone_de_phi_desc">Chạy, nhảy và hốt lộc đầu xuân</string>
+
+    <!-- Cùng Dê Phi Đón Tết: màn chờ mới + Cửa hàng Dê -->
+    <string name="de_phi_title_line1">Cùng Dê Phi</string>
+    <string name="de_phi_title_line2">Đón Tết</string>
+    <string name="de_phi_play_now">CHƠI NGAY</string>
+    <string name="de_phi_shop">Cửa hàng</string>
+    <string name="de_phi_shop_title">Cửa Hàng Dê</string>
+    <string name="de_phi_shop_desc">Trang phục chỉ để đẹp, không ảnh hưởng điểm số. Xu dùng chung với các game khác.</string>
+    <string name="de_phi_skin_in_use">Đang dùng</string>
+    <string name="de_phi_skin_select">Chọn</string>
+    <string name="de_phi_buy_title">Mua %1$s?</string>
+    <string name="de_phi_buy_msg">Dùng %1$s xu để mua %2$s. Bạn đang có %3$s xu.</string>
+    <string name="de_phi_buy">Mua</string>
+    <string name="de_phi_not_enough">Bạn còn thiếu %1$d xu. Chơi thêm, điểm danh hoặc xem video ở Bầu Cua để có xu nhé!</string>
+    <string name="de_phi_bought">Đã mua %1$s!</string>
+    <string name="de_phi_run_xu_best">+%1$d xu · %2$d điểm · Kỷ lục %3$d m</string>
+    <string name="de_phi_skin_trang">Dê Trắng</string>
+    <string name="de_phi_skin_hoa_dao">Dê Hoa Đào</string>
+    <string name="de_phi_skin_ao_dai">Dê Áo Dài</string>
+    <string name="de_phi_skin_vang">Dê Vàng Phú Quý</string>
+    <string name="de_phi_skin_than_tai">Dê Thần Tài</string>
+    <string name="de_phi_skin_den_ngau">Dê Đen Ngầu</string>
+
+    <!-- Cùng Dê Phi Đón Tết: quảng cáo hồi sinh / nhân đôi xu -->
+    <string name="de_phi_revive_title">Chạy tiếp từ %1$d m?</string>
+    <string name="de_phi_revive_desc">Xem 1 video ngắn để chú dê đứng dậy chạy tiếp, giữ nguyên quãng đường và lộc đã nhặt.</string>
+    <string name="de_phi_revive_watch">Xem video, chạy tiếp</string>
+    <string name="de_phi_revive_skip">Xem kết quả (%1$d)</string>
+    <string name="de_phi_tap_to_continue">Chạm để chạy tiếp</string>
+    <string name="de_phi_double_coins">Xem video nhân đôi xu (+%1$d)</string>
+    <string name="de_phi_double_coins_done">Đã nhân đôi: +%1$d xu</string>
+
+    <!-- Cây Điều Ước cộng đồng -->
+    <string name="wishing_public_notice">Điều ước sẽ hiện công khai trên cây (ẩn danh). Đừng ghi tên thật, số điện thoại hay đường link.</string>
+    <string name="wishing_reject_too_long">Điều ước tối đa 100 ký tự.</string>
+    <string name="wishing_reject_bad_word">Điều ước có từ ngữ chưa phù hợp, bạn sửa lại giúp nhé.</string>
+    <string name="wishing_reject_link">Không ghi đường link trong điều ước nhé.</string>
+    <string name="wishing_reject_phone">Không ghi số điện thoại trong điều ước nhé.</string>
+    <string name="wishing_reject_email">Không ghi email trong điều ước nhé.</string>
+    <string name="wishing_reject_spam">Điều ước có ký tự lặp lại quá nhiều.</string>
+    <string name="wishing_extra_title">Hôm nay bạn đã treo điều ước</string>
+    <string name="wishing_extra_msg">Mỗi ngày được treo 1 điều ước. Xem 1 video ngắn để treo thêm 1 lá nữa trong hôm nay nhé!</string>
+    <string name="wishing_extra_watch">Xem video, treo thêm</string>
+    <string name="wishing_extra_later">Để mai</string>
+    <string name="wishing_quota_none_title">Hẹn bạn ngày mai</string>
+    <string name="wishing_quota_none_msg">Hôm nay bạn đã treo đủ điều ước. Quay lại sau %1$s để treo điều ước mới nhé!</string>
+    <string name="wishing_new_blessings">🌸 Điều ước của bạn vừa nhận thêm %1$d lời chúc!</string>
+    <string name="wishing_stats_desc">điều ước trên cây · %1$s hôm nay</string>
+    <string name="wishing_bless_own">Điều ước của bạn</string>
+    <string name="wishing_bless_done">Đã chúc 🙏</string>
+    <string name="wishing_report">Báo cáo điều ước không phù hợp</string>
+    <string name="wishing_report_title">Báo cáo điều ước này?</string>
+    <string name="wishing_report_msg">Lá này sẽ được ẩn khỏi cây của bạn ngay. Khi đủ lượt báo cáo, lá sẽ bị ẩn với mọi người.</string>
+    <string name="wishing_report_confirm">Báo cáo</string>
+    <string name="wishing_report_done">Cảm ơn bạn. Lá đã được ẩn.</string>
+    <string name="wishing_leaf_mine_desc">Điều ước của bạn</string>
 </resources>

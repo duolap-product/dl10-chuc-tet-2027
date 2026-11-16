@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Thanh tiến độ so với kỷ lục (phần đã chạy) -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+    <corners android:radius="4dp" />
+    <gradient android:angle="0" android:startColor="#FFD54F" android:endColor="#FF8F00" />
+</shape>

@@ -93,6 +93,12 @@
             tools:ignore="LockedOrientationActivity" />
 
         <activity
+            android:name=".game.dephi.ui.DePhiActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
+
+        <activity
             android:name=".game.dapchuot.ui.DapChuotActivity"
             android:exported="true"
             android:screenOrientation="portrait"

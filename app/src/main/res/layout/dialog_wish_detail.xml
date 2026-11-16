@@ -185,6 +185,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/arimo_bold"
                     android:includeFontPadding="false"
+                    android:id="@+id/tvBlessWish"
                     android:text="@string/wishing_tree_btn_bless"
                     android:textColor="#FFFDF7"
                     android:textSize="14sp"
@@ -223,6 +224,24 @@
             </LinearLayout>
 
         </LinearLayout>
+
+        <!-- Báo cáo lá không phù hợp (chỉ lá cộng đồng) -->
+        <TextView
+            android:id="@+id/btnReportWish"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginTop="6dp"
+            android:background="?attr/selectableItemBackground"
+            android:fontFamily="@font/arimo_regular"
+            android:gravity="center"
+            android:paddingHorizontal="12dp"
+            android:text="@string/wishing_report"
+            android:textColor="#9E8270"
+            android:textSize="12.5sp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/layoutDetailActions" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

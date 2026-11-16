@@ -33,6 +33,17 @@
         android:textSize="10sp"
         tools:text="Sức khỏe\nbình an" />
 
+    <!-- Ngôi sao vàng đánh dấu lá của chính người dùng -->
+    <ImageView
+        android:id="@+id/ivLeafMine"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:layout_gravity="end|top"
+        android:layout_marginTop="16dp"
+        android:importantForAccessibility="no"
+        android:src="@drawable/ic_leaf_mine_star"
+        android:visibility="gone" />
+
     <!-- Icon ic_wish_leaf_* đã gồm huy hiệu tròn viền vàng -->
     <ImageView
         android:id="@+id/ivLeafCategoryIcon"

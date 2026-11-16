@@ -54,6 +54,7 @@ import online.duolap.tetviet.game.oanquan.engine.MoveDirection
 import online.duolap.tetviet.game.oanquan.engine.OAnQuanBoardState
 import online.duolap.tetviet.game.oanquan.engine.OAnQuanEngine
 import online.duolap.tetviet.game.oanquan.engine.OAnQuanPreferences
+import online.duolap.tetviet.game.oanquan.engine.OAnQuanRewards
 import online.duolap.tetviet.game.oanquan.engine.OAnQuanStep
 import online.duolap.tetviet.game.oanquan.engine.PlayerSide
 import online.duolap.tetviet.game.oanquan.online.OAnQuanOnlineManager
@@ -109,7 +110,6 @@ class OAnQuanActivity : AppCompatActivity() {
     private val location2 = IntArray(2)
 
     companion object {
-        private const val WIN_COINS = 100
         private val STAR_MARGINS = intArrayOf(1, 10, 25)
 
         fun start(context: Context) {
@@ -637,7 +637,7 @@ class OAnQuanActivity : AppCompatActivity() {
         val p1Final = gameState.player1Score - gameState.player1Debt
         val p2Final = gameState.player2Score - gameState.player2Debt
 
-        val coins = if (p1Wins) WIN_COINS else 0
+        val coins = if (p1Wins) OAnQuanRewards.winCoins(currentMode, prefs.getAIDifficulty()) else 0
         val coinsBefore = coinPrefs.getCoins()
         if (coins > 0) {
             // Giữ số dư cũ tới khi xu bay từ thẻ kết quả lên thanh trên cùng

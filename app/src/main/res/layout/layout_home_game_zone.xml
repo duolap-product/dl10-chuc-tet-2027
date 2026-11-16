@@ -159,6 +159,104 @@
         </FrameLayout>
     </LinearLayout>
 
+    <!-- Game mới nổi bật: Cùng Dê Phi Đón Tết -->
+    <FrameLayout
+        android:id="@+id/cardDePhi"
+        android:layout_width="match_parent"
+        android:layout_height="96dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/bg_dp_featured_card"
+        android:clickable="true"
+        android:contentDescription="@string/de_phi_title"
+        android:focusable="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="104dp"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            android:paddingStart="12dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_game_badge_gold"
+                    android:fontFamily="@font/arimo_bold"
+                    android:includeFontPadding="false"
+                    android:paddingHorizontal="6dp"
+                    android:paddingVertical="3dp"
+                    android:text="@string/game_zone_badge_new"
+                    android:textColor="#7A090D"
+                    android:textSize="9sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="6dp"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/lobster_regular"
+                    android:includeFontPadding="false"
+                    android:maxLines="1"
+                    android:shadowColor="#80000000"
+                    android:shadowDy="1.5"
+                    android:shadowRadius="2"
+                    android:text="@string/de_phi_title"
+                    android:textColor="#FFF3C4"
+                    android:textSize="18sp" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/arimo_regular"
+                android:includeFontPadding="false"
+                android:text="@string/game_zone_de_phi_desc"
+                android:textColor="#FFE9C4"
+                android:textSize="11.5sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="7dp"
+                android:background="@drawable/bg_play_pill"
+                android:fontFamily="@font/arimo_bold"
+                android:includeFontPadding="false"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="4dp"
+                android:text="@string/game_zone_play_now"
+                android:textColor="#7A090D"
+                android:textSize="10.5sp" />
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/ivDePhiGold"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_gravity="end|top"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="92dp"
+            android:importantForAccessibility="no"
+            android:src="@drawable/ic_dp_gold" />
+
+        <ImageView
+            android:id="@+id/ivDePhiGoat"
+            android:layout_width="92dp"
+            android:layout_height="86dp"
+            android:layout_gravity="end|bottom"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="2dp"
+            android:importantForAccessibility="no"
+            android:src="@drawable/ic_dp_goat_run1" />
+    </FrameLayout>
+
     <!-- 3 game -->
     <LinearLayout
         android:layout_width="match_parent"

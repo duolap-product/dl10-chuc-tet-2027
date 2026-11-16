@@ -22,6 +22,7 @@ import online.duolap.tetviet.databinding.ItemCheckinDayBinding
 import online.duolap.tetviet.databinding.ItemHomeGameCardBinding
 import online.duolap.tetviet.databinding.LayoutHomeGameZoneBinding
 import online.duolap.tetviet.game.dapchuot.ui.DapChuotActivity
+import online.duolap.tetviet.game.dephi.ui.DePhiActivity
 import online.duolap.tetviet.game.oanquan.ui.OAnQuanActivity
 import online.duolap.tetviet.views.CoinFlyAnimator
 import online.duolap.tetviet.views.setSafeOnClickListener
@@ -67,6 +68,11 @@ class HomeGameZoneController(
         bindGame(zone.gameDapChuot, R.drawable.bg_dc_home_card, R.string.feature_dap_chuot,
             R.string.game_zone_badge_new, R.drawable.bg_game_badge_gold, "dap_chuot") { DapChuotActivity.start(activity) }
 
+        zone.cardDePhi.setSafeOnClickListener {
+            AppAnalytics.logFeatureClick("de_phi")
+            AppAnalytics.logFeatureClick("game_zone_de_phi")
+            DePhiActivity.start(activity)
+        }
         zone.btnCheckIn.setSafeOnClickListener { openCheckIn("home_card") }
         zone.cardCheckIn.setSafeOnClickListener { openCheckIn("home_card") }
         zone.chipCoinBalance.setSafeOnClickListener { openCheckIn("coin_chip") }
@@ -99,6 +105,8 @@ class HomeGameZoneController(
         zone.ivCheckInEnvelope.rotation = 0f
         zone.btnCheckIn.scaleX = 1f
         zone.btnCheckIn.scaleY = 1f
+        zone.ivDePhiGoat.translationY = 0f
+        zone.ivDePhiGold.translationY = 0f
     }
 
     /** Gọi mỗi giây (cùng nhịp đồng hồ đếm ngược Tết) để cập nhật "Quay lại sau hh:mm:ss". */
@@ -210,6 +218,9 @@ class HomeGameZoneController(
             val t = f / 0.25f
             (12 * sin(t * 4 * PI) * (1 - t)).toFloat()
         } else 0f
+        // Dê trên thẻ nổi bật nhún nhảy, đồng vàng lơ lửng
+        zone.ivDePhiGoat.translationY = (-7 * density * kotlin.math.abs(sin(f * 4 * PI))).toFloat()
+        zone.ivDePhiGold.translationY = (3 * density * sin(f * 2 * PI + 1)).toFloat()
         val pulse = if (available) (1 + 0.035 * sin(f * 6 * PI)).toFloat() else 1f
         zone.btnCheckIn.scaleX = pulse
         zone.btnCheckIn.scaleY = pulse

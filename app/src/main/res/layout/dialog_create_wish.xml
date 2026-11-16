@@ -177,6 +177,27 @@
                     android:text="0/100"
                     android:textColor="#9E8270"
                     android:textSize="11sp" />
+
+                <!-- Điều ước hiện công khai cho cộng đồng: nói rõ để người dùng không ghi thông tin cá nhân -->
+                <TextView
+                    android:id="@+id/tvPublicNotice"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:fontFamily="@font/arimo_regular"
+                    android:text="@string/wishing_public_notice"
+                    android:textColor="#8D5524"
+                    android:textSize="11sp" />
+
+                <TextView
+                    android:id="@+id/tvWishError"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:fontFamily="@font/arimo_bold"
+                    android:textColor="#C62828"
+                    android:textSize="12sp"
+                    android:visibility="gone" />
             </LinearLayout>
 
         </FrameLayout>
@@ -450,7 +471,6 @@
 
         </LinearLayout>
 
-        <!-- CTA Button: Treo điều ước -->
         <LinearLayout
             android:id="@+id/btnHangWish"
             android:layout_width="0dp"

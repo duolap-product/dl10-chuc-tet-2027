@@ -571,8 +571,8 @@ class DapChuotActivity : AppCompatActivity() {
         }
         prefs.totalGamesPlayed++
 
-        // 1 Xu cho mỗi 10 điểm, cộng vào ví Xu dùng chung với Bầu Cua
-        val earnedCoins = finalScore / 10
+        // 1 Xu cho mỗi 20 điểm, tối đa 60 Xu mỗi ván, cộng vào ví Xu dùng chung với Bầu Cua
+        val earnedCoins = WhackMoleEngine.coinsForScore(finalScore)
         val coinsBefore = coinPrefs.getCoins()
         if (earnedCoins > 0) {
             // Giữ số dư cũ tới khi xu bay từ thẻ kết quả lên thanh trên cùng

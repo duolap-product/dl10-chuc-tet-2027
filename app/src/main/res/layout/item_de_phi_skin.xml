@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Một trang phục trong Cửa hàng Dê -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/skinRoot"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_weight="1"
+    android:background="@drawable/bg_dp_skin_card"
+    android:clickable="true"
+    android:focusable="true"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <ImageView
+        android:id="@+id/ivSkin"
+        android:layout_width="96dp"
+        android:layout_height="90dp"
+        android:importantForAccessibility="no"
+        tools:src="@drawable/ic_dp_goat_vang_run1" />
+
+    <TextView
+        android:id="@+id/tvSkinName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:ellipsize="end"
+        android:fontFamily="@font/arimo_bold"
+        android:maxLines="1"
+        android:textColor="#7A090D"
+        android:textSize="14sp"
+        tools:text="Dê Vàng Phú Quý" />
+
+    <LinearLayout
+        android:id="@+id/btnSkinAction"
+        android:layout_width="match_parent"
+        android:layout_height="34dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/bg_wishing_cta_button"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/ivSkinCoin"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_marginEnd="4dp"
+            android:importantForAccessibility="no"
+            android:src="@drawable/ic_coin_gold" />
+
+        <TextView
+            android:id="@+id/tvSkinAction"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/arimo_bold"
+            android:textColor="#FFFDF7"
+            android:textSize="13.5sp"
+            tools:text="800" />
+    </LinearLayout>
+</LinearLayout>

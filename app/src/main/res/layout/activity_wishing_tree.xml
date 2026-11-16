@@ -57,7 +57,7 @@
             android:gravity="center"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/ivTopOrnament"
+            app:layout_constraintEnd_toStartOf="@+id/chipWishCoins"
             app:layout_constraintStart_toEndOf="@+id/btnBack"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -92,12 +92,44 @@
                 android:textSize="12sp" />
         </LinearLayout>
 
+        <!-- Số xu: điều ước đầu tiên mỗi ngày được thưởng xu, xu bay vào đây -->
+        <LinearLayout
+            android:id="@+id/chipWishCoins"
+            android:layout_width="wrap_content"
+            android:layout_height="34dp"
+            android:background="@drawable/bg_coin_chip"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingHorizontal="9dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:importantForAccessibility="no"
+                android:src="@drawable/ic_coin_gold" />
+
+            <TextView
+                android:id="@+id/tvWishCoins"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:fontFamily="@font/arimo_bold"
+                android:textColor="#FFF3C4"
+                android:textSize="13sp"
+                tools:text="459" />
+        </LinearLayout>
+
+        <!-- Hoa mai trang trí cũ: nhường chỗ cho số xu, giữ lại nhưng ẩn -->
         <ImageView
             android:id="@+id/ivTopOrnament"
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:scaleType="fitCenter"
             android:src="@drawable/sticker_apricot_flower"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

@@ -14,6 +14,9 @@ enum class AdPlacement(val key: String) {
     OAN_QUAN_UNDO("oan_quan_undo"),
     OAN_QUAN_DOUBLE_COINS("oan_quan_double_coins"),
     DAILY_CHECKIN_DOUBLE("daily_checkin_double"),
+    DE_PHI_REVIVE("de_phi_revive"),
+    WISHING_EXTRA_WISH("wishing_extra_wish"),
+    DE_PHI_DOUBLE_COINS("de_phi_double_coins"),
 
     // Interstitial
     CARD_SAVED("card_saved"),
@@ -21,6 +24,7 @@ enum class AdPlacement(val key: String) {
     DAP_CHUOT_BREAK("dap_chuot_break"),
     OAN_QUAN_BREAK("oan_quan_break"),
     WISHING_LANTERN_BREAK("wishing_lantern_break"),
+    DE_PHI_BREAK("de_phi_break"),
 
     // Banner (chỉ đặt ở màn hình đọc/lướt nội dung, không đặt ở game hay màn hình thao tác nhiều)
     BANNER_TET_CUSTOMS("banner_tet_customs"),

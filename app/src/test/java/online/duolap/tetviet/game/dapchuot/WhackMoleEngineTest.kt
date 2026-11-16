@@ -103,4 +103,22 @@ class WhackMoleEngineTest {
         assertFalse(engine.isGameRunning())
         scope.cancel()
     }
+
+    @Test
+    fun comboBonusIsCapped() {
+        assertEquals(0, WhackMoleEngine.comboBonus(0))
+        assertEquals(5, WhackMoleEngine.comboBonus(1))
+        assertEquals(25, WhackMoleEngine.comboBonus(5))
+        assertEquals(25, WhackMoleEngine.comboBonus(50))
+    }
+
+    @Test
+    fun coinsForScoreIsOnePer20PointsCappedAt60() {
+        assertEquals(0, WhackMoleEngine.coinsForScore(0))
+        assertEquals(0, WhackMoleEngine.coinsForScore(19))
+        assertEquals(1, WhackMoleEngine.coinsForScore(20))
+        assertEquals(25, WhackMoleEngine.coinsForScore(500))
+        assertEquals(60, WhackMoleEngine.coinsForScore(1200))
+        assertEquals(60, WhackMoleEngine.coinsForScore(5000))
+    }
 }

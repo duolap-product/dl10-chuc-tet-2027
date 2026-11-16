@@ -19,6 +19,7 @@
 -keep class online.duolap.tetviet.audio.TetSongRepository { *; }
 -keep class online.duolap.tetviet.game.oanquan.** { *; }
 -keep class online.duolap.tetviet.game.dapchuot.** { *; }
+-keep class online.duolap.tetviet.game.dephi.** { *; }
 
 # Room Database
 # Room tạo *_Impl bằng reflection (getDeclaredConstructor), nên phải giữ cả constructor rỗng.

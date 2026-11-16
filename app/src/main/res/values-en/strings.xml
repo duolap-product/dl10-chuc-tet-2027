@@ -679,4 +679,78 @@
     <string name="donate_thanks_title">Thank you so much! ❤️</string>
     <string name="donate_thanks_desc">Your coffee has reached the team. Wishing you and your family a happy and prosperous New Year!</string>
     <string name="donate_thanks_btn">Happy New Year!</string>
+
+    <!-- Goat Dash for Tết -->
+    <string name="de_phi_title">Goat Dash for Tết</string>
+    <string name="de_phi_tagline">Jump smart – grab spring fortune!</string>
+    <string name="de_phi_how_to">Tap the screen to jump over firecrackers, apricot pots and gift boxes.\nCollect gold, bánh chưng and lucky money for coins.</string>
+    <string name="de_phi_best">Best: %1$d m</string>
+    <string name="de_phi_tap_to_start">Tap to start</string>
+    <string name="de_phi_paused">Paused · Tap to continue</string>
+    <string name="de_phi_meters">%1$d m</string>
+    <string name="de_phi_run_xu">+%1$d coins · %2$d pts</string>
+    <string name="de_phi_game_over">Oops, the goat tripped!</string>
+    <string name="de_phi_new_record">New record!</string>
+    <string name="de_phi_result_score">Score: %1$d · Best: %2$d m</string>
+    <string name="de_phi_result_xu">+%1$d</string>
+    <string name="de_phi_exit">Exit</string>
+    <string name="de_phi_play_again">Play again</string>
+    <string name="de_phi_game_area_desc">Game area, tap to jump</string>
+    <string name="game_zone_de_phi_desc">Run, jump and grab spring fortune</string>
+
+    <!-- Goat Dash: new start screen + Goat Shop -->
+    <string name="de_phi_title_line1">Goat Dash</string>
+    <string name="de_phi_title_line2">for Tết</string>
+    <string name="de_phi_play_now">PLAY NOW</string>
+    <string name="de_phi_shop">Shop</string>
+    <string name="de_phi_shop_title">Goat Shop</string>
+    <string name="de_phi_shop_desc">Outfits are just for looks and do not change your score. Coins are shared with the other games.</string>
+    <string name="de_phi_skin_in_use">In use</string>
+    <string name="de_phi_skin_select">Select</string>
+    <string name="de_phi_buy_title">Buy %1$s?</string>
+    <string name="de_phi_buy_msg">Spend %1$s coins on %2$s. You have %3$s coins.</string>
+    <string name="de_phi_buy">Buy</string>
+    <string name="de_phi_not_enough">You need %1$d more coins. Play more, check in daily or watch a video in Bau Cua to earn coins!</string>
+    <string name="de_phi_bought">Bought %1$s!</string>
+    <string name="de_phi_run_xu_best">+%1$d coins · %2$d pts · Best %3$d m</string>
+    <string name="de_phi_skin_trang">White Goat</string>
+    <string name="de_phi_skin_hoa_dao">Peach Blossom Goat</string>
+    <string name="de_phi_skin_ao_dai">Áo Dài Goat</string>
+    <string name="de_phi_skin_vang">Golden Fortune Goat</string>
+    <string name="de_phi_skin_than_tai">God of Wealth Goat</string>
+    <string name="de_phi_skin_den_ngau">Cool Black Goat</string>
+
+    <!-- Goat Dash: revive / double coins ads -->
+    <string name="de_phi_revive_title">Keep running from %1$d m?</string>
+    <string name="de_phi_revive_desc">Watch a short video to get the goat back on its feet, keeping your distance and the fortune you collected.</string>
+    <string name="de_phi_revive_watch">Watch video, keep running</string>
+    <string name="de_phi_revive_skip">See results (%1$d)</string>
+    <string name="de_phi_tap_to_continue">Tap to keep running</string>
+    <string name="de_phi_double_coins">Watch video to double coins (+%1$d)</string>
+    <string name="de_phi_double_coins_done">Doubled: +%1$d coins</string>
+
+    <!-- Community Wishing Tree -->
+    <string name="wishing_public_notice">Your wish will be shown publicly on the tree (anonymously). Don\'t include your real name, phone number or links.</string>
+    <string name="wishing_reject_too_long">Wishes can be up to 100 characters.</string>
+    <string name="wishing_reject_bad_word">Your wish contains inappropriate words, please edit it.</string>
+    <string name="wishing_reject_link">Please don\'t include links in your wish.</string>
+    <string name="wishing_reject_phone">Please don\'t include phone numbers in your wish.</string>
+    <string name="wishing_reject_email">Please don\'t include email addresses in your wish.</string>
+    <string name="wishing_reject_spam">Your wish has too many repeated characters.</string>
+    <string name="wishing_extra_title">You already hung a wish today</string>
+    <string name="wishing_extra_msg">You can hang 1 wish a day. Watch a short video to hang 1 more today!</string>
+    <string name="wishing_extra_watch">Watch video, hang another</string>
+    <string name="wishing_extra_later">Tomorrow</string>
+    <string name="wishing_quota_none_title">See you tomorrow</string>
+    <string name="wishing_quota_none_msg">You\'ve hung all your wishes for today. Come back in %1$s to hang a new one!</string>
+    <string name="wishing_new_blessings">🌸 Your wish just received %1$d more blessings!</string>
+    <string name="wishing_stats_desc">wishes on the tree · %1$s today</string>
+    <string name="wishing_bless_own">Your wish</string>
+    <string name="wishing_bless_done">Blessed 🙏</string>
+    <string name="wishing_report">Report inappropriate wish</string>
+    <string name="wishing_report_title">Report this wish?</string>
+    <string name="wishing_report_msg">This leaf will be hidden from your tree right away. With enough reports it is hidden for everyone.</string>
+    <string name="wishing_report_confirm">Report</string>
+    <string name="wishing_report_done">Thank you. The leaf has been hidden.</string>
+    <string name="wishing_leaf_mine_desc">Your wish</string>
 </resources>

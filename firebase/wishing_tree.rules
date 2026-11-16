@@ -1,0 +1,102 @@
+// Firestore Rules cho Cây Điều Ước cộng đồng (WishingTreeRepository).
+//
+// Cách dùng: Firebase console → Firestore Database → Rules. Dán các khối `match` dưới đây vào BÊN TRONG
+// `match /databases/{database}/documents { ... }` hiện có, giữ nguyên rules của các collection khác
+// (tao_thiep_hinh_nen, tao_thiep_mau_sac, oanquan_rooms...). Cần bật Authentication → Anonymous.
+//
+// Ngày tính theo giờ Việt Nam (UTC+7), giống TetCountdown.dayIndex():
+//   dayKey = (thời điểm theo ms + 7 giờ) / 1 ngày, làm tròn xuống.
+
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function vnDayKey() {
+      return (request.time.toMillis() + 25200000) / 86400000;
+    }
+
+    // Điều ước
+    match /wishing_tree_wishes/{wishId} {
+      allow read: if true;
+
+      // Tạo: đúng chủ, đúng ngày hôm nay, nội dung 1–100 ký tự, các bộ đếm bắt đầu từ 0,
+      // và phải tạo kèm "vé" trong ngày wishing_tree_daily/{uid}_{dayKey}_{slot} (tối đa slot 2).
+      allow create: if signedIn()
+        && request.resource.data.authorId == request.auth.uid
+        && request.resource.data.content is string
+        && request.resource.data.content.size() > 0
+        && request.resource.data.content.size() <= 100
+        && request.resource.data.category is string
+        && request.resource.data.tagColorType in [0, 1, 2]
+        && request.resource.data.authorName is string
+        && request.resource.data.authorName.size() <= 40
+        && request.resource.data.createdAt == request.time
+        && request.resource.data.dayKey == int(vnDayKey())
+        && request.resource.data.slot in [1, 2]
+        && request.resource.data.blessingCount == 0
+        && request.resource.data.reportCount == 0
+        && request.resource.data.hidden == false
+        && getAfter(/databases/$(database)/documents/wishing_tree_daily/$(request.auth.uid + '_' + string(request.resource.data.dayKey) + '_' + string(request.resource.data.slot))).data.wishId == wishId;
+
+      // Cập nhật chỉ có 2 kiểu, đều do người khác làm:
+      //  1) Chúc phúc: blessingCount + 1, kèm tạo wishing_tree_blessings/{wishId}_{uid} (chưa từng có).
+      //  2) Báo cáo: reportCount + 1 và hidden = (reportCount >= 3), kèm tạo wishing_tree_reports/{wishId}_{uid}.
+      allow update: if signedIn() && (
+        (
+          request.resource.data.diff(resource.data).affectedKeys().hasOnly(['blessingCount'])
+          && request.resource.data.blessingCount == resource.data.blessingCount + 1
+          && !exists(/databases/$(database)/documents/wishing_tree_blessings/$(wishId + '_' + request.auth.uid))
+          && existsAfter(/databases/$(database)/documents/wishing_tree_blessings/$(wishId + '_' + request.auth.uid))
+        ) || (
+          request.resource.data.diff(resource.data).affectedKeys().hasOnly(['reportCount', 'hidden'])
+          && request.resource.data.reportCount == resource.data.reportCount + 1
+          && request.resource.data.hidden == (request.resource.data.reportCount >= 3)
+          && !exists(/databases/$(database)/documents/wishing_tree_reports/$(wishId + '_' + request.auth.uid))
+          && existsAfter(/databases/$(database)/documents/wishing_tree_reports/$(wishId + '_' + request.auth.uid))
+        )
+      );
+
+      allow delete: if false;
+    }
+
+    // "Vé" treo điều ước trong ngày: id cố định {uid}_{dayKey}_{slot}, chỉ tạo được 1 lần
+    // (tạo lại = update, bị chặn) nên mỗi người tối đa 2 điều ước mỗi ngày.
+    match /wishing_tree_daily/{ticketId} {
+      allow read: if signedIn() && resource.data.uid == request.auth.uid;
+      allow create: if signedIn()
+        && request.resource.data.uid == request.auth.uid
+        && request.resource.data.dayKey == int(vnDayKey())
+        && request.resource.data.slot in [1, 2]
+        && ticketId == request.auth.uid + '_' + string(request.resource.data.dayKey) + '_' + string(request.resource.data.slot)
+        && request.resource.data.wishId is string;
+      allow update, delete: if false;
+    }
+
+    // Lượt chúc phúc: mỗi người 1 lần mỗi lá
+    match /wishing_tree_blessings/{blessingId} {
+      allow read: if signedIn() && resource.data.uid == request.auth.uid;
+      allow create: if signedIn()
+        && request.resource.data.uid == request.auth.uid
+        && blessingId == request.resource.data.wishId + '_' + request.auth.uid;
+      allow update, delete: if false;
+    }
+
+    // Lượt báo cáo: mỗi người 1 lần mỗi lá
+    match /wishing_tree_reports/{reportId} {
+      allow read: if false;
+      allow create: if signedIn()
+        && request.resource.data.uid == request.auth.uid
+        && reportId == request.resource.data.wishId + '_' + request.auth.uid;
+      allow update, delete: if false;
+    }
+
+    // Bộ đếm: tổng và theo ngày, mỗi lần chỉ được tăng đúng 1 (đi kèm khi treo điều ước)
+    match /wishing_tree_stats/{statId} {
+      allow read: if true;
+      allow create: if signedIn() && statId == 'global'
+        && request.resource.data.total == 1;
+      allow update: if signedIn() && statId == 'global'
+        && request.resource.data.total == resource.data.get('total', 0) + 1
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['total', 'day_' + string(int(vnDayKey()))]);
+      allow delete: if false;
+    }

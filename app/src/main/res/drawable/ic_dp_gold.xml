@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Vật phẩm: thỏi vàng -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:width="26dp"
+    android:height="26dp"
+    android:viewportWidth="26"
+    android:viewportHeight="26">
+    <path
+        android:pathData="M3,17 L23,17 L20,23 L6,23 Z">
+        <aapt:attr name="android:fillColor">
+            <gradient android:type="linear" android:startX="0" android:startY="17" android:endX="0" android:endY="23">
+                <item android:color="#F2B23A" android:offset="0" />
+                <item android:color="#B5761A" android:offset="1" />
+            </gradient>
+        </aapt:attr>
+    </path>
+    <path
+        android:pathData="M3.5,17.5 Q3,9.5 8.5,10.5 Q13,4.5 17.5,10.5 Q23,9.5 22.5,17.5 Z">
+        <aapt:attr name="android:fillColor">
+            <gradient android:type="linear" android:startX="0" android:startY="5" android:endX="0" android:endY="18">
+                <item android:color="#FFF3B0" android:offset="0" />
+                <item android:color="#FFD54F" android:offset="0.5" />
+                <item android:color="#F2A900" android:offset="1" />
+            </gradient>
+        </aapt:attr>
+    </path>
+    <path
+        android:pathData="M3.5,17.5 Q3,9.5 8.5,10.5 Q13,4.5 17.5,10.5 Q23,9.5 22.5,17.5 Z"
+        android:strokeColor="#B5761A"
+        android:strokeWidth="0.9"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round" />
+    <path
+        android:pathData="M9,12 Q12,8.5 14,10"
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="1.2"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round" />
+</vector>

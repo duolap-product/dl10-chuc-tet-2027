@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Thẻ nổi bật "Cùng Dê Phi Đón Tết" trong khu game ở màn hình chính -->
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="#33FFFFFF">
+    <item>
+        <shape android:shape="rectangle">
+            <corners android:radius="16dp" />
+            <gradient
+                android:angle="0"
+                android:centerColor="#E6542B"
+                android:endColor="#FFB74D"
+                android:startColor="#C62828" />
+            <stroke
+                android:width="1.6dp"
+                android:color="#F2C14E" />
+        </shape>
+    </item>
+</ripple>

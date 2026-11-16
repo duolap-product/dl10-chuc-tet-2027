@@ -47,8 +47,8 @@ android {
         applicationId = "online.duolap.tetviet"
         minSdk = 24
         targetSdk = 36
-        versionCode = 9
-        versionName = "1.0.0-9"
+        versionCode = 10
+        versionName = "1.0.0-10"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
@@ -135,11 +135,12 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
-    // Firebase (Analytics, Crashlytics, Firestore)
+    // Firebase (Analytics, Crashlytics, Firestore, Auth ẩn danh cho Cây Điều Ước)
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.analytics)
     implementation(libs.firebase.crashlytics)
     implementation(libs.firebase.firestore)
+    implementation(libs.firebase.auth)
 
     // Room Database
     implementation(libs.androidx.room.runtime)

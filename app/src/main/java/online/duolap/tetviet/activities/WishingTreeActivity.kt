@@ -44,7 +44,11 @@ import online.duolap.tetviet.ads.AppOpenGate
 import online.duolap.tetviet.analytics.AppAnalytics
 import online.duolap.tetviet.data.local.WishEntity
 import online.duolap.tetviet.data.model.WishCategory
+import online.duolap.tetviet.data.local.BauCuaPreferences
 import online.duolap.tetviet.data.repository.WishingTreeRepository
+import online.duolap.tetviet.data.wishing.WishContentFilter
+import online.duolap.tetviet.views.CoinFlyAnimator
+import online.duolap.tetviet.widget.TetCountdown
 import online.duolap.tetviet.databinding.ActivityWishingTreeBinding
 import online.duolap.tetviet.databinding.DialogCreateWishBinding
 import online.duolap.tetviet.databinding.DialogUserWishesBinding
@@ -69,6 +73,9 @@ class WishingTreeActivity : AppCompatActivity() {
 
     @Inject
     lateinit var adManager: AdManager
+
+    @Inject
+    lateinit var coinPrefs: BauCuaPreferences
 
     private lateinit var binding: ActivityWishingTreeBinding
 
@@ -136,8 +143,20 @@ class WishingTreeActivity : AppCompatActivity() {
         }
         observeData()
 
+        repository.warmUp()
         lifecycleScope.launch {
             repository.ensureInitialWishesSeeded()
+            // Tải lên điều ước còn chờ (viết lúc mất mạng), rồi lấy lá cộng đồng + lời chúc mới
+            repository.syncPending()
+            val freshBlessings = repository.refreshCommunity()
+            if (freshBlessings > 0 && !isFinishing) {
+                Toast.makeText(
+                    this@WishingTreeActivity,
+                    getString(R.string.wishing_new_blessings, freshBlessings),
+                    Toast.LENGTH_LONG
+                ).show()
+                repository.markBlessingsSeen()
+            }
         }
     }
 
@@ -166,7 +185,7 @@ class WishingTreeActivity : AppCompatActivity() {
         binding.btnWriteWish.setSafeOnClickListener {
             vibrateLight(20)
             AppAnalytics.logFeatureClick("wishing_tree_open_create")
-            showCreateWishDialog()
+            onWriteWishClicked()
         }
 
         binding.cardStats.setSafeOnClickListener {
@@ -187,20 +206,88 @@ class WishingTreeActivity : AppCompatActivity() {
             }
         }
 
-        // Observe total count
+        // Số điều ước thật của cộng đồng (Firestore); chưa tải được thì hiện số điều ước của chính mình
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                repository.getTotalWishCount().collectLatest { totalCount ->
-                    val displayCount = if (totalCount >= 1000) {
-                        String.format(Locale.US, "%.1fK", totalCount / 1000f)
-                    } else {
-                        totalCount.toString()
+                kotlinx.coroutines.flow.combine(repository.stats, repository.getUserWishCount()) { stats, mine ->
+                    stats to mine
+                }.collectLatest { (stats, mine) ->
+                    val total = stats?.total ?: mine.toLong()
+                    binding.tvTotalWishCount.text = compactCount(total)
+                    if (stats != null) {
+                        binding.tvStatsDesc.text = getString(R.string.wishing_stats_desc, compactCount(stats.today))
                     }
-                    binding.tvTotalWishCount.text = displayCount
+                }
+            }
+        }
+
+        // Số xu (thưởng điều ước đầu tiên mỗi ngày bay vào đây)
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                coinPrefs.coinsFlow.collect { coins ->
+                    if (!CoinFlyAnimator.isHeld(binding.tvWishCoins)) binding.tvWishCoins.text = coins.toString()
                 }
             }
         }
     }
+
+    private fun compactCount(n: Long): String =
+        if (n >= 1000) String.format(Locale.US, "%.1fK", n / 1000f) else n.toString()
+
+    private fun onWriteWishClicked() {
+        when (repository.writeQuota()) {
+            WishingTreeRepository.WriteQuota.FREE,
+            WishingTreeRepository.WriteQuota.EXTRA_GRANTED -> showCreateWishDialog()
+            WishingTreeRepository.WriteQuota.EXTRA_AVAILABLE -> showExtraWishOffer()
+            WishingTreeRepository.WriteQuota.NONE -> showComeBackTomorrow()
+        }
+    }
+
+    private fun showExtraWishOffer() {
+        AppAnalytics.logFeatureClick("wishing_tree_extra_offer")
+        AlertDialog.Builder(this)
+            .setTitle(R.string.wishing_extra_title)
+            .setMessage(R.string.wishing_extra_msg)
+            .setPositiveButton(R.string.wishing_extra_watch) { _, _ ->
+                var rewarded = false
+                Toast.makeText(this, R.string.msg_ad_loading_short, Toast.LENGTH_SHORT).show()
+                adManager.showRewardedAd(
+                    activity = this,
+                    placement = online.duolap.tetviet.ads.AdPlacement.WISHING_EXTRA_WISH,
+                    onUserEarnedReward = {
+                        rewarded = true
+                        repository.grantExtraWish()
+                    },
+                    // Mở hộp thoại viết khi quảng cáo đã đóng
+                    onDismissed = { if (rewarded && !isFinishing) showCreateWishDialog() },
+                    onError = { msg -> Toast.makeText(this, msg, Toast.LENGTH_SHORT).show() }
+                )
+            }
+            .setNegativeButton(R.string.wishing_extra_later, null)
+            .show()
+    }
+
+    private fun showComeBackTomorrow() {
+        val remaining = (TetCountdown.nextDayStartMillis() - System.currentTimeMillis()).coerceAtLeast(0) / 1000
+        val hm = String.format(Locale.US, "%02d:%02d", remaining / 3600, remaining % 3600 / 60)
+        AlertDialog.Builder(this)
+            .setTitle(R.string.wishing_quota_none_title)
+            .setMessage(getString(R.string.wishing_quota_none_msg, hm))
+            .setPositiveButton(android.R.string.ok, null)
+            .show()
+    }
+
+    private fun rejectionMessage(r: WishContentFilter.Rejection): String = getString(
+        when (r) {
+            WishContentFilter.Rejection.EMPTY -> R.string.wishing_tree_input_empty_error
+            WishContentFilter.Rejection.TOO_LONG -> R.string.wishing_reject_too_long
+            WishContentFilter.Rejection.BAD_WORD -> R.string.wishing_reject_bad_word
+            WishContentFilter.Rejection.LINK -> R.string.wishing_reject_link
+            WishContentFilter.Rejection.PHONE -> R.string.wishing_reject_phone
+            WishContentFilter.Rejection.EMAIL -> R.string.wishing_reject_email
+            WishContentFilter.Rejection.SPAM -> R.string.wishing_reject_spam
+        }
+    )
 
     private fun renderTreeTags(wishes: List<WishEntity>) {
         val canvas = binding.treeBranchesCanvas
@@ -287,11 +374,14 @@ class WishingTreeActivity : AppCompatActivity() {
     private fun bindLeaf(holder: LeafHolder) {
         val wish = holder.wish
         val b = holder.binding
+        b.ivLeafMine.visibility = if (wish.isUserCreated) View.VISIBLE else View.GONE
         val text = formatTagText(wish.content)
         if (holder.boundText != text) {
             holder.boundText = text
             b.tvLeafContent.text = text
-            b.root.contentDescription = wish.content
+            b.root.contentDescription = if (wish.isUserCreated) {
+                getString(R.string.wishing_leaf_mine_desc) + ": " + wish.content
+            } else wish.content
         }
         if (holder.boundCategory != wish.category) {
             holder.boundCategory = wish.category
@@ -457,7 +547,6 @@ class WishingTreeActivity : AppCompatActivity() {
         }
     }
 
-    // Modal: Viết điều ước (Screen 2)
     @SuppressLint("InflateParams")
     private fun showCreateWishDialog() {
         val dialogBinding = DialogCreateWishBinding.inflate(layoutInflater)
@@ -469,7 +558,6 @@ class WishingTreeActivity : AppCompatActivity() {
 
         var selectedCategory = WishCategory.HEALTH
 
-        // Chọn màu lá ngay khi mở để phần xem trước giống hệt lá sẽ treo lên cây
         val tagColorType = (0..2).random()
         leafStyle(tagColorType).let { (bgRes, textColor) ->
             dialogBinding.ivPreviewLeafBg.setImageResource(bgRes)
@@ -513,7 +601,6 @@ class WishingTreeActivity : AppCompatActivity() {
             }
         }
 
-        // Real-time Live Preview Tag Text
         dialogBinding.etWishContent.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
@@ -552,31 +639,45 @@ class WishingTreeActivity : AppCompatActivity() {
             dialog.dismiss()
         }
 
+        dialogBinding.etWishContent.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                dialogBinding.tvWishError.visibility = View.GONE
+            }
+            override fun afterTextChanged(s: Editable?) {}
+        })
+
         dialogBinding.btnHangWish.setSafeOnClickListener {
             val content = dialogBinding.etWishContent.text?.toString()?.trim().orEmpty()
-            if (content.isBlank()) {
-                Toast.makeText(
-                    this,
-                    getString(R.string.wishing_tree_input_empty_error),
-                    Toast.LENGTH_SHORT
-                ).show()
+            WishContentFilter.check(content)?.let { reason ->
+                dialogBinding.tvWishError.text = rejectionMessage(reason)
+                dialogBinding.tvWishError.visibility = View.VISIBLE
+                AppAnalytics.logFeatureClick("wishing_tree_rejected_${reason.name.lowercase()}")
                 return@setSafeOnClickListener
             }
 
-            vibrateWinCelebration()
-            AppAnalytics.logFeatureClick("wishing_tree_hang_success")
-
             lifecycleScope.launch {
-                // Vị trí treo mong muốn (renderTreeTags sẽ dời sang chỗ trống nếu đã có lá)
                 val targetBranch = (System.currentTimeMillis() % leafSlots.size).toInt()
-                val createdWish = repository.createWish(
+                val result = repository.createWish(
                     content = content,
                     category = selectedCategory,
-                    authorName = "Người gửi ẩn danh",
                     branchIndex = targetBranch,
                     tagColorType = tagColorType
                 )
+                result.rejection?.let {
+                    dialogBinding.tvWishError.text = rejectionMessage(it)
+                    dialogBinding.tvWishError.visibility = View.VISIBLE
+                    return@launch
+                }
+                if (result.quotaExceeded) {
+                    dialog.dismiss()
+                    onWriteWishClicked()
+                    return@launch
+                }
+                val createdWish = result.wish ?: return@launch
 
+                vibrateWinCelebration()
+                AppAnalytics.logFeatureClick("wishing_tree_hang_success")
                 dialog.dismiss()
                 Toast.makeText(
                     this@WishingTreeActivity,
@@ -592,6 +693,22 @@ class WishingTreeActivity : AppCompatActivity() {
                 } else {
                     pendingCeremonyWishId = createdWish.id
                 }
+
+                // Thưởng xu cho điều ước đầu tiên trong ngày: xu bay từ nút viết lên ô số xu
+                if (result.coinsAwarded > 0) {
+                    val end = coinPrefs.getCoins()
+                    CoinFlyAnimator.hold(binding.tvWishCoins)
+                    binding.root.postDelayed({
+                        if (isFinishing) return@postDelayed
+                        val (fx, fy) = CoinFlyAnimator.centerOnScreen(binding.btnWriteWish)
+                        CoinFlyAnimator.fly(
+                            this@WishingTreeActivity, fx, fy, binding.chipWishCoins, binding.tvWishCoins,
+                            startValue = end - result.coinsAwarded, endValue = end
+                        )
+                    }, 1200)
+                }
+
+                repository.syncPending()
             }
         }
 
@@ -667,19 +784,32 @@ class WishingTreeActivity : AppCompatActivity() {
             wish.blessingCount
         )
 
-        var hasBlessed = false
+        // Chúc phúc: mỗi người 1 lần mỗi lá; không tự chúc điều ước của mình
+        var hasBlessed = repository.hasBlessed(wish)
+        when {
+            wish.isUserCreated -> {
+                dialogBinding.tvBlessWish.setText(R.string.wishing_bless_own)
+                dialogBinding.btnBlessWish.isEnabled = false
+                dialogBinding.btnBlessWish.alpha = 0.6f
+            }
+            hasBlessed -> {
+                dialogBinding.tvBlessWish.setText(R.string.wishing_bless_done)
+                dialogBinding.btnBlessWish.alpha = 0.6f
+            }
+        }
         dialogBinding.btnBlessWish.setSafeOnClickListener {
-            if (!hasBlessed) {
+            if (!hasBlessed && !wish.isUserCreated) {
                 hasBlessed = true
                 vibrateLight(25)
                 lifecycleScope.launch {
-                    repository.blessWish(wish.id)
+                    repository.blessWish(wish)
                 }
                 val newBlessingCount = wish.blessingCount + 1
                 dialogBinding.tvDetailBlessingCount.text = getString(
                     R.string.wishing_tree_blessings_count,
                     newBlessingCount
                 )
+                dialogBinding.tvBlessWish.setText(R.string.wishing_bless_done)
                 dialogBinding.btnBlessWish.animate()
                     .scaleX(1.15f)
                     .scaleY(1.15f)
@@ -694,6 +824,23 @@ class WishingTreeActivity : AppCompatActivity() {
                     Toast.LENGTH_SHORT
                 ).show()
             }
+        }
+
+        // Báo cáo lá cộng đồng không phù hợp
+        dialogBinding.btnReportWish.visibility =
+            if (wish.remoteId != null && !wish.isUserCreated) View.VISIBLE else View.GONE
+        dialogBinding.btnReportWish.setSafeOnClickListener {
+            AlertDialog.Builder(this)
+                .setTitle(R.string.wishing_report_title)
+                .setMessage(R.string.wishing_report_msg)
+                .setPositiveButton(R.string.wishing_report_confirm) { _, _ ->
+                    AppAnalytics.logFeatureClick("wishing_tree_report")
+                    lifecycleScope.launch { repository.reportWish(wish) }
+                    dialog.dismiss()
+                    Toast.makeText(this, R.string.wishing_report_done, Toast.LENGTH_SHORT).show()
+                }
+                .setNegativeButton(android.R.string.cancel, null)
+                .show()
         }
 
         dialogBinding.btnShareWish.setSafeOnClickListener {
@@ -734,6 +881,7 @@ class WishingTreeActivity : AppCompatActivity() {
         dialogBinding.rvUserWishes.layoutManager = LinearLayoutManager(this)
         dialogBinding.rvUserWishes.adapter = adapter
 
+        lifecycleScope.launch { repository.markBlessingsSeen() }
         lifecycleScope.launch {
             repository.getUserWishes().collectLatest { userWishes ->
                 if (userWishes.isEmpty()) {
